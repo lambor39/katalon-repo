@@ -1,0 +1,694 @@
+import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
+import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
+import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import org.openqa.selenium.remote.RemoteWebDriver as RemoteWebDriver
+import org.openqa.selenium.remote.DesiredCapabilities as DesiredCapabilities
+import org.openqa.selenium.logging.LogEntry as LogEntry
+import org.openqa.selenium.logging.LogEntries as LogEntries
+import org.openqa.selenium.firefox.FirefoxDriver as FirefoxDriver
+import org.openqa.selenium.chrome.ChromeOptions as ChromeOptions
+import org.openqa.selenium.chrome.ChromeDriver as ChromeDriver
+import org.openqa.selenium.WebElement as WebElement
+import org.openqa.selenium.WebDriver as WebDriver
+import org.openqa.selenium.Point as Point
+import org.openqa.selenium.Keys as Keys
+import org.openqa.selenium.JavascriptExecutor as JavascriptExecutor
+import org.openqa.selenium.Dimension as Dimension
+import org.openqa.selenium.Capabilities as Capabilities
+import org.openqa.selenium.By as By
+import internal.GlobalVariable
+import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.webui.driver.WebUIDriverType as WebUIDriverType
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.util.KeywordUtil as KeywordUtil
+import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.ObjectRepository as ObjectRepository
+import com.kms.katalon.core.testdata.TestDataFactory as TestDataFactory
+import com.kms.katalon.core.testdata.ExcelData as ExcelData
+import com.kms.katalon.core.testdata.TestData as TestData
+import com.kms.katalon.core.testcase.TestCaseFactory as TestCaseFactory
+import com.kms.katalon.core.testcase.TestCase as TestCase
+import com.kms.katalon.core.model.FailureHandling as FailureHandling
+import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
+import com.kms.katalon.core.logging.KeywordLogger as KeywordLogger
+import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
+import com.kms.katalon.core.configuration.RunConfiguration as RunConfiguration
+import com.kms.katalon.core.checkpoint.CheckpointFactory as CheckpointFactory
+import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
+import com.kms.katalon.core.annotation.Keyword as Keyword
+import org.roojai.ignite.core.IGNBrowserConfig as IGNBrowserConfig
+import org.roojai.ignite.core.IGNRobotAuth as IGNRobotAuth
+import org.roojai.tha.core.THARoojaiWebsite as THARoojaiWebsite
+import org.roojai.ignite.core.IGNUemaHelper as IGNUemaHelper
+import org.roojai.tha.types.myaccount.newbiz.THAMyAccountNewbizMainFactory
+import org.roojai.tha.types.myaccount.newbiz.THAMyAccountNewbizMainType
+import org.roojai.tha.types.myaccount.newbiz.THAMyAccountNewbizMainUtil
+IGNUemaHelper.printLog(GlobalVariable.TestCaseFullName+' Start')
+IGNUemaHelper.printLog('printPropertiesOfExecutionProperties')
+IGNUemaHelper.printPropertiesOfExecutionProperties()
+IGNUemaHelper.printLog('ExecutionProfile:'+IGNUemaHelper.getExecutionProfile())
+String lDateTimeNow=IGNUemaHelper.getStringCurrentStampDateTime()
+if(GlobalVariable.CaseDateTimeBegin.toString().length()<=0){
+	GlobalVariable.CaseDateTimeBegin=lDateTimeNow
+}
+GlobalVariable.CaseDateTimeEnd=lDateTimeNow
+IGNUemaHelper.printLog('Start>>'+GlobalVariable.CaseDateTimeBegin)
+if(IGNUemaHelper.CURRENT_BROWSER_IS_SAFARI){
+	IGNUemaHelper.printLog('CURRENT_BROWSER_IS_SAFARI=true')
+	if(IGNUemaHelper.CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_SAFARI){
+		IGNUemaHelper.printLog('CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_SAFARI=true')
+		IGNUemaHelper.switchSmartWaitDelay(true)
+	}else{
+		IGNUemaHelper.printLog('CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_SAFARI=false')
+		IGNUemaHelper.switchSmartWaitDelay(false)
+	}
+}else{
+	IGNUemaHelper.printLog('CURRENT_BROWSER_IS_SAFARI=false')
+	if(IGNUemaHelper.CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_OTHERS){
+		IGNUemaHelper.printLog('CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_OTHERS=true')
+		IGNUemaHelper.switchSmartWaitDelay(true)
+	}else{
+		IGNUemaHelper.printLog('CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_OTHERS=false')
+		IGNUemaHelper.switchSmartWaitDelay(false)
+	}
+}
+IGNUemaHelper.printLog('GlobalVariable.CaseNumber:'+GlobalVariable.CaseNumber)
+TestData dataInput=TestDataFactory.findTestData(THAMyAccountNewbizMainType.INPUT_DATA_FILE_NAME)
+TestData dataOutput=TestDataFactory.findTestData(THAMyAccountNewbizMainType.OUTPUT_DATA_FILE_NAME)
+THAMyAccountNewbizMainFactory caseFactory=new THAMyAccountNewbizMainFactory(dataInput)
+caseFactory.CurrentCase=GlobalVariable.CaseNumber
+THAMyAccountNewbizMainType caseData=caseFactory.CaseData()
+Map caseInput=caseData.Input
+Map caseOutput=caseData.Output
+WebDriver driver=null
+WebDriver selenium=null
+THAMyAccountNewbizMainUtil caseUtil=null
+Boolean runNext=false
+/*Input
+ caseInput.BaseUrl
+ caseInput.MaximizeMode
+ caseInput.WithAuth
+ caseInput.AuthUser
+ caseInput.AuthPassword
+ caseInput.Language
+ caseInput.MenuPaymentToDo
+ caseInput.MenuPaymentOpenTermAndCondition
+ caseInput.MenuPaymentChangeCreditCard
+ caseInput.MenuPaymentMakePaymentCardOld
+ caseInput.MenuPaymentMakePaymentCardNew
+ caseInput.MenuProfileToDo
+ caseInput.MenuProfilePositiveCase
+ caseInput.ProfileMaritalStatus
+ caseInput.ProfilePreferredLanguage
+ caseInput.ProfileOccupation
+ caseInput.ProfileAddressHouseBuildingNumber
+ caseInput.ProfileAddressVillage
+ caseInput.ProfileAddressSoiRoad
+ caseInput.ProfileAddressPostcode
+ caseInput.ProfileAddressProvince
+ caseInput.ProfileAddressDistrict
+ caseInput.ProfileAddressSubdistrict
+ caseInput.ProfileTelephoneNumber
+ caseInput.ProfileEmail
+ caseInput.MenuPolicyToDo
+ caseInput.MenuPolicyCardSelectProductMotor
+ caseInput.MenuPolicyCardSelectProductHealth
+ caseInput.MenuPolicyDetailHistoryToDo
+ caseInput.MenuPolicyDetailDocDownloadToDo
+ caseInput.MenuPolicyDetailDocDownloadOpenInsuranceHandbookToDo
+ caseInput.MenuPolicyDetailPaymentToDo
+ caseInput.MenuPolicyDetailPaymentOpenTermAndConditionToDo
+ caseInput.MenuPolicyDetailTaxDeductionToDo
+ caseInput.MenuPolicyDetailTaxDeductionAccept
+ caseInput.MenuPolicyDetailTaxDeductionEditToDo
+ caseInput.MenuPolicyDetailTaxDeductionEditHolderIsThai
+ caseInput.MenuPolicyDetailTaxDeductionEditName
+ caseInput.MenuPolicyDetailTaxDeductionEditSurname
+ caseInput.MenuPolicyDetailTaxDeductionEditIdentificationNumber
+ caseInput.MenuPolicyDetailECareCardToDo
+ caseInput.MenuPolicyCompulsoryBuyCardToDo
+ caseInput.MenuClaimToDo
+ caseInput.MenuClaimDetailNonClosureToDo
+ caseInput.MenuClaimDetailClosureStatusToDo
+ caseInput.MenuClaimDetailClosureStatusUpdate
+ caseInput.MenuDocDownloadToDo
+ caseInput.MenuDocDownloadOpenInsuranceHandbook
+ caseInput.MenuDocDownloadCardToDo
+ caseInput.MenuContactSupportToDo
+ caseInput.MenuContactSupportSubjectRenewalToDo
+ caseInput.MenuContactSupportSubjectPolicyToDo
+ caseInput.MenuContactSupportSubjectClaimToDo
+ caseInput.MenuContactSupportSubjectEnquiryClaimHandlerToDo
+ caseInput.MenuContactSupportSubjectEnquiryVehicleAssessmentStatusToDo
+ caseInput.MenuContactSupportSubjectEnquiryReimbursementStatusToDo
+ caseInput.MenuContactSupportSubjectDeleteAccountToDo
+ caseInput.MenuContactSupportSubjectRequestPolicyDocumentsToDo
+ caseInput.MenuInspectionToDo
+ caseInput.MenuFindGarageToDo
+ caseInput.MenuGetQuoteToDo
+ caseInput.MenuGetQuoteSelectProductMotor
+ caseInput.MenuGetQuoteSelectProductHealth
+ caseInput.MenuReferFriendToDo
+ caseInput.MenuReferFriendName
+ caseInput.MenuReferFriendMobile
+ caseInput.MenuReferFriendEmail
+ caseInput.MenuFindNetworkHospitalToDo
+ caseInput.MenuRoojaiRewardToDo
+ caseInput.MenuRoojaiRewardName
+ caseInput.MenuRoojaiRewardMobile
+ caseInput.MenuRoojaiRewardEmail
+ caseInput.MenuRoojaiRewardVoucherAllToDo
+ caseInput.MenuRoojaiRewardVoucherInsuranceProductToDo
+ caseInput.MenuRoojaiRewardVoucherCharityToDo
+ caseInput.MenuRoojaiRewardVoucherPetrolToDo
+ caseInput.MenuRoojaiRewardVoucherKangarooToDo
+ caseInput.MenuRoojaiRewardVoucherTravelAndLifestyleToDo
+ caseInput.MenuRoojaiRewardVoucherFoodAndBeverageToDo
+ caseInput.MenuRoojaiRewardVoucherShoppingToDo
+ caseInput.PositiveCase
+ */
+/*Output
+ caseOutput.BaseUrl
+ caseOutput.MaximizeMode
+ caseOutput.WithAuth
+ caseOutput.AuthUser
+ caseOutput.AuthPassword
+ caseOutput.Language
+ caseOutput.MenuPaymentToDo
+ caseOutput.MenuPaymentOpenTermAndCondition
+ caseOutput.MenuPaymentChangeCreditCard
+ caseOutput.MenuPaymentMakePaymentCardOld
+ caseOutput.MenuPaymentMakePaymentCardNew
+ caseOutput.MenuProfileToDo
+ caseOutput.MenuProfilePositiveCase
+ caseOutput.ProfileMaritalStatus
+ caseOutput.ProfilePreferredLanguage
+ caseOutput.ProfileOccupation
+ caseOutput.ProfileAddressHouseBuildingNumber
+ caseOutput.ProfileAddressVillage
+ caseOutput.ProfileAddressSoiRoad
+ caseOutput.ProfileAddressPostcode
+ caseOutput.ProfileAddressProvince
+ caseOutput.ProfileAddressDistrict
+ caseOutput.ProfileAddressSubdistrict
+ caseOutput.ProfileTelephoneNumber
+ caseOutput.ProfileEmail
+ caseOutput.MenuPolicyToDo
+ caseOutput.MenuPolicyCardSelectProductMotor
+ caseOutput.MenuPolicyCardSelectProductHealth
+ caseOutput.MenuPolicyDetailHistoryToDo
+ caseOutput.MenuPolicyDetailDocDownloadToDo
+ caseOutput.MenuPolicyDetailDocDownloadOpenInsuranceHandbookToDo
+ caseOutput.MenuPolicyDetailPaymentToDo
+ caseOutput.MenuPolicyDetailPaymentOpenTermAndConditionToDo
+ caseOutput.MenuPolicyDetailTaxDeductionToDo
+ caseOutput.MenuPolicyDetailTaxDeductionAccept
+ caseOutput.MenuPolicyDetailTaxDeductionEditToDo
+ caseOutput.MenuPolicyDetailTaxDeductionEditHolderIsThai
+ caseOutput.MenuPolicyDetailTaxDeductionEditName
+ caseOutput.MenuPolicyDetailTaxDeductionEditSurname
+ caseOutput.MenuPolicyDetailTaxDeductionEditIdentificationNumber
+ caseOutput.MenuPolicyDetailECareCardToDo
+ caseOutput.MenuPolicyCompulsoryBuyCardToDo
+ caseOutput.MenuClaimToDo
+ caseOutput.MenuClaimDetailNonClosureToDo
+ caseOutput.MenuClaimDetailClosureStatusToDo
+ caseOutput.MenuClaimDetailClosureStatusUpdate
+ caseOutput.MenuDocDownloadToDo
+ caseOutput.MenuDocDownloadOpenInsuranceHandbook
+ caseOutput.MenuDocDownloadCardToDo
+ caseOutput.MenuContactSupportToDo
+ caseOutput.MenuContactSupportSubjectRenewalToDo
+ caseOutput.MenuContactSupportSubjectPolicyToDo
+ caseOutput.MenuContactSupportSubjectClaimToDo
+ caseOutput.MenuContactSupportSubjectEnquiryClaimHandlerToDo
+ caseOutput.MenuContactSupportSubjectEnquiryVehicleAssessmentStatusToDo
+ caseOutput.MenuContactSupportSubjectEnquiryReimbursementStatusToDo
+ caseOutput.MenuContactSupportSubjectDeleteAccountToDo
+ caseOutput.MenuContactSupportSubjectRequestPolicyDocumentsToDo
+ caseOutput.MenuInspectionToDo
+ caseOutput.MenuFindGarageToDo
+ caseOutput.MenuGetQuoteToDo
+ caseOutput.MenuGetQuoteSelectProductMotor
+ caseOutput.MenuGetQuoteSelectProductHealth
+ caseOutput.MenuReferFriendToDo
+ caseOutput.MenuReferFriendName
+ caseOutput.MenuReferFriendMobile
+ caseOutput.MenuReferFriendEmail
+ caseOutput.MenuFindNetworkHospitalToDo
+ caseOutput.MenuRoojaiRewardToDo
+ caseOutput.MenuRoojaiRewardName
+ caseOutput.MenuRoojaiRewardMobile
+ caseOutput.MenuRoojaiRewardEmail
+ caseOutput.MenuRoojaiRewardVoucherAllToDo
+ caseOutput.MenuRoojaiRewardVoucherInsuranceProductToDo
+ caseOutput.MenuRoojaiRewardVoucherCharityToDo
+ caseOutput.MenuRoojaiRewardVoucherPetrolToDo
+ caseOutput.MenuRoojaiRewardVoucherKangarooToDo
+ caseOutput.MenuRoojaiRewardVoucherTravelAndLifestyleToDo
+ caseOutput.MenuRoojaiRewardVoucherFoodAndBeverageToDo
+ caseOutput.MenuRoojaiRewardVoucherShoppingToDo
+ caseOutput.PositiveCase
+ caseOutput.ActualResult
+ caseOutput.ResultMessage
+ caseOutput.ActualAccountName
+ caseOutput.PaymentTermAndCondition
+ caseOutput.PaymentCardItemDetail
+ caseOutput.PaymentCardItemChangeCreditCardDetail
+ caseOutput.PaymentCardItemChangeCreditCardResult
+ caseOutput.PaymentCardItemMakePaymentCardOldDetail
+ caseOutput.PaymentCardItemMakePaymentCardOldResult
+ caseOutput.PaymentCardItemMakePaymentCardNewDetail
+ caseOutput.PaymentCardItemMakePaymentCardNewResult
+ caseOutput.ProfileEditDetail
+ caseOutput.ProfileEditResult
+ caseOutput.PolicyItem01DetailCardSelectedProductName
+ caseOutput.PolicyItem01DetailCardSelectedId
+ caseOutput.PolicyItem01DetailCardSelectedDetail
+ caseOutput.PolicyItem01DetailAdditionalDetail
+ caseOutput.PolicyItem01DetailHistoryToDo
+ caseOutput.PolicyItem01DetailHistoryDetail
+ caseOutput.PolicyItem01DetailPaymentTodo
+ caseOutput.PolicyItem01DetailPaymentCardId
+ caseOutput.PolicyItem01DetailPaymentDetail
+ caseOutput.PolicyItem01DetailPaymentOpenTermAndConditionToDo
+ caseOutput.PolicyItem01DetailPaymentTermAndCondition
+ caseOutput.PolicyItem01DetailDocDownloadToDo
+ caseOutput.PolicyItem01DetailDocDownloadDetail
+ caseOutput.PolicyItem01DetailDocDownloadResult
+ caseOutput.PolicyItem01DetailDocDownloadOpenInsuranceHandbookToDo
+ caseOutput.PolicyItem01DetailDocDownloadInsuranceHandbook
+ caseOutput.PolicyItem01DetailTaxDeductionToDo
+ caseOutput.PolicyItem01DetailTaxDeductionDetail
+ caseOutput.PolicyItem01DetailTaxDeductionResult
+ caseOutput.PolicyItem01DetailECareCardToDo
+ caseOutput.PolicyItem01DetailECareCardDetail
+ caseOutput.PolicyItem01DetailECareCardResult
+ caseOutput.PolicyItem02DetailCardSelectedProductName
+ caseOutput.PolicyItem02DetailCardSelectedId
+ caseOutput.PolicyItem02DetailCardSelectedDetail
+ caseOutput.PolicyItem02DetailAdditionalDetail
+ caseOutput.PolicyItem02DetailHistoryToDo
+ caseOutput.PolicyItem02DetailHistoryDetail
+ caseOutput.PolicyItem02DetailPaymentTodo
+ caseOutput.PolicyItem02DetailPaymentCardId
+ caseOutput.PolicyItem02DetailPaymentDetail
+ caseOutput.PolicyItem02DetailPaymentOpenTermAndConditionToDo
+ caseOutput.PolicyItem02DetailPaymentTermAndCondition
+ caseOutput.PolicyItem02DetailDocDownloadToDo
+ caseOutput.PolicyItem02DetailDocDownloadDetail
+ caseOutput.PolicyItem02DetailDocDownloadResult
+ caseOutput.PolicyItem02DetailDocDownloadOpenInsuranceHandbookToDo
+ caseOutput.PolicyItem02DetailDocDownloadInsuranceHandbook
+ caseOutput.PolicyItem02DetailTaxDeductionToDo
+ caseOutput.PolicyItem02DetailTaxDeductionDetail
+ caseOutput.PolicyItem02DetailTaxDeductionResult
+ caseOutput.PolicyItem02DetailECareCardToDo
+ caseOutput.PolicyItem02DetailECareCardDetail
+ caseOutput.PolicyItem02DetailECareCardResult
+ caseOutput.PolicyItem03DetailCardSelectedProductName
+ caseOutput.PolicyItem03DetailCardSelectedId
+ caseOutput.PolicyItem03DetailCardSelectedDetail
+ caseOutput.PolicyItem03DetailAdditionalDetail
+ caseOutput.PolicyItem03DetailHistoryToDo
+ caseOutput.PolicyItem03DetailHistoryDetail
+ caseOutput.PolicyItem03DetailPaymentTodo
+ caseOutput.PolicyItem03DetailPaymentCardId
+ caseOutput.PolicyItem03DetailPaymentDetail
+ caseOutput.PolicyItem03DetailPaymentOpenTermAndConditionToDo
+ caseOutput.PolicyItem03DetailPaymentTermAndCondition
+ caseOutput.PolicyItem03DetailDocDownloadToDo
+ caseOutput.PolicyItem03DetailDocDownloadDetail
+ caseOutput.PolicyItem03DetailDocDownloadResult
+ caseOutput.PolicyItem03DetailDocDownloadOpenInsuranceHandbookToDo
+ caseOutput.PolicyItem03DetailDocDownloadInsuranceHandbook
+ caseOutput.PolicyItem03DetailTaxDeductionToDo
+ caseOutput.PolicyItem03DetailTaxDeductionDetail
+ caseOutput.PolicyItem03DetailTaxDeductionResult
+ caseOutput.PolicyItem03DetailECareCardToDo
+ caseOutput.PolicyItem03DetailECareCardDetail
+ caseOutput.PolicyItem03DetailECareCardResult
+ caseOutput.PolicyItem04DetailCardSelectedProductName
+ caseOutput.PolicyItem04DetailCardSelectedId
+ caseOutput.PolicyItem04DetailCardSelectedDetail
+ caseOutput.PolicyItem04DetailAdditionalDetail
+ caseOutput.PolicyItem04DetailHistoryToDo
+ caseOutput.PolicyItem04DetailHistoryDetail
+ caseOutput.PolicyItem04DetailPaymentTodo
+ caseOutput.PolicyItem04DetailPaymentCardId
+ caseOutput.PolicyItem04DetailPaymentDetail
+ caseOutput.PolicyItem04DetailPaymentOpenTermAndConditionToDo
+ caseOutput.PolicyItem04DetailPaymentTermAndCondition
+ caseOutput.PolicyItem04DetailDocDownloadToDo
+ caseOutput.PolicyItem04DetailDocDownloadDetail
+ caseOutput.PolicyItem04DetailDocDownloadResult
+ caseOutput.PolicyItem04DetailDocDownloadOpenInsuranceHandbookToDo
+ caseOutput.PolicyItem04DetailDocDownloadInsuranceHandbook
+ caseOutput.PolicyItem04DetailTaxDeductionToDo
+ caseOutput.PolicyItem04DetailTaxDeductionDetail
+ caseOutput.PolicyItem04DetailTaxDeductionResult
+ caseOutput.PolicyItem04DetailECareCardToDo
+ caseOutput.PolicyItem04DetailECareCardDetail
+ caseOutput.PolicyItem04DetailECareCardResult
+ caseOutput.PolicyItem05DetailCardSelectedProductName
+ caseOutput.PolicyItem05DetailCardSelectedId
+ caseOutput.PolicyItem05DetailCardSelectedDetail
+ caseOutput.PolicyItem05DetailAdditionalDetail
+ caseOutput.PolicyItem05DetailHistoryToDo
+ caseOutput.PolicyItem05DetailHistoryDetail
+ caseOutput.PolicyItem05DetailPaymentTodo
+ caseOutput.PolicyItem05DetailPaymentCardId
+ caseOutput.PolicyItem05DetailPaymentDetail
+ caseOutput.PolicyItem05DetailPaymentOpenTermAndConditionToDo
+ caseOutput.PolicyItem05DetailPaymentTermAndCondition
+ caseOutput.PolicyItem05DetailDocDownloadToDo
+ caseOutput.PolicyItem05DetailDocDownloadDetail
+ caseOutput.PolicyItem05DetailDocDownloadResult
+ caseOutput.PolicyItem05DetailDocDownloadOpenInsuranceHandbookToDo
+ caseOutput.PolicyItem05DetailDocDownloadInsuranceHandbook
+ caseOutput.PolicyItem05DetailTaxDeductionToDo
+ caseOutput.PolicyItem05DetailTaxDeductionDetail
+ caseOutput.PolicyItem05DetailTaxDeductionResult
+ caseOutput.PolicyItem05DetailECareCardToDo
+ caseOutput.PolicyItem05DetailECareCardDetail
+ caseOutput.PolicyItem05DetailECareCardResult
+ caseOutput.PolicyItem06DetailCardSelectedProductName
+ caseOutput.PolicyItem06DetailCardSelectedId
+ caseOutput.PolicyItem06DetailCardSelectedDetail
+ caseOutput.PolicyItem06DetailAdditionalDetail
+ caseOutput.PolicyItem06DetailHistoryToDo
+ caseOutput.PolicyItem06DetailHistoryDetail
+ caseOutput.PolicyItem06DetailPaymentTodo
+ caseOutput.PolicyItem06DetailPaymentCardId
+ caseOutput.PolicyItem06DetailPaymentDetail
+ caseOutput.PolicyItem06DetailPaymentOpenTermAndConditionToDo
+ caseOutput.PolicyItem06DetailPaymentTermAndCondition
+ caseOutput.PolicyItem06DetailDocDownloadToDo
+ caseOutput.PolicyItem06DetailDocDownloadDetail
+ caseOutput.PolicyItem06DetailDocDownloadResult
+ caseOutput.PolicyItem06DetailDocDownloadOpenInsuranceHandbookToDo
+ caseOutput.PolicyItem06DetailDocDownloadInsuranceHandbook
+ caseOutput.PolicyItem06DetailTaxDeductionToDo
+ caseOutput.PolicyItem06DetailTaxDeductionDetail
+ caseOutput.PolicyItem06DetailTaxDeductionResult
+ caseOutput.PolicyItem06DetailECareCardToDo
+ caseOutput.PolicyItem06DetailECareCardDetail
+ caseOutput.PolicyItem06DetailECareCardResult
+ caseOutput.PolicyItem07DetailCardSelectedProductName
+ caseOutput.PolicyItem07DetailCardSelectedId
+ caseOutput.PolicyItem07DetailCardSelectedDetail
+ caseOutput.PolicyItem07DetailAdditionalDetail
+ caseOutput.PolicyItem07DetailHistoryToDo
+ caseOutput.PolicyItem07DetailHistoryDetail
+ caseOutput.PolicyItem07DetailPaymentTodo
+ caseOutput.PolicyItem07DetailPaymentCardId
+ caseOutput.PolicyItem07DetailPaymentDetail
+ caseOutput.PolicyItem07DetailPaymentOpenTermAndConditionToDo
+ caseOutput.PolicyItem07DetailPaymentTermAndCondition
+ caseOutput.PolicyItem07DetailDocDownloadToDo
+ caseOutput.PolicyItem07DetailDocDownloadDetail
+ caseOutput.PolicyItem07DetailDocDownloadResult
+ caseOutput.PolicyItem07DetailDocDownloadOpenInsuranceHandbookToDo
+ caseOutput.PolicyItem07DetailDocDownloadInsuranceHandbook
+ caseOutput.PolicyItem07DetailTaxDeductionToDo
+ caseOutput.PolicyItem07DetailTaxDeductionDetail
+ caseOutput.PolicyItem07DetailTaxDeductionResult
+ caseOutput.PolicyItem07DetailECareCardToDo
+ caseOutput.PolicyItem07DetailECareCardDetail
+ caseOutput.PolicyItem07DetailECareCardResult
+ caseOutput.PolicyItem08DetailCardSelectedProductName
+ caseOutput.PolicyItem08DetailCardSelectedId
+ caseOutput.PolicyItem08DetailCardSelectedDetail
+ caseOutput.PolicyItem08DetailAdditionalDetail
+ caseOutput.PolicyItem08DetailHistoryToDo
+ caseOutput.PolicyItem08DetailHistoryDetail
+ caseOutput.PolicyItem08DetailPaymentTodo
+ caseOutput.PolicyItem08DetailPaymentCardId
+ caseOutput.PolicyItem08DetailPaymentDetail
+ caseOutput.PolicyItem08DetailPaymentOpenTermAndConditionToDo
+ caseOutput.PolicyItem08DetailPaymentTermAndCondition
+ caseOutput.PolicyItem08DetailDocDownloadToDo
+ caseOutput.PolicyItem08DetailDocDownloadDetail
+ caseOutput.PolicyItem08DetailDocDownloadResult
+ caseOutput.PolicyItem08DetailDocDownloadOpenInsuranceHandbookToDo
+ caseOutput.PolicyItem08DetailDocDownloadInsuranceHandbook
+ caseOutput.PolicyItem08DetailTaxDeductionToDo
+ caseOutput.PolicyItem08DetailTaxDeductionDetail
+ caseOutput.PolicyItem08DetailTaxDeductionResult
+ caseOutput.PolicyItem08DetailECareCardToDo
+ caseOutput.PolicyItem08DetailECareCardDetail
+ caseOutput.PolicyItem08DetailECareCardResult
+ caseOutput.PolicyItem09DetailCardSelectedProductName
+ caseOutput.PolicyItem09DetailCardSelectedId
+ caseOutput.PolicyItem09DetailCardSelectedDetail
+ caseOutput.PolicyItem09DetailAdditionalDetail
+ caseOutput.PolicyItem09DetailHistoryToDo
+ caseOutput.PolicyItem09DetailHistoryDetail
+ caseOutput.PolicyItem09DetailPaymentTodo
+ caseOutput.PolicyItem09DetailPaymentCardId
+ caseOutput.PolicyItem09DetailPaymentDetail
+ caseOutput.PolicyItem09DetailPaymentOpenTermAndConditionToDo
+ caseOutput.PolicyItem09DetailPaymentTermAndCondition
+ caseOutput.PolicyItem09DetailDocDownloadToDo
+ caseOutput.PolicyItem09DetailDocDownloadDetail
+ caseOutput.PolicyItem09DetailDocDownloadResult
+ caseOutput.PolicyItem09DetailDocDownloadOpenInsuranceHandbookToDo
+ caseOutput.PolicyItem09DetailDocDownloadInsuranceHandbook
+ caseOutput.PolicyItem09DetailTaxDeductionToDo
+ caseOutput.PolicyItem09DetailTaxDeductionDetail
+ caseOutput.PolicyItem09DetailTaxDeductionResult
+ caseOutput.PolicyItem09DetailECareCardToDo
+ caseOutput.PolicyItem09DetailECareCardDetail
+ caseOutput.PolicyItem09DetailECareCardResult
+ caseOutput.PolicyItem10DetailCardSelectedProductName
+ caseOutput.PolicyItem10DetailCardSelectedId
+ caseOutput.PolicyItem10DetailCardSelectedDetail
+ caseOutput.PolicyItem10DetailAdditionalDetail
+ caseOutput.PolicyItem10DetailHistoryToDo
+ caseOutput.PolicyItem10DetailHistoryDetail
+ caseOutput.PolicyItem10DetailPaymentTodo
+ caseOutput.PolicyItem10DetailPaymentCardId
+ caseOutput.PolicyItem10DetailPaymentDetail
+ caseOutput.PolicyItem10DetailPaymentOpenTermAndConditionToDo
+ caseOutput.PolicyItem10DetailPaymentTermAndCondition
+ caseOutput.PolicyItem10DetailDocDownloadToDo
+ caseOutput.PolicyItem10DetailDocDownloadDetail
+ caseOutput.PolicyItem10DetailDocDownloadResult
+ caseOutput.PolicyItem10DetailDocDownloadOpenInsuranceHandbookToDo
+ caseOutput.PolicyItem10DetailDocDownloadInsuranceHandbook
+ caseOutput.PolicyItem10DetailTaxDeductionToDo
+ caseOutput.PolicyItem10DetailTaxDeductionDetail
+ caseOutput.PolicyItem10DetailTaxDeductionResult
+ caseOutput.PolicyItem10DetailECareCardToDo
+ caseOutput.PolicyItem10DetailECareCardDetail
+ caseOutput.PolicyItem10DetailECareCardResult
+ caseOutput.PolicyCardSelectProductLineResult
+ caseOutput.PolicyCompulsoryBuyCardId
+ caseOutput.PolicyCompulsoryBuyCardDetail
+ caseOutput.PolicyCompulsoryBuyPaymentDetail
+ caseOutput.PolicyCompulsoryBuyPaymentResult
+ caseOutput.ClaimDetailNonClosureCardSelectedId
+ caseOutput.ClaimDetailNonClosureCardSelectedDetail
+ caseOutput.ClaimDetailClosureStatusCardSelectedId
+ caseOutput.ClaimDetailClosureStatusCardSelectedDetail
+ caseOutput.DocDownloadInsuranceHandbook
+ caseOutput.DocDownloadCardSelectedId
+ caseOutput.DocDownloadCardSelectedDetail
+ caseOutput.DocDownloadCardSelectedResult
+ caseOutput.ContactSupportSubjectRenewalDetail
+ caseOutput.ContactSupportSubjectRenewalResult
+ caseOutput.ContactSupportSubjectPolicyDetail
+ caseOutput.ContactSupportSubjectPolicyResult
+ caseOutput.ContactSupportSubjectClaimDetail
+ caseOutput.ContactSupportSubjectClaimResult
+ caseOutput.ContactSupportSubjectEnquiryClaimHandlerDetail
+ caseOutput.ContactSupportSubjectEnquiryClaimHandlerResult
+ caseOutput.ContactSupportSubjectEnquiryVehicleAssessmentStatusDetail
+ caseOutput.ContactSupportSubjectEnquiryVehicleAssessmentStatusResult
+ caseOutput.ContactSupportSubjectEnquiryReimbursementStatusDetail
+ caseOutput.ContactSupportSubjectEnquiryReimbursementStatusResult
+ caseOutput.ContactSupportSubjectDeleteAccountDetail
+ caseOutput.ContactSupportSubjectDeleteAccountResult
+ caseOutput.ContactSupportSubjectRequestPolicyDocumentsDetail
+ caseOutput.ContactSupportSubjectRequestPolicyDocumentsResult
+ caseOutput.InspectionDetail
+ caseOutput.InspectionResult
+ caseOutput.FindGarageDetail
+ caseOutput.FindGarageResult
+ caseOutput.GetQuoteItem01Detail
+ caseOutput.GetQuoteItem01Result
+ caseOutput.GetQuoteItem02Detail
+ caseOutput.GetQuoteItem02Result
+ caseOutput.GetQuoteItem03Detail
+ caseOutput.GetQuoteItem03Result
+ caseOutput.GetQuoteItem04Detail
+ caseOutput.GetQuoteItem04Result
+ caseOutput.GetQuoteItem05Detail
+ caseOutput.GetQuoteItem05Result
+ caseOutput.GetQuoteItem06Detail
+ caseOutput.GetQuoteItem06Result
+ caseOutput.GetQuoteItem07Detail
+ caseOutput.GetQuoteItem07Result
+ caseOutput.GetQuoteItem08Detail
+ caseOutput.GetQuoteItem08Result
+ caseOutput.GetQuoteItem09Detail
+ caseOutput.GetQuoteItem09Result
+ caseOutput.GetQuoteItem10Detail
+ caseOutput.GetQuoteItem10Result
+ caseOutput.GetQuoteSelectProductLineResult
+ caseOutput.ReferFriendDetail
+ caseOutput.ReferFriendReferLink
+ caseOutput.ReferFriendReferCode
+ caseOutput.ReferFriendResult
+ caseOutput.FindNetworkHospitalDetail
+ caseOutput.FindNetworkHospitalResult
+ caseOutput.RoojaiRewardMyPointSummaryBefore
+ caseOutput.RoojaiRewardMyPointBalanceBefore
+ caseOutput.RoojaiRewardMyPointPendingBefore
+ caseOutput.RoojaiRewardMyPointAvailableBefore
+ caseOutput.RoojaiRewardMyPointTotalBefore
+ caseOutput.RoojaiRewardMyRewardBefore
+ caseOutput.RoojaiRewardMyHistoryBefore
+ caseOutput.RoojaiRewardMyPointSummaryAfter
+ caseOutput.RoojaiRewardMyPointBalanceAfter
+ caseOutput.RoojaiRewardMyPointPendingAfter
+ caseOutput.RoojaiRewardMyPointAvailableAfter
+ caseOutput.RoojaiRewardMyPointTotalAfter
+ caseOutput.RoojaiRewardMyRewardAfter
+ caseOutput.RoojaiRewardMyHistoryAfter
+ caseOutput.RoojaiRewardVoucherAllDetail
+ caseOutput.RoojaiRewardVoucherAllAdditional
+ caseOutput.RoojaiRewardVoucherAllResult
+ caseOutput.RoojaiRewardVoucherInsuranceProductDetail
+ caseOutput.RoojaiRewardVoucherInsuranceProductAdditional
+ caseOutput.RoojaiRewardVoucherInsuranceProductResult
+ caseOutput.RoojaiRewardVoucherCharityDetail
+ caseOutput.RoojaiRewardVoucherCharityAdditional
+ caseOutput.RoojaiRewardVoucherCharityResult
+ caseOutput.RoojaiRewardVoucherPetrolDetail
+ caseOutput.RoojaiRewardVoucherPetrolAdditional
+ caseOutput.RoojaiRewardVoucherPetrolResult
+ caseOutput.RoojaiRewardVoucherKangarooDetail
+ caseOutput.RoojaiRewardVoucherKangarooAdditional
+ caseOutput.RoojaiRewardVoucherKangarooResult
+ caseOutput.RoojaiRewardVoucherTravelAndLifestyleDetail
+ caseOutput.RoojaiRewardVoucherTravelAndLifestyleAdditional
+ caseOutput.RoojaiRewardVoucherTravelAndLifestyleResult
+ caseOutput.RoojaiRewardVoucherFoodAndBeverageDetail
+ caseOutput.RoojaiRewardVoucherFoodAndBeverageAdditional
+ caseOutput.RoojaiRewardVoucherFoodAndBeverageResult
+ caseOutput.RoojaiRewardVoucherShoppingDetail
+ caseOutput.RoojaiRewardVoucherShoppingAdditional
+ caseOutput.RoojaiRewardVoucherShoppingResult
+ caseOutput.RoojaiRewardResult
+ */
+if(GlobalVariable.PrevStatus){
+	IGNUemaHelper.printLog('GlobalVariable.PrevStatus:'+GlobalVariable.PrevStatus.toString())
+	GlobalVariable.PrevStatus=false
+	if(caseFactory.IsValid &&(caseFactory.CurrentCase>0)){
+		IGNUemaHelper.printLog('caseFactory.IsValid=true')
+		IGNUemaHelper.printLog(caseInput)
+		if(!(GlobalVariable.BrowserInit)){
+			IGNUemaHelper.printLog('BrowserInit Open')
+			GlobalVariable.BrowserInit=IGNBrowserConfig.openBrowser(caseInput.BaseUrl,IGNUemaHelper.convertStringToBoolean(caseInput.MaximizeMode),IGNUemaHelper.convertStringToBoolean(caseInput.WithAuth),caseInput.AuthUser,caseInput.AuthPassword)
+			if(GlobalVariable.BrowserInit){
+				caseOutput.BaseUrl=caseInput.BaseUrl
+				caseOutput.MaximizeMode=IGNUemaHelper.convertBooleanToString(IGNUemaHelper.convertStringToBoolean(caseInput.MaximizeMode))
+				caseOutput.WithAuth=IGNUemaHelper.convertBooleanToString(IGNUemaHelper.convertStringToBoolean(caseInput.WithAuth))
+				caseOutput.AuthUser=caseInput.AuthUser
+				caseOutput.AuthPassword=IGNUemaHelper.convertStringToPassword(caseInput.AuthPassword.toString())
+				caseFactory.SaveOutput()
+			}
+		}
+		if(GlobalVariable.BrowserInit){
+			IGNUemaHelper.printLog('BrowserInit=true')
+			IGNUemaHelper.printLog('Script Start')
+			driver=DriverFactory.getWebDriver()
+			selenium=driver
+			caseUtil=new THAMyAccountNewbizMainUtil(driver,selenium)
+			String lTagCustomerName='customer-name'
+			String lLocatorCustomerName=IGNUemaHelper.getTagDataSeleniumKey(lTagCustomerName)
+			String lLocatorToCheck1=lLocatorCustomerName
+			Boolean lReady1=false
+			IGNUemaHelper.delayThreadSecond(0)
+			lReady1=IGNUemaHelper.checkElementPresentByLocator(driver,lLocatorToCheck1,20)
+			runNext=(lReady1)
+			IGNUemaHelper.delayThreadSecond(0)
+			if(!runNext){
+				KeywordUtil.markFailed(GlobalVariable.TestCaseFullName)
+				IGNUemaHelper.FORCESTOP()
+			}else{
+				caseFactory.SaveOutput()
+				//Check ABTesting
+				String lTagABTesting='ABTesting'
+				String lLocatorABTesting=IGNUemaHelper.getTagDataSeleniumKey(lTagABTesting)
+				WebElement lElementABTesting=IGNUemaHelper.getWebElementFromDataSeleniumKey(driver,lTagABTesting)
+				if(!lElementABTesting){
+					IGNUemaHelper.CURRENT_AB_TESTING_ENABLE=false
+					IGNUemaHelper.CURRENT_AB_TESTING_VERSION=''
+					IGNUemaHelper.printLog('CURRENT_AB_TESTING_ENABLE='+IGNUemaHelper.CURRENT_AB_TESTING_ENABLE.toString())
+				}else{
+					IGNUemaHelper.CURRENT_AB_TESTING_VERSION=IGNUemaHelper.getDataSeleniumValueWebElement(driver,lElementABTesting).trim().toUpperCase()
+					if(IGNUemaHelper.CURRENT_AB_TESTING_VERSION.length()>1){
+						IGNUemaHelper.CURRENT_AB_TESTING_VERSION=''
+					}
+					IGNUemaHelper.CURRENT_AB_TESTING_ENABLE=IGNUemaHelper.CURRENT_AB_TESTING_VERSION.length()>0
+					IGNUemaHelper.printLog('CURRENT_AB_TESTING_ENABLE='+IGNUemaHelper.CURRENT_AB_TESTING_ENABLE.toString())
+					if(IGNUemaHelper.CURRENT_AB_TESTING_ENABLE){
+						IGNUemaHelper.printLog('IGNUemaHelper.CURRENT_AB_TESTING_VERSION='+IGNUemaHelper.CURRENT_AB_TESTING_VERSION)
+					}
+				}
+				runNext=caseUtil.inputCase(caseInput,caseOutput)
+				if(caseOutput.PositiveCase.toString().length()>0){
+					if((!IGNUemaHelper.convertStringToBoolean(caseOutput.PositiveCase.toString()))&&(caseOutput.ActualResult.toString().length()<=0)){
+						caseOutput.ActualResult=IGNUemaHelper.convertBooleanToString(true)
+					}
+				}
+				caseFactory.SaveOutput()
+				//Check For Retry Case
+				if(caseOutput.PositiveCase.toString().length()>0){
+					if(!IGNUemaHelper.convertStringToBoolean(caseOutput.ActualResult)){
+						if(IGNUemaHelper.convertStringToBoolean(caseOutput.PositiveCase)){
+							KeywordUtil.markFailed(GlobalVariable.TestCaseFullName)
+							IGNUemaHelper.FORCESTOP()
+						}
+					}
+				}
+				GlobalVariable.PrevStatus=runNext
+			}
+			IGNUemaHelper.printLog(caseOutput)
+			IGNUemaHelper.delayThreadSecond(0)
+			IGNUemaHelper.printLog('Script Stop')
+			KeywordUtil.markPassed(GlobalVariable.TestCaseFullName)
+		}else{
+			IGNUemaHelper.printLog('BrowserInit=false')
+			caseFactory.SaveOutput()
+			KeywordUtil.markError(GlobalVariable.TestCaseFullName)
+			IGNUemaHelper.FORCESTOP()
+		}
+	}else{
+		IGNUemaHelper.printLog('caseFactory.IsValid=false')
+		KeywordUtil.markError(GlobalVariable.TestCaseFullName)
+		IGNUemaHelper.FORCESTOP()
+	}
+}else{
+	IGNUemaHelper.printLog('GlobalVariable.PrevStatus:'+GlobalVariable.PrevStatus.toString())
+	if(caseFactory.IsValid &&(caseFactory.CurrentCase>0)){
+		IGNUemaHelper.printLog('caseFactory.IsValid=true')
+		caseFactory.SaveOutput()
+		KeywordUtil.markPassed(GlobalVariable.TestCaseFullName)
+	}else{
+		IGNUemaHelper.printLog('caseFactory.IsValid=false')
+		KeywordUtil.markError(GlobalVariable.TestCaseFullName)
+		IGNUemaHelper.FORCESTOP()
+	}
+}
+lDateTimeNow=IGNUemaHelper.getStringCurrentStampDateTime()
+GlobalVariable.CaseDateTimeEnd=lDateTimeNow
+IGNUemaHelper.printLog('Stop>>'+GlobalVariable.CaseDateTimeEnd)
+IGNUemaHelper.printLog(GlobalVariable.TestCaseFullName+' Stop')
+return null

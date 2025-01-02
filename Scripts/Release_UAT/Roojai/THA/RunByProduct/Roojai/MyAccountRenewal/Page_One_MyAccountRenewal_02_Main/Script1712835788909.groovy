@@ -1,0 +1,458 @@
+import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
+import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
+import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import org.openqa.selenium.remote.RemoteWebDriver as RemoteWebDriver
+import org.openqa.selenium.remote.DesiredCapabilities as DesiredCapabilities
+import org.openqa.selenium.logging.LogEntry as LogEntry
+import org.openqa.selenium.logging.LogEntries as LogEntries
+import org.openqa.selenium.firefox.FirefoxDriver as FirefoxDriver
+import org.openqa.selenium.chrome.ChromeOptions as ChromeOptions
+import org.openqa.selenium.chrome.ChromeDriver as ChromeDriver
+import org.openqa.selenium.WebElement as WebElement
+import org.openqa.selenium.WebDriver as WebDriver
+import org.openqa.selenium.Point as Point
+import org.openqa.selenium.Keys as Keys
+import org.openqa.selenium.JavascriptExecutor as JavascriptExecutor
+import org.openqa.selenium.Dimension as Dimension
+import org.openqa.selenium.Capabilities as Capabilities
+import org.openqa.selenium.By as By
+import internal.GlobalVariable
+import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import com.kms.katalon.core.webui.driver.WebUIDriverType as WebUIDriverType
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.util.KeywordUtil as KeywordUtil
+import com.kms.katalon.core.testobject.TestObject as TestObject
+import com.kms.katalon.core.testobject.ObjectRepository as ObjectRepository
+import com.kms.katalon.core.testdata.TestDataFactory as TestDataFactory
+import com.kms.katalon.core.testdata.ExcelData as ExcelData
+import com.kms.katalon.core.testdata.TestData as TestData
+import com.kms.katalon.core.testcase.TestCaseFactory as TestCaseFactory
+import com.kms.katalon.core.testcase.TestCase as TestCase
+import com.kms.katalon.core.model.FailureHandling as FailureHandling
+import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
+import com.kms.katalon.core.logging.KeywordLogger as KeywordLogger
+import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
+import com.kms.katalon.core.configuration.RunConfiguration as RunConfiguration
+import com.kms.katalon.core.checkpoint.CheckpointFactory as CheckpointFactory
+import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
+import com.kms.katalon.core.annotation.Keyword as Keyword
+import org.roojai.ignite.core.IGNBrowserConfig as IGNBrowserConfig
+import org.roojai.ignite.core.IGNRobotAuth as IGNRobotAuth
+import org.roojai.tha.core.THARoojaiWebsite as THARoojaiWebsite
+import org.roojai.ignite.core.IGNUemaHelper as IGNUemaHelper
+import org.roojai.tha.types.myaccount.renewal.THAMyAccountRenewalMainFactory
+import org.roojai.tha.types.myaccount.renewal.THAMyAccountRenewalMainType
+import org.roojai.tha.types.myaccount.renewal.THAMyAccountRenewalMainUtil
+IGNUemaHelper.printLog(GlobalVariable.TestCaseFullName+' Start')
+IGNUemaHelper.printLog('printPropertiesOfExecutionProperties')
+IGNUemaHelper.printPropertiesOfExecutionProperties()
+IGNUemaHelper.printLog('ExecutionProfile:'+IGNUemaHelper.getExecutionProfile())
+String lDateTimeNow=IGNUemaHelper.getStringCurrentStampDateTime()
+if(GlobalVariable.CaseDateTimeBegin.toString().length()<=0){
+	GlobalVariable.CaseDateTimeBegin=lDateTimeNow
+}
+GlobalVariable.CaseDateTimeEnd=lDateTimeNow
+IGNUemaHelper.printLog('Start>>'+GlobalVariable.CaseDateTimeBegin)
+if(IGNUemaHelper.CURRENT_BROWSER_IS_SAFARI){
+	IGNUemaHelper.printLog('CURRENT_BROWSER_IS_SAFARI=true')
+	if(IGNUemaHelper.CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_SAFARI){
+		IGNUemaHelper.printLog('CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_SAFARI=true')
+		IGNUemaHelper.switchSmartWaitDelay(true)
+	}else{
+		IGNUemaHelper.printLog('CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_SAFARI=false')
+		IGNUemaHelper.switchSmartWaitDelay(false)
+	}
+}else{
+	IGNUemaHelper.printLog('CURRENT_BROWSER_IS_SAFARI=false')
+	if(IGNUemaHelper.CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_OTHERS){
+		IGNUemaHelper.printLog('CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_OTHERS=true')
+		IGNUemaHelper.switchSmartWaitDelay(true)
+	}else{
+		IGNUemaHelper.printLog('CURRENT_ENABLE_SMART_WAIT_FOR_BROWSER_OTHERS=false')
+		IGNUemaHelper.switchSmartWaitDelay(false)
+	}
+}
+IGNUemaHelper.printLog('GlobalVariable.CaseNumber:'+GlobalVariable.CaseNumber)
+TestData dataInput=TestDataFactory.findTestData(THAMyAccountRenewalMainType.INPUT_DATA_FILE_NAME)
+TestData dataOutput=TestDataFactory.findTestData(THAMyAccountRenewalMainType.OUTPUT_DATA_FILE_NAME)
+THAMyAccountRenewalMainFactory caseFactory=new THAMyAccountRenewalMainFactory(dataInput)
+caseFactory.CurrentCase=GlobalVariable.CaseNumber
+THAMyAccountRenewalMainType caseData=caseFactory.CaseData()
+Map caseInput=caseData.Input
+Map caseOutput=caseData.Output
+WebDriver driver=null
+WebDriver selenium=null
+THAMyAccountRenewalMainUtil caseUtil=null
+Boolean runNext=false
+/*Input
+ caseInput.BaseUrl
+ caseInput.MaximizeMode
+ caseInput.WithAuth
+ caseInput.AuthUser
+ caseInput.AuthPassword
+ caseInput.Language
+ caseInput.MenuHomeRenewalDetailVehicleToDo
+ caseInput.MenuHomeRenewalDetailVehicleExpectedProductCar
+ caseInput.MenuHomeRenewalDetailVehicleExpectedCarPlateNumber
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomToDo
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomPlanType
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomPlanGarage
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomPlanExcess
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomPlanDriver
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomPlanVoluntaryTpbi
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomPlanPaAndMe
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomPlanPaOnly
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomPlanMeOnly
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomPlanCarRental
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomPlanCompulsory
+ caseInput.MenuHomeRenewalDetailVehiclePlanCustomPlanRoadsideAssistance
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryAdd
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryCarryBoyAdd
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryCarryBoyOption
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemAdd
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemOption
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryBodyKitAdd
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryBodyKitOption
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryRimsTiresAdd
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryRimsTiresOption
+ caseInput.MenuHomeRenewalDetailVehicleAccessorySolarFilmAdd
+ caseInput.MenuHomeRenewalDetailVehicleAccessorySolarFilmOption
+ caseInput.MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemAdd
+ caseInput.MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemOption
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemAdd
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemOption
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemAdd
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemOption
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryCarCameraAdd
+ caseInput.MenuHomeRenewalDetailVehicleAccessoryCarCameraOption
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditMaritalStatus
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditOccupation
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteBeforeAddToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddFirstName
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddLastName
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddThaiResident
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialThaiId
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportCountry
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportId
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddGender
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddMaritalStatus
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddBirthDate
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddYearDriving
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddClaimNo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddOccupation
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1EditToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1EditMaritalStatus
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1EditOccupation
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteAfterAddToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver1ChangeToMainDriver
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteBeforeAddToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddFirstName
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddLastName
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddThaiResident
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialThaiId
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportCountry
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportId
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddGender
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddMaritalStatus
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddBirthDate
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddYearDriving
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddClaimNo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddOccupation
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2EditToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2EditMaritalStatus
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2EditOccupation
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteAfterAddToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver2ChangeToMainDriver
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteBeforeAddToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddFirstName
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddLastName
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddThaiResident
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialThaiId
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportCountry
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportId
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddGender
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddMaritalStatus
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddBirthDate
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddYearDriving
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddClaimNo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddOccupation
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3EditToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3EditMaritalStatus
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3EditOccupation
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteAfterAddToDo
+ caseInput.MenuHomeRenewalDetailVehicleDriverCustomDriver3ChangeToMainDriver
+ caseInput.MenuHomeRenewalDetailVehicleOtherCustomToDo
+ caseInput.MenuHomeRenewalDetailVehicleOtherCustomCarUsage
+ caseInput.MenuHomeRenewalDetailVehicleOtherCustomCamera
+ caseInput.MenuHomeRenewalDetailVehiclePaymentToDo
+ caseInput.MenuHomeRenewalDetailVehiclePaymentPayMethod
+ caseInput.MenuHomeRenewalDetailVehiclePaymentPayByCcExistingCard
+ caseInput.MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterToDo
+ caseInput.MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDate
+ caseInput.MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDayOffset
+ caseInput.MenuHomeRenewalDetailVehiclePaymentPayByCcSuccessCase
+ caseInput.MenuHomeRenewalDetailVehiclePaymentFrequency
+ caseInput.MenuHomeRenewalDetailVehiclePaymentEPolicy
+ caseInput.MenuHomeRenewalDetailVehiclePaymentAutoRenew
+ caseInput.PositiveCase
+*/
+/*Output
+ caseOutput.BaseUrl
+ caseOutput.MaximizeMode
+ caseOutput.WithAuth
+ caseOutput.AuthUser
+ caseOutput.AuthPassword
+ caseOutput.Language
+ caseOutput.MenuHomeRenewalDetailVehicleToDo
+ caseOutput.MenuHomeRenewalDetailVehicleExpectedProductCar
+ caseOutput.MenuHomeRenewalDetailVehicleExpectedCarPlateNumber
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomToDo
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomPlanType
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomPlanGarage
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomPlanExcess
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomPlanDriver
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomPlanVoluntaryTpbi
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomPlanPaAndMe
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomPlanPaOnly
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomPlanMeOnly
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomPlanCarRental
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomPlanCompulsory
+ caseOutput.MenuHomeRenewalDetailVehiclePlanCustomPlanRoadsideAssistance
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryAdd
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryCarryBoyAdd
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryCarryBoyOption
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemAdd
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemOption
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryBodyKitAdd
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryBodyKitOption
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryRimsTiresAdd
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryRimsTiresOption
+ caseOutput.MenuHomeRenewalDetailVehicleAccessorySolarFilmAdd
+ caseOutput.MenuHomeRenewalDetailVehicleAccessorySolarFilmOption
+ caseOutput.MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemAdd
+ caseOutput.MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemOption
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemAdd
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemOption
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemAdd
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemOption
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryCarCameraAdd
+ caseOutput.MenuHomeRenewalDetailVehicleAccessoryCarCameraOption
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditMaritalStatus
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditOccupation
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteBeforeAddToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddFirstName
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddLastName
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddThaiResident
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialThaiId
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportCountry
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportId
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddGender
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddMaritalStatus
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddBirthDate
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddYearDriving
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddClaimNo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1AddOccupation
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1EditToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1EditMaritalStatus
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1EditOccupation
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteAfterAddToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver1ChangeToMainDriver
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteBeforeAddToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddFirstName
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddLastName
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddThaiResident
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialThaiId
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportCountry
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportId
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddGender
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddMaritalStatus
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddBirthDate
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddYearDriving
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddClaimNo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2AddOccupation
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2EditToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2EditMaritalStatus
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2EditOccupation
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteAfterAddToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver2ChangeToMainDriver
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteBeforeAddToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddFirstName
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddLastName
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddThaiResident
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialThaiId
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportCountry
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportId
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddGender
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddMaritalStatus
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddBirthDate
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddYearDriving
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddClaimNo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3AddOccupation
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3EditToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3EditMaritalStatus
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3EditOccupation
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteAfterAddToDo
+ caseOutput.MenuHomeRenewalDetailVehicleDriverCustomDriver3ChangeToMainDriver
+ caseOutput.MenuHomeRenewalDetailVehicleOtherCustomToDo
+ caseOutput.MenuHomeRenewalDetailVehicleOtherCustomCarUsage
+ caseOutput.MenuHomeRenewalDetailVehicleOtherCustomCamera
+ caseOutput.MenuHomeRenewalDetailVehiclePaymentToDo
+ caseOutput.MenuHomeRenewalDetailVehiclePaymentPayMethod
+ caseOutput.MenuHomeRenewalDetailVehiclePaymentPayByCcExistingCard
+ caseOutput.MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterToDo
+ caseOutput.MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDate
+ caseOutput.MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDayOffset
+ caseOutput.MenuHomeRenewalDetailVehiclePaymentPayByCcSuccessCase
+ caseOutput.MenuHomeRenewalDetailVehiclePaymentFrequency
+ caseOutput.MenuHomeRenewalDetailVehiclePaymentEPolicy
+ caseOutput.MenuHomeRenewalDetailVehiclePaymentAutoRenew
+ caseOutput.PositiveCase
+ caseOutput.ActualResult
+ caseOutput.ResultMessage
+ caseOutput.ActualAccountName
+ caseOutput.RenewalDetailVehicleCardSelectedId
+ caseOutput.RenewalDetailVehicleCardSelectedDetail
+ caseOutput.RenewalDetailVehicleCardRenewalDetailBefore
+ caseOutput.RenewalDetailVehicleCardRenewalDetailAfter
+ caseOutput.RenewalDetailVehiclePlanCustomBefore
+ caseOutput.RenewalDetailVehiclePlanCustomAfter
+ caseOutput.RenewalDetailVehiclePlanCustomResult
+ caseOutput.RenewalDetailVehicleAccessoryCustomBefore
+ caseOutput.RenewalDetailVehicleAccessoryCustomAfter
+ caseOutput.RenewalDetailVehicleAccessoryCustomResult
+ caseOutput.RenewalDetailVehicleDriverCustomBefore
+ caseOutput.RenewalDetailVehicleDriverCustomAfter
+ caseOutput.RenewalDetailVehicleDriverCustomResult
+ caseOutput.RenewalDetailVehicleOtherCustomBefore
+ caseOutput.RenewalDetailVehicleOtherCustomAfter
+ caseOutput.RenewalDetailVehicleOtherCustomResult
+ caseOutput.RenewalDetailVehiclePaymentBefore
+ caseOutput.RenewalDetailVehiclePaymentTotalAmount
+ caseOutput.RenewalDetailVehiclePaymentFirstAmount
+ caseOutput.RenewalDetailVehiclePaymentFirstDate
+ caseOutput.RenewalDetailVehiclePaymentNextAmount
+ caseOutput.RenewalDetailVehiclePaymentNextDate
+ caseOutput.RenewalDetailVehiclePaymentAfter
+ caseOutput.RenewalDetailVehiclePaymentResult
+ caseOutput.RenewalDetailVehicleResult
+ */
+if(GlobalVariable.PrevStatus){
+	IGNUemaHelper.printLog('GlobalVariable.PrevStatus:'+GlobalVariable.PrevStatus.toString())
+	GlobalVariable.PrevStatus=false
+	if(caseFactory.IsValid &&(caseFactory.CurrentCase>0)){
+		IGNUemaHelper.printLog('caseFactory.IsValid=true')
+		IGNUemaHelper.printLog(caseInput)
+		if(!(GlobalVariable.BrowserInit)){
+			IGNUemaHelper.printLog('BrowserInit Open')
+			GlobalVariable.BrowserInit=IGNBrowserConfig.openBrowser(caseInput.BaseUrl,IGNUemaHelper.convertStringToBoolean(caseInput.MaximizeMode),IGNUemaHelper.convertStringToBoolean(caseInput.WithAuth),caseInput.AuthUser,caseInput.AuthPassword)
+			if(GlobalVariable.BrowserInit){
+				caseOutput.BaseUrl=caseInput.BaseUrl
+				caseOutput.MaximizeMode=IGNUemaHelper.convertBooleanToString(IGNUemaHelper.convertStringToBoolean(caseInput.MaximizeMode))
+				caseOutput.WithAuth=IGNUemaHelper.convertBooleanToString(IGNUemaHelper.convertStringToBoolean(caseInput.WithAuth))
+				caseOutput.AuthUser=caseInput.AuthUser
+				caseOutput.AuthPassword=IGNUemaHelper.convertStringToPassword(caseInput.AuthPassword.toString())
+				caseFactory.SaveOutput()
+			}
+		}
+		if(GlobalVariable.BrowserInit){
+			IGNUemaHelper.printLog('BrowserInit=true')
+			IGNUemaHelper.printLog('Script Start')
+			driver=DriverFactory.getWebDriver()
+			selenium=driver
+			caseUtil=new THAMyAccountRenewalMainUtil(driver,selenium)
+			String lTagCustomerName='customer-name'
+			String lLocatorCustomerName=IGNUemaHelper.getTagDataSeleniumKey(lTagCustomerName)
+			String lLocatorToCheck1=lLocatorCustomerName
+			Boolean lReady1=false
+			IGNUemaHelper.delayThreadSecond(0)
+			lReady1=IGNUemaHelper.checkElementPresentByLocator(driver,lLocatorToCheck1,20)
+			runNext=(lReady1)
+			IGNUemaHelper.delayThreadSecond(0)
+			if(!runNext){
+				KeywordUtil.markFailed(GlobalVariable.TestCaseFullName)
+				IGNUemaHelper.FORCESTOP()
+			}else{
+				caseFactory.SaveOutput()
+				//Check ABTesting
+				String lTagABTesting='ABTesting'
+				String lLocatorABTesting=IGNUemaHelper.getTagDataSeleniumKey(lTagABTesting)
+				WebElement lElementABTesting=IGNUemaHelper.getWebElementFromDataSeleniumKey(driver,lTagABTesting)
+				if(!lElementABTesting){
+					IGNUemaHelper.CURRENT_AB_TESTING_ENABLE=false
+					IGNUemaHelper.CURRENT_AB_TESTING_VERSION=''
+					IGNUemaHelper.printLog('CURRENT_AB_TESTING_ENABLE='+IGNUemaHelper.CURRENT_AB_TESTING_ENABLE.toString())
+				}else{
+					IGNUemaHelper.CURRENT_AB_TESTING_VERSION=IGNUemaHelper.getDataSeleniumValueWebElement(driver,lElementABTesting).trim().toUpperCase()
+					if(IGNUemaHelper.CURRENT_AB_TESTING_VERSION.length()>1){
+						IGNUemaHelper.CURRENT_AB_TESTING_VERSION=''
+					}
+					IGNUemaHelper.CURRENT_AB_TESTING_ENABLE=IGNUemaHelper.CURRENT_AB_TESTING_VERSION.length()>0
+					IGNUemaHelper.printLog('CURRENT_AB_TESTING_ENABLE='+IGNUemaHelper.CURRENT_AB_TESTING_ENABLE.toString())
+					if(IGNUemaHelper.CURRENT_AB_TESTING_ENABLE){
+						IGNUemaHelper.printLog('IGNUemaHelper.CURRENT_AB_TESTING_VERSION='+IGNUemaHelper.CURRENT_AB_TESTING_VERSION)
+					}
+				}
+				runNext=caseUtil.inputCase(caseInput,caseOutput)
+				if(caseOutput.PositiveCase.toString().length()>0){
+					if((!IGNUemaHelper.convertStringToBoolean(caseOutput.PositiveCase.toString()))&&(caseOutput.ActualResult.toString().length()<=0)){
+						caseOutput.ActualResult=IGNUemaHelper.convertBooleanToString(true)
+					}
+				}
+				caseFactory.SaveOutput()
+				//Check For Retry Case
+				if(caseOutput.PositiveCase.toString().length()>0){
+					if(!IGNUemaHelper.convertStringToBoolean(caseOutput.ActualResult)){
+						if(IGNUemaHelper.convertStringToBoolean(caseOutput.PositiveCase)){
+							KeywordUtil.markFailed(GlobalVariable.TestCaseFullName)
+							IGNUemaHelper.FORCESTOP()
+						}
+					}
+				}
+				GlobalVariable.PrevStatus=runNext
+			}
+			IGNUemaHelper.printLog(caseOutput)
+			IGNUemaHelper.delayThreadSecond(0)
+			IGNUemaHelper.printLog('Script Stop')
+			KeywordUtil.markPassed(GlobalVariable.TestCaseFullName)
+		}else{
+			IGNUemaHelper.printLog('BrowserInit=false')
+			caseFactory.SaveOutput()
+			KeywordUtil.markError(GlobalVariable.TestCaseFullName)
+			IGNUemaHelper.FORCESTOP()
+		}
+	}else{
+		IGNUemaHelper.printLog('caseFactory.IsValid=false')
+		KeywordUtil.markError(GlobalVariable.TestCaseFullName)
+		IGNUemaHelper.FORCESTOP()
+	}
+}else{
+	IGNUemaHelper.printLog('GlobalVariable.PrevStatus:'+GlobalVariable.PrevStatus.toString())
+	if(caseFactory.IsValid &&(caseFactory.CurrentCase>0)){
+		IGNUemaHelper.printLog('caseFactory.IsValid=true')
+		caseFactory.SaveOutput()
+		KeywordUtil.markPassed(GlobalVariable.TestCaseFullName)
+	}else{
+		IGNUemaHelper.printLog('caseFactory.IsValid=false')
+		KeywordUtil.markError(GlobalVariable.TestCaseFullName)
+		IGNUemaHelper.FORCESTOP()
+	}
+}
+lDateTimeNow=IGNUemaHelper.getStringCurrentStampDateTime()
+GlobalVariable.CaseDateTimeEnd=lDateTimeNow
+IGNUemaHelper.printLog('Stop>>'+GlobalVariable.CaseDateTimeEnd)
+IGNUemaHelper.printLog(GlobalVariable.TestCaseFullName+' Stop')
+return null

@@ -1,0 +1,976 @@
+package org.roojai.tha.types.myaccount.renewal
+import com.kms.katalon.core.testdata.TestDataFactory
+import com.kms.katalon.core.testdata.TestData
+public class THAMyAccountRenewalMainType{
+	public static final String INPUT_DATA_FILE_NAME='Data Files/Release_UAT/Roojai/THA/MyAccountRenewal/MyAccountRenewal_02_Main.Input'
+	public static final String INPUT_EXCEL_FILE_NAME='Data Files/Release_UAT/Roojai/THA/Excel_MyAccount_Renewal.xlsx'
+	public static final String INPUT_EXCEL_SHEET_NAME='MyAccount_Renewal_Main.Input'
+	public static final Integer INPUT_EXCEL_COL_BEGIN=2
+	public static final Integer INPUT_EXCEL_ROW_BEGIN=1
+	public static final Integer INPUT_EXCEL_ROW_END=114
+	public static final Integer INPUT_DATA_COL_BEGIN=3
+	public static final Integer INPUT_DATA_ROW_BEGIN=1
+	public static final Integer INPUT_DATA_ROW_END=115
+	public static final String OUTPUT_DATA_FILE_NAME='Data Files/Release_UAT/Roojai/THA/MyAccountRenewal/MyAccountRenewal_02_Main.Output'
+	public static final String OUTPUT_EXCEL_FILE_NAME='Data Files/Release_UAT/Roojai/THA/Excel_MyAccount_Renewal.xlsx'
+	public static final String OUTPUT_EXCEL_SHEET_NAME='MyAccount_Renewal_Main.Output'
+	public static final Integer OUTPUT_EXCEL_COL_BEGIN=1
+	public static final Integer OUTPUT_EXCEL_ROW_BEGIN=1
+	public static final Integer OUTPUT_EXCEL_ROW_END=142
+	public static final Integer OUTPUT_DATA_COL_BEGIN=2
+	public static final Integer OUTPUT_DATA_ROW_BEGIN=1
+	public static final Integer OUTPUT_DATA_ROW_END=143
+	//Constant
+	public static final String DEFAULT_BASE_URL='https://myaccount.uat-roojai.com'
+	public static final String DEFAULT_MAXIMIZE_MODE='No'
+	public static final String DEFAULT_WITH_AUTH='No'
+	public static final String DEFAULT_AUTH_USER='demo'
+	public static final String DEFAULT_AUTH_PASSWORD='DemoRoojai#99'
+	public static final String DEFAULT_LANGUAGE='EN'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_EXPECTED_PRODUCT_CAR='Yes'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_EXPECTED_CAR_PLATE_NUMBER=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_TYPE='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_GARAGE='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_EXCESS='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_DRIVER='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_VOLUNTARY_TPBI='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_PA_AND_ME='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_PA_ONLY='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_ME_ONLY='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_CAR_RENTAL='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_COMPULSORY='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_ROADSIDE_ASSISTANCE='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_ADD='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_CARRY_BOY_ADD='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_CARRY_BOY_OPTION='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_GAS_FUELING_SYSTEM_ADD='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_GAS_FUELING_SYSTEM_OPTION='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_BODY_KIT_ADD='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_BODY_KIT_OPTION='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_RIMS_TIRES_ADD='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_RIMS_TIRES_OPTION='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_SOLAR_FILM_ADD='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_SOLAR_FILM_OPTION='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_SUSPENSION_STABILIZER_SYSTEM_ADD='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_SUSPENSION_STABILIZER_SYSTEM_OPTION='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_IN_VEHICLE_ENTERTAINMENT_SYSTEM_ADD='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_IN_VEHICLE_ENTERTAINMENT_SYSTEM_OPTION='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_AIR_INTAKE_EXHAUST_SYSTEM_ADD='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_AIR_INTAKE_EXHAUST_SYSTEM_OPTION='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_CAR_CAMERA_ADD='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_CAR_CAMERA_OPTION='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_MAIN_DRIVER_EDIT_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_MAIN_DRIVER_EDIT_MARITAL_STATUS='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_MAIN_DRIVER_EDIT_OCCUPATION=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_DELETE_BEFORE_ADD_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_FIRST_NAME='DriverNew1FirstName'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_LAST_NAME='DriverNew1LastName'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_THAI_RESIDENT='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_RESIDENTIAL_THAI_ID=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_RESIDENTIAL_PASSPORT_COUNTRY=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_RESIDENTIAL_PASSPORT_ID=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_GENDER='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_MARITAL_STATUS='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_BIRTH_DATE='01/01/1988'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_YEAR_DRIVING='6'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_CLAIM_NO='0'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_OCCUPATION=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_EDIT_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_EDIT_MARITAL_STATUS='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_EDIT_OCCUPATION=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_DELETE_AFTER_ADD_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_CHANGE_TO_MAIN_DRIVER='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_DELETE_BEFORE_ADD_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_FIRST_NAME='DriverNew2FirstName'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_LAST_NAME='DriverNew2LastName'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_THAI_RESIDENT='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_RESIDENTIAL_THAI_ID=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_RESIDENTIAL_PASSPORT_COUNTRY=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_RESIDENTIAL_PASSPORT_ID=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_GENDER='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_MARITAL_STATUS='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_BIRTH_DATE='01/01/1988'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_YEAR_DRIVING='6'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_CLAIM_NO='0'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_OCCUPATION=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_EDIT_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_EDIT_MARITAL_STATUS='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_EDIT_OCCUPATION=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_DELETE_AFTER_ADD_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_CHANGE_TO_MAIN_DRIVER='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_DELETE_BEFORE_ADD_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_FIRST_NAME='DriverNew3FirstName'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_LAST_NAME='DriverNew3LastName'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_THAI_RESIDENT='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_RESIDENTIAL_THAI_ID=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_RESIDENTIAL_PASSPORT_COUNTRY=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_RESIDENTIAL_PASSPORT_ID=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_GENDER='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_MARITAL_STATUS='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_BIRTH_DATE='01/01/1988'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_YEAR_DRIVING='6'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_CLAIM_NO='0'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_OCCUPATION=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_EDIT_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_EDIT_MARITAL_STATUS='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_EDIT_OCCUPATION=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_DELETE_AFTER_ADD_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_CHANGE_TO_MAIN_DRIVER='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_OTHER_CUSTOM_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_OTHER_CUSTOM_CAR_USAGE='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_OTHER_CUSTOM_CAMERA='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_METHOD='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_BY_CC_EXISTING_CARD='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_BY_CC_PAY_LATER_TO_DO='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_BY_CC_PAY_LATER_DATE=''
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_BY_CC_PAY_LATER_DAY_OFFSET='0'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_BY_CC_SUCCESS_CASE='Yes'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_FREQUENCY='1'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_E_POLICY='No'
+	public static final String DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_AUTO_RENEW='No'
+	public static final String DEFAULT_POSITIVE_CASE='No'
+	public Map Input=[:]
+	public Map Output=[:]
+	public THAMyAccountRenewalMainType(){
+		super()
+		this.initInput()
+		this.initOutput()
+	}
+	public Map getInput(){
+		return this.Input
+	}
+	public void setInput(Map newInput){
+		this.Input.keySet().each{prop->
+			if(newInput.containsKey(prop.toString())){
+				this.Input[prop]=newInput.get(prop).toString().trim()
+			}
+		}
+	}
+	public Map getOutput(){
+		return this.Output
+	}
+	public void setOutput(Map newOutput){
+		this.Output.keySet().each{prop->
+			if(newOutput.containsKey(prop.toString())){
+				this.Output[prop]=newOutput.get(prop).toString().trim()
+			}
+		}
+	}
+	public void initInput(){
+		this.Input.clear()
+		this.Input.put('BaseUrl',this.DEFAULT_BASE_URL)
+		this.Input.put('MaximizeMode',this.DEFAULT_MAXIMIZE_MODE)
+		this.Input.put('WithAuth',this.DEFAULT_WITH_AUTH)
+		this.Input.put('AuthUser',this.DEFAULT_AUTH_USER)
+		this.Input.put('AuthPassword',this.DEFAULT_AUTH_PASSWORD)
+		this.Input.put('Language',this.DEFAULT_LANGUAGE)
+		this.Input.put('MenuHomeRenewalDetailVehicleToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleExpectedProductCar',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_EXPECTED_PRODUCT_CAR)
+		this.Input.put('MenuHomeRenewalDetailVehicleExpectedCarPlateNumber',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_EXPECTED_CAR_PLATE_NUMBER)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomPlanType',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_TYPE)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomPlanGarage',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_GARAGE)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomPlanExcess',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_EXCESS)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomPlanDriver',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_DRIVER)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomPlanVoluntaryTpbi',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_VOLUNTARY_TPBI)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomPlanPaAndMe',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_PA_AND_ME)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomPlanPaOnly',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_PA_ONLY)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomPlanMeOnly',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_ME_ONLY)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomPlanCarRental',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_CAR_RENTAL)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomPlanCompulsory',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_COMPULSORY)
+		this.Input.put('MenuHomeRenewalDetailVehiclePlanCustomPlanRoadsideAssistance',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PLAN_CUSTOM_PLAN_ROADSIDE_ASSISTANCE)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryAdd',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_ADD)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryCarryBoyAdd',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_CARRY_BOY_ADD)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryCarryBoyOption',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_CARRY_BOY_OPTION)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemAdd',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_GAS_FUELING_SYSTEM_ADD)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemOption',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_GAS_FUELING_SYSTEM_OPTION)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryBodyKitAdd',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_BODY_KIT_ADD)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryBodyKitOption',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_BODY_KIT_OPTION)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryRimsTiresAdd',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_RIMS_TIRES_ADD)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryRimsTiresOption',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_RIMS_TIRES_OPTION)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessorySolarFilmAdd',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_SOLAR_FILM_ADD)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessorySolarFilmOption',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_SOLAR_FILM_OPTION)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemAdd',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_SUSPENSION_STABILIZER_SYSTEM_ADD)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemOption',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_SUSPENSION_STABILIZER_SYSTEM_OPTION)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemAdd',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_IN_VEHICLE_ENTERTAINMENT_SYSTEM_ADD)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemOption',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_IN_VEHICLE_ENTERTAINMENT_SYSTEM_OPTION)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemAdd',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_AIR_INTAKE_EXHAUST_SYSTEM_ADD)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemOption',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_AIR_INTAKE_EXHAUST_SYSTEM_OPTION)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryCarCameraAdd',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_CAR_CAMERA_ADD)
+		this.Input.put('MenuHomeRenewalDetailVehicleAccessoryCarCameraOption',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_ACCESSORY_CAR_CAMERA_OPTION)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_MAIN_DRIVER_EDIT_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditMaritalStatus',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_MAIN_DRIVER_EDIT_MARITAL_STATUS)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditOccupation',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_MAIN_DRIVER_EDIT_OCCUPATION)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteBeforeAddToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_DELETE_BEFORE_ADD_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddFirstName',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_FIRST_NAME)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddLastName',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_LAST_NAME)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddThaiResident',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_THAI_RESIDENT)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialThaiId',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_RESIDENTIAL_THAI_ID)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportCountry',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_RESIDENTIAL_PASSPORT_COUNTRY)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportId',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_RESIDENTIAL_PASSPORT_ID)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddGender',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_GENDER)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddMaritalStatus',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_MARITAL_STATUS)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddBirthDate',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_BIRTH_DATE)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddYearDriving',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_YEAR_DRIVING)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddClaimNo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_CLAIM_NO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddOccupation',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_ADD_OCCUPATION)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_EDIT_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditMaritalStatus',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_EDIT_MARITAL_STATUS)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditOccupation',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_EDIT_OCCUPATION)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteAfterAddToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_DELETE_AFTER_ADD_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1ChangeToMainDriver',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER1_CHANGE_TO_MAIN_DRIVER)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteBeforeAddToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_DELETE_BEFORE_ADD_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddFirstName',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_FIRST_NAME)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddLastName',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_LAST_NAME)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddThaiResident',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_THAI_RESIDENT)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialThaiId',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_RESIDENTIAL_THAI_ID)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportCountry',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_RESIDENTIAL_PASSPORT_COUNTRY)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportId',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_RESIDENTIAL_PASSPORT_ID)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddGender',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_GENDER)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddMaritalStatus',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_MARITAL_STATUS)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddBirthDate',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_BIRTH_DATE)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddYearDriving',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_YEAR_DRIVING)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddClaimNo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_CLAIM_NO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddOccupation',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_ADD_OCCUPATION)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_EDIT_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditMaritalStatus',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_EDIT_MARITAL_STATUS)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditOccupation',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_EDIT_OCCUPATION)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteAfterAddToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_DELETE_AFTER_ADD_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2ChangeToMainDriver',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER2_CHANGE_TO_MAIN_DRIVER)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteBeforeAddToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_DELETE_BEFORE_ADD_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddFirstName',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_FIRST_NAME)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddLastName',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_LAST_NAME)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddThaiResident',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_THAI_RESIDENT)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialThaiId',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_RESIDENTIAL_THAI_ID)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportCountry',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_RESIDENTIAL_PASSPORT_COUNTRY)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportId',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_RESIDENTIAL_PASSPORT_ID)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddGender',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_GENDER)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddMaritalStatus',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_MARITAL_STATUS)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddBirthDate',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_BIRTH_DATE)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddYearDriving',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_YEAR_DRIVING)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddClaimNo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_CLAIM_NO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddOccupation',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_ADD_OCCUPATION)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_EDIT_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditMaritalStatus',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_EDIT_MARITAL_STATUS)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditOccupation',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_EDIT_OCCUPATION)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteAfterAddToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_DELETE_AFTER_ADD_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3ChangeToMainDriver',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_DRIVER_CUSTOM_DRIVER3_CHANGE_TO_MAIN_DRIVER)
+		this.Input.put('MenuHomeRenewalDetailVehicleOtherCustomToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_OTHER_CUSTOM_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehicleOtherCustomCarUsage',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_OTHER_CUSTOM_CAR_USAGE)
+		this.Input.put('MenuHomeRenewalDetailVehicleOtherCustomCamera',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_OTHER_CUSTOM_CAMERA)
+		this.Input.put('MenuHomeRenewalDetailVehiclePaymentToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehiclePaymentPayMethod',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_METHOD)
+		this.Input.put('MenuHomeRenewalDetailVehiclePaymentPayByCcExistingCard',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_BY_CC_EXISTING_CARD)
+		this.Input.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterToDo',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_BY_CC_PAY_LATER_TO_DO)
+		this.Input.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDate',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_BY_CC_PAY_LATER_DATE)
+		this.Input.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDayOffset',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_BY_CC_PAY_LATER_DAY_OFFSET)
+		this.Input.put('MenuHomeRenewalDetailVehiclePaymentPayByCcSuccessCase',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_PAY_BY_CC_SUCCESS_CASE)
+		this.Input.put('MenuHomeRenewalDetailVehiclePaymentFrequency',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_FREQUENCY)
+		this.Input.put('MenuHomeRenewalDetailVehiclePaymentEPolicy',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_E_POLICY)
+		this.Input.put('MenuHomeRenewalDetailVehiclePaymentAutoRenew',this.DEFAULT_MENU_HOME_RENEWAL_DETAIL_VEHICLE_PAYMENT_AUTO_RENEW)
+		this.Input.put('PositiveCase',this.DEFAULT_POSITIVE_CASE)
+	}
+	public void initOutput(){
+		this.Output.clear()
+		this.Output.put('BaseUrl','')
+		this.Output.put('MaximizeMode','')
+		this.Output.put('WithAuth','')
+		this.Output.put('AuthUser','')
+		this.Output.put('AuthPassword','')
+		this.Output.put('Language','')
+		this.Output.put('MenuHomeRenewalDetailVehicleToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleExpectedProductCar','')
+		this.Output.put('MenuHomeRenewalDetailVehicleExpectedCarPlateNumber','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomPlanType','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomPlanGarage','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomPlanExcess','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomPlanDriver','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomPlanVoluntaryTpbi','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomPlanPaAndMe','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomPlanPaOnly','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomPlanMeOnly','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomPlanCarRental','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomPlanCompulsory','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePlanCustomPlanRoadsideAssistance','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryAdd','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryCarryBoyAdd','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryCarryBoyOption','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemAdd','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemOption','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryBodyKitAdd','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryBodyKitOption','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryRimsTiresAdd','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryRimsTiresOption','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessorySolarFilmAdd','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessorySolarFilmOption','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemAdd','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemOption','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemAdd','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemOption','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemAdd','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemOption','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryCarCameraAdd','')
+		this.Output.put('MenuHomeRenewalDetailVehicleAccessoryCarCameraOption','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditMaritalStatus','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditOccupation','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteBeforeAddToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddFirstName','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddLastName','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddThaiResident','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialThaiId','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportCountry','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportId','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddGender','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddMaritalStatus','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddBirthDate','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddYearDriving','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddClaimNo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddOccupation','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditMaritalStatus','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditOccupation','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteAfterAddToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1ChangeToMainDriver','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteBeforeAddToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddFirstName','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddLastName','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddThaiResident','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialThaiId','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportCountry','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportId','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddGender','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddMaritalStatus','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddBirthDate','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddYearDriving','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddClaimNo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddOccupation','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditMaritalStatus','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditOccupation','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteAfterAddToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2ChangeToMainDriver','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteBeforeAddToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddFirstName','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddLastName','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddThaiResident','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialThaiId','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportCountry','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportId','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddGender','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddMaritalStatus','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddBirthDate','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddYearDriving','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddClaimNo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddOccupation','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditMaritalStatus','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditOccupation','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteAfterAddToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3ChangeToMainDriver','')
+		this.Output.put('MenuHomeRenewalDetailVehicleOtherCustomToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehicleOtherCustomCarUsage','')
+		this.Output.put('MenuHomeRenewalDetailVehicleOtherCustomCamera','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePaymentToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePaymentPayMethod','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePaymentPayByCcExistingCard','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterToDo','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDate','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDayOffset','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePaymentPayByCcSuccessCase','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePaymentFrequency','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePaymentEPolicy','')
+		this.Output.put('MenuHomeRenewalDetailVehiclePaymentAutoRenew','')
+		this.Output.put('PositiveCase','')
+		this.Output.put('ActualResult','')
+		this.Output.put('ResultMessage','')
+		this.Output.put('ActualAccountName','')
+		this.Output.put('RenewalDetailVehicleCardSelectedId','')
+		this.Output.put('RenewalDetailVehicleCardSelectedDetail','')
+		this.Output.put('RenewalDetailVehicleCardRenewalDetailBefore','')
+		this.Output.put('RenewalDetailVehicleCardRenewalDetailAfter','')
+		this.Output.put('RenewalDetailVehiclePlanCustomBefore','')
+		this.Output.put('RenewalDetailVehiclePlanCustomAfter','')
+		this.Output.put('RenewalDetailVehiclePlanCustomResult','')
+		this.Output.put('RenewalDetailVehicleAccessoryCustomBefore','')
+		this.Output.put('RenewalDetailVehicleAccessoryCustomAfter','')
+		this.Output.put('RenewalDetailVehicleAccessoryCustomResult','')
+		this.Output.put('RenewalDetailVehicleDriverCustomBefore','')
+		this.Output.put('RenewalDetailVehicleDriverCustomAfter','')
+		this.Output.put('RenewalDetailVehicleDriverCustomResult','')
+		this.Output.put('RenewalDetailVehicleOtherCustomBefore','')
+		this.Output.put('RenewalDetailVehicleOtherCustomAfter','')
+		this.Output.put('RenewalDetailVehicleOtherCustomResult','')
+		this.Output.put('RenewalDetailVehiclePaymentBefore','')
+		this.Output.put('RenewalDetailVehiclePaymentTotalAmount','')
+		this.Output.put('RenewalDetailVehiclePaymentFirstAmount','')
+		this.Output.put('RenewalDetailVehiclePaymentFirstDate','')
+		this.Output.put('RenewalDetailVehiclePaymentNextAmount','')
+		this.Output.put('RenewalDetailVehiclePaymentNextDate','')
+		this.Output.put('RenewalDetailVehiclePaymentAfter','')
+		this.Output.put('RenewalDetailVehiclePaymentResult','')
+		this.Output.put('RenewalDetailVehicleResult','')
+	}
+	public static Boolean readInputFromDataFile(Integer caseNumber,Map caseInput){
+		Boolean lreturn=false
+		if(caseNumber<1){
+			return lreturn
+		}
+		try{
+			TestData lTestData=TestDataFactory.findTestData(this.INPUT_DATA_FILE_NAME)
+			Integer dataColIndex=this.INPUT_DATA_COL_BEGIN+(caseNumber-1)
+			Integer dataRowIndex=this.INPUT_DATA_ROW_BEGIN
+			caseInput.put('BaseUrl',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MaximizeMode',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('WithAuth',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('AuthUser',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('AuthPassword',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('Language',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleExpectedProductCar',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleExpectedCarPlateNumber',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanType',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanGarage',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanExcess',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanDriver',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanVoluntaryTpbi',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanPaAndMe',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanPaOnly',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanMeOnly',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanCarRental',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanCompulsory',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanRoadsideAssistance',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryCarryBoyAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryCarryBoyOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryBodyKitAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryBodyKitOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryRimsTiresAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryRimsTiresOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessorySolarFilmAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessorySolarFilmOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryCarCameraAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleAccessoryCarCameraOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteBeforeAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddFirstName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddLastName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddThaiResident',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialThaiId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportCountry',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddGender',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddBirthDate',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddYearDriving',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddClaimNo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteAfterAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1ChangeToMainDriver',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteBeforeAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddFirstName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddLastName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddThaiResident',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialThaiId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportCountry',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddGender',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddBirthDate',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddYearDriving',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddClaimNo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteAfterAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2ChangeToMainDriver',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteBeforeAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddFirstName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddLastName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddThaiResident',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialThaiId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportCountry',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddGender',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddBirthDate',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddYearDriving',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddClaimNo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteAfterAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3ChangeToMainDriver',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleOtherCustomToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleOtherCustomCarUsage',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehicleOtherCustomCamera',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePaymentToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePaymentPayMethod',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePaymentPayByCcExistingCard',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDate',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDayOffset',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePaymentPayByCcSuccessCase',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePaymentFrequency',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePaymentEPolicy',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('MenuHomeRenewalDetailVehiclePaymentAutoRenew',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseInput.put('PositiveCase',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			lreturn=true
+		}catch(Exception e){
+			//e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Boolean readOutputFromDataFile(Integer caseNumber,Map caseOutput){
+		Boolean lreturn=false
+		if(caseNumber<1){
+			return lreturn
+		}
+		try{
+			TestData lTestData=TestDataFactory.findTestData(this.OUTPUT_DATA_FILE_NAME)
+			Integer dataColIndex=this.OUTPUT_DATA_COL_BEGIN+(caseNumber-1)
+			Integer dataRowIndex=this.OUTPUT_DATA_ROW_BEGIN
+			caseOutput.put('BaseUrl',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MaximizeMode',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('WithAuth',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('AuthUser',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('AuthPassword',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('Language',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleExpectedProductCar',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleExpectedCarPlateNumber',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanType',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanGarage',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanExcess',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanDriver',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanVoluntaryTpbi',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanPaAndMe',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanPaOnly',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanMeOnly',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanCarRental',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanCompulsory',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePlanCustomPlanRoadsideAssistance',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryCarryBoyAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryCarryBoyOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryGasFuelingSystemOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryBodyKitAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryBodyKitOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryRimsTiresAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryRimsTiresOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessorySolarFilmAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessorySolarFilmOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessorySuspensionStabilizerSystemOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryInVehicleEntertainmentSystemOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryAirIntakeExhaustSystemOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryCarCameraAdd',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleAccessoryCarCameraOption',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomMainDriverEditOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteBeforeAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddFirstName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddLastName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddThaiResident',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialThaiId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportCountry',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddResidentialPassportId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddGender',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddBirthDate',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddYearDriving',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddClaimNo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1AddOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1EditOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1DeleteAfterAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver1ChangeToMainDriver',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteBeforeAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddFirstName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddLastName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddThaiResident',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialThaiId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportCountry',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddResidentialPassportId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddGender',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddBirthDate',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddYearDriving',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddClaimNo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2AddOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2EditOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2DeleteAfterAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver2ChangeToMainDriver',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteBeforeAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddFirstName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddLastName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddThaiResident',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialThaiId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportCountry',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddResidentialPassportId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddGender',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddBirthDate',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddYearDriving',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddClaimNo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3AddOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditMaritalStatus',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3EditOccupation',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3DeleteAfterAddToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleDriverCustomDriver3ChangeToMainDriver',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleOtherCustomToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleOtherCustomCarUsage',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehicleOtherCustomCamera',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePaymentToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePaymentPayMethod',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePaymentPayByCcExistingCard',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterToDo',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDate',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePaymentPayByCcPayLaterDayOffset',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePaymentPayByCcSuccessCase',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePaymentFrequency',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePaymentEPolicy',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('MenuHomeRenewalDetailVehiclePaymentAutoRenew',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('PositiveCase',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('ActualResult',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('ResultMessage',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('ActualAccountName',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleCardSelectedId',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleCardSelectedDetail',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleCardRenewalDetailBefore',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleCardRenewalDetailAfter',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehiclePlanCustomBefore',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehiclePlanCustomAfter',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehiclePlanCustomResult',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleAccessoryCustomBefore',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleAccessoryCustomAfter',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleAccessoryCustomResult',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleDriverCustomBefore',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleDriverCustomAfter',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleDriverCustomResult',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleOtherCustomBefore',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleOtherCustomAfter',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleOtherCustomResult',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehiclePaymentBefore',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehiclePaymentTotalAmount',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehiclePaymentFirstAmount',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehiclePaymentFirstDate',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehiclePaymentNextAmount',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehiclePaymentNextDate',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehiclePaymentAfter',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehiclePaymentResult',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			dataRowIndex+=1
+			caseOutput.put('RenewalDetailVehicleResult',lTestData.getValue(dataColIndex,dataRowIndex).trim())
+			lreturn=true
+		}catch(Exception e){
+			//e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+}

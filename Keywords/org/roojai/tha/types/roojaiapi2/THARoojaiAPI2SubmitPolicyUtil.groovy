@@ -1,0 +1,2677 @@
+package org.roojai.tha.types.roojaiapi2
+import static org.assertj.core.api.Assertions.*
+import static com.kms.katalon.core.testobject.ObjectRepository.findWindowsObject
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
+import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
+import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
+import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
+import com.kms.katalon.core.testobject.*
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.webservice.verification.WSResponseManager
+import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
+import groovy.json.JsonSlurper
+import internal.GlobalVariable
+import org.openqa.selenium.*
+import org.openqa.selenium.support.ui.Select
+import org.roojai.ignite.core.IGNUemaHelper as IGNUemaHelper
+import org.roojai.ignite.core.IGNSalesforceRestAPIHelper as IGNSalesforceRestAPIHelper
+import org.roojai.tha.core.THARoojaiAPI2RestAPIHelper as THARoojaiAPI2RestAPIHelper
+import java.time.LocalDate
+public class THARoojaiAPI2SubmitPolicyUtil{
+	public static final Map DEFAULT_LIST_CALL_POINT=['1':'1','2':'2']
+	public static final Integer DEFAULT_CALL_POINT_TQM_NEW_BIZ=1
+	public static final Integer DEFAULT_CALL_POINT_TQM_RENEW=1
+	public THARoojaiAPI2SubmitPolicyUtil(){
+		super()
+	}
+	public Boolean inputCase(Map caseInput,Map caseOutput){
+		Boolean lreturn=false
+		String lProceedTqmToDo=caseInput.ProceedTqmToDo.toString().trim()
+		String lCallPointTqmNewBiz=caseInput.CallPointTqmNewBiz.toString().trim()
+		String lCallPointTqmRenew=caseInput.CallPointTqmRenew.toString().trim()
+		String lTqmNewBizToDo=caseInput.TqmNewBizToDo.toString().trim()
+		String lTqmNewBizRequiredStringUsername=caseInput.TqmNewBizRequiredStringUsername.toString().trim()
+		String lTqmNewBizRequiredStringPassword=caseInput.TqmNewBizRequiredStringPassword.toString().trim()
+		String lTqmNewBizRequiredRequestStringPolicyRefId=caseInput.TqmNewBizRequiredRequestStringPolicyRefId.toString().trim()
+		String lTqmNewBizRequiredRequestStringPolicyAgentLicense=caseInput.TqmNewBizRequiredRequestStringPolicyAgentLicense.toString().trim()
+		String lTqmNewBizRequiredRequestStringPolicyAgentId=caseInput.TqmNewBizRequiredRequestStringPolicyAgentId.toString().trim()
+		String lTqmNewBizRequiredRequestStringPolicyChannel=caseInput.TqmNewBizRequiredRequestStringPolicyChannel.toString().trim()
+		String lTqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice=caseInput.TqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerIdCard=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerIdCard.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerTitle=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerTitle.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerFirstName=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerFirstName.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerLastName=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerLastName.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerMobile=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerMobile.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerEmail=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerEmail.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerOccupation=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerOccupation.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerAddress=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerAddress.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerAddress2=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerAddress2.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerProvince=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerProvince.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerDistrict=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerDistrict.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerSubDistrict=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerSubDistrict.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerPostCode=caseInput.TqmNewBizRequiredRequestStringInsuredCustomerPostCode.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyInsureType=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyInsureType.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyAddressInsure=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyAddressInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure=caseInput.TqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyStartInsure=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyStartInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyBuildingType=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyBuildingType.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyClassBuild=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyClassBuild.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyWallOuter=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyWallOuter.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyAreaTop=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyAreaTop.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyRoofFrame=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyRoofFrame.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyRoof=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyRoof.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyAreaInterior=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyAreaInterior.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyIsOwner=caseInput.TqmNewBizRequiredRequestStringInsuredPropertyIsOwner.toString().trim()
+		String lTqmNewBizRequiredRequestStringBeneficiaryTitle=caseInput.TqmNewBizRequiredRequestStringBeneficiaryTitle.toString().trim()
+		String lTqmNewBizRequiredRequestStringBeneficiaryFirstName=caseInput.TqmNewBizRequiredRequestStringBeneficiaryFirstName.toString().trim()
+		String lTqmNewBizRequiredRequestStringBeneficiaryLastName=caseInput.TqmNewBizRequiredRequestStringBeneficiaryLastName.toString().trim()
+		String lTqmNewBizRequiredRequestStringBeneficiaryRelationship=caseInput.TqmNewBizRequiredRequestStringBeneficiaryRelationship.toString().trim()
+		String lTqmNewBizSalesforceProceedToDo=caseInput.TqmNewBizSalesforceProceedToDo.toString().trim()
+		String lTqmNewBizSalesforceCreateOpportunityToDo=caseInput.TqmNewBizSalesforceCreateOpportunityToDo.toString().trim()
+		String lPositiveCase=caseInput.PositiveCase.toString().trim()
+		String lActualResult=''
+		String lResultMessage=''
+		String lTqmNewBizEndPointVersion=''
+		String lTqmNewBizResponseStatus=''
+		String lTqmNewBizResponseTime=''
+		String lTqmNewBizResponseText=''
+		String lTqmNewBizOpportunityNumber=''
+		String lTqmNewBizActualResult=''
+		String lCallPointTqmNewBizUrl=''
+		try{
+			Map lMapPositiveCase=this.inputPositiveCase(lPositiveCase)
+			if(!lMapPositiveCase.Result){
+				lPositiveCase=''
+			}else{
+				lPositiveCase=lMapPositiveCase.PositiveCase
+			}
+			caseOutput.PositiveCase=lPositiveCase
+			if(lPositiveCase.length()<=0){
+				return lreturn
+			}
+			Boolean lIsPositiveCase=IGNUemaHelper.convertStringToBoolean(lPositiveCase)
+			Map lMapProceedTqmToDo=this.inputProceedTqmToDo(lProceedTqmToDo)
+			if(!lMapProceedTqmToDo.Result){
+				lProceedTqmToDo=''
+			}else{
+				lProceedTqmToDo=lMapProceedTqmToDo.ProceedTqmToDo
+			}
+			caseOutput.ProceedTqmToDo=lProceedTqmToDo
+			if(lProceedTqmToDo.length()<=0){
+				return lreturn
+			}
+			Boolean lIsProceedTqmToDo=IGNUemaHelper.convertStringToBoolean(lProceedTqmToDo)
+			Map lMapCallPointTqmNewBiz=this.inputCallPointTqmNewBiz(lCallPointTqmNewBiz)
+			if(!lMapCallPointTqmNewBiz.Result){
+				lCallPointTqmNewBiz=''
+				lCallPointTqmNewBizUrl=''
+			}else{
+				lCallPointTqmNewBiz=lMapCallPointTqmNewBiz.CallPointTqmNewBiz
+				lCallPointTqmNewBizUrl=lMapCallPointTqmNewBiz.CallPointTqmNewBizUrl
+			}
+			caseOutput.CallPointTqmNewBiz=lCallPointTqmNewBiz
+			if(lCallPointTqmNewBiz.length()<=0){
+				return lreturn
+			}
+			Integer lCallPointTqmNewBizNum=IGNUemaHelper.convertStringToInteger(lCallPointTqmNewBiz,this.DEFAULT_CALL_POINT_TQM_NEW_BIZ)
+			Map lMapCallPointTqmRenew=this.inputCallPointTqmRenew(lCallPointTqmRenew)
+			if(!lMapCallPointTqmRenew.Result){
+				lCallPointTqmRenew=''
+			}else{
+				lCallPointTqmRenew=lMapCallPointTqmRenew.CallPointTqmRenew
+			}
+			caseOutput.CallPointTqmRenew=lCallPointTqmRenew
+			if(lCallPointTqmRenew.length()<=0){
+				return lreturn
+			}
+			Integer lCallPointTqmRenewNum=IGNUemaHelper.convertStringToInteger(lCallPointTqmRenew,this.DEFAULT_CALL_POINT_TQM_RENEW)
+			Boolean lIsOKTqm=true
+			Boolean lIsTqmActualResult=false
+			if(lIsProceedTqmToDo){
+				Map lMapTqmNewBizToDo=this.inputTqmNewBizToDo(lTqmNewBizToDo)
+				if(!lMapTqmNewBizToDo.Result){
+					lTqmNewBizToDo=''
+				}else{
+					lTqmNewBizToDo=lMapTqmNewBizToDo.TqmNewBizToDo
+				}
+				if(!lMapTqmNewBizToDo.Result){
+					return lreturn
+				}
+				caseOutput.TqmNewBizToDo=lTqmNewBizToDo
+				Boolean lIsTqmNewBizToDo=IGNUemaHelper.convertStringToBoolean(lTqmNewBizToDo)
+				Boolean lIsTqmNewBizSalesforceCreateOpportunityToDo=false
+				if(lIsTqmNewBizToDo){
+					Map lMapTqmSalesforceCreateOpportunityToDo=this.inputTqmSalesforceCreateOpportunityToDo(true,lTqmNewBizSalesforceCreateOpportunityToDo)
+					if(!lMapTqmSalesforceCreateOpportunityToDo.Result){
+						lTqmNewBizSalesforceCreateOpportunityToDo=''
+					}else{
+						lTqmNewBizSalesforceCreateOpportunityToDo=lMapTqmSalesforceCreateOpportunityToDo.TqmSalesforceCreateOpportunityToDo
+					}
+					if(!lMapTqmSalesforceCreateOpportunityToDo.Result){
+						return lreturn
+					}
+					caseOutput.TqmNewBizSalesforceCreateOpportunityToDo=lTqmNewBizSalesforceCreateOpportunityToDo
+					lIsTqmNewBizSalesforceCreateOpportunityToDo=IGNUemaHelper.convertStringToBoolean(lTqmNewBizSalesforceCreateOpportunityToDo)
+				}
+				if(lIsTqmNewBizSalesforceCreateOpportunityToDo){
+					Map lMapRoojaiAPI2InputOutputTqmNewBiz=this.initRoojaiAPI2SubmitPolicyInputOutput()
+					lMapRoojaiAPI2InputOutputTqmNewBiz.CallPointUrl=lCallPointTqmNewBizUrl
+					lMapRoojaiAPI2InputOutputTqmNewBiz.CallPointStr=lCallPointTqmNewBiz
+					lMapRoojaiAPI2InputOutputTqmNewBiz.CallPointNum=lCallPointTqmNewBizNum
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredStringUsername=lTqmNewBizRequiredStringUsername
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredStringPassword=lTqmNewBizRequiredStringPassword
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringPolicyRefId=lTqmNewBizRequiredRequestStringPolicyRefId
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringPolicyAgentLicense=lTqmNewBizRequiredRequestStringPolicyAgentLicense
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringPolicyAgentId=lTqmNewBizRequiredRequestStringPolicyAgentId
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringPolicyChannel=lTqmNewBizRequiredRequestStringPolicyChannel
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice=lTqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerIdCard=lTqmNewBizRequiredRequestStringInsuredCustomerIdCard
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerTitle=lTqmNewBizRequiredRequestStringInsuredCustomerTitle
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerFirstName=lTqmNewBizRequiredRequestStringInsuredCustomerFirstName
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerLastName=lTqmNewBizRequiredRequestStringInsuredCustomerLastName
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerMobile=lTqmNewBizRequiredRequestStringInsuredCustomerMobile
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerEmail=lTqmNewBizRequiredRequestStringInsuredCustomerEmail
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth=lTqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerOccupation=lTqmNewBizRequiredRequestStringInsuredCustomerOccupation
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerAddress=lTqmNewBizRequiredRequestStringInsuredCustomerAddress
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerAddress2=lTqmNewBizRequiredRequestStringInsuredCustomerAddress2
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerProvince=lTqmNewBizRequiredRequestStringInsuredCustomerProvince
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerDistrict=lTqmNewBizRequiredRequestStringInsuredCustomerDistrict
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerSubDistrict=lTqmNewBizRequiredRequestStringInsuredCustomerSubDistrict
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredCustomerPostCode=lTqmNewBizRequiredRequestStringInsuredCustomerPostCode
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyInsureType=lTqmNewBizRequiredRequestStringInsuredPropertyInsureType
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyAddressInsure=lTqmNewBizRequiredRequestStringInsuredPropertyAddressInsure
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure=lTqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure=lTqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure=lTqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure=lTqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure=lTqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset=lTqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyStartInsure=lTqmNewBizRequiredRequestStringInsuredPropertyStartInsure
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor=lTqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyBuildingType=lTqmNewBizRequiredRequestStringInsuredPropertyBuildingType
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyClassBuild=lTqmNewBizRequiredRequestStringInsuredPropertyClassBuild
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyWallOuter=lTqmNewBizRequiredRequestStringInsuredPropertyWallOuter
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyAreaTop=lTqmNewBizRequiredRequestStringInsuredPropertyAreaTop
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyRoofFrame=lTqmNewBizRequiredRequestStringInsuredPropertyRoofFrame
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyRoof=lTqmNewBizRequiredRequestStringInsuredPropertyRoof
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyAreaInterior=lTqmNewBizRequiredRequestStringInsuredPropertyAreaInterior
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber=lTqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure=lTqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringInsuredPropertyIsOwner=lTqmNewBizRequiredRequestStringInsuredPropertyIsOwner
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringBeneficiaryTitle=lTqmNewBizRequiredRequestStringBeneficiaryTitle
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringBeneficiaryFirstName=lTqmNewBizRequiredRequestStringBeneficiaryFirstName
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringBeneficiaryLastName=lTqmNewBizRequiredRequestStringBeneficiaryLastName
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizRequiredRequestStringBeneficiaryRelationship=lTqmNewBizRequiredRequestStringBeneficiaryRelationship
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizSalesforceProceedToDo=lTqmNewBizSalesforceProceedToDo
+					lMapRoojaiAPI2InputOutputTqmNewBiz.TqmNewBizSalesforceCreateOpportunityToDo=lTqmNewBizSalesforceCreateOpportunityToDo
+					Boolean lIsInputTqmNewBizCreateOpportunity=this.inputTqmNewBizCreateOpportunity(lMapRoojaiAPI2InputOutputTqmNewBiz,caseOutput)
+					lIsOKTqm=lIsInputTqmNewBizCreateOpportunity
+					if(!lIsInputTqmNewBizCreateOpportunity){
+						return lreturn
+					}
+				}
+			}
+			lreturn=lIsOKTqm
+		}catch(Exception e){
+			e.printStackTrace()
+			lResultMessage=IGNUemaHelper.concatMessageLeftRightByPipe(lResultMessage,e.getMessage())
+			caseOutput.ResultMessage=lResultMessage
+			return lreturn
+		}
+		return lreturn
+	}
+	public Boolean inputTqmNewBizCreateOpportunity(Map mapTqmNewBizInput,Map mapTqmNewBizOutput){
+		Boolean lreturn=false
+		String lCallPointTqmNewBizUrl=mapTqmNewBizInput.CallPointUrl.toString().trim()
+		String lCallPointTqmNewBiz=mapTqmNewBizInput.CallPointStr.toString().trim()
+		String lCallPointTqmNewBizNum=mapTqmNewBizInput.CallPointNum.toString().trim()
+		String lTqmNewBizRequiredStringUsername=mapTqmNewBizInput.TqmNewBizRequiredStringUsername.toString().trim()
+		String lTqmNewBizRequiredStringPassword=mapTqmNewBizInput.TqmNewBizRequiredStringPassword.toString().trim()
+		String lTqmNewBizRequiredRequestStringPolicyRefId=mapTqmNewBizInput.TqmNewBizRequiredRequestStringPolicyRefId.toString().trim()
+		String lTqmNewBizRequiredRequestStringPolicyAgentLicense=mapTqmNewBizInput.TqmNewBizRequiredRequestStringPolicyAgentLicense.toString().trim()
+		String lTqmNewBizRequiredRequestStringPolicyAgentId=mapTqmNewBizInput.TqmNewBizRequiredRequestStringPolicyAgentId.toString().trim()
+		String lTqmNewBizRequiredRequestStringPolicyChannel=mapTqmNewBizInput.TqmNewBizRequiredRequestStringPolicyChannel.toString().trim()
+		String lTqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice=mapTqmNewBizInput.TqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerIdCard=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerIdCard.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerTitle=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerTitle.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerFirstName=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerFirstName.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerLastName=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerLastName.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerMobile=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerMobile.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerEmail=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerEmail.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerOccupation=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerOccupation.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerAddress=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerAddress.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerAddress2=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerAddress2.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerProvince=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerProvince.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerDistrict=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerDistrict.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerSubDistrict=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerSubDistrict.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredCustomerPostCode=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredCustomerPostCode.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyInsureType=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyInsureType.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyAddressInsure=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyAddressInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyStartInsure=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyStartInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyBuildingType=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyBuildingType.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyClassBuild=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyClassBuild.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyWallOuter=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyWallOuter.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyAreaTop=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyAreaTop.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyRoofFrame=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyRoofFrame.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyRoof=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyRoof.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyAreaInterior=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyAreaInterior.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure.toString().trim()
+		String lTqmNewBizRequiredRequestStringInsuredPropertyIsOwner=mapTqmNewBizInput.TqmNewBizRequiredRequestStringInsuredPropertyIsOwner.toString().trim()
+		String lTqmNewBizRequiredRequestStringBeneficiaryTitle=mapTqmNewBizInput.TqmNewBizRequiredRequestStringBeneficiaryTitle.toString().trim()
+		String lTqmNewBizRequiredRequestStringBeneficiaryFirstName=mapTqmNewBizInput.TqmNewBizRequiredRequestStringBeneficiaryFirstName.toString().trim()
+		String lTqmNewBizRequiredRequestStringBeneficiaryLastName=mapTqmNewBizInput.TqmNewBizRequiredRequestStringBeneficiaryLastName.toString().trim()
+		String lTqmNewBizRequiredRequestStringBeneficiaryRelationship=mapTqmNewBizInput.TqmNewBizRequiredRequestStringBeneficiaryRelationship.toString().trim()
+		String lTqmNewBizSalesforceProceedToDo=mapTqmNewBizInput.TqmNewBizSalesforceProceedToDo.toString().trim()
+		String lResultMessage=''
+		try{
+			Map lMapInputTqmNewBizRequiredStringUsername=this.inputTqmRequiredStringUsername(true,lTqmNewBizRequiredStringUsername)
+			if(!lMapInputTqmNewBizRequiredStringUsername.Result){
+				lTqmNewBizRequiredStringUsername=''
+			}else{
+				lTqmNewBizRequiredStringUsername=lMapInputTqmNewBizRequiredStringUsername.TqmRequiredStringUsername
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredStringUsername=lTqmNewBizRequiredStringUsername
+			if(lTqmNewBizRequiredStringUsername.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmNewBizRequiredStringPassword=this.inputTqmRequiredStringPassword(true,lTqmNewBizRequiredStringPassword)
+			if(!lMapInputTqmNewBizRequiredStringPassword.Result){
+				lTqmNewBizRequiredStringPassword=''
+			}else{
+				lTqmNewBizRequiredStringPassword=lMapInputTqmNewBizRequiredStringPassword.TqmRequiredStringPassword
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredStringPassword=lTqmNewBizRequiredStringPassword
+			if(lTqmNewBizRequiredStringPassword.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringPolicyRefId=this.inputTqmRequiredRequestStringPolicyRefId(true,lTqmNewBizRequiredRequestStringPolicyRefId)
+			if(!lMapInputTqmRequiredRequestStringPolicyRefId.Result){
+				lTqmNewBizRequiredRequestStringPolicyRefId=''
+			}else{
+				lTqmNewBizRequiredRequestStringPolicyRefId=lMapInputTqmRequiredRequestStringPolicyRefId.TqmRequiredRequestStringPolicyRefId
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringPolicyRefId=lTqmNewBizRequiredRequestStringPolicyRefId
+			if(lTqmNewBizRequiredRequestStringPolicyRefId.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringPolicyAgentLicense=this.inputTqmRequiredRequestStringPolicyAgentLicense(true,lTqmNewBizRequiredRequestStringPolicyAgentLicense)
+			if(!lMapInputTqmRequiredRequestStringPolicyAgentLicense.Result){
+				lTqmNewBizRequiredRequestStringPolicyAgentLicense=''
+			}else{
+				lTqmNewBizRequiredRequestStringPolicyAgentLicense=lMapInputTqmRequiredRequestStringPolicyAgentLicense.TqmRequiredRequestStringPolicyAgentLicense
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringPolicyAgentLicense=lTqmNewBizRequiredRequestStringPolicyAgentLicense
+			if(lTqmNewBizRequiredRequestStringPolicyAgentLicense.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringPolicyAgentId=this.inputTqmRequiredRequestStringPolicyAgentId(true,lTqmNewBizRequiredRequestStringPolicyAgentId)
+			if(!lMapInputTqmRequiredRequestStringPolicyAgentId.Result){
+				lTqmNewBizRequiredRequestStringPolicyAgentId=''
+			}else{
+				lTqmNewBizRequiredRequestStringPolicyAgentId=lMapInputTqmRequiredRequestStringPolicyAgentId.TqmRequiredRequestStringPolicyAgentId
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringPolicyAgentId=lTqmNewBizRequiredRequestStringPolicyAgentId
+			if(lTqmNewBizRequiredRequestStringPolicyAgentId.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringPolicyChannel=this.inputTqmRequiredRequestStringPolicyChannel(true,lTqmNewBizRequiredRequestStringPolicyChannel)
+			if(!lMapInputTqmRequiredRequestStringPolicyChannel.Result){
+				lTqmNewBizRequiredRequestStringPolicyChannel=''
+			}else{
+				lTqmNewBizRequiredRequestStringPolicyChannel=lMapInputTqmRequiredRequestStringPolicyChannel.TqmRequiredRequestStringPolicyChannel
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringPolicyChannel=lTqmNewBizRequiredRequestStringPolicyChannel
+			if(lTqmNewBizRequiredRequestStringPolicyChannel.length()<=0){
+				return lreturn
+			}
+			String lTqmNewBizRequiredRequestStringPolicyPlanId=''
+			String lTqmNewBizRequiredRequestStringPolicyTotalPremium=''
+			String lTqmNewBizRequiredRequestStringPolicyAddressInsurePrice=''
+			Map lMapInputTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice=this.inputTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice(true,lTqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice)
+			if(!lMapInputTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice.Result){
+				lTqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice=''
+			}else{
+				lTqmNewBizRequiredRequestStringPolicyPlanId=lMapInputTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice.TqmRequiredRequestStringPolicyPlanId
+				lTqmNewBizRequiredRequestStringPolicyTotalPremium=lMapInputTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice.TqmRequiredRequestStringPolicyTotalPremium
+				lTqmNewBizRequiredRequestStringPolicyAddressInsurePrice=lMapInputTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice.TqmRequiredRequestStringPolicyAddressInsurePrice
+			}
+			lTqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice=lTqmNewBizRequiredRequestStringPolicyPlanId+'|'+lTqmNewBizRequiredRequestStringPolicyTotalPremium+'|'+lTqmNewBizRequiredRequestStringPolicyAddressInsurePrice
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice=lTqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice
+			if(lTqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerIdCard=this.inputTqmRequiredRequestStringInsuredCustomerIdCard(true,lTqmNewBizRequiredRequestStringInsuredCustomerIdCard)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerIdCard.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerIdCard=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerIdCard=lMapInputTqmRequiredRequestStringInsuredCustomerIdCard.TqmRequiredRequestStringInsuredCustomerIdCard
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerIdCard=lTqmNewBizRequiredRequestStringInsuredCustomerIdCard
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerIdCard.length()<=0){
+				return lreturn
+			}
+			Map lMapTqmRequiredRequestStringInsuredCustomerTitle=this.inputTqmRequiredRequestStringInsuredCustomerTitle(true,lTqmNewBizRequiredRequestStringInsuredCustomerTitle)
+			if(!lMapTqmRequiredRequestStringInsuredCustomerTitle.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerTitle=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerTitle=lMapTqmRequiredRequestStringInsuredCustomerTitle.TqmRequiredRequestStringInsuredCustomerTitle
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerTitle=lTqmNewBizRequiredRequestStringInsuredCustomerTitle
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerTitle.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerFirstName=this.inputTqmRequiredRequestStringInsuredCustomerFirstName(true,lTqmNewBizRequiredRequestStringInsuredCustomerFirstName)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerFirstName.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerFirstName=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerFirstName=lMapInputTqmRequiredRequestStringInsuredCustomerFirstName.TqmRequiredRequestStringInsuredCustomerFirstName
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerFirstName=lTqmNewBizRequiredRequestStringInsuredCustomerFirstName
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerFirstName.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerLastName=this.inputTqmRequiredRequestStringInsuredCustomerLastName(true,lTqmNewBizRequiredRequestStringInsuredCustomerLastName)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerLastName.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerLastName=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerLastName=lMapInputTqmRequiredRequestStringInsuredCustomerLastName.TqmRequiredRequestStringInsuredCustomerLastName
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerLastName=lTqmNewBizRequiredRequestStringInsuredCustomerLastName
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerLastName.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerMobile=this.inputTqmRequiredRequestStringInsuredCustomerMobile(true,lTqmNewBizRequiredRequestStringInsuredCustomerMobile)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerMobile.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerMobile=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerMobile=lMapInputTqmRequiredRequestStringInsuredCustomerMobile.TqmRequiredRequestStringInsuredCustomerMobile
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerMobile=lTqmNewBizRequiredRequestStringInsuredCustomerMobile
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerMobile.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerEmail=this.inputTqmRequiredRequestStringInsuredCustomerEmail(true,lTqmNewBizRequiredRequestStringInsuredCustomerEmail)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerEmail.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerEmail=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerEmail=lMapInputTqmRequiredRequestStringInsuredCustomerEmail.TqmRequiredRequestStringInsuredCustomerEmail
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerEmail=lTqmNewBizRequiredRequestStringInsuredCustomerEmail
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerEmail.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerDateOfBirth=this.inputTqmRequiredRequestStringInsuredCustomerDateOfBirth(true,lTqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerDateOfBirth.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth=lMapInputTqmRequiredRequestStringInsuredCustomerDateOfBirth.TqmRequiredRequestStringInsuredCustomerDateOfBirth
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth=lTqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerOccupation=this.inputTqmRequiredRequestStringInsuredCustomerOccupation(true,lTqmNewBizRequiredRequestStringInsuredCustomerOccupation)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerOccupation.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerOccupation=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerOccupation=lMapInputTqmRequiredRequestStringInsuredCustomerOccupation.TqmRequiredRequestStringInsuredCustomerOccupation
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerOccupation=lTqmNewBizRequiredRequestStringInsuredCustomerOccupation
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerOccupation.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerAddress=this.inputTqmRequiredRequestStringInsuredCustomerAddress(true,lTqmNewBizRequiredRequestStringInsuredCustomerAddress)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerAddress.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerAddress=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerAddress=lMapInputTqmRequiredRequestStringInsuredCustomerAddress.TqmRequiredRequestStringInsuredCustomerAddress
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerAddress=lTqmNewBizRequiredRequestStringInsuredCustomerAddress
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerAddress.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerAddress2=this.inputTqmRequiredRequestStringInsuredCustomerAddress2(true,lTqmNewBizRequiredRequestStringInsuredCustomerAddress2)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerAddress2.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerAddress2=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerAddress2=lMapInputTqmRequiredRequestStringInsuredCustomerAddress2.TqmRequiredRequestStringInsuredCustomerAddress2
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerAddress2=lTqmNewBizRequiredRequestStringInsuredCustomerAddress2
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerAddress2.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerProvince=this.inputTqmRequiredRequestStringInsuredCustomerProvince(true,lTqmNewBizRequiredRequestStringInsuredCustomerProvince)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerProvince.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerProvince=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerProvince=lMapInputTqmRequiredRequestStringInsuredCustomerProvince.TqmRequiredRequestStringInsuredCustomerProvince
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerProvince=lTqmNewBizRequiredRequestStringInsuredCustomerProvince
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerProvince.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerDistrict=this.inputTqmRequiredRequestStringInsuredCustomerDistrict(true,lTqmNewBizRequiredRequestStringInsuredCustomerDistrict)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerDistrict.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerDistrict=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerDistrict=lMapInputTqmRequiredRequestStringInsuredCustomerDistrict.TqmRequiredRequestStringInsuredCustomerDistrict
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerDistrict=lTqmNewBizRequiredRequestStringInsuredCustomerDistrict
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerDistrict.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerSubDistrict=this.inputTqmRequiredRequestStringInsuredCustomerSubDistrict(true,lTqmNewBizRequiredRequestStringInsuredCustomerSubDistrict)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerSubDistrict.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerSubDistrict=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerSubDistrict=lMapInputTqmRequiredRequestStringInsuredCustomerSubDistrict.TqmRequiredRequestStringInsuredCustomerSubDistrict
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerSubDistrict=lTqmNewBizRequiredRequestStringInsuredCustomerSubDistrict
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerSubDistrict.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredCustomerPostCode=this.inputTqmRequiredRequestStringInsuredCustomerPostCode(true,lTqmNewBizRequiredRequestStringInsuredCustomerPostCode)
+			if(!lMapInputTqmRequiredRequestStringInsuredCustomerPostCode.Result){
+				lTqmNewBizRequiredRequestStringInsuredCustomerPostCode=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredCustomerPostCode=lMapInputTqmRequiredRequestStringInsuredCustomerPostCode.TqmRequiredRequestStringInsuredCustomerPostCode
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredCustomerPostCode=lTqmNewBizRequiredRequestStringInsuredCustomerPostCode
+			if(lTqmNewBizRequiredRequestStringInsuredCustomerPostCode.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyInsureType=this.inputTqmRequiredRequestStringInsuredPropertyInsureType(true,lTqmNewBizRequiredRequestStringInsuredPropertyInsureType)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyInsureType.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyInsureType=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyInsureType=lMapInputTqmRequiredRequestStringInsuredPropertyInsureType.TqmRequiredRequestStringInsuredPropertyInsureType
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyInsureType=lTqmNewBizRequiredRequestStringInsuredPropertyInsureType
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyInsureType.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyAddressInsure=this.inputTqmRequiredRequestStringInsuredPropertyAddressInsure(true,lTqmNewBizRequiredRequestStringInsuredPropertyAddressInsure)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyAddressInsure.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyAddressInsure=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyAddressInsure=lMapInputTqmRequiredRequestStringInsuredPropertyAddressInsure.TqmRequiredRequestStringInsuredPropertyAddressInsure
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyAddressInsure=lTqmNewBizRequiredRequestStringInsuredPropertyAddressInsure
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyAddressInsure.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyAddress2Insure=this.inputTqmRequiredRequestStringInsuredPropertyAddress2Insure(true,lTqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyAddress2Insure.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure=lMapInputTqmRequiredRequestStringInsuredPropertyAddress2Insure.TqmRequiredRequestStringInsuredPropertyAddress2Insure
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure=lTqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyAddressInsureDetail=this.inputTqmRequiredRequestStringInsuredPropertyAddressInsureDetail(true,lTqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure,lTqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure,lTqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure,lTqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyAddressInsureDetail.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure=''
+				lTqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure=''
+				lTqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure=''
+				lTqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure=lMapInputTqmRequiredRequestStringInsuredPropertyAddressInsureDetail.TqmRequiredRequestStringInsuredPropertyProvinceInsure
+				lTqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure=lMapInputTqmRequiredRequestStringInsuredPropertyAddressInsureDetail.TqmRequiredRequestStringInsuredPropertyDistrictInsure
+				lTqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure=lMapInputTqmRequiredRequestStringInsuredPropertyAddressInsureDetail.TqmRequiredRequestStringInsuredPropertySubDistrictInsure
+				lTqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure=lMapInputTqmRequiredRequestStringInsuredPropertyAddressInsureDetail.TqmRequiredRequestStringInsuredPropertyPostCodeInsure
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure=lTqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure=lTqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure=lTqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure=lTqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure.length()<=0){
+				return lreturn
+			}
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure.length()<=0){
+				return lreturn
+			}
+			if(lTqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure.length()<=0){
+				return lreturn
+			}
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyStartInsure=this.inputTqmRequiredRequestStringInsuredPropertyStartInsure(true,lTqmNewBizRequiredRequestStringInsuredPropertyStartInsure,lTqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyStartInsure.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyStartInsure=''
+				lTqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyStartInsure=lMapInputTqmRequiredRequestStringInsuredPropertyStartInsure.TqmRequiredRequestStringInsuredPropertyStartInsure
+				lTqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset=lMapInputTqmRequiredRequestStringInsuredPropertyStartInsure.TqmRequiredRequestStringInsuredPropertyStartInsureDayOffset
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyStartInsure=lTqmNewBizRequiredRequestStringInsuredPropertyStartInsure
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset=lTqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyStartInsure.length()<=0){
+				return lreturn
+			}
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyBuildingFloor=this.inputTqmRequiredRequestStringInsuredPropertyBuildingFloor(true,lTqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyBuildingFloor.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor=lMapInputTqmRequiredRequestStringInsuredPropertyBuildingFloor.TqmRequiredRequestStringInsuredPropertyBuildingFloor
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor=lTqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyBuildingType=this.inputTqmRequiredRequestStringInsuredPropertyBuildingType(true,lTqmNewBizRequiredRequestStringInsuredPropertyBuildingType)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyBuildingType.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyBuildingType=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyBuildingType=lMapInputTqmRequiredRequestStringInsuredPropertyBuildingType.TqmRequiredRequestStringInsuredPropertyBuildingType
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyBuildingType=lTqmNewBizRequiredRequestStringInsuredPropertyBuildingType
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyBuildingType.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyClassBuild=this.inputTqmRequiredRequestStringInsuredPropertyClassBuild(true,lTqmNewBizRequiredRequestStringInsuredPropertyClassBuild)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyClassBuild.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyClassBuild=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyClassBuild=lMapInputTqmRequiredRequestStringInsuredPropertyClassBuild.TqmRequiredRequestStringInsuredPropertyClassBuild
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyClassBuild=lTqmNewBizRequiredRequestStringInsuredPropertyClassBuild
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyClassBuild.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyWallOuter=this.inputTqmRequiredRequestStringInsuredPropertyWallOuter(true,lTqmNewBizRequiredRequestStringInsuredPropertyWallOuter)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyWallOuter.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyWallOuter=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyWallOuter=lMapInputTqmRequiredRequestStringInsuredPropertyWallOuter.TqmRequiredRequestStringInsuredPropertyWallOuter
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyWallOuter=lTqmNewBizRequiredRequestStringInsuredPropertyWallOuter
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyWallOuter.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyAreaTop=this.inputTqmRequiredRequestStringInsuredPropertyAreaTop(true,lTqmNewBizRequiredRequestStringInsuredPropertyAreaTop)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyAreaTop.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyAreaTop=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyAreaTop=lMapInputTqmRequiredRequestStringInsuredPropertyAreaTop.TqmRequiredRequestStringInsuredPropertyAreaTop
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyAreaTop=lTqmNewBizRequiredRequestStringInsuredPropertyAreaTop
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyAreaTop.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyRoofFrame=this.inputTqmRequiredRequestStringInsuredPropertyRoofFrame(true,lTqmNewBizRequiredRequestStringInsuredPropertyRoofFrame)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyRoofFrame.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyRoofFrame=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyRoofFrame=lMapInputTqmRequiredRequestStringInsuredPropertyRoofFrame.TqmRequiredRequestStringInsuredPropertyRoofFrame
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyRoofFrame=lTqmNewBizRequiredRequestStringInsuredPropertyRoofFrame
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyRoofFrame.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyRoof=this.inputTqmRequiredRequestStringInsuredPropertyRoof(true,lTqmNewBizRequiredRequestStringInsuredPropertyRoof)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyRoof.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyRoof=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyRoof=lMapInputTqmRequiredRequestStringInsuredPropertyRoof.TqmRequiredRequestStringInsuredPropertyRoof
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyRoof=lTqmNewBizRequiredRequestStringInsuredPropertyRoof
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyRoof.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyAreaInterior=this.inputTqmRequiredRequestStringInsuredPropertyAreaInterior(true,lTqmNewBizRequiredRequestStringInsuredPropertyAreaInterior)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyAreaInterior.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyAreaInterior=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyAreaInterior=lMapInputTqmRequiredRequestStringInsuredPropertyAreaInterior.TqmRequiredRequestStringInsuredPropertyAreaInterior
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyAreaInterior=lTqmNewBizRequiredRequestStringInsuredPropertyAreaInterior
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyAreaInterior.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyBuildingNumber=this.inputTqmRequiredRequestStringInsuredPropertyBuildingNumber(true,lTqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyBuildingNumber.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber=lMapInputTqmRequiredRequestStringInsuredPropertyBuildingNumber.TqmRequiredRequestStringInsuredPropertyBuildingNumber
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber=lTqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyUseAddressInsure=this.inputTqmRequiredRequestStringInsuredPropertyUseAddressInsure(true,lTqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyUseAddressInsure.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure=lMapInputTqmRequiredRequestStringInsuredPropertyUseAddressInsure.TqmRequiredRequestStringInsuredPropertyUseAddressInsure
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure=lTqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringInsuredPropertyIsOwner=this.inputTqmRequiredRequestStringInsuredPropertyIsOwner(true,lTqmNewBizRequiredRequestStringInsuredPropertyIsOwner)
+			if(!lMapInputTqmRequiredRequestStringInsuredPropertyIsOwner.Result){
+				lTqmNewBizRequiredRequestStringInsuredPropertyIsOwner=''
+			}else{
+				lTqmNewBizRequiredRequestStringInsuredPropertyIsOwner=lMapInputTqmRequiredRequestStringInsuredPropertyIsOwner.TqmRequiredRequestStringInsuredPropertyIsOwner
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringInsuredPropertyIsOwner=lTqmNewBizRequiredRequestStringInsuredPropertyIsOwner
+			if(lTqmNewBizRequiredRequestStringInsuredPropertyIsOwner.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringBeneficiaryTitle=this.inputTqmRequiredRequestStringBeneficiaryTitle(true,lTqmNewBizRequiredRequestStringBeneficiaryTitle)
+			if(!lMapInputTqmRequiredRequestStringBeneficiaryTitle.Result){
+				lTqmNewBizRequiredRequestStringBeneficiaryTitle=''
+			}else{
+				lTqmNewBizRequiredRequestStringBeneficiaryTitle=lMapInputTqmRequiredRequestStringBeneficiaryTitle.TqmRequiredRequestStringBeneficiaryTitle
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringBeneficiaryTitle=lTqmNewBizRequiredRequestStringBeneficiaryTitle
+			if(lTqmNewBizRequiredRequestStringBeneficiaryTitle.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringBeneficiaryFirstName=this.inputTqmRequiredRequestStringBeneficiaryFirstName(true,lTqmNewBizRequiredRequestStringBeneficiaryFirstName)
+			if(!lMapInputTqmRequiredRequestStringBeneficiaryFirstName.Result){
+				lTqmNewBizRequiredRequestStringBeneficiaryFirstName=''
+			}else{
+				lTqmNewBizRequiredRequestStringBeneficiaryFirstName=lMapInputTqmRequiredRequestStringBeneficiaryFirstName.TqmRequiredRequestStringBeneficiaryFirstName
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringBeneficiaryFirstName=lTqmNewBizRequiredRequestStringBeneficiaryFirstName
+			if(lTqmNewBizRequiredRequestStringBeneficiaryFirstName.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringBeneficiaryLastName=this.inputTqmRequiredRequestStringBeneficiaryLastName(true,lTqmNewBizRequiredRequestStringBeneficiaryLastName)
+			if(!lMapInputTqmRequiredRequestStringBeneficiaryLastName.Result){
+				lTqmNewBizRequiredRequestStringBeneficiaryLastName=''
+			}else{
+				lTqmNewBizRequiredRequestStringBeneficiaryLastName=lMapInputTqmRequiredRequestStringBeneficiaryLastName.TqmRequiredRequestStringBeneficiaryLastName
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringBeneficiaryLastName=lTqmNewBizRequiredRequestStringBeneficiaryLastName
+			if(lTqmNewBizRequiredRequestStringBeneficiaryLastName.length()<=0){
+				return lreturn
+			}
+			Map lMapInputTqmRequiredRequestStringBeneficiaryRelationship=this.inputTqmRequiredRequestStringBeneficiaryRelationship(true,lTqmNewBizRequiredRequestStringBeneficiaryRelationship)
+			if(!lMapInputTqmRequiredRequestStringBeneficiaryRelationship.Result){
+				lTqmNewBizRequiredRequestStringBeneficiaryRelationship=''
+			}else{
+				lTqmNewBizRequiredRequestStringBeneficiaryRelationship=lMapInputTqmRequiredRequestStringBeneficiaryRelationship.TqmRequiredRequestStringBeneficiaryRelationship
+			}
+			mapTqmNewBizOutput.TqmNewBizRequiredRequestStringBeneficiaryRelationship=lTqmNewBizRequiredRequestStringBeneficiaryRelationship
+			if(lTqmNewBizRequiredRequestStringBeneficiaryRelationship.length()<=0){
+				return lreturn
+			}
+			Map lMapRoojaiAPI2SubmitPolicyNewBizRequestInput=this.initRoojaiAPI2SubmitPolicyNewBizRequestInput()
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.refId=lTqmNewBizRequiredRequestStringPolicyRefId
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.agentLicense=lTqmNewBizRequiredRequestStringPolicyAgentLicense
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.agentId=lTqmNewBizRequiredRequestStringPolicyAgentId
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.policyChannel=lTqmNewBizRequiredRequestStringPolicyChannel
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.planId=lTqmNewBizRequiredRequestStringPolicyPlanId
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.totalPremium=lTqmNewBizRequiredRequestStringPolicyTotalPremium
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.addressInsurePrice=lTqmNewBizRequiredRequestStringPolicyAddressInsurePrice
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.idCard=lTqmNewBizRequiredRequestStringInsuredCustomerIdCard
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.title=lTqmNewBizRequiredRequestStringInsuredCustomerTitle
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.firstName=lTqmNewBizRequiredRequestStringInsuredCustomerFirstName
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.lastName=lTqmNewBizRequiredRequestStringInsuredCustomerLastName
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.mobile=lTqmNewBizRequiredRequestStringInsuredCustomerMobile
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.email=lTqmNewBizRequiredRequestStringInsuredCustomerEmail
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.dateOfBirth=lTqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.occupation=lTqmNewBizRequiredRequestStringInsuredCustomerOccupation
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.address=lTqmNewBizRequiredRequestStringInsuredCustomerAddress
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.address2=lTqmNewBizRequiredRequestStringInsuredCustomerAddress2
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.province=lTqmNewBizRequiredRequestStringInsuredCustomerProvince
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.district=lTqmNewBizRequiredRequestStringInsuredCustomerDistrict
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.subDistrict=lTqmNewBizRequiredRequestStringInsuredCustomerSubDistrict
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.postcode=lTqmNewBizRequiredRequestStringInsuredCustomerPostCode
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.insureType=lTqmNewBizRequiredRequestStringInsuredPropertyInsureType
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.addressInsure=lTqmNewBizRequiredRequestStringInsuredPropertyAddressInsure
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.address2Insure=lTqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.provinceInsure=lTqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.districtInsure=lTqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.subDistrictInsure=lTqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.postcodeInsure=lTqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.startInsure=lTqmNewBizRequiredRequestStringInsuredPropertyStartInsure
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.buildingFloor=lTqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.buildingType=lTqmNewBizRequiredRequestStringInsuredPropertyBuildingType
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.classBuild=lTqmNewBizRequiredRequestStringInsuredPropertyClassBuild
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.wallOuter=lTqmNewBizRequiredRequestStringInsuredPropertyWallOuter
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.areaTop=lTqmNewBizRequiredRequestStringInsuredPropertyAreaTop
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.roofFrame=lTqmNewBizRequiredRequestStringInsuredPropertyRoofFrame
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.roof=lTqmNewBizRequiredRequestStringInsuredPropertyRoof
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.areaInterior=lTqmNewBizRequiredRequestStringInsuredPropertyAreaInterior
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.buildingNumber=lTqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.useAddressInsure=lTqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.isOwner=lTqmNewBizRequiredRequestStringInsuredPropertyIsOwner
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.beneTitle=lTqmNewBizRequiredRequestStringBeneficiaryTitle
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.beneFirstName=lTqmNewBizRequiredRequestStringBeneficiaryFirstName
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.beneLastName=lTqmNewBizRequiredRequestStringBeneficiaryLastName
+			lMapRoojaiAPI2SubmitPolicyNewBizRequestInput.beneRelationship=lTqmNewBizRequiredRequestStringBeneficiaryRelationship
+			Boolean lIsOk=false
+			Boolean lIsCallPointPrimary=mapTqmNewBizOutput.CallPointNum==1
+			String lCallPointPrimary=''
+			String lEndPointVersion=''
+			if(lIsCallPointPrimary){
+				lEndPointVersion='Primary'
+			}else{
+				lEndPointVersion='Secondary'
+			}
+			if(lIsCallPointPrimary){
+				lCallPointPrimary=THARoojaiAPI2GetPlanListType.END_POINT_ROOJAI_API2_HOME_VERSION_URL_PRIMARY
+			}else{
+				lCallPointPrimary=THARoojaiAPI2GetPlanListType.END_POINT_ROOJAI_API2_HOME_VERSION_URL_SECONDARY
+			}
+			String lRequestMethod=THARoojaiAPI2GetPlanListType.END_POINT_ROOJAI_API2_HOME_VERSION_REQUEST_METHOD
+			Map lMapRoojaiAPI2HomeVersionRequest=THARoojaiAPI2RestAPIHelper.mapRoojaiAPI2HomeVersionRequest(lCallPointPrimary,lRequestMethod)
+			if(!lMapRoojaiAPI2HomeVersionRequest.Result){
+				lEndPointVersion=''
+			}else{
+				lEndPointVersion=IGNUemaHelper.concatMessageLeftRightByPipe(lEndPointVersion,lMapRoojaiAPI2HomeVersionRequest.ResponseObjectText)
+			}
+			mapTqmNewBizOutput.TqmNewBizEndPointVersion=lEndPointVersion
+			if(!lMapRoojaiAPI2HomeVersionRequest.Result){
+				return lreturn
+			}
+			String lOpportunity=''
+			Map lMapPostRoojaiAPI2SubmitPolicy=THARoojaiAPI2RestAPIHelper.mapPostRoojaiAPI2SubmitPolicy(lCallPointTqmNewBizUrl,lTqmNewBizRequiredStringUsername,lTqmNewBizRequiredStringPassword,lMapRoojaiAPI2SubmitPolicyNewBizRequestInput)
+			if(!lMapPostRoojaiAPI2SubmitPolicy.Result){
+				lOpportunity=''
+			}else{
+				Map lMapJsonResponseObject=lMapPostRoojaiAPI2SubmitPolicy.MapJsonResponseObject
+				Map lMapMessageObject=lMapJsonResponseObject.Message
+				lOpportunity=lMapMessageObject.POLICY_NO
+			}
+			mapTqmNewBizOutput.TqmNewBizResponseStatus=lMapPostRoojaiAPI2SubmitPolicy.ResponseObjectStatusText.toString()
+			mapTqmNewBizOutput.TqmNewBizResponseTime=lMapPostRoojaiAPI2SubmitPolicy.ResponseObjectElapsedTimeText.toString()
+			mapTqmNewBizOutput.TqmNewBizResponseText=lMapPostRoojaiAPI2SubmitPolicy.MapJsonResponseObject.toString()
+			if(!lMapPostRoojaiAPI2SubmitPolicy.Result){
+				return lreturn
+			}
+			lIsOk=lOpportunity.length()>0
+			if(lOpportunity.length()>0){
+				IGNUemaHelper.delayThreadMilliSecond(10000)
+				Map lMapTqmSalesforceProceedToDo=this.inputTqmSalesforceProceedToDo(true,lTqmNewBizSalesforceProceedToDo)
+				if(!lMapTqmSalesforceProceedToDo.Result){
+					lTqmNewBizSalesforceProceedToDo=''
+				}else{
+					lTqmNewBizSalesforceProceedToDo=lMapTqmSalesforceProceedToDo.TqmSalesforceProceedToDo
+				}
+				mapTqmNewBizOutput.TqmNewBizSalesforceProceedToDo=lTqmNewBizSalesforceProceedToDo
+				if(lTqmNewBizSalesforceProceedToDo.length()<=0){
+					return lreturn
+				}
+				Boolean lIsTqmNewBizSalesforceProceedToDo=IGNUemaHelper.convertStringToBoolean(lTqmNewBizSalesforceProceedToDo)
+				if(lIsTqmNewBizSalesforceProceedToDo){
+					Map lMapGetSalesforceDataByOpportunityNumberToMapCaseOutput=IGNSalesforceRestAPIHelper.mapGetSalesforceDataByOpportunityNumberToMapCaseOutputNoPrefixV1(lOpportunity,mapTqmNewBizOutput)
+					if(!lMapGetSalesforceDataByOpportunityNumberToMapCaseOutput.Result){
+						lMapGetSalesforceDataByOpportunityNumberToMapCaseOutput=IGNSalesforceRestAPIHelper.mapGetSalesforceDataByOpportunityNumberToMapCaseOutputNoPrefixV1(lOpportunity,mapTqmNewBizOutput)
+					}
+					lIsOk=lMapGetSalesforceDataByOpportunityNumberToMapCaseOutput.Result
+					Map lMapGetSalesforceDataByOpportunityNumberToMapCaseOutputB=IGNSalesforceRestAPIHelper.mapGetSalesforceDataByOpportunityNumberToMapCaseOutputNoPrefixV2(lOpportunity,mapTqmNewBizOutput)
+					if(!lMapGetSalesforceDataByOpportunityNumberToMapCaseOutputB.Result){
+						lMapGetSalesforceDataByOpportunityNumberToMapCaseOutputB=IGNSalesforceRestAPIHelper.mapGetSalesforceDataByOpportunityNumberToMapCaseOutputNoPrefixV2(lOpportunity,mapTqmNewBizOutput)
+					}
+					lIsOk=lIsOk&&lMapGetSalesforceDataByOpportunityNumberToMapCaseOutputB.Result
+					if(lIsOk){
+						Map lMapSalesforceProceedVerify=this.inputSalesforceProceedVerify(mapTqmNewBizOutput)
+						lIsOk=lMapSalesforceProceedVerify.Result
+					}
+				}
+			}
+			mapTqmNewBizOutput.TqmNewBizOpportunityNumber=lOpportunity
+			mapTqmNewBizOutput.TqmNewBizActualResult=lIsOk
+			lreturn=lIsOk
+		}catch(Exception e){
+			e.printStackTrace()
+			lResultMessage=IGNUemaHelper.concatMessageLeftRightByPipe(lResultMessage,e.getMessage())
+			mapTqmNewBizOutput.ResultMessage=lResultMessage
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputPositiveCase(String strPositiveCase){
+		Map lreturn=[:]
+		String lPositiveCase=strPositiveCase.trim()
+		if(lPositiveCase.length()<=0){
+			lPositiveCase=THARoojaiAPI2GetPlanListType.DEFAULT_POSITIVE_CASE
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('PositiveCase','')
+			lreturn.put('Result',lResult)
+			Boolean lIsPositiveCase=IGNUemaHelper.convertStringToBoolean(lPositiveCase)
+			lPositiveCase=IGNUemaHelper.convertBooleanToString(lIsPositiveCase)
+			lResult=lPositiveCase.length()>0
+			if(lResult){
+				lreturn.put('PositiveCase',lPositiveCase)
+				lreturn.put('IsPositiveCase',lIsPositiveCase)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputProceedTqmToDo(String strProceedTqmToDo){
+		Map lreturn=[:]
+		String lProceedTqmToDo=strProceedTqmToDo.trim()
+		if(lProceedTqmToDo.length()<=0){
+			lProceedTqmToDo=THARoojaiAPI2GetPlanListType.DEFAULT_PROCEED_TQM_TO_DO
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('ProceedTqmToDo','')
+			lreturn.put('Result',lResult)
+			Boolean lIsProceedTqmToDo=IGNUemaHelper.convertStringToBoolean(lProceedTqmToDo)
+			lProceedTqmToDo=IGNUemaHelper.convertBooleanToString(lIsProceedTqmToDo)
+			lResult=lProceedTqmToDo.length()>0
+			if(lResult){
+				lreturn.put('ProceedTqmToDo',lProceedTqmToDo)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputCallPointTqmNewBiz(String strCallPointTqmNewBiz){
+		Map lreturn=[:]
+		String lCallPointTqmNewBiz=strCallPointTqmNewBiz.trim()
+		if(lCallPointTqmNewBiz.length()<=0){
+			lCallPointTqmNewBiz=THARoojaiAPI2GetPlanListType.DEFAULT_CALL_POINT_TQM_NEW_BIZ
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('CallPointTqmNewBiz','')
+			lreturn.put('CallPointTqmNewBizUrl','')
+			lreturn.put('Result',lResult)
+			String lCallPointTqmNewBizItem=this.DEFAULT_LIST_CALL_POINT.get(lCallPointTqmNewBiz)
+			if(!lCallPointTqmNewBizItem){
+				lCallPointTqmNewBizItem=this.DEFAULT_LIST_CALL_POINT.get(THARoojaiAPI2GetPlanListType.DEFAULT_CALL_POINT_TQM_NEW_BIZ)
+			}
+			Integer lCallPointTqmNewBizNum=IGNUemaHelper.convertStringToInteger(lCallPointTqmNewBizItem,this.DEFAULT_CALL_POINT_TQM_NEW_BIZ)
+			String CallPointTqmUrl=''
+			if(lCallPointTqmNewBizNum==1){
+				CallPointTqmUrl=THARoojaiAPI2GetPlanListType.END_POINT_ROOJAI_API2_PROPERTY_INSURE_NEW_BIZ_URL_PRIMARY
+			}else{
+				CallPointTqmUrl=THARoojaiAPI2GetPlanListType.END_POINT_ROOJAI_API2_PROPERTY_INSURE_NEW_BIZ_URL_SECONDARY
+			}
+			lCallPointTqmNewBiz=lCallPointTqmNewBizNum.toString()
+			lResult=lCallPointTqmNewBiz.length()>0
+			if(lResult){
+				lreturn.put('CallPointTqmNewBiz',lCallPointTqmNewBiz)
+				lreturn.put('CallPointTqmNewBizUrl',CallPointTqmUrl)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputCallPointTqmRenew(String strCallPointTqmRenew){
+		Map lreturn=[:]
+		String lCallPointTqmRenew=strCallPointTqmRenew.trim()
+		if(lCallPointTqmRenew.length()<=0){
+			lCallPointTqmRenew=THARoojaiAPI2GetPlanListType.DEFAULT_CALL_POINT_TQM_RENEW
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('CallPointTqmRenew','')
+			lreturn.put('Result',lResult)
+			String lCallPointTqmRenewItem=this.DEFAULT_LIST_CALL_POINT.get(lCallPointTqmRenew)
+			if(!lCallPointTqmRenewItem){
+				lCallPointTqmRenewItem=this.DEFAULT_LIST_CALL_POINT.get(THARoojaiAPI2GetPlanListType.DEFAULT_CALL_POINT_TQM_RENEW)
+			}
+			Integer lCallPointTqmRenewNum=IGNUemaHelper.convertStringToInteger(lCallPointTqmRenewItem,this.DEFAULT_CALL_POINT_TQM_RENEW)
+			lCallPointTqmRenew=lCallPointTqmRenewNum.toString()
+			lResult=lCallPointTqmRenew.length()>0
+			if(lResult){
+				lreturn.put('CallPointTqmRenew',lCallPointTqmRenew)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmNewBizToDo(String strTqmNewBizToDo){
+		Map lreturn=[:]
+		String lTqmNewBizToDo=strTqmNewBizToDo.trim()
+		if(lTqmNewBizToDo.length()<=0){
+			lTqmNewBizToDo=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_TO_DO
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmNewBizToDo','')
+			lreturn.put('Result',lResult)
+			Boolean lIsTqmNewBizToDo=IGNUemaHelper.convertStringToBoolean(lTqmNewBizToDo)
+			lTqmNewBizToDo=IGNUemaHelper.convertBooleanToString(lIsTqmNewBizToDo)
+			lResult=lTqmNewBizToDo.length()>0
+			if(lResult){
+				lreturn.put('TqmNewBizToDo',lTqmNewBizToDo)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredStringUsername(Boolean isTqmNewbiz,String strTqmRequiredStringUsername){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredStringUsername=strTqmRequiredStringUsername.trim()
+		if(lTqmRequiredStringUsername.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredStringUsername=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_STRING_USERNAME
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredStringUsername','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredStringUsername.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredStringUsername',lTqmRequiredStringUsername)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredStringPassword(Boolean isTqmNewbiz,String strTqmRequiredStringPassword){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredStringPassword=strTqmRequiredStringPassword.trim()
+		if(lTqmRequiredStringPassword.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredStringPassword=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_STRING_PASSWORD
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredStringPassword','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredStringPassword.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredStringPassword',lTqmRequiredStringPassword)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringPolicyRefId(Boolean isTqmNewbiz,String strTqmRequiredRequestStringPolicyRefId){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringPolicyRefId=strTqmRequiredRequestStringPolicyRefId.trim()
+		if(lTqmRequiredRequestStringPolicyRefId.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringPolicyRefId=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_POLICY_REF_ID
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringPolicyRefId','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringPolicyRefId.equalsIgnoreCase('RANDOM')){
+				lTqmRequiredRequestStringPolicyRefId='AUTO-'+IGNUemaHelper.getStringCurrentStampDateTime()
+			}
+			lResult=lTqmRequiredRequestStringPolicyRefId.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringPolicyRefId',lTqmRequiredRequestStringPolicyRefId)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringPolicyAgentLicense(Boolean isTqmNewbiz,String strTqmRequiredRequestStringPolicyAgentLicense){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringPolicyAgentLicense=strTqmRequiredRequestStringPolicyAgentLicense.trim()
+		if(lTqmRequiredRequestStringPolicyAgentLicense.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringPolicyAgentLicense=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_POLICY_AGENT_LICENSE
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringPolicyAgentLicense','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringPolicyAgentLicense.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringPolicyAgentLicense',lTqmRequiredRequestStringPolicyAgentLicense)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringPolicyAgentId(Boolean isTqmNewbiz,String strTqmRequiredRequestStringPolicyAgentId){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringPolicyAgentId=strTqmRequiredRequestStringPolicyAgentId.trim()
+		if(lTqmRequiredRequestStringPolicyAgentId.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringPolicyAgentId=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_POLICY_AGENT_ID
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringPolicyAgentId','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringPolicyAgentId.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringPolicyAgentId',lTqmRequiredRequestStringPolicyAgentId)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringPolicyChannel(Boolean isTqmNewbiz,String strTqmRequiredRequestStringPolicyChannel){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringPolicyChannel=strTqmRequiredRequestStringPolicyChannel.trim()
+		if(lTqmRequiredRequestStringPolicyChannel.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringPolicyChannel=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_POLICY_CHANNEL
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringPolicyChannelList=['1':'O','2':'T']
+		String lTqmRequiredRequestStringPolicyChannelItem=lTqmRequiredRequestStringPolicyChannelList.get(lTqmRequiredRequestStringPolicyChannel)
+		if(!lTqmRequiredRequestStringPolicyChannelItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringPolicyChannelItem=lTqmRequiredRequestStringPolicyChannelList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_POLICY_CHANNEL.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringPolicyChannel','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringPolicyChannelItem.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringPolicyChannel',lTqmRequiredRequestStringPolicyChannelItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice(Boolean isTqmNewbiz,String strTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice=strTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice.trim()
+		if(lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_POLICY_PLAN_ID_AND_TOTAL_PREMIUM_AND_ADDRESS_INSURE_PRICE
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceList=
+				['1':'HST_P401|1000000|2513.00','2':'HST_P402|1200000|2871.00','3':'HST_P403|1400000|3231.00','4':'HST_P404|1600000|3589.00','5':'HST_P405|1800000|3948.00','6':'HST_P406|2000000|4307.00','7':'HST_P407|2200000|4666.00','8':'HST_P408|2400000|5024.00','9':'HST_P409|2600000|5384.00','10':'HST_P410|2800000|5742.00',
+					'11':'HST_P411|3000000|6101.00','12':'HST_P412|3200000|6460.00','13':'HST_P413|3400000|6819.00','14':'HST_P414|3600000|7177.00','15':'HST_P415|3800000|7537.00','16':'HST_P416|4000000|7895.00','17':'HST_P417|4200000|8253.00','18':'HST_P418|4400000|8613.00','19':'HST_P419|4600000|8971.00','20':'HST_P420|4800000|9330.00',
+					'21':'HST_P421|5000000|9689.00','22':'HST_P501|1000000|3057.00','23':'HST_P502|1200000|3416.00','24':'HST_P503|1400000|3775.00','25':'HST_P504|1600000|4134.00','26':'HST_P505|1800000|4492.00','27':'HST_P506|2000000|4852.00','28':'HST_P507|2200000|5210.00','29':'HST_P508|2400000|5569.00','30':'HST_P509|2600000|5928.00',
+					'31':'HST_P510|2800000|6287.00','32':'HST_P511|3000000|6645.00','33':'HST_P512|3200000|7005.00','34':'HST_P513|3400000|7363.00','35':'HST_P514|3600000|7722.00','36':'HST_P515|3800000|8081.00','37':'HST_P516|4000000|8440.00','38':'HST_P517|4200000|8798.00','39':'HST_P518|4400000|9158.00','40':'HST_P519|4600000|9516.00',
+					'41':'HST_P520|4800000|9874.00','42':'HST_P521|5000000|10234.00'
+				]
+		String lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceItem=lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceList.get(lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice)
+		if(!lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceItem=lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_POLICY_PLAN_ID_AND_TOTAL_PREMIUM_AND_ADDRESS_INSURE_PRICE.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringPolicyPlanId','')
+			lreturn.put('TqmRequiredRequestStringPolicyTotalPremium','')
+			lreturn.put('TqmRequiredRequestStringPolicyAddressInsurePrice','')
+			lreturn.put('Result',lResult)
+			String lTqmRequiredRequestStringPolicyPlanId=''
+			String lTqmRequiredRequestStringPolicyTotalPremium=''
+			String lTqmRequiredRequestStringPolicyAddressInsurePrice=''
+			Integer lNumTqmRequiredRequestStringPolicyPlanIdIndex=0
+			Integer lNumTqmRequiredRequestStringAddressInsurePriceIndex=1
+			Integer lNumTqmRequiredRequestStringPolicyTotalPremiumIndex=2
+			List<String> lListTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceSeleted=[]
+			if(lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice.equalsIgnoreCase('RANDOM')){
+				List<String> lListTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice=[]
+				for(String lKeyMapValue in lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceList.keySet()){
+					lListTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice.add(lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceList.get(lKeyMapValue))
+				}
+				lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceItem=IGNUemaHelper.getRandomStringFromArrayListOfString(lListTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice)
+			}
+			lListTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceSeleted=lTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceItem.split('[|]')
+			if(lListTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceSeleted.size()!=3){
+				return lreturn
+			}
+			lTqmRequiredRequestStringPolicyPlanId=lListTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceSeleted.get(lNumTqmRequiredRequestStringPolicyPlanIdIndex)
+			lTqmRequiredRequestStringPolicyTotalPremium=lListTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceSeleted.get(lNumTqmRequiredRequestStringPolicyTotalPremiumIndex)
+			lTqmRequiredRequestStringPolicyAddressInsurePrice=lListTqmRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePriceSeleted.get(lNumTqmRequiredRequestStringAddressInsurePriceIndex)
+			lResult=lTqmRequiredRequestStringPolicyPlanId.length()>0
+			lResult=lResult&&lTqmRequiredRequestStringPolicyTotalPremium.length()>0
+			lResult=lResult&&lTqmRequiredRequestStringPolicyAddressInsurePrice.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringPolicyPlanId',lTqmRequiredRequestStringPolicyPlanId)
+				lreturn.put('TqmRequiredRequestStringPolicyTotalPremium',lTqmRequiredRequestStringPolicyTotalPremium)
+				lreturn.put('TqmRequiredRequestStringPolicyAddressInsurePrice',lTqmRequiredRequestStringPolicyAddressInsurePrice)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerIdCard(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerIdCard){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerIdCard=strTqmRequiredRequestStringInsuredCustomerIdCard.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerIdCard.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerIdCard=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_ID_CARD
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerIdCard','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerIdCard.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerIdCard',lTqmRequiredRequestStringInsuredCustomerIdCard)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerTitle(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerTitle){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerTitle=strTqmRequiredRequestStringInsuredCustomerTitle.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerTitle.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerTitle=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_TITLE
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringInsuredCustomerTitleList=['1':'นาย','2':'นาง','3':'นางสาว']
+		String lTqmRequiredRequestStringInsuredCustomerTitleItem=lTqmRequiredRequestStringInsuredCustomerTitleList.get(lTqmRequiredRequestStringInsuredCustomerTitle)
+		if(!lTqmRequiredRequestStringInsuredCustomerTitleItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerTitleItem=lTqmRequiredRequestStringInsuredCustomerTitleList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_TITLE.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerTitle','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerTitleItem.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerTitle',lTqmRequiredRequestStringInsuredCustomerTitleItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerFirstName(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerFirstName){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerFirstName=strTqmRequiredRequestStringInsuredCustomerFirstName.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerFirstName.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerFirstName=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_FIRST_NAME
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerFirstName','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerFirstName.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerFirstName',lTqmRequiredRequestStringInsuredCustomerFirstName)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerLastName(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerLastName){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerLastName=strTqmRequiredRequestStringInsuredCustomerLastName.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerLastName.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerLastName=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_LAST_NAME
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerLastName','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerLastName.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerLastName',lTqmRequiredRequestStringInsuredCustomerLastName)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerMobile(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerMobile){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerMobile=strTqmRequiredRequestStringInsuredCustomerMobile.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerMobile.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerMobile=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_MOBILE
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerMobile','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerMobile.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerMobile',lTqmRequiredRequestStringInsuredCustomerMobile)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerEmail(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerEmail){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerEmail=strTqmRequiredRequestStringInsuredCustomerEmail.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerEmail.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerEmail=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_EMAIL
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerEmail','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerEmail.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerEmail',lTqmRequiredRequestStringInsuredCustomerEmail)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerDateOfBirth(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerDateOfBirth){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerDateOfBirth=strTqmRequiredRequestStringInsuredCustomerDateOfBirth.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerDateOfBirth.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerDateOfBirth=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_DATE_OF_BIRTH
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerDateOfBirth','')
+			lreturn.put('Result',lResult)
+			LocalDate lLocalDateConvertTqmRequiredRequestStringInsuredCustomerDateOfBirth=IGNUemaHelper.convertDateStringtoLocalDate('dd/MM/yyyy',lTqmRequiredRequestStringInsuredCustomerDateOfBirth)
+			lTqmRequiredRequestStringInsuredCustomerDateOfBirth=IGNUemaHelper.convertLocalDateToString('yyyy-MM-dd',lLocalDateConvertTqmRequiredRequestStringInsuredCustomerDateOfBirth)
+			lResult=lTqmRequiredRequestStringInsuredCustomerDateOfBirth.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerDateOfBirth',lTqmRequiredRequestStringInsuredCustomerDateOfBirth)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerOccupation(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerOccupation){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerOccupation=strTqmRequiredRequestStringInsuredCustomerOccupation.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerOccupation.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerOccupation=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_OCCUPATION
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerOccupation','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringInsuredCustomerOccupation.equalsIgnoreCase('RANDOM')){
+				String lStrTargetSalesforceObjectName=''
+				Boolean lIsToPreferSelectedFieldName=false
+				List<String> lListFieldNameAll=new ArrayList<String>()
+				List<String> lListFieldNameSelected=new ArrayList<String>()
+				Boolean lIsWhereJoinOperatorAnd=true
+				String lStrClauseCustomText=''
+				Map lMapClauseEqualAnd=[:]
+				Map lMapClauseEqualOr=[:]
+				Map lMapClauseInAnd=[:]
+				Map lMapClauseInOr=[:]
+				Map lMapClauseLikeAnd=[:]
+				Map lMapClauseLikeOr=[:]
+				Map lMapClauseNotEqualAnd=[:]
+				Map lMapClauseNotEqualOr=[:]
+				Map lMapClauseNotInAnd=[:]
+				Map lMapClauseNotInOr=[:]
+				Map lMapClauseNotLikeAnd=[:]
+				Map lMapClauseNotLikeOr=[:]
+				String lStrWhereClause=''
+				String lStrSuffixQuery=''
+				lStrTargetSalesforceObjectName='Occupation_Mapping_Code__c'
+				lIsToPreferSelectedFieldName=false
+				lListFieldNameAll.clear()
+				lListFieldNameSelected.clear()
+				lIsWhereJoinOperatorAnd=true
+				lStrClauseCustomText=''
+				lMapClauseEqualAnd.clear()
+				lMapClauseEqualOr.clear()
+				lMapClauseInAnd.clear()
+				lMapClauseInOr.clear()
+				lMapClauseLikeAnd.clear()
+				lMapClauseLikeOr.clear()
+				lMapClauseNotEqualAnd.clear()
+				lMapClauseNotEqualOr.clear()
+				lMapClauseNotInAnd.clear()
+				lMapClauseNotInOr.clear()
+				lMapClauseNotLikeAnd.clear()
+				lMapClauseNotLikeOr.clear()
+				lListFieldNameSelected.add('Id')
+				lListFieldNameSelected.add('Occupation_Name__c')
+				lStrWhereClause=IGNUemaHelper.getStringQueryForWhereClauseBuilder(lIsWhereJoinOperatorAnd,lStrClauseCustomText,lMapClauseEqualAnd,lMapClauseEqualOr,lMapClauseInAnd,lMapClauseInOr,lMapClauseLikeAnd,lMapClauseLikeOr,lMapClauseNotEqualAnd,lMapClauseNotEqualOr,lMapClauseNotInAnd,lMapClauseNotInOr,lMapClauseNotLikeAnd,lMapClauseNotLikeOr)
+				lStrSuffixQuery=''
+				Map lMapGetSalesforceObjectTarget=[:]
+				lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+				if(!lMapGetSalesforceObjectTarget.Result){
+					lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+				}
+				if(!lMapGetSalesforceObjectTarget.Result){
+					return lreturn
+				}
+				List<Map> lListMapJsonGetSalesforceObjectTarget=lMapGetSalesforceObjectTarget.ListMapJsonResponseObject
+				if(lListMapJsonGetSalesforceObjectTarget.size()<=0){
+					return lreturn
+				}
+				Map lMapJsonTarget=lListMapJsonGetSalesforceObjectTarget[0]
+				if(!lMapJsonTarget){
+					return lreturn
+				}
+				Integer lNumberOfObjectTargetNum=lMapJsonTarget.records.size()
+				if(lNumberOfObjectTargetNum<=0){
+					return lreturn
+				}
+				List<Map> lListMapGetSalesforceObjectTargetRecord=lMapGetSalesforceObjectTarget.ListMapSalesforceObjectRecord
+				if(IGNUemaHelper.checkObjectNullOrEmptyOfList(lListMapGetSalesforceObjectTargetRecord)){
+					return lreturn
+				}
+				List<String> lListTqmRequiredRequestStringInsuredCustomerOccupation=new ArrayList<String>()
+				for(Map lMapGetSalesforceObjectTargetRecord in lListMapGetSalesforceObjectTargetRecord){
+					lListTqmRequiredRequestStringInsuredCustomerOccupation.add(lMapGetSalesforceObjectTargetRecord.Occupation_Name__c)
+				}
+				if(lListTqmRequiredRequestStringInsuredCustomerOccupation.size()<=0){
+					return lreturn
+				}
+				lTqmRequiredRequestStringInsuredCustomerOccupation=IGNUemaHelper.getRandomStringFromArrayListOfString(lListTqmRequiredRequestStringInsuredCustomerOccupation)
+			}
+			lResult=lTqmRequiredRequestStringInsuredCustomerOccupation.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerOccupation',lTqmRequiredRequestStringInsuredCustomerOccupation)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerAddress(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerAddress){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerAddress=strTqmRequiredRequestStringInsuredCustomerAddress.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerAddress.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerAddress=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_ADDRESS
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerAddress','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerAddress.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerAddress',lTqmRequiredRequestStringInsuredCustomerAddress)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerAddress2(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerAddress2){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerAddress2=strTqmRequiredRequestStringInsuredCustomerAddress2.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerAddress2.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerAddress2=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_ADDRESS2
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerAddress2','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerAddress2.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerAddress2',lTqmRequiredRequestStringInsuredCustomerAddress2)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerProvince(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerProvince){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerProvince=strTqmRequiredRequestStringInsuredCustomerProvince.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerProvince.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerProvince=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_PROVINCE
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerProvince','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerProvince.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerProvince',lTqmRequiredRequestStringInsuredCustomerProvince)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerDistrict(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerDistrict){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerDistrict=strTqmRequiredRequestStringInsuredCustomerDistrict.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerDistrict.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerDistrict=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_DISTRICT
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerDistrict','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerDistrict.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerDistrict',lTqmRequiredRequestStringInsuredCustomerDistrict)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerSubDistrict(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerSubDistrict){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerSubDistrict=strTqmRequiredRequestStringInsuredCustomerSubDistrict.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerSubDistrict.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerSubDistrict=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_SUB_DISTRICT
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerSubDistrict','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerSubDistrict.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerSubDistrict',lTqmRequiredRequestStringInsuredCustomerSubDistrict)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredCustomerPostCode(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredCustomerPostCode){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredCustomerPostCode=strTqmRequiredRequestStringInsuredCustomerPostCode.trim()
+		if(lTqmRequiredRequestStringInsuredCustomerPostCode.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredCustomerPostCode=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_CUSTOMER_POST_CODE
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredCustomerPostCode','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredCustomerPostCode.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredCustomerPostCode',lTqmRequiredRequestStringInsuredCustomerPostCode)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyInsureType(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyInsureType){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyInsureType=strTqmRequiredRequestStringInsuredPropertyInsureType.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyInsureType.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyInsureType=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_INSURE_TYPE
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringInsureTypeList=['1':'H','2':'C']
+		String lTqmRequiredRequestStringInsureTypeItem=lTqmRequiredRequestStringInsureTypeList.get(lTqmRequiredRequestStringInsuredPropertyInsureType)
+		if(!lTqmRequiredRequestStringInsureTypeItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsureTypeItem=lTqmRequiredRequestStringInsureTypeList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_INSURE_TYPE.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyInsureType','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsureTypeItem.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyInsureType',lTqmRequiredRequestStringInsureTypeItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyAddressInsure(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyAddressInsure){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyAddressInsure=strTqmRequiredRequestStringInsuredPropertyAddressInsure.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyAddressInsure.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyAddressInsure=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_ADDRESS_INSURE
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyAddressInsure','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringInsuredPropertyAddressInsure.equalsIgnoreCase('RANDOM')){
+				lTqmRequiredRequestStringInsuredPropertyAddressInsure=IGNUemaHelper.getRandomIntegerFromZeroToLessThanNumber(300)+'/'+IGNUemaHelper.getRandomIntegerFromZeroToLessThanNumber(300)
+			}
+			lResult=lTqmRequiredRequestStringInsuredPropertyAddressInsure.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyAddressInsure',lTqmRequiredRequestStringInsuredPropertyAddressInsure)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyAddress2Insure(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyAddress2Insure){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyAddress2Insure=strTqmRequiredRequestStringInsuredPropertyAddress2Insure.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyAddress2Insure.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyAddress2Insure=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_ADDRESS2_INSURE
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyAddress2Insure','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredPropertyAddress2Insure.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyAddress2Insure',lTqmRequiredRequestStringInsuredPropertyAddress2Insure)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyAddressInsureDetail(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyProvinceInsure,String strTqmRequiredRequestStringInsuredPropertyDistrictInsure,String strTqmRequiredRequestStringInsuredPropertySubDistrictInsure,String strTqmRequiredRequestStringInsuredPropertyPostCodeInsure){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyProvinceInsure=strTqmRequiredRequestStringInsuredPropertyProvinceInsure.trim()
+		String lTqmRequiredRequestStringInsuredPropertyDistrictInsure=strTqmRequiredRequestStringInsuredPropertyDistrictInsure.trim()
+		String lTqmRequiredRequestStringInsuredPropertySubDistrictInsure=strTqmRequiredRequestStringInsuredPropertySubDistrictInsure.trim()
+		String lTqmRequiredRequestStringInsuredPropertyPostCodeInsure=strTqmRequiredRequestStringInsuredPropertyPostCodeInsure.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyProvinceInsure.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyProvinceInsure=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_PROVINCE_INSURE
+			}else{
+			}
+		}
+		if(lTqmRequiredRequestStringInsuredPropertyDistrictInsure.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyDistrictInsure=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_DISTRICT_INSURE
+			}else{
+			}
+		}
+		if(lTqmRequiredRequestStringInsuredPropertySubDistrictInsure.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertySubDistrictInsure=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_SUB_DISTRICT_INSURE
+			}else{
+			}
+		}
+		if(lTqmRequiredRequestStringInsuredPropertyPostCodeInsure.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyPostCodeInsure=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_POST_CODE_INSURE
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyProvinceInsure','')
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyDistrictInsure','')
+			lreturn.put('TqmRequiredRequestStringInsuredPropertySubDistrictInsure','')
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyPostCodeInsure','')
+			lreturn.put('Result',lResult)
+			Integer lNumTqmRequiredRequestStringInsuredPropertyProvinceInsureIndex=0
+			Integer lNumTqmRequiredRequestStringInsuredPropertyDistrictInsureIndex=1
+			Integer lNumTqmRequiredRequestStringInsuredPropertySubDistrictInsureIndex=2
+			Integer lNumTqmRequiredRequestStringInsuredPropertyPostCodeInsureIndex=3
+			Boolean lIsGetDataFromSalesforce=false
+			if(lTqmRequiredRequestStringInsuredPropertyProvinceInsure.equalsIgnoreCase('RANDOM')){
+				lIsGetDataFromSalesforce=true
+			}
+			if(lTqmRequiredRequestStringInsuredPropertyDistrictInsure.equalsIgnoreCase('RANDOM')){
+				lIsGetDataFromSalesforce=true
+			}
+			if(lTqmRequiredRequestStringInsuredPropertySubDistrictInsure.equalsIgnoreCase('RANDOM')){
+				lIsGetDataFromSalesforce=true
+			}
+			if(lTqmRequiredRequestStringInsuredPropertyPostCodeInsure.equalsIgnoreCase('RANDOM')){
+				lIsGetDataFromSalesforce=true
+			}
+			if(lIsGetDataFromSalesforce){
+				String lStrTargetSalesforceObjectName=''
+				Boolean lIsToPreferSelectedFieldName=false
+				List<String> lListFieldNameAll=new ArrayList<String>()
+				List<String> lListFieldNameSelected=new ArrayList<String>()
+				Boolean lIsWhereJoinOperatorAnd=true
+				String lStrClauseCustomText=''
+				Map lMapClauseEqualAnd=[:]
+				Map lMapClauseEqualOr=[:]
+				Map lMapClauseInAnd=[:]
+				Map lMapClauseInOr=[:]
+				Map lMapClauseLikeAnd=[:]
+				Map lMapClauseLikeOr=[:]
+				Map lMapClauseNotEqualAnd=[:]
+				Map lMapClauseNotEqualOr=[:]
+				Map lMapClauseNotInAnd=[:]
+				Map lMapClauseNotInOr=[:]
+				Map lMapClauseNotLikeAnd=[:]
+				Map lMapClauseNotLikeOr=[:]
+				String lStrWhereClause=''
+				String lStrSuffixQuery=''
+				lStrTargetSalesforceObjectName='Postal_Code_Ref__c'
+				lIsToPreferSelectedFieldName=false
+				lListFieldNameAll.clear()
+				lListFieldNameSelected.clear()
+				lIsWhereJoinOperatorAnd=true
+				lStrClauseCustomText=''
+				lMapClauseEqualAnd.clear()
+				lMapClauseEqualOr.clear()
+				lMapClauseInAnd.clear()
+				lMapClauseInOr.clear()
+				lMapClauseLikeAnd.clear()
+				lMapClauseLikeOr.clear()
+				lMapClauseNotEqualAnd.clear()
+				lMapClauseNotEqualOr.clear()
+				lMapClauseNotInAnd.clear()
+				lMapClauseNotInOr.clear()
+				lMapClauseNotLikeAnd.clear()
+				lMapClauseNotLikeOr.clear()
+				lMapClauseEqualAnd.put('Language__c',IGNUemaHelper.getAddedSingleQuoteBeginEnd('TH'))
+				lMapClauseEqualAnd.put('Unused__c',IGNUemaHelper.getAddedSingleQuoteBeginEnd('No'))
+				lMapClauseNotEqualAnd.put('Postal_code__c',IGNUemaHelper.getAddedSingleQuoteBeginEnd('NA'))
+				lStrWhereClause=IGNUemaHelper.getStringQueryForWhereClauseBuilder(lIsWhereJoinOperatorAnd,lStrClauseCustomText,lMapClauseEqualAnd,lMapClauseEqualOr,lMapClauseInAnd,lMapClauseInOr,lMapClauseLikeAnd,lMapClauseLikeOr,lMapClauseNotEqualAnd,lMapClauseNotEqualOr,lMapClauseNotInAnd,lMapClauseNotInOr,lMapClauseNotLikeAnd,lMapClauseNotLikeOr)
+				lStrSuffixQuery='LIMIT 50'
+				Map lMapGetSalesforceObjectTarget=[:]
+				lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+				if(!lMapGetSalesforceObjectTarget.Result){
+					lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+				}
+				if(!lMapGetSalesforceObjectTarget.Result){
+					return lreturn
+				}
+				List<Map> lListMapJsonGetSalesforceObjectTarget=lMapGetSalesforceObjectTarget.ListMapJsonResponseObject
+				if(lListMapJsonGetSalesforceObjectTarget.size()<=0){
+					return lreturn
+				}
+				Map lMapJsonTarget=lListMapJsonGetSalesforceObjectTarget[0]
+				if(!lMapJsonTarget){
+					return lreturn
+				}
+				Integer lNumberOfObjectTargetNum=lMapJsonTarget.records.size()
+				if(lNumberOfObjectTargetNum<=0){
+					return lreturn
+				}
+				List<Map> lListMapGetSalesforceObjectTargetRecord=lMapGetSalesforceObjectTarget.ListMapSalesforceObjectRecord
+				if(IGNUemaHelper.checkObjectNullOrEmptyOfList(lListMapGetSalesforceObjectTargetRecord)){
+					return lreturn
+				}
+				String lPostalCodeRef=''
+				List<String> lListPostalCodeRef=new ArrayList<String>()
+				for(Map lMapGetSalesforceObjectTargetRecord in lListMapGetSalesforceObjectTargetRecord){
+					lPostalCodeRef=lMapGetSalesforceObjectTargetRecord.Province__c+'|'+lMapGetSalesforceObjectTargetRecord.District__c+'|'+lMapGetSalesforceObjectTargetRecord.Sub_District__c+'|'+lMapGetSalesforceObjectTargetRecord.Postal_code__c
+					lListPostalCodeRef.add(lPostalCodeRef)
+				}
+				if(lListPostalCodeRef.size()<=0){
+					return lreturn
+				}
+				lPostalCodeRef=IGNUemaHelper.getRandomStringFromArrayListOfString(lListPostalCodeRef)
+				List<String>lListPostalCodeRefeSeleted=lPostalCodeRef.split('[|]')
+				lTqmRequiredRequestStringInsuredPropertyProvinceInsure=lListPostalCodeRefeSeleted.get(lNumTqmRequiredRequestStringInsuredPropertyProvinceInsureIndex)
+				lTqmRequiredRequestStringInsuredPropertyDistrictInsure=lListPostalCodeRefeSeleted.get(lNumTqmRequiredRequestStringInsuredPropertyDistrictInsureIndex)
+				lTqmRequiredRequestStringInsuredPropertySubDistrictInsure=lListPostalCodeRefeSeleted.get(lNumTqmRequiredRequestStringInsuredPropertySubDistrictInsureIndex)
+				lTqmRequiredRequestStringInsuredPropertyPostCodeInsure=lListPostalCodeRefeSeleted.get(lNumTqmRequiredRequestStringInsuredPropertyPostCodeInsureIndex)
+			}
+			lResult=lTqmRequiredRequestStringInsuredPropertyProvinceInsure.length()>0
+			lResult=lResult&&lTqmRequiredRequestStringInsuredPropertyDistrictInsure.length()>0
+			lResult=lResult&&lTqmRequiredRequestStringInsuredPropertySubDistrictInsure.length()>0
+			lResult=lResult&&lTqmRequiredRequestStringInsuredPropertySubDistrictInsure.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyProvinceInsure',lTqmRequiredRequestStringInsuredPropertyProvinceInsure)
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyDistrictInsure',lTqmRequiredRequestStringInsuredPropertyDistrictInsure)
+				lreturn.put('TqmRequiredRequestStringInsuredPropertySubDistrictInsure',lTqmRequiredRequestStringInsuredPropertySubDistrictInsure)
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyPostCodeInsure',lTqmRequiredRequestStringInsuredPropertyPostCodeInsure)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyStartInsure(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyStartInsure,String strTqmRequiredRequestStringInsuredPropertyStartInsureDayOffset){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyStartInsure=strTqmRequiredRequestStringInsuredPropertyStartInsure.trim()
+		String lTqmRequiredRequestStringInsuredPropertyStartInsureDayOffset=strTqmRequiredRequestStringInsuredPropertyStartInsureDayOffset.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyStartInsure.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyStartInsure=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_START_INSURE
+			}else{
+			}
+		}
+		if(lTqmRequiredRequestStringInsuredPropertyStartInsureDayOffset.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyStartInsureDayOffset=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_START_INSURE_DAY_OFFSET
+			}else{
+			}
+		}
+		String lFormatDate='yyyy-MM-dd'
+		if(lTqmRequiredRequestStringInsuredPropertyStartInsure.length()>0){
+			lTqmRequiredRequestStringInsuredPropertyStartInsure=IGNUemaHelper.convertLocalDateToString(lFormatDate)
+		}
+		Integer lTqmRequiredRequestStringInsuredPropertyStartInsureDayOffsetNum=IGNUemaHelper.convertStringToInteger(lTqmRequiredRequestStringInsuredPropertyStartInsureDayOffset,0)
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyStartInsure','')
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyStartInsureDayOffset','')
+			lreturn.put('Result',lResult)
+			lTqmRequiredRequestStringInsuredPropertyStartInsureDayOffset=lTqmRequiredRequestStringInsuredPropertyStartInsureDayOffsetNum.toString()
+			lTqmRequiredRequestStringInsuredPropertyStartInsure=IGNUemaHelper.offsetDayByDateString(lFormatDate,lTqmRequiredRequestStringInsuredPropertyStartInsure,lTqmRequiredRequestStringInsuredPropertyStartInsureDayOffsetNum)
+			lResult=lTqmRequiredRequestStringInsuredPropertyStartInsure.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyStartInsure',lTqmRequiredRequestStringInsuredPropertyStartInsure)
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyStartInsureDayOffset',lTqmRequiredRequestStringInsuredPropertyStartInsureDayOffset)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyBuildingFloor(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyBuildingFloor){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyBuildingFloor=strTqmRequiredRequestStringInsuredPropertyBuildingFloor.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyBuildingFloor.length()<=0&&lTqmRequiredRequestStringInsuredPropertyBuildingFloor.equalsIgnoreCase('0')){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyBuildingFloor=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_BUILDING_FLOOR
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyBuildingFloor','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredPropertyBuildingFloor.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyBuildingFloor',lTqmRequiredRequestStringInsuredPropertyBuildingFloor)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyBuildingType(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyBuildingType){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyBuildingType=strTqmRequiredRequestStringInsuredPropertyBuildingType.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyBuildingType.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyBuildingType=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_BUILDING_TYPE
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringInsuredPropertyBuildingTypeList=['1':'1','2':'2','3':'3','4':'4','5':'5']
+		String lTqmRequiredRequestStringInsuredPropertyBuildingTypeItem=lTqmRequiredRequestStringInsuredPropertyBuildingTypeList.get(lTqmRequiredRequestStringInsuredPropertyBuildingType)
+		if(!lTqmRequiredRequestStringInsuredPropertyBuildingTypeItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyBuildingTypeItem=lTqmRequiredRequestStringInsuredPropertyBuildingTypeList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_BUILDING_TYPE.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyBuildingType','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringInsuredPropertyBuildingType.equalsIgnoreCase('RANDOM')){
+				List<String> lListTqmRequiredRequestStringInsuredPropertyBuildingType=[]
+				for(String lKeyMapValue in lTqmRequiredRequestStringInsuredPropertyBuildingTypeList.keySet()){
+					lListTqmRequiredRequestStringInsuredPropertyBuildingType.add(lTqmRequiredRequestStringInsuredPropertyBuildingTypeList.get(lKeyMapValue))
+				}
+				lTqmRequiredRequestStringInsuredPropertyBuildingTypeItem=IGNUemaHelper.getRandomStringFromArrayListOfString(lListTqmRequiredRequestStringInsuredPropertyBuildingType)
+			}
+			lResult=lTqmRequiredRequestStringInsuredPropertyBuildingTypeItem.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyBuildingType',lTqmRequiredRequestStringInsuredPropertyBuildingTypeItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyClassBuild(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyClassBuild){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyClassBuild=strTqmRequiredRequestStringInsuredPropertyClassBuild.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyClassBuild.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyClassBuild=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_CLASS_BUILD
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringInsuredPropertyClassBuildList=['1':'1','2':'2']
+		String lTqmRequiredRequestStringInsuredPropertyClassBuildItem=lTqmRequiredRequestStringInsuredPropertyClassBuildList.get(lTqmRequiredRequestStringInsuredPropertyClassBuild)
+		if(!lTqmRequiredRequestStringInsuredPropertyClassBuildItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyClassBuildItem=lTqmRequiredRequestStringInsuredPropertyClassBuildList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_CLASS_BUILD.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyClassBuild','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringInsuredPropertyClassBuild.equalsIgnoreCase('RANDOM')){
+				List<String> lListTqmRequiredRequestStringInsuredPropertyClassBuild=[]
+				for(String lKeyMapValue in lTqmRequiredRequestStringInsuredPropertyClassBuildList.keySet()){
+					lListTqmRequiredRequestStringInsuredPropertyClassBuild.add(lTqmRequiredRequestStringInsuredPropertyClassBuildList.get(lKeyMapValue))
+				}
+				lTqmRequiredRequestStringInsuredPropertyClassBuildItem=IGNUemaHelper.getRandomStringFromArrayListOfString(lListTqmRequiredRequestStringInsuredPropertyClassBuild)
+			}
+			lResult=lTqmRequiredRequestStringInsuredPropertyClassBuildItem.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyClassBuild',lTqmRequiredRequestStringInsuredPropertyClassBuildItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyWallOuter(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyWallOuter){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyWallOuter=strTqmRequiredRequestStringInsuredPropertyWallOuter.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyWallOuter.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyWallOuter=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_WALL_OUTER
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringInsuredPropertyWallOuterList=['1':'100','2':'102']
+		String lTqmRequiredRequestStringInsuredPropertyWallOuterItem=lTqmRequiredRequestStringInsuredPropertyWallOuterList.get(lTqmRequiredRequestStringInsuredPropertyWallOuter)
+		if(!lTqmRequiredRequestStringInsuredPropertyWallOuterItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyWallOuterItem=lTqmRequiredRequestStringInsuredPropertyWallOuterList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_WALL_OUTER.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyWallOuter','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringInsuredPropertyWallOuter.equalsIgnoreCase('RANDOM')){
+				List<String> lListTqmRequiredRequestStringInsuredPropertyWallOuter=[]
+				for(String lKeyMapValue in lTqmRequiredRequestStringInsuredPropertyWallOuterList.keySet()){
+					lListTqmRequiredRequestStringInsuredPropertyWallOuter.add(lTqmRequiredRequestStringInsuredPropertyWallOuterList.get(lKeyMapValue))
+				}
+				lTqmRequiredRequestStringInsuredPropertyWallOuterItem=IGNUemaHelper.getRandomStringFromArrayListOfString(lListTqmRequiredRequestStringInsuredPropertyWallOuter)
+			}
+			lResult=lTqmRequiredRequestStringInsuredPropertyWallOuterItem.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyWallOuter',lTqmRequiredRequestStringInsuredPropertyWallOuterItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyAreaTop(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyAreaTop){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyAreaTop=strTqmRequiredRequestStringInsuredPropertyAreaTop.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyAreaTop.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyAreaTop=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_AREA_TOP
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringInsuredPropertyAreaTopList=['1':'100','2':'200']
+		String lTqmRequiredRequestStringInsuredPropertyAreaTopItem=lTqmRequiredRequestStringInsuredPropertyAreaTopList.get(lTqmRequiredRequestStringInsuredPropertyAreaTop)
+		if(!lTqmRequiredRequestStringInsuredPropertyAreaTopItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyAreaTopItem=lTqmRequiredRequestStringInsuredPropertyAreaTopList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_AREA_TOP.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyAreaTop','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringInsuredPropertyAreaTop.equalsIgnoreCase('RANDOM')){
+				List<String> lListTqmRequiredRequestStringInsuredPropertyAreaTop=[]
+				for(String lKeyMapValue in lTqmRequiredRequestStringInsuredPropertyAreaTopList.keySet()){
+					lListTqmRequiredRequestStringInsuredPropertyAreaTop.add(lTqmRequiredRequestStringInsuredPropertyAreaTopList.get(lKeyMapValue))
+				}
+				lTqmRequiredRequestStringInsuredPropertyAreaTopItem=IGNUemaHelper.getRandomStringFromArrayListOfString(lListTqmRequiredRequestStringInsuredPropertyAreaTop)
+			}
+			lResult=lTqmRequiredRequestStringInsuredPropertyAreaTopItem.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyAreaTop',lTqmRequiredRequestStringInsuredPropertyAreaTopItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyRoofFrame(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyRoofFrame){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyRoofFrame=strTqmRequiredRequestStringInsuredPropertyRoofFrame.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyRoofFrame.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyRoofFrame=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_ROOF_FRAME
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringInsuredPropertyRoofFrameList=['1':'100','2':'200','3':'300']
+		String lTqmRequiredRequestStringInsuredPropertyRoofFrameItem=lTqmRequiredRequestStringInsuredPropertyRoofFrameList.get(lTqmRequiredRequestStringInsuredPropertyRoofFrame)
+		if(!lTqmRequiredRequestStringInsuredPropertyRoofFrameItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyRoofFrameItem=lTqmRequiredRequestStringInsuredPropertyRoofFrameList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_ROOF_FRAME.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyRoofFrame','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringInsuredPropertyRoofFrame.equalsIgnoreCase('RANDOM')){
+				List<String> lListTqmRequiredRequestStringInsuredPropertyRoofFrame=[]
+				for(String lKeyMapValue in lTqmRequiredRequestStringInsuredPropertyRoofFrameList.keySet()){
+					lListTqmRequiredRequestStringInsuredPropertyRoofFrame.add(lTqmRequiredRequestStringInsuredPropertyRoofFrameList.get(lKeyMapValue))
+				}
+				lTqmRequiredRequestStringInsuredPropertyRoofFrameItem=IGNUemaHelper.getRandomStringFromArrayListOfString(lListTqmRequiredRequestStringInsuredPropertyRoofFrame)
+			}
+			lResult=lTqmRequiredRequestStringInsuredPropertyRoofFrameItem.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyRoofFrame',lTqmRequiredRequestStringInsuredPropertyRoofFrameItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyRoof(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyRoof){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyRoof=strTqmRequiredRequestStringInsuredPropertyRoof.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyRoof.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyRoof=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_ROOF
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringInsuredPropertyRoofList=['1':'100','2':'304','3':'400','4':'901']
+		String lTqmRequiredRequestStringInsuredPropertyRoofItem=lTqmRequiredRequestStringInsuredPropertyRoofList.get(lTqmRequiredRequestStringInsuredPropertyRoof)
+		if(!lTqmRequiredRequestStringInsuredPropertyRoofItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyRoofItem=lTqmRequiredRequestStringInsuredPropertyRoofList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_ROOF.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyRoof','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringInsuredPropertyRoof.equalsIgnoreCase('RANDOM')){
+				List<String> lListTqmRequiredRequestStringInsuredPropertyRoof=[]
+				for(String lKeyMapValue in lTqmRequiredRequestStringInsuredPropertyRoofList.keySet()){
+					lListTqmRequiredRequestStringInsuredPropertyRoof.add(lTqmRequiredRequestStringInsuredPropertyRoofList.get(lKeyMapValue))
+				}
+				lTqmRequiredRequestStringInsuredPropertyRoofItem=IGNUemaHelper.getRandomStringFromArrayListOfString(lListTqmRequiredRequestStringInsuredPropertyRoof)
+			}
+			lResult=lTqmRequiredRequestStringInsuredPropertyRoofItem.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyRoof',lTqmRequiredRequestStringInsuredPropertyRoofItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyAreaInterior(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyAreaInterior){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyAreaInterior=strTqmRequiredRequestStringInsuredPropertyAreaInterior.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyAreaInterior.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyAreaInterior=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_AREA_INTERIOR
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyAreaInterior','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringInsuredPropertyAreaInterior.equalsIgnoreCase('RANDOM')){
+				lTqmRequiredRequestStringInsuredPropertyAreaInterior=IGNUemaHelper.getRandomIntegerFromZeroToLessThanNumber(1000)
+			}
+			lResult=lTqmRequiredRequestStringInsuredPropertyAreaInterior.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyAreaInterior',lTqmRequiredRequestStringInsuredPropertyAreaInterior)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyBuildingNumber(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyBuildingNumber){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyBuildingNumber=strTqmRequiredRequestStringInsuredPropertyBuildingNumber.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyBuildingNumber.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyBuildingNumber=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_BUILDING_NUMBER
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyBuildingNumber','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringInsuredPropertyBuildingNumber.equalsIgnoreCase('RANDOM')){
+				lTqmRequiredRequestStringInsuredPropertyBuildingNumber=IGNUemaHelper.getRandomIntegerFromZeroToLessThanNumber(10)
+			}
+			lResult=lTqmRequiredRequestStringInsuredPropertyBuildingNumber.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyBuildingNumber',lTqmRequiredRequestStringInsuredPropertyBuildingNumber)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyUseAddressInsure(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyUseAddressInsure){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyUseAddressInsure=strTqmRequiredRequestStringInsuredPropertyUseAddressInsure.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyUseAddressInsure.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyUseAddressInsure=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_USE_ADDRESS_INSURE
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyUseAddressInsure','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringInsuredPropertyUseAddressInsure.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyUseAddressInsure',lTqmRequiredRequestStringInsuredPropertyUseAddressInsure)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringInsuredPropertyIsOwner(Boolean isTqmNewbiz,String strTqmRequiredRequestStringInsuredPropertyIsOwner){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringInsuredPropertyIsOwner=strTqmRequiredRequestStringInsuredPropertyIsOwner.trim()
+		if(lTqmRequiredRequestStringInsuredPropertyIsOwner.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyIsOwner=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_IS_OWNER
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringInsuredPropertyIsOwnerList=['1':'1','2':'2']
+		String lTqmRequiredRequestStringInsuredPropertyIsOwnerItem=lTqmRequiredRequestStringInsuredPropertyIsOwnerList.get(lTqmRequiredRequestStringInsuredPropertyIsOwner)
+		if(!lTqmRequiredRequestStringInsuredPropertyIsOwnerItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringInsuredPropertyIsOwnerItem=lTqmRequiredRequestStringInsuredPropertyIsOwnerList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_INSURED_PROPERTY_IS_OWNER.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringInsuredPropertyIsOwner','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringInsuredPropertyIsOwner.equalsIgnoreCase('RANDOM')){
+				List<String> lListTqmRequiredRequestStringInsuredPropertyIsOwner=[]
+				for(String lKeyMapValue in lTqmRequiredRequestStringInsuredPropertyIsOwnerList.keySet()){
+					lListTqmRequiredRequestStringInsuredPropertyIsOwner.add(lTqmRequiredRequestStringInsuredPropertyIsOwnerList.get(lKeyMapValue))
+				}
+				lTqmRequiredRequestStringInsuredPropertyIsOwnerItem=IGNUemaHelper.getRandomStringFromArrayListOfString(lListTqmRequiredRequestStringInsuredPropertyIsOwner)
+			}
+			lResult=lTqmRequiredRequestStringInsuredPropertyIsOwnerItem.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringInsuredPropertyIsOwner',lTqmRequiredRequestStringInsuredPropertyIsOwnerItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringBeneficiaryTitle(Boolean isTqmNewbiz,String strTqmRequiredRequestStringBeneficiaryTitle){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringBeneficiaryTitle=strTqmRequiredRequestStringBeneficiaryTitle.trim()
+		if(lTqmRequiredRequestStringBeneficiaryTitle.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringBeneficiaryTitle=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_BENEFICIARY_TITLE
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringBeneficiaryTitleList=['1':'นาย','2':'นาง','3':'นางสาว']
+		String lTqmRequiredRequestStringBeneficiaryTitleItem=lTqmRequiredRequestStringBeneficiaryTitleList.get(lTqmRequiredRequestStringBeneficiaryTitle)
+		if(!lTqmRequiredRequestStringBeneficiaryTitleItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringBeneficiaryTitleItem=lTqmRequiredRequestStringBeneficiaryTitleList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_BENEFICIARY_TITLE.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringBeneficiaryTitle','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringBeneficiaryTitleItem.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringBeneficiaryTitle',lTqmRequiredRequestStringBeneficiaryTitleItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringBeneficiaryFirstName(Boolean isTqmNewbiz,String strTqmRequiredRequestStringBeneficiaryFirstName){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringBeneficiaryFirstName=strTqmRequiredRequestStringBeneficiaryFirstName.trim()
+		if(lTqmRequiredRequestStringBeneficiaryFirstName.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringBeneficiaryFirstName=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_BENEFICIARY_FIRST_NAME
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringBeneficiaryFirstName','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringBeneficiaryFirstName.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringBeneficiaryFirstName',lTqmRequiredRequestStringBeneficiaryFirstName)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringBeneficiaryLastName(Boolean isTqmNewbiz,String strTqmRequiredRequestStringBeneficiaryLastName){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringBeneficiaryLastName=strTqmRequiredRequestStringBeneficiaryLastName.trim()
+		if(lTqmRequiredRequestStringBeneficiaryLastName.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringBeneficiaryLastName=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_BENEFICIARY_LAST_NAME
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringBeneficiaryLastName','')
+			lreturn.put('Result',lResult)
+			lResult=lTqmRequiredRequestStringBeneficiaryLastName.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringBeneficiaryLastName',lTqmRequiredRequestStringBeneficiaryLastName)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmRequiredRequestStringBeneficiaryRelationship(Boolean isTqmNewbiz,String strTqmRequiredRequestStringBeneficiaryRelationship){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmRequiredRequestStringBeneficiaryRelationship=strTqmRequiredRequestStringBeneficiaryRelationship.trim()
+		if(lTqmRequiredRequestStringBeneficiaryRelationship.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringBeneficiaryRelationship=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_BENEFICIARY_RELATIONSHIP
+			}else{
+			}
+		}
+		Map lTqmRequiredRequestStringBeneficiaryRelationshipList=['1':'คู่สมรส','2':'บิดา','3':'มารดา','4':'บุตร','5':'ญาติ','6':'ทายาทโดยธรรม','7':'ลูกพี่ลูกน้อง','8':'พี่น้องร่วมบิดามารดา','9':'ญาติ','10':'เจ้าหนี้','11':'ไม่ระบุความสัมพันธ์']
+		String lTqmRequiredRequestStringBeneficiaryRelationshipItem=lTqmRequiredRequestStringBeneficiaryRelationshipList.get(lTqmRequiredRequestStringBeneficiaryRelationship)
+		if(!lTqmRequiredRequestStringBeneficiaryRelationshipItem){
+			if(lIsTqmNewbiz){
+				lTqmRequiredRequestStringBeneficiaryRelationshipItem=lTqmRequiredRequestStringBeneficiaryRelationshipList.get(THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_REQUIRED_REQUEST_STRING_BENEFICIARY_RELATIONSHIP.toUpperCase())
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmRequiredRequestStringBeneficiaryRelationship','')
+			lreturn.put('Result',lResult)
+			if(lTqmRequiredRequestStringBeneficiaryRelationship.equalsIgnoreCase('RANDOM')){
+			}
+			if(lTqmRequiredRequestStringBeneficiaryRelationship.equalsIgnoreCase('RANDOM')){
+				List<String> lListTqmRequiredRequestStringBeneficiaryRelationship=[]
+				for(String lKeyMapValue in lTqmRequiredRequestStringBeneficiaryRelationshipList.keySet()){
+					lListTqmRequiredRequestStringBeneficiaryRelationship.add(lTqmRequiredRequestStringBeneficiaryRelationshipList.get(lKeyMapValue))
+				}
+				lTqmRequiredRequestStringBeneficiaryRelationshipItem=IGNUemaHelper.getRandomStringFromArrayListOfString(lListTqmRequiredRequestStringBeneficiaryRelationship)
+			}
+			lResult=lTqmRequiredRequestStringBeneficiaryRelationship.length()>0
+			if(lResult){
+				lreturn.put('TqmRequiredRequestStringBeneficiaryRelationship',lTqmRequiredRequestStringBeneficiaryRelationshipItem)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmSalesforceProceedToDo(Boolean isTqmNewbiz,String strTqmSalesforceProceedToDo){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmSalesforceProceedToDo=strTqmSalesforceProceedToDo.trim()
+		if(lTqmSalesforceProceedToDo.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmSalesforceProceedToDo=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_SALESFORCE_PROCEED_TO_DO
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmSalesforceProceedToDo','')
+			lreturn.put('Result',lResult)
+			Boolean lIsSalesforceProceedToDo=IGNUemaHelper.convertStringToBoolean(lTqmSalesforceProceedToDo)
+			lTqmSalesforceProceedToDo=IGNUemaHelper.convertBooleanToString(lIsSalesforceProceedToDo)
+			lResult=lTqmSalesforceProceedToDo.length()>0
+			if(lResult){
+				lreturn.put('TqmSalesforceProceedToDo',lTqmSalesforceProceedToDo)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputTqmSalesforceCreateOpportunityToDo(Boolean isTqmNewbiz,String strTqmSalesforceCreateOpportunityToDo){
+		Map lreturn=[:]
+		Boolean lIsTqmNewbiz=isTqmNewbiz
+		String lTqmSalesforceCreateOpportunityToDo=strTqmSalesforceCreateOpportunityToDo.trim()
+		if(lTqmSalesforceCreateOpportunityToDo.length()<=0){
+			if(lIsTqmNewbiz){
+				lTqmSalesforceCreateOpportunityToDo=THARoojaiAPI2GetPlanListType.DEFAULT_TQM_NEW_BIZ_SALESFORCE_CREATE_OPPORTUNITY_TO_DO
+			}else{
+			}
+		}
+		try{
+			Boolean lResult=false
+			lreturn.put('TqmSalesforceCreateOpportunityToDo','')
+			lreturn.put('Result',lResult)
+			Boolean lIsTqmSalesforceCreateOpportunityToDo=IGNUemaHelper.convertStringToBoolean(lTqmSalesforceCreateOpportunityToDo)
+			lTqmSalesforceCreateOpportunityToDo=IGNUemaHelper.convertBooleanToString(lIsTqmSalesforceCreateOpportunityToDo)
+			lResult=lTqmSalesforceCreateOpportunityToDo.length()>0
+			if(lResult){
+				lreturn.put('TqmSalesforceCreateOpportunityToDo',lTqmSalesforceCreateOpportunityToDo)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputSalesforceProceedVerify(Map caseOutput){
+		Map lreturn=[:]
+		String lSalesforceVerifyCompareDetail=''
+		String lSalesforceVerifyCompareResult=''
+		try{
+			Boolean lResult=false
+			Boolean lIsOK=true
+			lreturn.put('Result','')
+			String lText=''
+			String lSalesforceTransaction=caseOutput.SalesforceVerifyDataOpportunityObjStagename
+			if(!IGNUemaHelper.checkStringContainString(lSalesforceTransaction,'Closed Won')){
+				lIsOK=false
+				lText='Transaction='+lSalesforceTransaction
+				lSalesforceVerifyCompareDetail=lSalesforceVerifyCompareDetail+lText+'\n'
+			}
+			String lSalesforceOutstandingBalanceC=caseOutput.SalesforceVerifyDataOpportunityObjOutstandingBalanceC
+			Float lOutstandingBalance=IGNUemaHelper.convertStringToFloat(lSalesforceOutstandingBalanceC,0)
+			if(lOutstandingBalance<1){
+				for(Integer lIndex=0;lIndex<=5;lIndex++){
+					Integer lItemIndex=lIndex+1
+					String lStrRoundPad=lItemIndex.toString().padLeft(2,'0')
+					String lQuoteLineItem=caseOutput.('SalesforceVerifyDataQuoteLineItem'+lStrRoundPad+'DetailCoverCodeC')
+					if(IGNUemaHelper.checkStringContainString(lQuoteLineItem,'HOME')){
+						String lQuoteLineItemTaxInvoice=caseOutput.('SalesforceVerifyDataQuoteLineItem'+lStrRoundPad+'DetailTaxInvoiceS2C')
+						if(lQuoteLineItemTaxInvoice.length()<=0){
+							lIsOK=false
+							lText='TaxInvoice HOME'
+							lSalesforceVerifyCompareDetail=lSalesforceVerifyCompareDetail+lText+'\n'
+						}
+					}
+				}
+			}
+			String lSalesforcePropertyObjFireBlock=caseOutput.SalesforceVerifyDataPropertyObjFireBlockC
+			if(lSalesforcePropertyObjFireBlock.equalsIgnoreCase('')){
+				lIsOK=false
+				lText='Transaction='+lSalesforceTransaction
+				lSalesforceVerifyCompareDetail=lSalesforceVerifyCompareDetail+lText+'\n'
+			}
+			if(lIsOK){
+				caseOutput.SalesforceVerifyCompareDetail='Passed'
+				caseOutput.SalesforceVerifyCompareResult='Passed'
+			}else{
+				caseOutput.SalesforceVerifyCompareDetail=lSalesforceVerifyCompareDetail.trim()
+				caseOutput.SalesforceVerifyCompareResult='Failed'
+			}
+			lResult=lIsOK
+			if(lResult){
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map initRoojaiAPI2SubmitPolicyInputOutput(){
+		Map lreturn=[:]
+		try{
+			String lDefaultString=''
+			Boolean lDefaultBoolean=false
+			Integer lDefaultInteger=0
+			lreturn.put('CallPointUrl',lDefaultString)
+			lreturn.put('CallPointStr',lDefaultString)
+			lreturn.put('CallPointNum',lDefaultInteger)
+			lreturn.put('TqmNewBizRequiredStringUsername',lDefaultString)
+			lreturn.put('TqmNewBizRequiredStringPassword',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringPolicyRefId',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringPolicyAgentLicense',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringPolicyAgentId',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringPolicyChannel',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringPolicyPlanIdAndTotalPremiumAndAddressInsurePrice',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerIdCard',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerTitle',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerFirstName',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerLastName',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerMobile',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerEmail',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerDateOfBirth',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerOccupation',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerAddress',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerAddress2',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerProvince',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerDistrict',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerSubDistrict',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredCustomerPostCode',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyInsureType',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyAddressInsure',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyAddress2Insure',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyProvinceInsure',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyDistrictInsure',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertySubDistrictInsure',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyPostCodeInsure',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyStartInsureDayOffset',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyStartInsure',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyBuildingFloor',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyBuildingType',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyClassBuild',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyWallOuter',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyAreaTop',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyRoofFrame',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyRoof',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyAreaInterior',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyBuildingNumber',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyUseAddressInsure',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringInsuredPropertyIsOwner',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringBeneficiaryTitle',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringBeneficiaryFirstName',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringBeneficiaryLastName',lDefaultString)
+			lreturn.put('TqmNewBizRequiredRequestStringBeneficiaryRelationship',lDefaultString)
+			lreturn.put('TqmNewBizSalesforceProceedToDo',lDefaultString)
+			lreturn.put('TqmNewBizSalesforceCreateOpportunityToDo',lDefaultString)
+			lreturn.put('EndPointVersion',lDefaultString)
+			lreturn.put('ResponseStatus',lDefaultString)
+			lreturn.put('ResponseTime',lDefaultString)
+			lreturn.put('ResponseText',lDefaultString)
+			lreturn.put('ActualResultBool',lDefaultBoolean)
+			lreturn.put('ActualResultStr',lDefaultString)
+			return lreturn
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map initRoojaiAPI2SubmitPolicyNewBizRequestInput(){
+		Map lreturn=[:]
+		try{
+			String lDefaultString=''
+			Boolean lDefaultBoolean=false
+			Integer lDefaultInteger=0
+			lreturn.put('refId',lDefaultString)
+			lreturn.put('agentLicense',lDefaultString)
+			lreturn.put('agentId',lDefaultString)
+			lreturn.put('policyChannel',lDefaultString)
+			lreturn.put('planId',lDefaultString)
+			lreturn.put('totalPremium',lDefaultString)
+			lreturn.put('addressInsurePrice',lDefaultString)
+			lreturn.put('idCard',lDefaultString)
+			lreturn.put('title',lDefaultString)
+			lreturn.put('firstName',lDefaultString)
+			lreturn.put('lastName',lDefaultString)
+			lreturn.put('mobile',lDefaultString)
+			lreturn.put('email',lDefaultString)
+			lreturn.put('dateOfBirth',lDefaultString)
+			lreturn.put('occupation',lDefaultString)
+			lreturn.put('address',lDefaultString)
+			lreturn.put('address2',lDefaultString)
+			lreturn.put('province',lDefaultString)
+			lreturn.put('district',lDefaultString)
+			lreturn.put('subDistrict',lDefaultString)
+			lreturn.put('postcode',lDefaultString)
+			lreturn.put('insureType',lDefaultString)
+			lreturn.put('addressInsure',lDefaultString)
+			lreturn.put('address2Insure',lDefaultString)
+			lreturn.put('provinceInsure',lDefaultString)
+			lreturn.put('districtInsure',lDefaultString)
+			lreturn.put('subDistrictInsure',lDefaultString)
+			lreturn.put('postcodeInsure',lDefaultString)
+			lreturn.put('startInsure',lDefaultString)
+			lreturn.put('buildingFloor',lDefaultString)
+			lreturn.put('buildingType',lDefaultString)
+			lreturn.put('classBuild',lDefaultString)
+			lreturn.put('wallOuter',lDefaultString)
+			lreturn.put('areaTop',lDefaultString)
+			lreturn.put('roofFrame',lDefaultString)
+			lreturn.put('roof',lDefaultString)
+			lreturn.put('areaInterior',lDefaultString)
+			lreturn.put('buildingNumber',lDefaultString)
+			lreturn.put('useAddressInsure',lDefaultString)
+			lreturn.put('isOwner',lDefaultString)
+			lreturn.put('beneTitle',lDefaultString)
+			lreturn.put('beneFirstName',lDefaultString)
+			lreturn.put('beneLastName',lDefaultString)
+			lreturn.put('beneRelationship',lDefaultString)
+			return lreturn
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+}
