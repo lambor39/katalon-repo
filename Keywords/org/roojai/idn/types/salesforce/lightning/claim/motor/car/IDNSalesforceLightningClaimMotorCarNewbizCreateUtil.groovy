@@ -43,6 +43,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 	}
 	public Boolean inputClaimCreate(Map<String,String> caseInput,Map<String,String> caseOutput){
 		Boolean lreturn=false
+		String lErrorMessage=''
 		try{
 			String lStrSalesforceRecordID=''
 			String lStrSalesforceSearchByDefaultObjectValue=''
@@ -62,12 +63,12 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrCreateClaimFlowButtonName='Create Claim'
 			Map lMapInputCreateClaimFlowButton=this.inputCreateClaimFlowButton(lListElementCreateClaimFlowButton,lStrCreateClaimFlowButtonName)
 			if(!lMapInputCreateClaimFlowButton.Result){
-				lCmsCarMake=''
+				lErrorMessage=''
 			}else{
-				lCmsCarMake=lMapCmsCarMake.CmsCarMake
+				lErrorMessage=lMapInputCreateClaimFlowButton.ErrorMessage
 			}
-			caseOutput.CmsCarMake=lCmsCarMake
-			if(lCmsCarMake.length()<=0){
+			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			if(lErrorMessage.length()>0){
 				return lreturn
 			}
 			lStrCssLocator='c-ign-claim-reporting-form'
@@ -80,26 +81,49 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			switch(lStrSalesforceSearchByDefaultObjectValue){
 				case 'Account':
 					IGNUemaHelper.delayWebUISecond(5)
-				//Change to Map
 					Map lMapInputSfProductType=this.inputSfProductType(lElementIgniteClaimReportingFormRoot)
-					if(!lIsInputSfProductTypeOK){
+					if(!lMapInputSfProductType.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfProductType.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(lErrorMessage.length()>0){
 						return lreturn
 					}
 					IGNUemaHelper.delayWebUISecond(5)
 					Map lMapInputSfOpportunityNo=this.inputSfOpportunityNo(lElementIgniteClaimReportingFormRoot)
-					if(!lIsInputSfOpportunityNoOK){
+					if(!lMapInputSfOpportunityNo.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfOpportunityNo.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(lErrorMessage.length()>0){
 						return lreturn
 					}
 					IGNUemaHelper.delayWebUISecond(5)
 					Map lMapInputSfLossDateAndTime=this.inputSfLossDateAndTime(lElementIgniteClaimReportingFormRoot)
-					if(!lIsInputSfClaimLossDateAndTimeOK){
+					if(!lMapInputSfLossDateAndTime.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfLossDateAndTime.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(lErrorMessage.length()>0){
 						return lreturn
 					}
 					break
 				case 'Contract':
 					IGNUemaHelper.delayWebUISecond(5)
 					Map lMapInputSfLossDateAndTime=this.inputSfLossDateAndTime(lElementIgniteClaimReportingFormRoot)
-					if(!lIsInputSfClaimLossDateAndTimeOK){
+					if(!lMapInputSfLossDateAndTime.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfLossDateAndTime.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(lErrorMessage.length()>0){
 						return lreturn
 					}
 					break
@@ -128,93 +152,201 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfIncidentDriver=this.inputSfIncidentDriver(lElementIgniteClaimReportingFormRoot)
-				if(!lIsInputSfIncidentDriverOK){
+				if(!lMapInputSfIncidentDriver.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfIncidentDriver.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfAddress=this.inputSfAddress(lElementIgniteClaimReportingFormRoot)
-				if(!lIsInputSfAddressOK){
+				if(!lMapInputSfAddress.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfAddress.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfClaimCauseAndIncidentType=this.inputSfClaimCauseAndIncidentType(lElementIgniteClaimReportingFormRoot)
-				if(!lIsInputSfClaimCauseAndIncidentTypeOK){
+				if(!lMapInputSfClaimCauseAndIncidentType.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfClaimCauseAndIncidentType.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfLiability=this.inputSfLiability(lElementIgniteClaimReportingFormRoot)
-				if(!lIsInputSfLiabilityOK){
+				if(!lMapInputSfLiability.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfLiability.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfWereYouTravellingOrWork=this.inputSfWereYouTravellingOrWork(lElementIgniteClaimReportingFormRoot)
-				if(!lIsInputSfWereYouTravellingOrWorkOK){
+				if(!lMapInputSfWereYouTravellingOrWork.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfWereYouTravellingOrWork.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfAppointmentPlace=this.inputSfAppointmentPlace(lElementIgniteClaimReportingFormRoot)
-				if(!lIsInputSfAppointmentPlaceOK){
+				if(!lMapInputSfAppointmentPlace.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfAppointmentPlace.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfIndependentWitness=this.inputSfIndependentWitness(lElementIgniteClaimReportingFormRoot)
-				if(!lIsInputSfIndependentWitnessOK){
+				if(!lMapInputSfIndependentWitness.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfIndependentWitness.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfCarIsDrivable=this.inputSfCarIsDrivable(lElementIgniteClaimReportingFormRoot)
-				if(!lIsInputSfCarIsDrivableOK){
+				if(!lMapInputSfCarIsDrivable.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfCarIsDrivable.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfClaimDescription=this.inputSfClaimDescription(lElementIgniteClaimReportingFormRoot)
-				if(!lIsInputSfClaimDescriptionOK){
+				if(!lMapInputSfClaimDescription.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfClaimDescription.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfAnyInjury=this.inputSfAnyInjury(lElementIgniteClaimReportingFormRoot)
-				if(!lIsInputSfAnyInjuryOK){
+				if(!lMapInputSfAnyInjury.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfAnyInjury.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfClaimReportDate=this.inputSfClaimReportDate(lElementIgniteClaimReportingFormRoot)
-				if(!lIsInputSfClaimReportDateOK){
+				if(!lMapInputSfClaimReportDate.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfClaimReportDate.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
 				IGNUemaHelper.delayWebUISecond(5)
 				Map lMapInputSfSurveyorRequired=this.inputSfSurveyorRequired(lElementIgniteClaimReportingFormRoot)
-				if(!lMapInputSfSurveyorRequiredOK.Result){
+				if(!lMapInputSfSurveyorRequired.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfSurveyorRequired.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(lErrorMessage.length()>0){
 					return lreturn
 				}
-				if(lMapInputSfSurveyorRequiredOK.IsSurveyorRequired){
+				if(lMapInputSfSurveyorRequired.IsSurveyorRequired){
 					IGNUemaHelper.delayWebUISecond(5)
 					Map lMapInputSfSurveyCompany=this.inputSfSurveyCompany(lElementIgniteClaimReportingFormRoot)
-					if(!lIsInputSfSurveyCompanyOK){
+					if(!lMapInputSfSurveyCompany.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfSurveyCompany.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(lErrorMessage.length()>0){
 						return lreturn
 					}
 					IGNUemaHelper.delayWebUISecond(5)
 					Map lMapInputSfSurveyorName=this.inputSfSurveyorName(lElementIgniteClaimReportingFormRoot)
-					if(!lIsInputSfSurveyorNameOK){
+					if(!lMapInputSfSurveyorName.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfSurveyorName.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(lErrorMessage.length()>0){
 						return lreturn
 					}
 					IGNUemaHelper.delayWebUISecond(5)
 					Map lMapInputSfSurveyorMobileNo=this.inputSfSurveyorMobileNo(lElementIgniteClaimReportingFormRoot)
-					if(!lIsInputSfSurveyorMobileNoOK){
+					if(!lMapInputSfSurveyorMobileNo.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfSurveyorMobileNo.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(lErrorMessage.length()>0){
 						return lreturn
 					}
 					IGNUemaHelper.delayWebUISecond(5)
 					Map lMapInputSfSurveyType=this.inputSfSurveyType(lElementIgniteClaimReportingFormRoot)
-					if(!lIsInputSfSurveyTypeOK){
+					if(!lMapInputSfSurveyType.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfSurveyType.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(lErrorMessage.length()>0){
 						return lreturn
 					}
 					IGNUemaHelper.delayWebUISecond(5)
 					Map lMapInputSfReasonForSurveyType=this.inputSfReasonForSurveyType(lElementIgniteClaimReportingFormRoot)
-					if(!lIsInputSfReasonForSurveyTypeOK){
+					if(!lMapInputSfReasonForSurveyType.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfReasonForSurveyType.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(lErrorMessage.length()>0){
 						return lreturn
 					}
 					IGNUemaHelper.delayWebUISecond(5)
 					Map lMapInputSfSurveyorAppointedDateAndTime=this.inputSfSurveyorAppointedDateAndTime(lElementIgniteClaimReportingFormRoot)
-					if(!lIsInputSfSurveyorAppointedDateAndTimeOK){
+					if(!lMapInputSfSurveyorAppointedDateAndTime.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfSurveyorAppointedDateAndTime.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(lErrorMessage.length()>0){
 						return lreturn
 					}
 				}
@@ -236,17 +368,35 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			IGNUemaHelper.delayWebUISecond(5)
 			Map lMapInputSfReportedBy=this.inputSfReportedBy(lElementIgniteClaimReportingFormRoot)
-			if(!lIsInputSfReportedByOK){
+			if(!lMapInputSfReportedBy.Result){
+				lErrorMessage=''
+			}else{
+				lErrorMessage=lMapInputSfReportedBy.ErrorMessage
+			}
+			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			if(lErrorMessage.length()>0){
 				return lreturn
 			}
 			IGNUemaHelper.delayWebUISecond(5)
 			Map lMapInputSfChronologyAccident=this.inputSfChronologyAccident(lElementIgniteClaimReportingFormRoot)
-			if(!lIsInputSfChronologyAccidentOK){
+			if(!lMapInputSfChronologyAccident.Result){
+				lErrorMessage=''
+			}else{
+				lErrorMessage=lMapInputSfChronologyAccident.ErrorMessage
+			}
+			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			if(lErrorMessage.length()>0){
 				return lreturn
 			}
 			IGNUemaHelper.delayWebUISecond(5)
 			Map lMapInputSfClaimAccidentVillage=this.inputSfClaimAccidentVillage(lElementIgniteClaimReportingFormRoot)
-			if(!lIsInputSfReportedByOK){
+			if(!lMapInputSfClaimAccidentVillage.Result){
+				lErrorMessage=''
+			}else{
+				lErrorMessage=lMapInputSfClaimAccidentVillage.ErrorMessage
+			}
+			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			if(lErrorMessage.length()>0){
 				return lreturn
 			}
 			IGNUemaHelper.delayWebUISecond(5)
@@ -263,7 +413,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimReportingFormRoot)){
 				return lreturn
 			}
-			lreturn=lMapSearchDefaultObjectResult.Result
+			lreturn=lMapSearchDefaultObject.Result
 		}catch(Exception e){
 			e.printStackTrace()
 		}
