@@ -9089,7 +9089,7 @@ public class THAElectricMotorCarQuotationDetail1UtilOld{
 			lreturn.put('Result',lResult)
 			String lTagInputText='add-driver-0-idcard'
 			String lLocatorInputText=IGNUemaHelper.getTagDataSeleniumKey(lTagInputText)
-			lDriver1ThaiId=IGNUemaHelper.typeTextWithEnterByLocator(this.driver,lLocatorInputText,lDriver1ThaiId)
+			lDriver1ThaiId=IGNUemaHelper.typeTextByLocator(this.driver,lLocatorInputText,lDriver1ThaiId)
 			lResult=lDriver1ThaiId.length()>0
 			IGNUemaHelper.selectButtonByLocator(this.driver,IGNUemaHelper.getTagDataSeleniumKey('add-driver-0-idcard-next'))
 			if(lResult){
@@ -9114,7 +9114,7 @@ public class THAElectricMotorCarQuotationDetail1UtilOld{
 			lreturn.put('Result',lResult)
 			String lTagInputText='driver-idcard'
 			String lLocatorInputText=IGNUemaHelper.getTagDataSeleniumKey(lTagInputText)
-			lDriver1ThaiId=IGNUemaHelper.typeTextWithEnterByLocator(this.driver,lLocatorInputText,lDriver1ThaiId)
+			lDriver1ThaiId=IGNUemaHelper.typeTextByLocator(this.driver,lLocatorInputText,lDriver1ThaiId)
 			lResult=lDriver1ThaiId.length()>0
 			IGNUemaHelper.selectButtonByLocator(this.driver,IGNUemaHelper.getTagDataSeleniumKey('driver-idcard-next'))
 			if(lResult){
@@ -10118,7 +10118,7 @@ public class THAElectricMotorCarQuotationDetail1UtilOld{
 			lreturn.put('Result',lResult)
 			String lTagInputText='add-driver-1-idcard'
 			String lLocatorInputText=IGNUemaHelper.getTagDataSeleniumKey(lTagInputText)
-			lDriver2ThaiId=IGNUemaHelper.typeTextWithEnterByLocator(this.driver,lLocatorInputText,lDriver2ThaiId)
+			lDriver2ThaiId=IGNUemaHelper.typeTextByLocator(this.driver,lLocatorInputText,lDriver2ThaiId)
 			lResult=lDriver2ThaiId.length()>0
 			IGNUemaHelper.selectButtonByLocator(this.driver,IGNUemaHelper.getTagDataSeleniumKey('add-driver-1-idcard-next'))
 			if(lResult){
@@ -10143,7 +10143,7 @@ public class THAElectricMotorCarQuotationDetail1UtilOld{
 			lreturn.put('Result',lResult)
 			String lTagInputText='driver-idcard'
 			String lLocatorInputText=IGNUemaHelper.getTagDataSeleniumKey(lTagInputText)
-			lDriver2ThaiId=IGNUemaHelper.typeTextWithEnterByLocator(this.driver,lLocatorInputText,lDriver2ThaiId)
+			lDriver2ThaiId=IGNUemaHelper.typeTextByLocator(this.driver,lLocatorInputText,lDriver2ThaiId)
 			lResult=lDriver2ThaiId.length()>0
 			IGNUemaHelper.selectButtonByLocator(this.driver,IGNUemaHelper.getTagDataSeleniumKey('driver-idcard-next'))
 			if(lResult){
@@ -11147,7 +11147,7 @@ public class THAElectricMotorCarQuotationDetail1UtilOld{
 			lreturn.put('Result',lResult)
 			String lTagInputText='add-driver-2-idcard'
 			String lLocatorInputText=IGNUemaHelper.getTagDataSeleniumKey(lTagInputText)
-			lDriver3ThaiId=IGNUemaHelper.typeTextWithEnterByLocator(this.driver,lLocatorInputText,lDriver3ThaiId)
+			lDriver3ThaiId=IGNUemaHelper.typeTextByLocator(this.driver,lLocatorInputText,lDriver3ThaiId)
 			lResult=lDriver3ThaiId.length()>0
 			IGNUemaHelper.selectButtonByLocator(this.driver,IGNUemaHelper.getTagDataSeleniumKey('add-driver-2-idcard-next'))
 			if(lResult){
@@ -11172,7 +11172,7 @@ public class THAElectricMotorCarQuotationDetail1UtilOld{
 			lreturn.put('Result',lResult)
 			String lTagInputText='driver-idcard'
 			String lLocatorInputText=IGNUemaHelper.getTagDataSeleniumKey(lTagInputText)
-			lDriver3ThaiId=IGNUemaHelper.typeTextWithEnterByLocator(this.driver,lLocatorInputText,lDriver3ThaiId)
+			lDriver3ThaiId=IGNUemaHelper.typeTextByLocator(this.driver,lLocatorInputText,lDriver3ThaiId)
 			lResult=lDriver3ThaiId.length()>0
 			IGNUemaHelper.selectButtonByLocator(this.driver,IGNUemaHelper.getTagDataSeleniumKey('driver-idcard-next'))
 			if(lResult){
@@ -12176,7 +12176,7 @@ public class THAElectricMotorCarQuotationDetail1UtilOld{
 			lreturn.put('Result',lResult)
 			String lTagInputText='add-driver-2-idcard'
 			String lLocatorInputText=IGNUemaHelper.getTagDataSeleniumKey(lTagInputText)
-			lDriver4ThaiId=IGNUemaHelper.typeTextWithEnterByLocator(this.driver,lLocatorInputText,lDriver4ThaiId)
+			lDriver4ThaiId=IGNUemaHelper.typeTextByLocator(this.driver,lLocatorInputText,lDriver4ThaiId)
 			lResult=lDriver4ThaiId.length()>0
 			IGNUemaHelper.selectButtonByLocator(this.driver,IGNUemaHelper.getTagDataSeleniumKey('add-driver-2-idcard-next'))
 			if(lResult){
@@ -12201,7 +12201,7 @@ public class THAElectricMotorCarQuotationDetail1UtilOld{
 			lreturn.put('Result',lResult)
 			String lTagInputText='driver-idcard'
 			String lLocatorInputText=IGNUemaHelper.getTagDataSeleniumKey(lTagInputText)
-			lDriver4ThaiId=IGNUemaHelper.typeTextWithEnterByLocator(this.driver,lLocatorInputText,lDriver4ThaiId)
+			lDriver4ThaiId=IGNUemaHelper.typeTextByLocator(this.driver,lLocatorInputText,lDriver4ThaiId)
 			lResult=lDriver4ThaiId.length()>0
 			IGNUemaHelper.selectButtonByLocator(this.driver,IGNUemaHelper.getTagDataSeleniumKey('driver-idcard-next'))
 			if(lResult){

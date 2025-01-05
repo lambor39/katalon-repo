@@ -389,50 +389,6 @@ public class IGNWebElementLevelTypeItem{
 		}
 		return lreturn
 	}
-	public Boolean checkIsIGNWebElementLevelTypeItemAlive(){
-		Boolean lreturn=false
-		if(!this.isIGNWebElementLevelTypeItemValid){
-			return lreturn
-		}
-		try{
-			Boolean lIsIGNWebElementLevelTypeItemAlive=!IGNUemaHelper.checkObjectNullOfObject(this.parentIGNWebElementHelper)
-			lIsIGNWebElementLevelTypeItemAlive=lIsIGNWebElementLevelTypeItemAlive&&this.parentIGNWebElementHelper.checkIsIGNWebElementHelperAlive()
-			if(!lIsIGNWebElementLevelTypeItemAlive){
-				this.markIGNWebElementLevelTypeItemInvalidBySelf(this)
-			}
-			lreturn=lIsIGNWebElementLevelTypeItemAlive
-		}catch(Exception e){
-			//e.printStackTrace()
-		}
-		return lreturn
-	}
-	private Boolean attachIGNWebElementLevelTypeItemNext(IGNWebElementHelper parentIGNWebElementHelper,IGNWebElementLevelTypeItem childIGNWebElementLevelTypeItem){
-		Boolean lreturn=false
-		if(!this.checkIsIGNWebElementLevelTypeItemAlive()){
-			return lreturn
-		}
-		if(IGNUemaHelper.checkObjectNullOfObject(parentIGNWebElementHelper)){
-			return lreturn
-		}
-		if(!this.parentIGNWebElementHelper==parentIGNWebElementHelper){
-			return lreturn
-		}
-		if(IGNUemaHelper.checkObjectNullOfObject(childIGNWebElementLevelTypeItem)){
-			return lreturn
-		}
-		if(!IGNUemaHelper.checkObjectNullOfObject(this.currentIGNWebElementLevelTypeItemNext)){
-			return lreturn
-		}
-		try{
-			if(!childIGNWebElementLevelTypeItem.getIsIGNWebElementLevelTypeItemValid()){
-				this.currentIGNWebElementLevelTypeItemNext=childIGNWebElementLevelTypeItem
-				lreturn=!IGNUemaHelper.checkObjectNullOfObject(this.currentIGNWebElementLevelTypeItemNext)
-			}
-		}catch(Exception e){
-			//e.printStackTrace()
-		}
-		return lreturn
-	}
 	public Boolean checkIsIGNWebElementLevelTypeItemAsRoot(){
 		Boolean lreturn=true
 		if(!this.isIGNWebElementLevelTypeItemValid){
@@ -485,6 +441,55 @@ public class IGNWebElementLevelTypeItem{
 		}
 		return lreturn
 	}
+	public Boolean checkIsIGNWebElementLevelTypeItemAlive(){
+		Boolean lreturn=false
+		if(!this.isIGNWebElementLevelTypeItemValid){
+			return lreturn
+		}
+		try{
+			Boolean lIsIGNWebElementLevelTypeItemAlive=!IGNUemaHelper.checkObjectNullOfObject(this.parentIGNWebElementHelper)
+			lIsIGNWebElementLevelTypeItemAlive=lIsIGNWebElementLevelTypeItemAlive&&this.parentIGNWebElementHelper.checkIsIGNWebElementHelperAlive()
+			if(lIsIGNWebElementLevelTypeItemAlive){
+				if(!this.checkIsIGNWebElementLevelTypeItemAsRoot()){
+					lIsIGNWebElementLevelTypeItemAlive=this.currentIGNWebElementLevelTypeItemPrev.checkIsIGNWebElementLevelTypeItemAlive()
+				}
+			}
+			if(!lIsIGNWebElementLevelTypeItemAlive){
+				this.markIGNWebElementLevelTypeItemInvalidBySelf(this)
+			}
+			lreturn=lIsIGNWebElementLevelTypeItemAlive
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	private Boolean attachIGNWebElementLevelTypeItemNext(IGNWebElementHelper parentIGNWebElementHelper,IGNWebElementLevelTypeItem childIGNWebElementLevelTypeItem){
+		Boolean lreturn=false
+		if(!this.checkIsIGNWebElementLevelTypeItemAlive()){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(parentIGNWebElementHelper)){
+			return lreturn
+		}
+		if(!this.parentIGNWebElementHelper==parentIGNWebElementHelper){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(childIGNWebElementLevelTypeItem)){
+			return lreturn
+		}
+		if(!IGNUemaHelper.checkObjectNullOfObject(this.currentIGNWebElementLevelTypeItemNext)){
+			return lreturn
+		}
+		try{
+			if(!childIGNWebElementLevelTypeItem.getIsIGNWebElementLevelTypeItemValid()){
+				this.currentIGNWebElementLevelTypeItemNext=childIGNWebElementLevelTypeItem
+				lreturn=!IGNUemaHelper.checkObjectNullOfObject(this.currentIGNWebElementLevelTypeItemNext)
+			}
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
 	public Boolean checkIsPreferWebDriver(){
 		Boolean lreturn=true
 		if(!this.checkIsIGNWebElementLevelTypeItemAlive()){
@@ -492,18 +497,6 @@ public class IGNWebElementLevelTypeItem{
 		}
 		try{
 			lreturn=this.checkIsIGNWebElementLevelTypeItemAsRoot()
-		}catch(Exception e){
-			//e.printStackTrace()
-		}
-		return lreturn
-	}
-	public WebDriver getWebDriver(){
-		WebDriver lreturn=null
-		if(!this.checkIsReadyToExecute()){
-			return lreturn
-		}
-		try{
-			lreturn=this.parentIGNWebElementHelper.getCurrentWebDriver()
 		}catch(Exception e){
 			//e.printStackTrace()
 		}
@@ -526,6 +519,18 @@ public class IGNWebElementLevelTypeItem{
 				}
 			}
 			lreturn=lIsReadyToExecute
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public WebDriver getWebDriver(){
+		WebDriver lreturn=null
+		if(!this.checkIsReadyToExecute()){
+			return lreturn
+		}
+		try{
+			lreturn=this.parentIGNWebElementHelper.getCurrentWebDriver()
 		}catch(Exception e){
 			//e.printStackTrace()
 		}

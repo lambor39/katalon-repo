@@ -3673,6 +3673,26 @@ public class THARGPAMotorQuotationDetail1Util{
 		String lSubmitCallMeBack=caseInput.SubmitCallMeBack.toString().trim()
 		String lCallMeBackEmail=caseInput.CallMeBackEmail.toString().trim()
 		String lCallMeBackMobile=caseInput.CallMeBackMobile.toString().trim()
+		String lExpectedSkipDetail2=caseInput.ExpectedSkipDetail2.toString().trim()
+		String lDetail2ProceedTodo=caseInput.Detail2ProceedTodo.toString().trim()
+		String lDetail2UnderFinancing=caseInput.Detail2UnderFinancing.toString().trim()
+		String lDetail2FinancialOrganisation=caseInput.Detail2FinancialOrganisation.toString().trim()
+		String lDetail2WithRedPlate=caseInput.Detail2WithRedPlate.toString().trim()
+		String lDetail2ChassisNumber=caseInput.Detail2ChassisNumber.toString().trim()
+		String lDetail2PrevInsuranceCovered=caseInput.Detail2PrevInsuranceCovered.toString().trim()
+		String lDetail2PrevInsuranceCompany=caseInput.Detail2PrevInsuranceCompany.toString().trim()
+		String lDetail2PrevInsuranceType=caseInput.Detail2PrevInsuranceType.toString().trim()
+		String lDetail2PolicyExpirationDayOffset=caseInput.Detail2PolicyExpirationDayOffset.toString().trim()
+		String lDetail2PolicyExpirationDate=caseInput.Detail2PolicyExpirationDate.toString().trim()
+		String lDetail2PolicyStartDayOffset=caseInput.Detail2PolicyStartDayOffset.toString().trim()
+		String lDetail2PolicyStartDate=caseInput.Detail2PolicyStartDate.toString().trim()
+		String lDetail2SendToPostalCode=caseInput.Detail2SendToPostalCode.toString().trim()
+		String lDetail2SendToProvince=caseInput.Detail2SendToProvince.toString().trim()
+		String lDetail2SendToDistrict=caseInput.Detail2SendToDistrict.toString().trim()
+		String lDetail2SendToSubDistrict=caseInput.Detail2SendToSubDistrict.toString().trim()
+		String lDetail2SendToRoad=caseInput.Detail2SendToRoad.toString().trim()
+		String lDetail2SendToBuildingName=caseInput.Detail2SendToBuildingName.toString().trim()
+		String lDetail2SendToBuildingNumber=caseInput.Detail2SendToBuildingNumber.toString().trim()
 		String lSalesforceProceedTodo=caseInput.SalesforceProceedTodo.toString().trim()
 		String lSalesforceProceedRetrieveTodo=caseInput.SalesforceProceedRetrieveTodo.toString().trim()
 		String lPositiveCase=caseInput.PositiveCase.toString().trim()
@@ -3691,6 +3711,20 @@ public class THARGPAMotorQuotationDetail1Util{
 				return lreturn
 			}
 			Boolean lIsPositiveCase=IGNUemaHelper.convertStringToBoolean(lPositiveCase)
+			Map lMapExpectedSkipDetail2=this.inputExpectedSkipDetail2(lExpectedSkipDetail2,lDetail2ProceedTodo)
+			if(!lMapExpectedSkipDetail2.Result){
+				lExpectedSkipDetail2=''
+				lDetail2ProceedTodo=''
+			}else{
+				lExpectedSkipDetail2=lMapExpectedSkipDetail2.ExpectedSkipDetail2
+				lDetail2ProceedTodo=lMapExpectedSkipDetail2.Detail2ProceedTodo
+			}
+			caseOutput.ExpectedSkipDetail2=lExpectedSkipDetail2
+			caseOutput.Detail2ProceedTodo=lDetail2ProceedTodo
+			THARGPAMotorCoreType.CURRENT_SKIP_PAGE_DETAIL2=lMapExpectedSkipDetail2.IsCurrentSkipPageDetail2
+			if(lDetail2ProceedTodo.length()<=0){
+				return lreturn
+			}
 			Map lMapDetail1Input=this.lTHAMotorCarQuotationDetail1Util.initDetail1Input()
 			lMapDetail1Input.Language=lLanguage
 			lMapDetail1Input.HolderEmail=lHolderEmail
@@ -3767,11 +3801,31 @@ public class THARGPAMotorQuotationDetail1Util{
 			lMapDetail1Input.SubmitCallMeBack=lSubmitCallMeBack
 			lMapDetail1Input.CallMeBackEmail=lCallMeBackEmail
 			lMapDetail1Input.CallMeBackMobile=lCallMeBackMobile
+			lMapDetail1Input.ExpectedSkipDetail2=lExpectedSkipDetail2
+			lMapDetail1Input.Detail2ProceedTodo=lDetail2ProceedTodo
+			lMapDetail1Input.Detail2UnderFinancing=lDetail2UnderFinancing
+			lMapDetail1Input.Detail2FinancialOrganisation=lDetail2FinancialOrganisation
+			lMapDetail1Input.Detail2WithRedPlate=lDetail2WithRedPlate
+			lMapDetail1Input.Detail2ChassisNumber=lDetail2ChassisNumber
+			lMapDetail1Input.Detail2PrevInsuranceCovered=lDetail2PrevInsuranceCovered
+			lMapDetail1Input.Detail2PrevInsuranceCompany=lDetail2PrevInsuranceCompany
+			lMapDetail1Input.Detail2PrevInsuranceType=lDetail2PrevInsuranceType
+			lMapDetail1Input.Detail2PolicyExpirationDayOffset=lDetail2PolicyExpirationDayOffset
+			lMapDetail1Input.Detail2PolicyExpirationDate=lDetail2PolicyExpirationDate
+			lMapDetail1Input.Detail2PolicyStartDayOffset=lDetail2PolicyStartDayOffset
+			lMapDetail1Input.Detail2PolicyStartDate=lDetail2PolicyStartDate
+			lMapDetail1Input.Detail2SendToPostalCode=lDetail2SendToPostalCode
+			lMapDetail1Input.Detail2SendToProvince=lDetail2SendToProvince
+			lMapDetail1Input.Detail2SendToDistrict=lDetail2SendToDistrict
+			lMapDetail1Input.Detail2SendToSubDistrict=lDetail2SendToSubDistrict
+			lMapDetail1Input.Detail2SendToRoad=lDetail2SendToRoad
+			lMapDetail1Input.Detail2SendToBuildingName=lDetail2SendToBuildingName
+			lMapDetail1Input.Detail2SendToBuildingNumber=lDetail2SendToBuildingNumber
 			Map lMapInputDetail1=[:]
 			if(IGNUemaHelper.CURRENT_AB_TESTING_ENABLE){
 				switch(IGNUemaHelper.CURRENT_AB_TESTING_VERSION){
 					case 'A':
-						lMapInputDetail1=this.inputDetail1MotorCarA(lMapDetail1Input,lIsPositiveCase)
+						lMapInputDetail1=this.inputDetail1MotorCarB(lMapDetail1Input,lIsPositiveCase)
 						break
 					case 'B':
 						lMapInputDetail1=this.inputDetail1MotorCarB(lMapDetail1Input,lIsPositiveCase)
@@ -3781,7 +3835,7 @@ public class THARGPAMotorQuotationDetail1Util{
 						break
 				}
 			}else{
-				lMapInputDetail1=this.inputDetail1MotorCarA(lMapDetail1Input,lIsPositiveCase)
+				lMapInputDetail1=this.inputDetail1MotorCarB(lMapDetail1Input,lIsPositiveCase)
 			}
 			lLanguage=lMapInputDetail1.Language
 			lHolderEmail=lMapInputDetail1.HolderEmail
@@ -3858,6 +3912,26 @@ public class THARGPAMotorQuotationDetail1Util{
 			lSubmitCallMeBack=lMapInputDetail1.SubmitCallMeBack
 			lCallMeBackEmail=lMapInputDetail1.CallMeBackEmail
 			lCallMeBackMobile=lMapInputDetail1.CallMeBackMobile
+			lExpectedSkipDetail2=lMapInputDetail1.ExpectedSkipDetail2
+			lDetail2ProceedTodo=lMapInputDetail1.Detail2ProceedTodo
+			lDetail2UnderFinancing=lMapInputDetail1.Detail2UnderFinancing
+			lDetail2FinancialOrganisation=lMapInputDetail1.Detail2FinancialOrganisation
+			lDetail2WithRedPlate=lMapInputDetail1.Detail2WithRedPlate
+			lDetail2ChassisNumber=lMapInputDetail1.Detail2ChassisNumber
+			lDetail2PrevInsuranceCovered=lMapInputDetail1.Detail2PrevInsuranceCovered
+			lDetail2PrevInsuranceCompany=lMapInputDetail1.Detail2PrevInsuranceCompany
+			lDetail2PrevInsuranceType=lMapInputDetail1.Detail2PrevInsuranceType
+			lDetail2PolicyExpirationDayOffset=lMapInputDetail1.Detail2PolicyExpirationDayOffset
+			lDetail2PolicyExpirationDate=lMapInputDetail1.Detail2PolicyExpirationDate
+			lDetail2PolicyStartDayOffset=lMapInputDetail1.Detail2PolicyStartDayOffset
+			lDetail2PolicyStartDate=lMapInputDetail1.Detail2PolicyStartDate
+			lDetail2SendToPostalCode=lMapInputDetail1.Detail2SendToPostalCode
+			lDetail2SendToProvince=lMapInputDetail1.Detail2SendToProvince
+			lDetail2SendToDistrict=lMapInputDetail1.Detail2SendToDistrict
+			lDetail2SendToSubDistrict=lMapInputDetail1.Detail2SendToSubDistrict
+			lDetail2SendToRoad=lMapInputDetail1.Detail2SendToRoad
+			lDetail2SendToBuildingName=lMapInputDetail1.Detail2SendToBuildingName
+			lDetail2SendToBuildingNumber=lMapInputDetail1.Detail2SendToBuildingNumber
 			lActualResult=lMapInputDetail1.ActualResult
 			lPolicyInsurer=lMapInputDetail1.PolicyInsurer
 			caseOutput.Language=lLanguage
@@ -3935,6 +4009,24 @@ public class THARGPAMotorQuotationDetail1Util{
 			caseOutput.SubmitCallMeBack=lSubmitCallMeBack
 			caseOutput.CallMeBackEmail=lCallMeBackEmail
 			caseOutput.CallMeBackMobile=lCallMeBackMobile
+			caseOutput.Detail2UnderFinancing=lDetail2UnderFinancing
+			caseOutput.Detail2FinancialOrganisation=lDetail2FinancialOrganisation
+			caseOutput.Detail2WithRedPlate=lDetail2WithRedPlate
+			caseOutput.Detail2ChassisNumber=lDetail2ChassisNumber
+			caseOutput.Detail2PrevInsuranceCovered=lDetail2PrevInsuranceCovered
+			caseOutput.Detail2PrevInsuranceCompany=lDetail2PrevInsuranceCompany
+			caseOutput.Detail2PrevInsuranceType=lDetail2PrevInsuranceType
+			caseOutput.Detail2PolicyExpirationDayOffset=lDetail2PolicyExpirationDayOffset
+			caseOutput.Detail2PolicyExpirationDate=lDetail2PolicyExpirationDate
+			caseOutput.Detail2PolicyStartDayOffset=lDetail2PolicyStartDayOffset
+			caseOutput.Detail2PolicyStartDate=lDetail2PolicyStartDate
+			caseOutput.Detail2SendToPostalCode=lDetail2SendToPostalCode
+			caseOutput.Detail2SendToProvince=lDetail2SendToProvince
+			caseOutput.Detail2SendToDistrict=lDetail2SendToDistrict
+			caseOutput.Detail2SendToSubDistrict=lDetail2SendToSubDistrict
+			caseOutput.Detail2SendToRoad=lDetail2SendToRoad
+			caseOutput.Detail2SendToBuildingName=lDetail2SendToBuildingName
+			caseOutput.Detail2SendToBuildingNumber=lDetail2SendToBuildingNumber
 			caseOutput.ActualResult=lActualResult
 			caseOutput.PolicyInsurer=lPolicyInsurer
 			THARGPAMotorCoreType.CURRENT_QUOTATION_VEHICLE_OPPORTUNITY_NUMBER=THAMotorCarCoreType.CURRENT_QUOTATION_VEHICLE_OPPORTUNITY_NUMBER
@@ -4045,6 +4137,26 @@ public class THARGPAMotorQuotationDetail1Util{
 		String lSubmitCallMeBack=mapInput.SubmitCallMeBack.toString().trim()
 		String lCallMeBackEmail=mapInput.CallMeBackEmail.toString().trim()
 		String lCallMeBackMobile=mapInput.CallMeBackMobile.toString().trim()
+		String lExpectedSkipDetail2=mapInput.ExpectedSkipDetail2.toString().trim()
+		String lDetail2ProceedTodo=mapInput.Detail2ProceedTodo.toString().trim()
+		String lDetail2UnderFinancing=mapInput.Detail2UnderFinancing.toString().trim()
+		String lDetail2FinancialOrganisation=mapInput.Detail2FinancialOrganisation.toString().trim()
+		String lDetail2WithRedPlate=mapInput.Detail2WithRedPlate.toString().trim()
+		String lDetail2ChassisNumber=mapInput.Detail2ChassisNumber.toString().trim()
+		String lDetail2PrevInsuranceCovered=mapInput.Detail2PrevInsuranceCovered.toString().trim()
+		String lDetail2PrevInsuranceCompany=mapInput.Detail2PrevInsuranceCompany.toString().trim()
+		String lDetail2PrevInsuranceType=mapInput.Detail2PrevInsuranceType.toString().trim()
+		String lDetail2PolicyExpirationDayOffset=mapInput.Detail2PolicyExpirationDayOffset.toString().trim()
+		String lDetail2PolicyExpirationDate=mapInput.Detail2PolicyExpirationDate.toString().trim()
+		String lDetail2PolicyStartDayOffset=mapInput.Detail2PolicyStartDayOffset.toString().trim()
+		String lDetail2PolicyStartDate=mapInput.Detail2PolicyStartDate.toString().trim()
+		String lDetail2SendToPostalCode=mapInput.Detail2SendToPostalCode.toString().trim()
+		String lDetail2SendToProvince=mapInput.Detail2SendToProvince.toString().trim()
+		String lDetail2SendToDistrict=mapInput.Detail2SendToDistrict.toString().trim()
+		String lDetail2SendToSubDistrict=mapInput.Detail2SendToSubDistrict.toString().trim()
+		String lDetail2SendToRoad=mapInput.Detail2SendToRoad.toString().trim()
+		String lDetail2SendToBuildingName=mapInput.Detail2SendToBuildingName.toString().trim()
+		String lDetail2SendToBuildingNumber=mapInput.Detail2SendToBuildingNumber.toString().trim()
 		String lPositiveCase=mapInput.PositiveCase.toString().trim()
 		String lActualResult=''
 		String lPolicyInsurer=''
@@ -5499,6 +5611,26 @@ public class THARGPAMotorQuotationDetail1Util{
 		String lSubmitCallMeBack=mapInput.SubmitCallMeBack.toString().trim()
 		String lCallMeBackEmail=mapInput.CallMeBackEmail.toString().trim()
 		String lCallMeBackMobile=mapInput.CallMeBackMobile.toString().trim()
+		String lExpectedSkipDetail2=mapInput.ExpectedSkipDetail2.toString().trim()
+		String lDetail2ProceedTodo=mapInput.Detail2ProceedTodo.toString().trim()
+		String lDetail2UnderFinancing=mapInput.Detail2UnderFinancing.toString().trim()
+		String lDetail2FinancialOrganisation=mapInput.Detail2FinancialOrganisation.toString().trim()
+		String lDetail2WithRedPlate=mapInput.Detail2WithRedPlate.toString().trim()
+		String lDetail2ChassisNumber=mapInput.Detail2ChassisNumber.toString().trim()
+		String lDetail2PrevInsuranceCovered=mapInput.Detail2PrevInsuranceCovered.toString().trim()
+		String lDetail2PrevInsuranceCompany=mapInput.Detail2PrevInsuranceCompany.toString().trim()
+		String lDetail2PrevInsuranceType=mapInput.Detail2PrevInsuranceType.toString().trim()
+		String lDetail2PolicyExpirationDayOffset=mapInput.Detail2PolicyExpirationDayOffset.toString().trim()
+		String lDetail2PolicyExpirationDate=mapInput.Detail2PolicyExpirationDate.toString().trim()
+		String lDetail2PolicyStartDayOffset=mapInput.Detail2PolicyStartDayOffset.toString().trim()
+		String lDetail2PolicyStartDate=mapInput.Detail2PolicyStartDate.toString().trim()
+		String lDetail2SendToPostalCode=mapInput.Detail2SendToPostalCode.toString().trim()
+		String lDetail2SendToProvince=mapInput.Detail2SendToProvince.toString().trim()
+		String lDetail2SendToDistrict=mapInput.Detail2SendToDistrict.toString().trim()
+		String lDetail2SendToSubDistrict=mapInput.Detail2SendToSubDistrict.toString().trim()
+		String lDetail2SendToRoad=mapInput.Detail2SendToRoad.toString().trim()
+		String lDetail2SendToBuildingName=mapInput.Detail2SendToBuildingName.toString().trim()
+		String lDetail2SendToBuildingNumber=mapInput.Detail2SendToBuildingNumber.toString().trim()
 		String lPositiveCase=mapInput.PositiveCase.toString().trim()
 		String lActualResult=''
 		String lPolicyInsurer=''
@@ -5531,17 +5663,6 @@ public class THARGPAMotorQuotationDetail1Util{
 			if(!lMapSubmitCallMeBack.Result){
 				return lreturn
 			}
-			Map lMapHolderIsMain=this.inputHolderIsMain(lHolderIsMain)
-			if(!lMapHolderIsMain.Result){
-				lHolderIsMain=''
-			}else{
-				lHolderIsMain=lMapHolderIsMain.HolderIsMain
-			}
-			lreturn.HolderIsMain=lHolderIsMain
-			if(lHolderIsMain.length()<=0){
-				return lreturn
-			}
-			Boolean lIsHolderIsMain=IGNUemaHelper.convertStringToBoolean(lHolderIsMain)
 			Map lMapHolderEmail=this.inputHolderEmail(lHolderEmail)
 			if(!lMapHolderEmail.Result){
 				lHolderEmail=''
@@ -5636,6 +5757,59 @@ public class THARGPAMotorQuotationDetail1Util{
 				if(lCallMeBackAtTime.length()<=0){
 					return lreturn
 				}
+				Map lMapCarPlateNumber=this.inputCarPlateNumber(lCarPlateNumber)
+				if(!lMapCarPlateNumber.Result){
+					lCarPlateNumber=''
+				}else{
+					lCarPlateNumber=lMapCarPlateNumber.CarPlateNumber
+				}
+				lreturn.CarPlateNumber=lCarPlateNumber
+				if(lCarPlateNumber.length()<=0){
+					return lreturn
+				}
+				Map lMapCarPlateProvince=this.inputCarPlateProvince(lCarPlateProvince)
+				if(!lMapCarPlateProvince.Result){
+					lCarPlateProvince=''
+				}else{
+					lCarPlateProvince=lMapCarPlateProvince.CarPlateProvince
+				}
+				lreturn.CarPlateProvince=lCarPlateProvince
+				if(lCarPlateProvince.length()<=0){
+					return lreturn
+				}
+				if(THARGPAMotorCoreType.CURRENT_SKIP_PAGE_DETAIL2){
+					lDetail2WithRedPlate='No Option'
+					lreturn.Detail2WithRedPlate=lDetail2WithRedPlate
+					lDetail2PolicyExpirationDayOffset='No Option'
+					lreturn.Detail2PolicyExpirationDayOffset=lDetail2PolicyExpirationDayOffset
+					lDetail2PolicyExpirationDate='No Option'
+					lreturn.Detail2PolicyExpirationDate=lDetail2PolicyExpirationDate
+					lDetail2PolicyStartDayOffset='No Option'
+					lreturn.Detail2PolicyStartDayOffset=lDetail2PolicyStartDayOffset
+					lDetail2PolicyStartDate='No Option'
+					lreturn.Detail2PolicyStartDate=lDetail2PolicyStartDate
+					String lChassisNumber=this.inputChassisNumber(lDetail2ChassisNumber)
+					if(lChassisNumber.length()<=0){
+						return lreturn
+					}else{
+						lreturn.Detail2ChassisNumber=lChassisNumber
+					}
+					String lUnderFinancing=this.inputUnderFinancing(lDetail2UnderFinancing)
+					if(lUnderFinancing.length()<=0){
+						return lreturn
+					}else{
+						lreturn.Detail2UnderFinancing=lUnderFinancing
+					}
+					Boolean lIsUnderFinancing=IGNUemaHelper.convertStringToBoolean(lUnderFinancing)
+					if(lIsUnderFinancing){
+						String lFinancialOrganisation=this.inputFinancialOrganisation(lDetail2FinancialOrganisation)
+						if(lFinancialOrganisation.length()<=0){
+							return lreturn
+						}else{
+							lreturn.Detail2FinancialOrganisation=lFinancialOrganisation
+						}
+					}
+				}
 				Map lMapCarForCommercial=this.inputCarForCommercial(lCarForCommercial)
 				if(!lMapCarForCommercial.Result){
 					lCarForCommercial=''
@@ -5657,6 +5831,18 @@ public class THARGPAMotorQuotationDetail1Util{
 					return lreturn
 				}
 				Boolean lIsHolderIsPerson=IGNUemaHelper.convertStringToBoolean(lHolderIsPerson)
+								if(lIsHolderIsPerson){
+					Map lMapHolderIsMain=this.inputHolderIsMain(lHolderIsMain)
+					if(!lMapHolderIsMain.Result){
+						lHolderIsMain=''
+					}else{
+						lHolderIsMain=lMapHolderIsMain.HolderIsMain
+					}
+					lreturn.HolderIsMain=lHolderIsMain
+					if(lHolderIsMain.length()<=0){
+						return lreturn
+					}
+				}
 				if(!lIsHolderIsPerson){
 					Map lMapHolderCompName=this.inputHolderCompName(lHolderCompName)
 					if(!lMapHolderCompName.Result){
@@ -5678,26 +5864,6 @@ public class THARGPAMotorQuotationDetail1Util{
 					if(lHolderCompId.length()<=0){
 						return lreturn
 					}
-				}
-				Map lMapCarPlateNumber=this.inputCarPlateNumber(lCarPlateNumber)
-				if(!lMapCarPlateNumber.Result){
-					lCarPlateNumber=''
-				}else{
-					lCarPlateNumber=lMapCarPlateNumber.CarPlateNumber
-				}
-				lreturn.CarPlateNumber=lCarPlateNumber
-				if(lCarPlateNumber.length()<=0){
-					return lreturn
-				}
-				Map lMapCarPlateProvince=this.inputCarPlateProvince(lCarPlateProvince)
-				if(!lMapCarPlateProvince.Result){
-					lCarPlateProvince=''
-				}else{
-					lCarPlateProvince=lMapCarPlateProvince.CarPlateProvince
-				}
-				lreturn.CarPlateProvince=lCarPlateProvince
-				if(lCarPlateProvince.length()<=0){
-					return lreturn
 				}
 				if(!lIsHolderIsPerson){
 					//Holder=Company||Fill//Main
@@ -6936,6 +7102,71 @@ public class THARGPAMotorQuotationDetail1Util{
 								return lreturn
 							}
 							break
+					}
+				}
+				if(THARGPAMotorCoreType.CURRENT_SKIP_PAGE_DETAIL2){
+					IGNUemaHelper.delayThreadSecond(1)
+					String lSendToPostalCode=this.inputSendToPostalCode(lDetail2SendToPostalCode)
+					if(lSendToPostalCode.length()<=0){
+						return lreturn
+					}else{
+						lreturn.Detail2SendToPostalCode=lSendToPostalCode
+					}
+					IGNUemaHelper.delayThreadSecond(3)
+					String lSendToProvince=this.inputSendToProvince(lDetail2SendToProvince)
+					if(lSendToProvince.length()<=0){
+						return lreturn
+					}else{
+						lreturn.Detail2SendToProvince=lSendToProvince
+					}
+					IGNUemaHelper.delayThreadSecond(1)
+					String lSendToDistrict=this.inputSendToDistrict(lDetail2SendToDistrict)
+					if(lSendToDistrict.length()<=0){
+						return lreturn
+					}else{
+						lreturn.Detail2SendToDistrict=lSendToDistrict
+					}
+					IGNUemaHelper.delayThreadSecond(1)
+					String lSendToSubDistrict=this.inputSendToSubDistrict(lDetail2SendToSubDistrict)
+					if(lSendToSubDistrict.length()<=0){
+						return lreturn
+					}else{
+						lreturn.Detail2SendToSubDistrict=lSendToSubDistrict
+					}
+					String lSendToRoad=this.inputSendToRoad(lDetail2SendToRoad)
+					if(lSendToRoad.length()<=0){
+						return lreturn
+					}else{
+						lreturn.Detail2SendToRoad=lSendToRoad
+					}
+					String lSendToBuildingName=this.inputSendToBuildingName(lDetail2SendToBuildingName)
+					if(lSendToBuildingName.length()<=0){
+						return lreturn
+					}else{
+						lreturn.Detail2SendToBuildingName=lSendToBuildingName
+					}
+					String lSendToBuildingNumber=this.inputSendToBuildingNumber(lDetail2SendToBuildingNumber)
+					if(lSendToBuildingNumber.length()<=0){
+						return lreturn
+					}else{
+						lreturn.Detail2SendToBuildingNumber=lSendToBuildingNumber
+					}
+					lreturn.Detail2PrevInsuranceCovered='No Option'
+					String lPrevInsuranceType=this.inputPrevInsuranceType(lDetail2PrevInsuranceType)
+					if(lPrevInsuranceType.length()<=0){
+						return lreturn
+					}else{
+						lreturn.Detail2PrevInsuranceType=lPrevInsuranceType
+					}
+					if(IGNUemaHelper.checkStringContainString(lPrevInsuranceType,'Type')){
+						String lPrevInsuranceCompany=this.inputPrevInsuranceCompany(lDetail2PrevInsuranceCompany)
+						if(lPrevInsuranceCompany.length()<=0){
+							return lreturn
+						}else{
+							lreturn.Detail2PrevInsuranceCompany=lPrevInsuranceCompany
+						}
+					}else{
+						lreturn.Detail2PrevInsuranceCompany='No Option'
 					}
 				}
 				Map lMapPolicyStartDate=this.inputPolicyStartDate(lPolicyStartDate,lPolicyStartDayOffset)
@@ -9748,6 +9979,282 @@ public class THARGPAMotorQuotationDetail1Util{
 			if(lResult){
 				lreturn.put('SalesforceProceedTodo',lSalesforceProceedTodo)
 				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Map inputExpectedSkipDetail2(String strExpectedSkipDetail2,String strDetail2ProceedTodo){
+		Map lreturn=[:]
+		String lExpectedSkipDetail2=strExpectedSkipDetail2.trim()
+		String lDetail2ProceedTodo=strDetail2ProceedTodo.trim()
+		if(lExpectedSkipDetail2.length()<=0){
+			lExpectedSkipDetail2=THARGPAMotorQuotationDetail1Type.DEFAULT_EXPECTED_SKIP_DETAIL2
+		}
+		if(lDetail2ProceedTodo.length()<=0){
+			lDetail2ProceedTodo=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_PROCEED_TODO
+		}
+		try{
+			Boolean lResult=false
+			Boolean lIsCurrentSkipPageDetail2=false
+			lreturn.put('ExpectedSkipDetail2','')
+			lreturn.put('Detail2ProceedTodo','')
+			lreturn.put('IsCurrentSkipPageDetail2',lIsCurrentSkipPageDetail2)
+			lreturn.put('Result',lResult)
+			Map lMapExpectedSkipDetail2=this.lTHAMotorCarQuotationDetail1Util.inputExpectedSkipDetail2(lExpectedSkipDetail2,lDetail2ProceedTodo)
+			if(!lMapExpectedSkipDetail2.Result){
+				lExpectedSkipDetail2=''
+				lDetail2ProceedTodo=''
+			}else{
+				lExpectedSkipDetail2=lMapExpectedSkipDetail2.ExpectedSkipDetail2
+				lDetail2ProceedTodo=lMapExpectedSkipDetail2.Detail2ProceedTodo
+				lIsCurrentSkipPageDetail2=lMapExpectedSkipDetail2.IsCurrentSkipPageDetail2
+			}
+			lResult=true
+			if(lResult){
+				lreturn.put('ExpectedSkipDetail2',lExpectedSkipDetail2)
+				lreturn.put('Detail2ProceedTodo',lDetail2ProceedTodo)
+				lreturn.put('IsCurrentSkipPageDetail2',lIsCurrentSkipPageDetail2)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputChassisNumber(String strChassisNumber){
+		String lreturn=''
+		String lChassisNumber=strChassisNumber.trim()
+		try{
+			String lText=''
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputChassisNumber(lChassisNumber)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputUnderFinancing(String strUnderFinancing){
+		String lreturn=''
+		String lUnderFinancing=strUnderFinancing.trim()
+		try{
+			String lText=''
+			if(lUnderFinancing.length()<=0){
+				lUnderFinancing=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_UNDER_FINANCING
+			}
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputUnderFinancing(lUnderFinancing)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputFinancialOrganisation(String strFinancialOrganisation){
+		String lreturn=''
+		String lFinancialOrganisation=strFinancialOrganisation.trim()
+		try{
+			String lText=''
+			if(lFinancialOrganisation.length()<=0){
+				lFinancialOrganisation=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_FINANCIAL_ORGANISATION
+			}
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputFinancialOrganisation(lFinancialOrganisation)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputSendToPostalCode(String strSendToPostalCode){
+		String lreturn=''
+		String lSendToPostalCode=strSendToPostalCode.trim()
+		try{
+			String lText=''
+			if(lSendToPostalCode.length()<=0){
+				lSendToPostalCode=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_SEND_TO_POSTAL_CODE
+			}
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputSendToPostalCode(lSendToPostalCode)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputSendToProvince(String strSendToProvince){
+		String lreturn=''
+		String lSendToProvince=strSendToProvince.trim()
+		try{
+			String lText=''
+			if(lSendToProvince.length()<=0){
+				lSendToProvince=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_SEND_TO_PROVINCE
+			}
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputSendToProvince(lSendToProvince)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputSendToDistrict(String strSendToDistrict){
+		String lreturn=''
+		String lSendToDistrict=strSendToDistrict.trim()
+		try{
+			String lText=''
+			if(lSendToDistrict.length()<=0){
+				lSendToDistrict=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_SEND_TO_DISTRICT
+			}
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputSendToDistrict(lSendToDistrict)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputSendToSubDistrict(String strSendToSubDistrict){
+		String lreturn=''
+		String lSendToSubDistrict=strSendToSubDistrict.trim()
+		try{
+			String lText=''
+			if(lSendToSubDistrict.length()<=0){
+				lSendToSubDistrict=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_SEND_TO_SUB_DISTRICT
+			}
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputSendToSubDistrict(lSendToSubDistrict)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputSendToRoad(String strSendToRoad){
+		String lreturn=''
+		String lSendToRoad=strSendToRoad.trim()
+		try{
+			String lText=''
+			if(lSendToRoad.length()<=0){
+				lSendToRoad=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_SEND_TO_ROAD
+			}
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputSendToRoad(lSendToRoad)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputSendToBuildingName(String strSendToBuildingName){
+		String lreturn=''
+		String lSendToBuildingName=strSendToBuildingName.trim()
+		try{
+			String lText=''
+			if(lSendToBuildingName.length()<=0){
+				lSendToBuildingName=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_SEND_TO_BUILDING_NAME
+			}
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputSendToBuildingName(lSendToBuildingName)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputSendToBuildingNumber(String strSendToBuildingNumber){
+		String lreturn=''
+		String lSendToBuildingNumber=strSendToBuildingNumber.trim()
+		try{
+			String lText=''
+			if(lSendToBuildingNumber.length()<=0){
+				lSendToBuildingNumber=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_SEND_TO_BUILDING_NUMBER
+			}
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputSendToBuildingNumber(lSendToBuildingNumber)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputPrevInsuranceCompany(String strPrevInsuranceCompany){
+		String lreturn=''
+		String lPrevInsuranceCompany=strPrevInsuranceCompany.trim()
+		try{
+			String lText=''
+			if(lPrevInsuranceCompany.length()<=0){
+				lPrevInsuranceCompany=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_PREV_INSURANCE_COMPANY
+			}
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputPrevInsuranceCompany(lPrevInsuranceCompany)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public String inputPrevInsuranceType(String strPrevInsuranceType){
+		String lreturn=''
+		String lPrevInsuranceType=strPrevInsuranceType.trim()
+		try{
+			String lText=''
+			if(lPrevInsuranceType.length()<=0){
+				lPrevInsuranceType=THARGPAMotorQuotationDetail1Type.DEFAULT_DETAIL2_PREV_INSURANCE_TYPE
+			}
+			lText=this.lTHAMotorCarQuotationDetail1Util.inputPrevInsuranceType(lPrevInsuranceType)
+			if(lText.length()<=0){
+				return lreturn
+			}else{
+				lreturn=lText
 			}
 		}catch(Exception e){
 			e.printStackTrace()

@@ -58,8 +58,10 @@ public class THAPersonalAccidentQuotationInputUtil{
 			lVersion=lVersion.toLowerCase()
 			this.driver.get(lBaseUrl+'&abtesting='+lVersion)
 			IGNUemaHelper.delayThreadSecond(3)
+			this.checkChangeInsurerNoticePopupDisplayed()
 			this.driver.get(lBaseUrl+'&abtesting='+lVersion)
 			IGNUemaHelper.delayThreadSecond(5)
+			this.checkChangeInsurerNoticePopupDisplayed()
 			lVersionOutput=lVersion.toUpperCase()
 			lVersionOutput=IGNUemaHelper.concatMessageLeftRightByPipe(lVersionOutput,lBrowserInfo)
 			lVersionOutput=IGNUemaHelper.concatMessageLeftRightByPipe(lVersionOutput,lBuildVersion)
@@ -143,16 +145,16 @@ public class THAPersonalAccidentQuotationInputUtil{
 			/*Map lMapVersion=this.inputVersion(lBaseUrl,lVersion)
 			 if(!lMapVersion.Result){
 			 lVersion=''
-			}else{
+			 }else{
 			 lVersion=lMapVersion.Version
-			}
+			 }
 			 caseOutput.Version=lVersion
 			 if(lVersion.length()<=0){
 			 return lreturn
-			}
+			 }
 			 if(!this.waitUntilLoaded()){
 			 this.waitUntilLoaded()
-			}*/
+			 }*/
 			Boolean lIsCmsMainProductPersonalAccident=false
 			String lTagCmsMainProductButton=''
 			String lLocatorCmsMainProductButton='#product-link a'
@@ -194,6 +196,7 @@ public class THAPersonalAccidentQuotationInputUtil{
 					caseOutput.Version=IGNUemaHelper.concatMessageLeftRightByPipe(caseOutput.Version,'ActualVersion:'+lVersion)
 				}
 			}
+			this.checkChangeInsurerNoticePopupDisplayed()
 			Map lMapCmsKeepDetail=this.inputCmsKeepDetail(lCmsKeepDetail,lCmsLanguage,lCmsGenderAndMaritalStatus,lCmsBirthDateMain,lCmsInsuredOccupation,lCmsInsuredSalary)
 			if(!lMapCmsKeepDetail.Result){
 				lCmsKeepDetail=''
@@ -1068,16 +1071,16 @@ public class THAPersonalAccidentQuotationInputUtil{
 			/*Map lMapVersion=this.inputVersion(lBaseUrl,lVersion)
 			 if(!lMapVersion.Result){
 			 lVersion=''
-			}else{
+			 }else{
 			 lVersion=lMapVersion.Version
-			}
+			 }
 			 caseOutput.Version=lVersion
 			 if(lVersion.length()<=0){
 			 return lreturn
-			}
+			 }
 			 if(!this.waitUntilLoaded()){
 			 this.waitUntilLoaded()
-			}*/
+			 }*/
 			String lStartQuoteButton='#main .section-header a.btn'
 			WebElement lElementStartQuoteButton=IGNUemaHelper.getWebElementFromCssLocator(this.driver,lStartQuoteButton)
 			if(lElementStartQuoteButton){
@@ -1106,6 +1109,7 @@ public class THAPersonalAccidentQuotationInputUtil{
 					caseOutput.Version=IGNUemaHelper.concatMessageLeftRightByPipe(caseOutput.Version,'ActualVersion:'+lVersion)
 				}
 			}
+			this.checkChangeInsurerNoticePopupDisplayed()
 			Map lMapCmsKeepDetail=this.inputCmsKeepDetail(lCmsKeepDetail,lCmsLanguage,lCmsGenderAndMaritalStatus,lCmsBirthDateMain,lCmsInsuredOccupation,lCmsInsuredSalary)
 			if(!lMapCmsKeepDetail.Result){
 				lCmsKeepDetail=''
@@ -1941,6 +1945,7 @@ public class THAPersonalAccidentQuotationInputUtil{
 		String lActualResult=''
 		String lResultMessage=''
 		try{
+			this.checkChangeInsurerNoticePopupDisplayed()
 			Map lMapPositiveCase=this.inputPositiveCase(lPositiveCase)
 			if(!lMapPositiveCase.Result){
 				lPositiveCase=''
@@ -2413,6 +2418,52 @@ public class THAPersonalAccidentQuotationInputUtil{
 			}
 			if(lreturn){
 				IGNUemaHelper.delayThreadSecond(1)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public Boolean checkChangeInsurerNoticePopupDisplayed(){
+		Boolean lreturn=false
+		try{
+			String lTagChangeInsurerNoticeForm='product-unavailable-modal'
+			String lLocatorChangeInsurerNoticeForm=IGNUemaHelper.getTagDataSeleniumKey(lTagChangeInsurerNoticeForm)
+			WebElement lElementChangeInsurerNotice=IGNUemaHelper.getWebElementFromDataSeleniumKey(this.driver,lTagChangeInsurerNoticeForm)
+			if(!lElementChangeInsurerNotice){
+				IGNUemaHelper.delayThreadSecond(3)
+				lElementChangeInsurerNotice=IGNUemaHelper.getWebElementFromDataSeleniumKey(this.driver,lTagChangeInsurerNoticeForm)
+			}
+			if(!lElementChangeInsurerNotice){
+				IGNUemaHelper.delayThreadSecond(5)
+				lElementChangeInsurerNotice=IGNUemaHelper.getWebElementFromDataSeleniumKey(this.driver,lTagChangeInsurerNoticeForm)
+			}
+			if(!lElementChangeInsurerNotice){
+				IGNUemaHelper.delayThreadSecond(8)
+				lElementChangeInsurerNotice=IGNUemaHelper.getWebElementFromDataSeleniumKey(this.driver,lTagChangeInsurerNoticeForm)
+			}
+			if(!lElementChangeInsurerNotice){
+				lreturn=true
+			}
+			if(lElementChangeInsurerNotice){
+				Boolean lIsFormSaveQuoteDisplayed=IGNUemaHelper.checkElementVisibleWithBlockByElementJs(this.driver,lElementChangeInsurerNotice)
+				if(!lIsFormSaveQuoteDisplayed){
+					IGNUemaHelper.delayThreadSecond(3)
+					lIsFormSaveQuoteDisplayed=IGNUemaHelper.checkElementVisibleWithBlockByElementJs(this.driver,lElementChangeInsurerNotice)
+				}
+				if(!lIsFormSaveQuoteDisplayed){
+					IGNUemaHelper.delayThreadSecond(5)
+					lIsFormSaveQuoteDisplayed=IGNUemaHelper.checkElementVisibleWithBlockByElementJs(this.driver,lElementChangeInsurerNotice)
+				}
+				if(!lIsFormSaveQuoteDisplayed){
+					IGNUemaHelper.delayThreadSecond(8)
+					lIsFormSaveQuoteDisplayed=IGNUemaHelper.checkElementVisibleWithBlockByElementJs(this.driver,lElementChangeInsurerNotice)
+				}
+				if(lIsFormSaveQuoteDisplayed){
+					WebElement lElementChangeInsurerNoticeButton=IGNUemaHelper.getChildWebElementOfWebElement(this.driver,lElementChangeInsurerNotice,'button',false)
+					lreturn=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementChangeInsurerNoticeButton)
+				}
 			}
 		}catch(Exception e){
 			e.printStackTrace()

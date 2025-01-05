@@ -279,6 +279,9 @@ if(GlobalVariable.PrevStatus){
 				}
 			}
 			String lLocatorToCheck1=''
+			String lTagChangeInsurerNoticeForm='product-unavailable-modal'
+			String lLocatorChangeInsurerNoticeForm=IGNUemaHelper.getTagDataSeleniumKey(lTagChangeInsurerNoticeForm)
+			WebElement lElementChangeInsurerNotice=null
 			if(lIsStartFromCmsFormMain){
 				lLocatorToCheck1='#main .justify-content-center'
 				lBaseUrl=caseInput.CmsBaseUrlFormMain
@@ -288,6 +291,41 @@ if(GlobalVariable.PrevStatus){
 					lBaseUrl=caseInput.CmsBaseUrlFormMain
 				}else{
 					lLocatorToCheck1=IGNUemaHelper.getTagDataSeleniumKey('gender')
+					lElementChangeInsurerNotice=IGNUemaHelper.getWebElementFromDataSeleniumKey(driver,lTagChangeInsurerNoticeForm)
+					if(!lElementChangeInsurerNotice){
+						IGNUemaHelper.delayThreadSecond(3)
+						lElementChangeInsurerNotice=IGNUemaHelper.getWebElementFromDataSeleniumKey(driver,lTagChangeInsurerNoticeForm)
+					}
+					if(!lElementChangeInsurerNotice){
+						IGNUemaHelper.delayThreadSecond(5)
+						lElementChangeInsurerNotice=IGNUemaHelper.getWebElementFromDataSeleniumKey(driver,lTagChangeInsurerNoticeForm)
+					}
+					if(!lElementChangeInsurerNotice){
+						IGNUemaHelper.delayThreadSecond(8)
+						lElementChangeInsurerNotice=IGNUemaHelper.getWebElementFromDataSeleniumKey(driver,lTagChangeInsurerNoticeForm)
+					}
+					if(lElementChangeInsurerNotice){
+						lLocatorToCheck1=lLocatorChangeInsurerNoticeForm
+					}
+					if(lElementChangeInsurerNotice){
+						Boolean lIsFormSaveQuoteDisplayed=IGNUemaHelper.checkElementVisibleWithBlockByElementJs(driver,lElementChangeInsurerNotice)
+						if(!lIsFormSaveQuoteDisplayed){
+							IGNUemaHelper.delayThreadSecond(3)
+							lIsFormSaveQuoteDisplayed=IGNUemaHelper.checkElementVisibleWithBlockByElementJs(driver,lElementChangeInsurerNotice)
+						}
+						if(!lIsFormSaveQuoteDisplayed){
+							IGNUemaHelper.delayThreadSecond(5)
+							lIsFormSaveQuoteDisplayed=IGNUemaHelper.checkElementVisibleWithBlockByElementJs(driver,lElementChangeInsurerNotice)
+						}
+						if(!lIsFormSaveQuoteDisplayed){
+							IGNUemaHelper.delayThreadSecond(8)
+							lIsFormSaveQuoteDisplayed=IGNUemaHelper.checkElementVisibleWithBlockByElementJs(driver,lElementChangeInsurerNotice)
+						}
+						if(lIsFormSaveQuoteDisplayed){
+							WebElement lElementChangeInsurerNoticeButton=IGNUemaHelper.getChildWebElementOfWebElement(driver,lElementChangeInsurerNotice,'button',false)
+							lreturn=IGNUemaHelper.clickByWebElementWithScroll(driver,lElementChangeInsurerNoticeButton)
+						}
+					}
 					lBaseUrl=caseInput.BaseUrl
 				}
 			}
