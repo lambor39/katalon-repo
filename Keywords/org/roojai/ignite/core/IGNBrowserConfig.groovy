@@ -150,14 +150,14 @@ public class IGNBrowserConfig{
 					File lBinary64_2=new File('C:/Program Files/Google/Chrome Beta/Application/chrome.exe')
 					if(lBinaryHere.exists()){
 						chromeBinary=lBinaryHere.toString()
-					}else if(lBinary32_2.exists()){
-						chromeBinary=lBinary32_2.toString()
-					}else if(lBinary32_1.exists()){
-						chromeBinary=lBinary32_1.toString()
 					}else if(lBinary64_2.exists()){
 						chromeBinary=lBinary64_2.toString()
 					}else if(lBinary64_1.exists()){
 						chromeBinary=lBinary64_1.toString()
+					}else if(lBinary32_2.exists()){
+						chromeBinary=lBinary32_2.toString()
+					}else if(lBinary32_1.exists()){
+						chromeBinary=lBinary32_1.toString()
 					}else{
 						chromeBinary='chrome.exe'
 					}
@@ -222,14 +222,14 @@ public class IGNBrowserConfig{
 					File lBinary64_2=new File('C:/Program Files/Google/Chrome Beta/Application/chrome.exe')
 					if(lBinaryHere.exists()){
 						chromeBinary=lBinaryHere.toString()
-					}else if(lBinary32_2.exists()){
-						chromeBinary=lBinary32_2.toString()
-					}else if(lBinary32_1.exists()){
-						chromeBinary=lBinary32_1.toString()
 					}else if(lBinary64_2.exists()){
 						chromeBinary=lBinary64_2.toString()
 					}else if(lBinary64_1.exists()){
 						chromeBinary=lBinary64_1.toString()
+					}else if(lBinary32_2.exists()){
+						chromeBinary=lBinary32_2.toString()
+					}else if(lBinary32_1.exists()){
+						chromeBinary=lBinary32_1.toString()
 					}else{
 						chromeBinary='chrome.exe'
 					}
@@ -304,6 +304,7 @@ public class IGNBrowserConfig{
 					FirefoxProfile firefoxProfile=new FirefoxProfile()
 					FirefoxOptions firefoxOptions=new FirefoxOptions().setProfile(firefoxProfile)
 					firefoxOptions.setBinary(firefoxBinary)
+					firefoxOptions.addArguments('-headless')
 					firefoxOptions.setHeadless(true)
 					System.setProperty('webdriver.gecko.driver',DriverFactory.getGeckoDriverPath())
 					WebDriver firefoxDriver=new FirefoxDriver(firefoxOptions)
@@ -313,80 +314,92 @@ public class IGNBrowserConfig{
 					IGNUemaHelper.printLog('EdgeChromium=true')
 					lIsCustomWebDriverSetUp=true
 					String edgeChromiumBinary=''
+					Boolean lIsCustomEdgeChromiumDriver=false
 					File lBinaryHere=new File(this.strEdgeChromiumBinaryHere)
 					File lBinary32_1=new File('C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe')
 					File lBinary32_2=new File('C:/Program Files (x86)/Microsoft/Edge Beta/Application/msedge.exe')
 					File lBinary64_1=new File('C:/Program Files/Microsoft/Edge/Application/msedge.exe')
 					File lBinary64_2=new File('C:/Program Files/Microsoft/Edge Beta/Application/msedge.exe')
-					if(lBinaryHere.exists()){
-						edgeChromiumBinary=lBinaryHere.toString()
+					if(lBinary64_2.exists()){
+						edgeChromiumBinary=lBinary64_2.toString()
+					}else if(lBinary64_1.exists()){
+						edgeChromiumBinary=lBinary64_1.toString()
 					}else if(lBinary32_2.exists()){
 						edgeChromiumBinary=lBinary32_2.toString()
 					}else if(lBinary32_1.exists()){
 						edgeChromiumBinary=lBinary32_1.toString()
-					}else if(lBinary64_2.exists()){
-						edgeChromiumBinary=lBinary64_2.toString()
-					}else if(lBinary64_1.exists()){
-						edgeChromiumBinary=lBinary64_1.toString()
+					}else if(lBinaryHere.exists()){
+						lIsCustomEdgeChromiumDriver=true
+						edgeChromiumBinary=lBinaryHere.toString()
 					}else{
 						edgeChromiumBinary='msedge.exe'
 					}
 					IGNUemaHelper.printLog('EdgeChromium:'+edgeChromiumBinary)
-					String edgeChromiumDriverFile=this.strPathToRun+'Microsoft/Edge/Application/msedgedriver.exe'
-					System.setProperty('webdriver.chrome.driver',edgeChromiumDriverFile)
-					System.setProperty('webdriver.edge.driver',edgeChromiumDriverFile)
+					IGNUemaHelper.printLog('IsCustomEdgeChromiumDriver:'+IGNUemaHelper.convertBooleanToYesNoString(lIsCustomEdgeChromiumDriver))
 					System.setProperty('webdriver.edge.verboseLogging','true')
-					DesiredCapabilities edgeChromiumCapabilities=new DesiredCapabilities()
-					ChromeOptions edgeChromiumOptions=new ChromeOptions()
-					Map<String,Object> prefs=new HashMap<String,Object>()
-					prefs.put('credentials_enable_service',false)
-					prefs.put('profile.password_manager_enabled',false)
-					prefs.put('profile.default_content_settings.popups',0)
-					prefs.put('download.default_directory',this.strPathToDownload)
-					prefs.put('download.prompt_for_download',false)
-					prefs.put('profile.default_content_setting_values.cookies',1)
-					prefs.put('network.cookie.cookieBehavior',1)
-					prefs.put('profile.block_third_party_cookies',false)
-					edgeChromiumOptions.with{
-						setBinary(edgeChromiumBinary)
-						setExperimentalOption("prefs",prefs)
-						setExperimentalOption('useAutomationExtension',false)
-						setExperimentalOption("excludeSwitches",Collections.singletonList("enable-automation"))
-						setAcceptInsecureCerts(true)
-						addArguments('--disable-blink-features=AutomationControlled')
-						addArguments('--disable-dev-shm-usage')
-						addArguments('--disable-dev-shm-using')
-						addArguments('--disable-extensions')
-						addArguments('--disable-features=NetworkService')
-						addArguments('--disable-features=VizDisplayCompositor')
-						addArguments('--disable-gpu')
-						addArguments('--disable-infobars')
-						addArguments('--disable-notifications')
-						addArguments('--disable-popup-blocking')
-						addArguments('--disable-prompt-on-repost')
-						addArguments('--disable-save-password-bubble')
-						addArguments('--disable-setuid-sandbox')
-						addArguments('--disable-web-security')
-						addArguments('--dns-prefetch-disable')
-						addArguments('--enable-blink-features=ExperimentalProductivityFeatures')
-						addArguments('--enable-features=NetworkServiceInProcess')
-						addArguments('--ignore-certificate-errors')
-						addArguments('--no-first-run')
-						addArguments('--no-sandbox')
-						addArguments('--profile-directory=Default')
-						addArguments('--remote-allow-origins=*')
-						//addArguments('--remote-debugging-port=9222')
-						addArguments('--start-maximized')
-						addArguments('--test-type')
-						addArguments('--window-size=1280,1024')
+					if(lIsCustomEdgeChromiumDriver){
+						String edgeChromiumDriverFile=this.strPathToRun+'Microsoft/Edge/Application/msedgedriver.exe'
+						System.setProperty('webdriver.chrome.driver',edgeChromiumDriverFile)
+						System.setProperty('webdriver.edge.driver',edgeChromiumDriverFile)
+						DesiredCapabilities edgeChromiumCapabilities=new DesiredCapabilities()
+						ChromeOptions edgeChromiumOptions=new ChromeOptions()
+						Map<String,Object> prefs=new HashMap<String,Object>()
+						prefs.put('credentials_enable_service',false)
+						prefs.put('profile.password_manager_enabled',false)
+						prefs.put('profile.default_content_settings.popups',0)
+						prefs.put('download.default_directory',this.strPathToDownload)
+						prefs.put('download.prompt_for_download',false)
+						prefs.put('profile.default_content_setting_values.cookies',1)
+						prefs.put('network.cookie.cookieBehavior',1)
+						prefs.put('profile.block_third_party_cookies',false)
+						edgeChromiumOptions.with{
+							setBinary(edgeChromiumBinary)
+							setExperimentalOption("prefs",prefs)
+							setExperimentalOption('useAutomationExtension',false)
+							setExperimentalOption("excludeSwitches",Collections.singletonList("enable-automation"))
+							setAcceptInsecureCerts(true)
+							addArguments('--disable-blink-features=AutomationControlled')
+							addArguments('--disable-dev-shm-usage')
+							addArguments('--disable-dev-shm-using')
+							addArguments('--disable-extensions')
+							addArguments('--disable-features=NetworkService')
+							addArguments('--disable-features=VizDisplayCompositor')
+							addArguments('--disable-gpu')
+							addArguments('--disable-infobars')
+							addArguments('--disable-notifications')
+							addArguments('--disable-popup-blocking')
+							addArguments('--disable-prompt-on-repost')
+							addArguments('--disable-save-password-bubble')
+							addArguments('--disable-setuid-sandbox')
+							addArguments('--disable-web-security')
+							addArguments('--dns-prefetch-disable')
+							addArguments('--enable-blink-features=ExperimentalProductivityFeatures')
+							addArguments('--enable-features=NetworkServiceInProcess')
+							addArguments('--ignore-certificate-errors')
+							addArguments('--no-first-run')
+							addArguments('--no-sandbox')
+							addArguments('--profile-directory=Default')
+							addArguments('--remote-allow-origins=*')
+							//addArguments('--remote-debugging-port=9222')
+							addArguments('--start-maximized')
+							addArguments('--test-type')
+							addArguments('--window-size=1280,1024')
+						}
+						edgeChromiumCapabilities.setCapability(edgeChromiumOptions.CAPABILITY,edgeChromiumOptions)
+						edgeChromiumOptions.merge(edgeChromiumCapabilities)
+						edgeChromiumOptions.setCapability(CapabilityType.BROWSER_NAME,BrowserType.EDGE)
+						EdgeOptions edgeOptions=new EdgeOptions().merge(edgeChromiumOptions)
+						WebDriver edgeChromiumDriver=new ChromeDriver(edgeOptions)
+						DriverFactory.changeWebDriver(edgeChromiumDriver)
+						lIsCustomWebDriverOK=true
+					}else{
+						try{
+							WebUI.openBrowser(baseURL,FailureHandling.CONTINUE_ON_FAILURE)
+							lIsCustomWebDriverOK=true
+						}catch(Exception ex){
+							//ex.printStackTrace()
+						}
 					}
-					edgeChromiumCapabilities.setCapability(edgeChromiumOptions.CAPABILITY,edgeChromiumOptions)
-					edgeChromiumOptions.merge(edgeChromiumCapabilities)
-					edgeChromiumOptions.setCapability(CapabilityType.BROWSER_NAME,BrowserType.EDGE)
-					EdgeOptions edgeOptions=new EdgeOptions().merge(edgeChromiumOptions)
-					WebDriver edgeChromiumDriver=new ChromeDriver(edgeOptions)
-					DriverFactory.changeWebDriver(edgeChromiumDriver)
-					lIsCustomWebDriverOK=true
 				}else{
 					IGNUemaHelper.printLog('Chrome=false')
 					try{

@@ -566,6 +566,85 @@ public class IGNGlobalEnum{
 			return lreturn
 		}
 	}
+	public enum IGNWebElementTargetProceedDOM{
+		WebElementProceedFind('WebElementProceedFind'),
+		WebElementProceedList('WebElementProceedList'),
+		WebElementProceedMatch('WebElementProceedMatch')
+		private final String lStrName
+		private IGNWebElementTargetProceedDOM(String strName){
+			try{
+				this.lStrName=strName
+			}catch(Exception e){
+			}
+		}
+		public Boolean equalsName(String strOtherName){
+			Boolean lreturn=false
+			if(strOtherName==null) return lreturn
+			if(strOtherName.length()<=0) return lreturn
+			try{
+				lreturn=this.lStrName.equals(strOtherName)
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public String toString(){
+			String lreturn=null
+			try{
+				lreturn=this.lStrName
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public String toRefString(){
+			String lreturn=null
+			try{
+				Integer lNumOrdinal=this.ordinal()
+				switch(lNumOrdinal){
+					case 1:
+						lreturn=this.lStrName
+						break
+					default:
+						lreturn=this.lStrName
+						break
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public static IGNWebElementTargetProceedDOM fromRefNameToEnum(String strRefName){
+			IGNWebElementTargetProceedDOM lreturn=null
+			if(strRefName==null) return lreturn
+			if(strRefName.length()<=0) return lreturn
+			try{
+				try{
+					IGNWebElementTargetProceedDOM[] lArrayValueAll=IGNWebElementTargetProceedDOM.values()
+					for(IGNWebElementTargetProceedDOM lArrayValueItem in lArrayValueAll){
+						String lStrRefString=lArrayValueItem.toRefString()
+						if(lStrRefString.equals(strRefName)){
+							lreturn=lArrayValueItem
+							break
+						}
+					}
+				}catch(Exception ex){
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public static String fromRefNameToString(String strRefName){
+			String lreturn=null
+			if(strRefName==null) return lreturn
+			if(strRefName.length()<=0) return lreturn
+			try{
+				IGNWebElementTargetProceedDOM lEnumValue=this.fromRefNameToEnum(strRefName)
+				if(lEnumValue!=null){
+					lreturn=lEnumValue.toString()
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+	}
 	public enum IGNWebElementTargetItem{
 		WebElementItemSingle('WebElementItemSingle'),
 		WebElementItemMultiple('WebElementItemMultiple')
@@ -643,12 +722,22 @@ public class IGNGlobalEnum{
 			}
 			return lreturn
 		}
+		public Boolean checkIsItemMultiple(){
+			Boolean lreturn=false
+			try{
+				if(this.lStrName.contains('ItemMultiple')){
+					lreturn=true
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
 	}
-	public enum IGNWebElementTargeDOM{
-		WebElementDOMNormal('WebElementDOMNormal'),
-		WebElementDOMShadow('WebElementDOMShadow')
+	public enum IGNWebElementTargetFindDOM{
+		WebElementFindDOMNormal('WebElementFindDOMNormal'),
+		WebElementFindDOMShadow('WebElementFindDOMShadow')
 		private final String lStrName
-		private IGNWebElementTargeDOM(String strName){
+		private IGNWebElementTargetFindDOM(String strName){
 			try{
 				this.lStrName=strName
 			}catch(Exception e){
@@ -688,14 +777,14 @@ public class IGNGlobalEnum{
 			}
 			return lreturn
 		}
-		public static IGNWebElementTargeDOM fromRefNameToEnum(String strRefName){
-			IGNWebElementTargeDOM lreturn=null
+		public static IGNWebElementTargetFindDOM fromRefNameToEnum(String strRefName){
+			IGNWebElementTargetFindDOM lreturn=null
 			if(strRefName==null) return lreturn
 			if(strRefName.length()<=0) return lreturn
 			try{
 				try{
-					IGNWebElementTargeDOM[] lArrayValueAll=IGNWebElementTargeDOM.values()
-					for(IGNWebElementTargeDOM lArrayValueItem in lArrayValueAll){
+					IGNWebElementTargetFindDOM[] lArrayValueAll=IGNWebElementTargetFindDOM.values()
+					for(IGNWebElementTargetFindDOM lArrayValueItem in lArrayValueAll){
 						String lStrRefString=lArrayValueItem.toRefString()
 						if(lStrRefString.equals(strRefName)){
 							lreturn=lArrayValueItem
@@ -713,7 +802,7 @@ public class IGNGlobalEnum{
 			if(strRefName==null) return lreturn
 			if(strRefName.length()<=0) return lreturn
 			try{
-				IGNWebElementTargeDOM lEnumValue=this.fromRefNameToEnum(strRefName)
+				IGNWebElementTargetFindDOM lEnumValue=this.fromRefNameToEnum(strRefName)
 				if(lEnumValue!=null){
 					lreturn=lEnumValue.toString()
 				}
@@ -721,16 +810,223 @@ public class IGNGlobalEnum{
 			}
 			return lreturn
 		}
+		public Boolean checkIsFindDOMNormal(){
+			Boolean lreturn=false
+			try{
+				if(this.lStrName.contains('FindDOMNormal')){
+					lreturn=true
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+	}
+	public enum IGNWebElementTargetDOM{
+		WebElementDOMFindAsMultipleByNormal('WebElementDOMFindAsMultipleByNormal'),
+		WebElementDOMFindAsMultipleByShadow('WebElementDOMFindAsMultipleByShadow'),
+		WebElementDOMFindAsSingleByNormal('WebElementDOMFindAsSingleByNormal'),
+		WebElementDOMFindAsSingleByShadow('WebElementDOMFindAsSingleByShadow'),
+		WebElementDOMListChildrenAsMultipleByNormal('WebElementDOMListChildrenAsMultipleByNormal'),
+		WebElementDOMListChildrenAsMultipleByShadow('WebElementDOMListChildrenAsMultipleByShadow'),
+		WebElementDOMListWildcardAsMultipleByNormal('WebElementDOMListWildcardAsMultipleByNormal'),
+		WebElementDOMListWildcardAsMultipleByShadow('WebElementDOMListWildcardAsMultipleByShadow'),
+		WebElementDOMMatchContainAllAsMultiple('WebElementDOMMatchContainAllAsMultiple'),
+		WebElementDOMMatchEqualAllAsMultiple('WebElementDOMMatchEqualAllAsMultiple'),
+		WebElementDOMMatchPrefixAllAsMultiple('WebElementDOMMatchPrefixAllAsMultiple'),
+		WebElementDOMMatchSuffixAllAsMultiple('WebElementDOMMatchSuffixAllAsMultiple')
+		private final String lStrName
+		private IGNWebElementTargetDOM(String strName){
+			try{
+				this.lStrName=strName
+			}catch(Exception e){
+			}
+		}
+		public Boolean equalsName(String strOtherName){
+			Boolean lreturn=false
+			if(strOtherName==null) return lreturn
+			if(strOtherName.length()<=0) return lreturn
+			try{
+				lreturn=this.lStrName.equals(strOtherName)
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public String toString(){
+			String lreturn=null
+			try{
+				lreturn=this.lStrName
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public String toRefString(){
+			String lreturn=null
+			try{
+				Integer lNumOrdinal=this.ordinal()
+				switch(lNumOrdinal){
+					case 1:
+						lreturn=this.lStrName
+						break
+					case 2:
+						lreturn=this.lStrName
+						break
+					case 3:
+						lreturn=this.lStrName
+						break
+					case 4:
+						lreturn=this.lStrName
+						break
+					case 5:
+						lreturn=this.lStrName
+						break
+					case 6:
+						lreturn=this.lStrName
+						break
+					case 7:
+						lreturn=this.lStrName
+						break
+					case 8:
+						lreturn=this.lStrName
+						break
+					case 9:
+						lreturn=this.lStrName
+						break
+					case 10:
+						lreturn=this.lStrName
+						break
+					case 11:
+						lreturn=this.lStrName
+						break
+					default:
+						lreturn=this.lStrName
+						break
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public static IGNWebElementTargetDOM fromRefNameToEnum(String strRefName){
+			IGNWebElementTargetDOM lreturn=null
+			if(strRefName==null) return lreturn
+			if(strRefName.length()<=0) return lreturn
+			try{
+				try{
+					IGNWebElementTargetDOM[] lArrayValueAll=IGNWebElementTargetDOM.values()
+					for(IGNWebElementTargetDOM lArrayValueItem in lArrayValueAll){
+						String lStrRefString=lArrayValueItem.toRefString()
+						if(lStrRefString.equals(strRefName)){
+							lreturn=lArrayValueItem
+							break
+						}
+					}
+				}catch(Exception ex){
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public static String fromRefNameToString(String strRefName){
+			String lreturn=null
+			if(strRefName==null) return lreturn
+			if(strRefName.length()<=0) return lreturn
+			try{
+				IGNWebElementTargetDOM lEnumValue=this.fromRefNameToEnum(strRefName)
+				if(lEnumValue!=null){
+					lreturn=lEnumValue.toString()
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public IGNWebElementTargetProceedDOM toIGNWebElementTargetProceedDOM(){
+			IGNWebElementTargetProceedDOM lreturn=null
+			try{
+				if(this.lStrName.contains('DOMFind')){
+					lreturn=IGNWebElementTargetProceedDOM.WebElementProceedFind
+				}else if(this.lStrName.contains('DOMList')){
+					lreturn=IGNWebElementTargetProceedDOM.WebElementProceedList
+				}else if(this.lStrName.contains('DOMMatch')){
+					lreturn=IGNWebElementTargetProceedDOM.WebElementProceedMatch
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public IGNWebElementTargetItem toIGNWebElementTargetItem(){
+			IGNWebElementTargetItem lreturn=null
+			try{
+				if(this.lStrName.contains('AsMultiple')){
+					lreturn=IGNWebElementTargetItem.WebElementItemMultiple
+				}else if(this.lStrName.contains('AsSingle')){
+					lreturn=IGNWebElementTargetItem.WebElementItemSingle
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public IGNWebElementTargetFindDOM toIGNWebElementTargetFindDOM(){
+			IGNWebElementTargetFindDOM lreturn=null
+			try{
+				IGNWebElementTargetProceedDOM lIGNWebElementTargetProceedDOM=this.toIGNWebElementTargetProceedDOM()
+				if(lIGNWebElementTargetProceedDOM==IGNWebElementTargetProceedDOM.WebElementProceedFind){
+					if(this.lStrName.contains('ByNormal')){
+						lreturn=IGNWebElementTargetFindDOM.WebElementFindDOMNormal
+					}else if(this.lStrName.contains('ByShadow')){
+						lreturn=IGNWebElementTargetFindDOM.WebElementFindDOMShadow
+					}
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public Boolean checkIsItemMultiple(){
+			Boolean lreturn=false
+			try{
+				IGNWebElementTargetItem lIGNWebElementTargetItem=this.toIGNWebElementTargetItem()
+				if(lIGNWebElementTargetItem==IGNWebElementTargetItem.WebElementItemMultiple){
+					lreturn=true
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public Boolean checkIsFindDOMNormal(){
+			Boolean lreturn=false
+			try{
+				IGNWebElementTargetFindDOM lIGNWebElementTargetFindDOM=this.toIGNWebElementTargetFindDOM()
+				if(lIGNWebElementTargetFindDOM==IGNWebElementTargetFindDOM.WebElementFindDOMNormal){
+					lreturn=true
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
 	}
 	public enum IGNWebElementFindByMethod{
-		WebElementFindByCssLocator('WebElementFindByCssLocator'),
-		WebElementFindByLinkText('WebElementFindByLinkText'),
-		WebElementFindByPartialLinkText('WebElementFindByPartialLinkText'),
-		WebElementFindByTagName('WebElementFindByTagName'),
-		WebElementFindByXPath('WebElementFindByXPath'),
-		WebElementFindByDataSeleniumOneKey('WebElementFindByDataSeleniumOneKey'),
-		WebElementFindByDataSeleniumOneValue('WebElementFindByDataSeleniumOneValue'),
-		WebElementFindByDataSeleniumBothKeyValue('WebElementFindByDataSeleniumBothKeyValue')
+		WebElementFindAsMultipleByCssLocator('WebElementFindAsMultipleByCssLocator'),
+		WebElementFindAsMultipleByCssSelector('WebElementFindAsMultipleByCssSelector'),
+		WebElementFindAsMultipleByDataSeleniumOneKey('WebElementFindAsMultipleByDataSeleniumOneKey'),
+		WebElementFindAsMultipleByLinkTextFull('WebElementFindAsMultipleByLinkTextFull'),
+		WebElementFindAsMultipleByLinkTextPartial('WebElementFindAsMultipleByLinkTextPartial'),
+		WebElementFindAsMultipleByTagName('WebElementFindAsMultipleByTagName'),
+		WebElementFindAsMultipleByXPath('WebElementFindAsMultipleByXPath'),
+		WebElementFindAsSingleByCssLocator('WebElementFindAsSingleByCssLocator'),
+		WebElementFindAsSingleByCssSelector('WebElementFindAsSingleByCssSelector'),
+		WebElementFindAsSingleByDataSeleniumOneKey('WebElementFindAsSingleByDataSeleniumOneKey'),
+		WebElementFindAsSingleByDataSeleniumPairKeyValueContain('WebElementFindAsSingleByDataSeleniumPairKeyValueContain'),
+		WebElementFindAsSingleByDataSeleniumPairKeyValueEqual('WebElementFindAsSingleByDataSeleniumPairKeyValueEqual'),
+		WebElementFindAsSingleByLinkTextFull('WebElementFindAsSingleByLinkTextFull'),
+		WebElementFindAsSingleByLinkTextPartial('WebElementFindAsSingleByLinkTextPartial'),
+		WebElementFindAsSingleByTagName('WebElementFindAsSingleByTagName'),
+		WebElementFindAsSingleByXPath('WebElementFindAsSingleByXPath'),
+		WebElementListAsMultipleByChildrenOfRoot('WebElementListAsMultipleByChildrenOfRoot'),
+		WebElementListAsMultipleByWildcardOfRoot('WebElementListAsMultipleByWildcardOfRoot'),
+		WebElementMatchAsMultipleByAttributeClass('WebElementMatchAsMultipleByAttributeClass'),
+		WebElementMatchAsMultipleByAttributeName('WebElementMatchAsMultipleByAttributeName'),
+		WebElementMatchAsMultipleByAttributeValue('WebElementMatchAsMultipleByAttributeValue'),
+		WebElementMatchAsMultipleByGetChildText('WebElementMatchAsMultipleByGetChildText'),
+		WebElementMatchAsMultipleByGetText('WebElementMatchAsMultipleByGetText'),
+		WebElementMatchAsMultipleByTagName('WebElementMatchAsMultipleByTagName')
 		private final String lStrName
 		private IGNWebElementFindByMethod(String strName){
 			try{
@@ -782,6 +1078,54 @@ public class IGNGlobalEnum{
 					case 7:
 						lreturn=this.lStrName
 						break
+					case 8:
+						lreturn=this.lStrName
+						break
+					case 9:
+						lreturn=this.lStrName
+						break
+					case 10:
+						lreturn=this.lStrName
+						break
+					case 11:
+						lreturn=this.lStrName
+						break
+					case 12:
+						lreturn=this.lStrName
+						break
+					case 13:
+						lreturn=this.lStrName
+						break
+					case 14:
+						lreturn=this.lStrName
+						break
+					case 15:
+						lreturn=this.lStrName
+						break
+					case 16:
+						lreturn=this.lStrName
+						break
+					case 17:
+						lreturn=this.lStrName
+						break
+					case 18:
+						lreturn=this.lStrName
+						break
+					case 19:
+						lreturn=this.lStrName
+						break
+					case 20:
+						lreturn=this.lStrName
+						break
+					case 21:
+						lreturn=this.lStrName
+						break
+					case 22:
+						lreturn=this.lStrName
+						break
+					case 23:
+						lreturn=this.lStrName
+						break
 					default:
 						lreturn=this.lStrName
 						break
@@ -823,96 +1167,38 @@ public class IGNGlobalEnum{
 			}
 			return lreturn
 		}
-	}
-	public enum IGNWebElementMatchByMethod{
-		WebElementMatchByAny('WebElementMatchByAny')
-		private final String lStrName
-		private IGNWebElementMatchByMethod(String strName){
+		public IGNWebElementTargetProceedDOM toIGNWebElementTargetProceedDOM(){
+			IGNWebElementTargetProceedDOM lreturn=null
 			try{
-				this.lStrName=strName
+				if(this.lStrName.contains('WebElementFind')){
+					lreturn=IGNWebElementTargetProceedDOM.WebElementProceedFind
+				}else if(this.lStrName.contains('WebElementList')){
+					lreturn=IGNWebElementTargetProceedDOM.WebElementProceedList
+				}else if(this.lStrName.contains('WebElementMatch')){
+					lreturn=IGNWebElementTargetProceedDOM.WebElementProceedMatch
+				}
 			}catch(Exception e){
 			}
+			return lreturn
 		}
-		public Boolean equalsName(String strOtherName){
+		public IGNWebElementTargetItem toIGNWebElementTargetItem(){
+			IGNWebElementTargetItem lreturn=null
+			try{
+				if(this.lStrName.contains('AsMultiple')){
+					lreturn=IGNWebElementTargetItem.WebElementItemMultiple
+				}else if(this.lStrName.contains('AsSingle')){
+					lreturn=IGNWebElementTargetItem.WebElementItemSingle
+				}
+			}catch(Exception e){
+			}
+			return lreturn
+		}
+		public Boolean checkIsItemMultiple(){
 			Boolean lreturn=false
-			if(strOtherName==null) return lreturn
-			if(strOtherName.length()<=0) return lreturn
 			try{
-				lreturn=this.lStrName.equals(strOtherName)
-			}catch(Exception e){
-			}
-			return lreturn
-		}
-		public String toString(){
-			String lreturn=null
-			try{
-				lreturn=this.lStrName
-			}catch(Exception e){
-			}
-			return lreturn
-		}
-		public String toRefString(){
-			String lreturn=null
-			try{
-				Integer lNumOrdinal=this.ordinal()
-				switch(lNumOrdinal){
-					case 1:
-						lreturn=this.lStrName
-						break
-					case 2:
-						lreturn=this.lStrName
-						break
-					case 3:
-						lreturn=this.lStrName
-						break
-					case 4:
-						lreturn=this.lStrName
-						break
-					case 5:
-						lreturn=this.lStrName
-						break
-					case 6:
-						lreturn=this.lStrName
-						break
-					case 7:
-						lreturn=this.lStrName
-						break
-					default:
-						lreturn=this.lStrName
-						break
-				}
-			}catch(Exception e){
-			}
-			return lreturn
-		}
-		public static IGNWebElementMatchByMethod fromRefNameToEnum(String strRefName){
-			IGNWebElementMatchByMethod lreturn=null
-			if(strRefName==null) return lreturn
-			if(strRefName.length()<=0) return lreturn
-			try{
-				try{
-					IGNWebElementMatchByMethod[] lArrayValueAll=IGNWebElementMatchByMethod.values()
-					for(IGNWebElementMatchByMethod lArrayValueItem in lArrayValueAll){
-						String lStrRefString=lArrayValueItem.toRefString()
-						if(lStrRefString.equals(strRefName)){
-							lreturn=lArrayValueItem
-							break
-						}
-					}
-				}catch(Exception ex){
-				}
-			}catch(Exception e){
-			}
-			return lreturn
-		}
-		public static String fromRefNameToString(String strRefName){
-			String lreturn=null
-			if(strRefName==null) return lreturn
-			if(strRefName.length()<=0) return lreturn
-			try{
-				IGNWebElementMatchByMethod lEnumValue=this.fromRefNameToEnum(strRefName)
-				if(lEnumValue!=null){
-					lreturn=lEnumValue.toString()
+				IGNWebElementTargetItem lIGNWebElementTargetItem=this.toIGNWebElementTargetItem()
+				if(lIGNWebElementTargetItem==IGNWebElementTargetItem.WebElementItemMultiple){
+					lreturn=true
 				}
 			}catch(Exception e){
 			}

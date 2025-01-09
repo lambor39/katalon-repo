@@ -4777,7 +4777,12 @@ public class IGNUemaHelper{
 				if(!IGNUemaHelper.checkObjectNullOfObject(lCell)){
 					CellType lCellType=lCell.getCellTypeEnum()
 					if((lCellType==CellType.NUMERIC)){
-						lStrDataFormatterObjectValue=this.getStrDataFormatterOfExcelCell(lCell)
+						if(DateUtil.isCellDateFormatted(lCell)){
+							LocalDate lLocalDate=IGNUemaHelper.convertDateStringtoLocalDate('dd/MM/yyyy',lStrDataFormatterObjectValue)
+							lStrDataFormatterObjectValue=IGNUemaHelper.convertLocalDateToString('yyyy-MM-dd',lLocalDate)
+						}else{
+							lStrDataFormatterObjectValue=this.getStrDataFormatterOfExcelCell(lCell)
+						}
 					}else{
 						lStrDataFormatterObjectValue=this.getStrDataFormatterOfExcelCell(lCell)
 					}
@@ -10132,7 +10137,7 @@ public class IGNUemaHelper{
 				String lOptionFindText=''
 				if(isMatchByValueBeforeVisibleText){
 					lTargetMatchByValue=true
-					for(Integer lOptionItemIndex=0;lOptionItemIndex<lOptionList.size()-1;lOptionItemIndex++){
+					for(Integer lOptionItemIndex=0;lOptionItemIndex<=lOptionList.size()-1;lOptionItemIndex++){
 						lElementOptionItem=lOptionList.get(lOptionItemIndex)
 						lOptionFindText=this.getElementAttributeByWebElement(driver,lElementOptionItem,'value')
 						if(lOptionFindText.contains(strTargetOptionValue)){
@@ -10143,7 +10148,7 @@ public class IGNUemaHelper{
 					}
 					if(!lOptionItemFound){
 						lTargetMatchByValue=false
-						for(Integer lOptionItemIndex=0;lOptionItemIndex<lOptionList.size()-1;lOptionItemIndex++){
+						for(Integer lOptionItemIndex=0;lOptionItemIndex<=lOptionList.size()-1;lOptionItemIndex++){
 							lElementOptionItem=lOptionList.get(lOptionItemIndex)
 							lOptionFindText=lElementOptionItem.getText()
 							if(lOptionFindText.contains(strTargetOptionValue)){
@@ -10155,7 +10160,7 @@ public class IGNUemaHelper{
 					}
 				}else{
 					lTargetMatchByValue=false
-					for(Integer lOptionItemIndex=0;lOptionItemIndex<lOptionList.size()-1;lOptionItemIndex++){
+					for(Integer lOptionItemIndex=0;lOptionItemIndex<=lOptionList.size()-1;lOptionItemIndex++){
 						lElementOptionItem=lOptionList.get(lOptionItemIndex)
 						lOptionFindText=lElementOptionItem.getText()
 						if(lOptionFindText.contains(strTargetOptionValue)){
@@ -10166,7 +10171,7 @@ public class IGNUemaHelper{
 					}
 					if(!lOptionItemFound){
 						lTargetMatchByValue=true
-						for(Integer lOptionItemIndex=0;lOptionItemIndex<lOptionList.size()-1;lOptionItemIndex++){
+						for(Integer lOptionItemIndex=0;lOptionItemIndex<=lOptionList.size()-1;lOptionItemIndex++){
 							lElementOptionItem=lOptionList.get(lOptionItemIndex)
 							lOptionFindText=this.getElementAttributeByWebElement(driver,lElementOptionItem,'value')
 							if(lOptionFindText.contains(strTargetOptionValue)){
@@ -10752,6 +10757,350 @@ public class IGNUemaHelper{
 			}
 			String lStrJavascript=lStrConstJavascriptReturn+lStrConstJavascriptArgument00+lStrCssSelector
 			lreturn=(List<WebElement>)this.getWebJsReturnFromJavascriptExecutor(driver,lStrJavascript,[parentElement].toArray())
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static WebElement getWebElementFromLinkTextFull(WebDriver driver,String strLinkTextFull){
+		WebElement lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strLinkTextFull)){
+			return lreturn
+		}
+		String lStrLinkTextFull=strLinkTextFull.trim()
+		if(this.checkObjectEmptyOfString(lStrLinkTextFull)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=driver.findElement(By.linkText(lStrLinkTextFull))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static List<WebElement> getWebElementListFromLinkTextFull(WebDriver driver,String strLinkTextFull){
+		List<WebElement> lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strLinkTextFull)){
+			return lreturn
+		}
+		String lStrLinkTextFull=strLinkTextFull.trim()
+		if(this.checkObjectEmptyOfString(lStrLinkTextFull)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=driver.findElements(By.linkText(lStrLinkTextFull))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static WebElement getChildWebElementFromLinkTextFull(WebDriver driver,WebElement parentElement,String strLinkTextFull){
+		WebElement lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(parentElement)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strLinkTextFull)){
+			return lreturn
+		}
+		String lStrLinkTextFull=strLinkTextFull.trim()
+		if(this.checkObjectEmptyOfString(lStrLinkTextFull)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=parentElement.findElement(By.linkText(lStrLinkTextFull))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static List<WebElement> getChildWebElementListFromLinkTextFull(WebDriver driver,WebElement parentElement,String strLinkTextFull){
+		List<WebElement> lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(parentElement)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strLinkTextFull)){
+			return lreturn
+		}
+		String lStrLinkTextFull=strLinkTextFull.trim()
+		if(this.checkObjectEmptyOfString(lStrLinkTextFull)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=parentElement.findElements(By.linkText(lStrLinkTextFull))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static WebElement getWebElementFromLinkTextPartial(WebDriver driver,String strLinkTextPartial){
+		WebElement lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strLinkTextPartial)){
+			return lreturn
+		}
+		String lStrLinkTextPartial=strLinkTextPartial.trim()
+		if(this.checkObjectEmptyOfString(lStrLinkTextPartial)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=driver.findElement(By.partialLinkText(lStrLinkTextPartial))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static List<WebElement> getWebElementListFromLinkTextPartial(WebDriver driver,String strLinkTextPartial){
+		List<WebElement> lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strLinkTextPartial)){
+			return lreturn
+		}
+		String lStrLinkTextPartial=strLinkTextPartial.trim()
+		if(this.checkObjectEmptyOfString(lStrLinkTextPartial)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=driver.findElements(By.partialLinkText(lStrLinkTextPartial))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static WebElement getChildWebElementFromLinkTextPartial(WebDriver driver,WebElement parentElement,String strLinkTextPartial){
+		WebElement lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(parentElement)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strLinkTextPartial)){
+			return lreturn
+		}
+		String lStrLinkTextPartial=strLinkTextPartial.trim()
+		if(this.checkObjectEmptyOfString(lStrLinkTextPartial)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=parentElement.findElement(By.partialLinkText(lStrLinkTextPartial))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static List<WebElement> getChildWebElementListFromLinkTextPartial(WebDriver driver,WebElement parentElement,String strLinkTextPartial){
+		List<WebElement> lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(parentElement)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strLinkTextPartial)){
+			return lreturn
+		}
+		String lStrLinkTextPartial=strLinkTextPartial.trim()
+		if(this.checkObjectEmptyOfString(lStrLinkTextPartial)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=parentElement.findElements(By.partialLinkText(lStrLinkTextPartial))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static WebElement getWebElementFromTagName(WebDriver driver,String strTagName){
+		WebElement lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strTagName)){
+			return lreturn
+		}
+		String lStrTagName=strTagName.trim()
+		if(this.checkObjectEmptyOfString(lStrTagName)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=driver.findElement(By.tagName(lStrTagName))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static List<WebElement> getWebElementListFromTagName(WebDriver driver,String strTagName){
+		List<WebElement> lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strTagName)){
+			return lreturn
+		}
+		String lStrTagName=strTagName.trim()
+		if(this.checkObjectEmptyOfString(lStrTagName)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=driver.findElements(By.tagName(lStrTagName))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static WebElement getChildWebElementFromTagName(WebDriver driver,WebElement parentElement,String strTagName){
+		WebElement lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(parentElement)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strTagName)){
+			return lreturn
+		}
+		String lStrTagName=strTagName.trim()
+		if(this.checkObjectEmptyOfString(lStrTagName)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=parentElement.findElement(By.tagName(lStrTagName))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static List<WebElement> getChildWebElementListFromTagName(WebDriver driver,WebElement parentElement,String strTagName){
+		List<WebElement> lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(parentElement)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strTagName)){
+			return lreturn
+		}
+		String lStrTagName=strTagName.trim()
+		if(this.checkObjectEmptyOfString(lStrTagName)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=parentElement.findElements(By.tagName(lStrTagName))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static WebElement getWebElementFromXPath(WebDriver driver,String strXPath){
+		WebElement lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strXPath)){
+			return lreturn
+		}
+		String lStrXPath=strXPath.trim()
+		if(this.checkObjectEmptyOfString(lStrXPath)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=driver.findElement(By.xpath(lStrXPath))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static List<WebElement> getWebElementListFromXPath(WebDriver driver,String strXPath){
+		List<WebElement> lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strXPath)){
+			return lreturn
+		}
+		String lStrXPath=strXPath.trim()
+		if(this.checkObjectEmptyOfString(lStrXPath)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=driver.findElements(By.xpath(lStrXPath))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static WebElement getChildWebElementFromXPath(WebDriver driver,WebElement parentElement,String strXPath){
+		WebElement lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(parentElement)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strXPath)){
+			return lreturn
+		}
+		String lStrXPath=strXPath.trim()
+		if(this.checkObjectEmptyOfString(lStrXPath)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=parentElement.findElement(By.xpath(lStrXPath))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static List<WebElement> getChildWebElementListFromXPath(WebDriver driver,WebElement parentElement,String strXPath){
+		List<WebElement> lreturn=null
+		if(this.checkObjectNullOfObject(driver)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(parentElement)){
+			return lreturn
+		}
+		if(this.checkObjectNullOfObject(strXPath)){
+			return lreturn
+		}
+		String lStrXPath=strXPath.trim()
+		if(this.checkObjectEmptyOfString(lStrXPath)){
+			return lreturn
+		}
+		try{
+			this.printLog(this.getThisCallMethodName())
+			lreturn=parentElement.findElements(By.xpath(lStrXPath))
 		}catch(Exception e){
 			//e.printStackTrace()
 		}

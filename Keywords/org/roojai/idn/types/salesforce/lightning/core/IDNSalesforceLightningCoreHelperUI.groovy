@@ -394,6 +394,7 @@ public class IDNSalesforceLightningCoreHelperUI{
 			String lLocatorUsername='input#username'
 			String lLocatorPassword='input#password'
 			String lLocatorLogin='input#Login'
+			IGNUemaHelper.delayWebUISecond(5)
 			if(IGNUemaHelper.checkElementPresentByLocator(webDriver,lLocatorUsername,15)){
 				WebElement lElementUsernameInput=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lLocatorUsername)
 				if(lElementUsernameInput){
