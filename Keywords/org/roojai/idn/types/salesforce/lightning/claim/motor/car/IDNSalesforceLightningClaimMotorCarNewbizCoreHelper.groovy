@@ -1353,7 +1353,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 					}
 				}
 			}
-			lResult=this.selectedValueSfToTargetBaseComboBoxItem(lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lStrSfClaimLiabilityValue,true)
+			lResult=this.selectedValueSfToTargetBaseComboBoxItem(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lStrSfClaimLiabilityValue,true)
 			if(!lResult){
 				lStrErrorMessage='Cannot selected item in claim liability'
 			}
@@ -2108,7 +2108,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 					}
 				}
 			}
-			lResult=this.selectedValueSfToTargetBaseComboBoxItem(lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lStrSfClaimSurveyTypeValue,true)
+			lResult=this.selectedValueSfToTargetBaseComboBoxItem(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lStrSfClaimSurveyTypeValue,true)
 			if(!lResult){
 				lStrErrorMessage='Cannot selected item in claim survey type'
 			}
@@ -2166,7 +2166,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 					}
 				}
 			}
-			lResult=this.selectedValueSfToTargetBaseComboBoxItem(lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lStrSfClaimReasonForSurveyTypeValue,true)
+			lResult=this.selectedValueSfToTargetBaseComboBoxItem(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lStrSfClaimReasonForSurveyTypeValue,true)
 			if(!lResult){
 				lStrErrorMessage='Cannot selected item in claim reason for survey type'
 			}
