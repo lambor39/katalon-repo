@@ -35,12 +35,13 @@ import org.roojai.idn.core.IDNGlobalConst as IDNGlobalConst
 import org.roojai.idn.types.pricingapi.IDNPricingApiGetPriceListCoreType as IDNPricingApiGetPriceListCoreType
 import org.roojai.idn.types.pricingapi.IDNPricingApiGetPriceListDatabaseHandling as IDNPricingApiGetPriceListDatabaseHandling
 public class IDNPricingApiRestAPIHelper{
-	protected static final String strDefaultRequestHeaderAuthorizationKey=HttpHeaders.AUTHORIZATION
 	protected static final String strDefaultRequestHeaderContentType01Key=HttpHeaders.CONTENT_TYPE
-	protected static final String strDefaultRequestHeaderContentType01Value='application/json;charset=UTF-8;'
+	protected static final String strDefaultRequestHeaderContentType01Value='application/json'
 	protected static final String strDefaultRequestHeaderContentType02Key=HttpHeaders.ORIGIN
 	protected static final String strDefaultRequestHeaderContentType02Value='http://localhost:5173'
 	protected static final String strDefaultRequestHeaderContentType03Key='X-UUID'
+	protected static final String strDefaultRequestHeaderContentType04Key=HttpHeaders.COOKIE
+	protected static final String strDefaultRequestHeaderContentType05Key='X-USER-ID'
 	public static final String CONST_HTTP_METHOD_CONNECT=HttpMethod.CONNECT
 	public static final String CONST_HTTP_METHOD_DELETE=HttpMethod.DELETE
 	public static final String CONST_HTTP_METHOD_GET=HttpMethod.GET
@@ -53,7 +54,6 @@ public class IDNPricingApiRestAPIHelper{
 	public static Map mapCallRestAPIGeneric(String strHTTPMethod,String strURLServerBaseURI,String strURLServerRestAPIEndpoint,Map mapURLRequestParameter,List<TestObjectProperty> listHTTPRequestHeader,String strHTTPBodyContent){
 		Map lreturn=[:]
 		try{
-			IGNUemaHelper.printLog('Inside API CAll')
 			Boolean lResult=false
 			lreturn.put('Result',lResult)
 			String lHTTPMethod=strHTTPMethod.trim()
@@ -68,11 +68,7 @@ public class IDNPricingApiRestAPIHelper{
 			String lHTTPBodyContent=strHTTPBodyContent.trim()
 			Boolean lIsOK=false
 			String lServerURLEndpoint=lURLServerBaseURI+lURLServerRestAPIEndpoint
-			IGNUemaHelper.printLog('lServerURLEndpoint')
-			IGNUemaHelper.printLog(lServerURLEndpoint)
 			String lURLRequestParameterString=IGNUemaHelper.convertMapURLRequestParameterToStringURLRequestParameter(lServerURLEndpoint,mapURLRequestParameter)
-			IGNUemaHelper.printLog('lURLRequestParameterString')
-			IGNUemaHelper.printLog(lURLRequestParameterString)
 			RequestObject lRequestObject=new RequestObject(IGNUemaHelper.randomStringAlphabetEngAndNum(17,false))
 			lRequestObject.setRestUrl(lURLRequestParameterString)
 			lRequestObject.setRestRequestMethod(lHTTPMethod)
@@ -91,8 +87,6 @@ public class IDNPricingApiRestAPIHelper{
 			lreturn.put('ResponseObject',lResponseObject)
 			Integer lResponseObjectStatusCode=lResponseObject.getStatusCode()
 			lreturn.put('ResponseObjectStatusCode',lResponseObjectStatusCode)
-			IGNUemaHelper.printLog('lResponseObjectStatusCode')
-			IGNUemaHelper.printLog(lResponseObjectStatusCode)
 			String lResponseObjectStatusText=lResponseObjectStatusCode.toString()
 			lreturn.put('ResponseObjectStatusText',lResponseObjectStatusText)
 			Integer lResponseObjectElapsedTimeNum=lResponseObject.getElapsedTime()
@@ -208,9 +202,10 @@ public class IDNPricingApiRestAPIHelper{
 		}
 		return lreturn
 	}
-	public static Map mapPricingApiRegisterClientCallRequest(String strPricingApiInputRequestBodyContent){
+	public static Map mapPricingApiRegisterClientCallRequest(String strPricingApiInputRequestBodyContent,String strPricingApiCallSdkVersion){
 		Map lreturn=[:]
 		String lPricingApiInputRequestBodyContent=strPricingApiInputRequestBodyContent.trim()
+		String lStrPricingApiCallSdkVersion=strPricingApiCallSdkVersion.trim()
 		try{
 			List<TestObjectProperty> lListHTTPRequestHeader=[]
 			TestObjectProperty lHTTPRequestHeaderItem=null
@@ -218,10 +213,10 @@ public class IDNPricingApiRestAPIHelper{
 			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
 			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType02Key,ConditionType.EQUALS,this.strDefaultRequestHeaderContentType02Value)
 			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
-			String lPricingApiServerRegsiterClientBaseUrl=IDNGlobalConst.DEFAULT_PRICING_API_SERVER_REGISTER_CLIENT_URL_UAT
-			String lPricingApiServerRegsiterClientEndpointURL=IDNGlobalConst.DEFAULT_PRICING_API_SERVER_REGISTER_CLIENT_ENDPOINT_URL
+			String lStrPricingApiServerRegsiterClientBaseUrl=IDNGlobalConst.DEFAULT_PRICING_API_SERVER_REGISTER_CLIENT_URL_UAT
+			String lStrPricingApiServerRegsiterClientEndpointURL=IDNGlobalConst.DEFAULT_PRICING_API_SERVER_REGISTER_CLIENT_ENDPOINT_URL+'/'+lStrPricingApiCallSdkVersion
 			Map lMapURLRequestParameter=[:]
-			Map lMapCallRestAPIHTTPPost=this.mapCallRestAPIHTTPPost(lPricingApiServerRegsiterClientBaseUrl,lPricingApiServerRegsiterClientEndpointURL,lMapURLRequestParameter,lListHTTPRequestHeader,lPricingApiInputRequestBodyContent)
+			Map lMapCallRestAPIHTTPPost=this.mapCallRestAPIHTTPPost(lStrPricingApiServerRegsiterClientBaseUrl,lStrPricingApiServerRegsiterClientEndpointURL,lMapURLRequestParameter,lListHTTPRequestHeader,lPricingApiInputRequestBodyContent)
 			//	IGNUemaHelper.printLog(lMapCallRestAPIHTTPPost.ResponseObjectResponseText)
 			lreturn.putAll(lMapCallRestAPIHTTPPost)
 		}catch(Exception e){
@@ -230,11 +225,12 @@ public class IDNPricingApiRestAPIHelper{
 		}
 		return lreturn
 	}
-	public static Map inputPricingApiMultiPlanPriceCallRequest(String strPricingApiMultiPlanPriceInputRequestBodyContent,String strPricingApiMultiPlanPriceInputRequestUrl,String strRegisterUuid){
+	public static Map inputPricingApiIniServiceCallRequest(String strPricingApiInitServiceInputRequestBodyContent,String strPricingApiInitServiceInputRequestUrl,String strRegisterUuid,String strSessionID){
 		Map lreturn=[:]
-		String lRegisterUuid=strRegisterUuid.trim()
-		String lPricingApiMultiPlanPriceInputRequestBodyContent=strPricingApiMultiPlanPriceInputRequestBodyContent.trim()
-		String lPricingApiMultiPlanPriceInputRequestUrl=strPricingApiMultiPlanPriceInputRequestUrl.trim()
+		String lStrRegisterUuid=strRegisterUuid.trim()
+		String lStrSessionID=strSessionID.trim()
+		String lStrPricingApiInitServiceInputRequestBodyContent=strPricingApiInitServiceInputRequestBodyContent.trim()
+		String lStrPricingApiInitServiceInputRequestUrl=strPricingApiInitServiceInputRequestUrl.trim()
 		try{
 			List<TestObjectProperty> lListHTTPRequestHeader=[]
 			TestObjectProperty lHTTPRequestHeaderItem=null
@@ -242,11 +238,13 @@ public class IDNPricingApiRestAPIHelper{
 			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
 			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType02Key,ConditionType.EQUALS,this.strDefaultRequestHeaderContentType02Value)
 			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
-			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType03Key,ConditionType.EQUALS,lRegisterUuid)
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType03Key,ConditionType.EQUALS,lStrRegisterUuid)
 			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
-			String lPricingApiServerMultiPlanPriceBaseUrl=lPricingApiMultiPlanPriceInputRequestUrl
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType04Key,ConditionType.EQUALS,lStrSessionID)
+			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
+			String lPricingApiServerInitServiceBaseUrl=lStrPricingApiInitServiceInputRequestUrl
 			Map lMapURLRequestParameter=[:]
-			Map lMapCallRestAPIHTTPPost=this.mapCallRestAPIHTTPPost(lPricingApiServerMultiPlanPriceBaseUrl,'',lMapURLRequestParameter,lListHTTPRequestHeader,lPricingApiMultiPlanPriceInputRequestBodyContent)
+			Map lMapCallRestAPIHTTPPost=this.mapCallRestAPIHTTPPost(lPricingApiServerInitServiceBaseUrl,'',lMapURLRequestParameter,lListHTTPRequestHeader,lStrPricingApiInitServiceInputRequestBodyContent)
 			lreturn.putAll(lMapCallRestAPIHTTPPost)
 		}catch(Exception e){
 			e.printStackTrace()
@@ -254,9 +252,39 @@ public class IDNPricingApiRestAPIHelper{
 		}
 		return lreturn
 	}
-	public static Map inputPricingApiGetPlanPriceCallRequest(String strPricingApiGetPlanPriceInputRequestBodyContent,String strPricingApiGetPlanPriceInputRequestUrl,String strRegisterUuid){
+	public static Map inputPricingApiMultiPlanPriceCallRequest(String strPricingApiMultiPlanPriceInputRequestBodyContent,String strPricingApiMultiPlanPriceInputRequestUrl,String strRegisterUuid,String strSessionID){
 		Map lreturn=[:]
-		String lRegisterUuid=strRegisterUuid.trim()
+		String lStrRegisterUuid=strRegisterUuid.trim()
+		String lStrSessionID=strSessionID.trim()
+		String lStrPricingApiMultiPlanPriceInputRequestBodyContent=strPricingApiMultiPlanPriceInputRequestBodyContent.trim()
+		String lStrPricingApiMultiPlanPriceInputRequestUrl=strPricingApiMultiPlanPriceInputRequestUrl.trim()
+		try{
+			List<TestObjectProperty> lListHTTPRequestHeader=[]
+			TestObjectProperty lHTTPRequestHeaderItem=null
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType01Key,ConditionType.EQUALS,this.strDefaultRequestHeaderContentType01Value)
+			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType02Key,ConditionType.EQUALS,this.strDefaultRequestHeaderContentType02Value)
+			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType03Key,ConditionType.EQUALS,lStrRegisterUuid)
+			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType04Key,ConditionType.EQUALS,lStrSessionID)
+			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType05Key,ConditionType.EQUALS,'')
+			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
+			String lPricingApiServerMultiPlanPriceBaseUrl=lStrPricingApiMultiPlanPriceInputRequestUrl
+			Map lMapURLRequestParameter=[:]
+			Map lMapCallRestAPIHTTPPost=this.mapCallRestAPIHTTPPost(lPricingApiServerMultiPlanPriceBaseUrl,'',lMapURLRequestParameter,lListHTTPRequestHeader,lStrPricingApiMultiPlanPriceInputRequestBodyContent)
+			lreturn.putAll(lMapCallRestAPIHTTPPost)
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Map inputPricingApiGetPlanPriceCallRequest(String strPricingApiGetPlanPriceInputRequestBodyContent,String strPricingApiGetPlanPriceInputRequestUrl,String strRegisterUuid,String strSessionID){
+		Map lreturn=[:]
+		String lStrRegisterUuid=strRegisterUuid.trim()
+		String lStrSessionID=strSessionID.trim()
 		String lPricingApiGetPlanPriceInputRequestBodyContent=strPricingApiGetPlanPriceInputRequestBodyContent.trim()
 		String lPricingApiGetPlanPriceInputRequestUrl=strPricingApiGetPlanPriceInputRequestUrl.trim()
 		try{
@@ -266,7 +294,11 @@ public class IDNPricingApiRestAPIHelper{
 			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
 			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType02Key,ConditionType.EQUALS,this.strDefaultRequestHeaderContentType02Value)
 			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
-			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType03Key,ConditionType.EQUALS,lRegisterUuid)
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType03Key,ConditionType.EQUALS,lStrRegisterUuid)
+			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType04Key,ConditionType.EQUALS,lStrSessionID)
+			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType05Key,ConditionType.EQUALS,'')
 			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
 			String lPricingApiServerGetPlanPriceBaseUrl=lPricingApiGetPlanPriceInputRequestUrl
 			Map lMapURLRequestParameter=[:]
@@ -279,9 +311,10 @@ public class IDNPricingApiRestAPIHelper{
 		}
 		return lreturn
 	}
-	public static Map inputPricingApiGetPlanWithInstallmentPriceCallRequest(String strPricingApiGetPlanWithInstallmentPriceInputRequestBodyContent,String strPricingApiGetPlanWithInstallmentPriceInputRequestUrl,String strRegisterUuid){
+	public static Map inputPricingApiGetPlanWithInstallmentPriceCallRequest(String strPricingApiGetPlanWithInstallmentPriceInputRequestBodyContent,String strPricingApiGetPlanWithInstallmentPriceInputRequestUrl,String strRegisterUuid,String strSessionID){
 		Map lreturn=[:]
-		String lRegisterUuid=strRegisterUuid.trim()
+		String lStrRegisterUuid=strRegisterUuid.trim()
+		String lStrSessionID=strSessionID.trim()
 		String lPricingApiGetPlanWithInstallmentPriceInputRequestBodyContent=strPricingApiGetPlanWithInstallmentPriceInputRequestBodyContent.trim()
 		String lPricingApiGetPlanWithInstallmentPriceInputRequestUrl=strPricingApiGetPlanWithInstallmentPriceInputRequestUrl.trim()
 		try{
@@ -291,7 +324,11 @@ public class IDNPricingApiRestAPIHelper{
 			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
 			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType02Key,ConditionType.EQUALS,this.strDefaultRequestHeaderContentType02Value)
 			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
-			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType03Key,ConditionType.EQUALS,lRegisterUuid)
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType03Key,ConditionType.EQUALS,lStrRegisterUuid)
+			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType04Key,ConditionType.EQUALS,lStrSessionID)
+			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
+			lHTTPRequestHeaderItem=new TestObjectProperty(this.strDefaultRequestHeaderContentType05Key,ConditionType.EQUALS,'')
 			lListHTTPRequestHeader.add(lHTTPRequestHeaderItem)
 			String lPricingApiServerGetPlanWithInstallmentPriceBaseUrl=lPricingApiGetPlanWithInstallmentPriceInputRequestUrl
 			Map lMapURLRequestParameter=[:]

@@ -20,303 +20,470 @@ import org.openqa.selenium.*
 import org.roojai.ignite.core.IGNUemaHelper
 import org.roojai.ignite.core.IGNBrowserConfig as IGNBrowserConfig
 import internal.GlobalVariable
+import groovy.json.JsonSlurper
+import groovy.sql.*
 public class IDNPricingApiLibraryGetPriceListMainUtil{
-	private WebDriver driver=null
-	private WebDriver selenium=null
-	public IDNPricingApiLibraryGetPriceListMainUtil(){
-		super()
-	}
-	private WebDriver getDriver(){
-		return this.driver
-	}
-	private void setDriver(WebDriver newDriver){
-		//Do Nothing
-		//this.driver=newDriver
-	}
-	private WebDriver getSelenium(){
-		return this.selenium
-	}
-	private void setSelenium(WebDriver newSelenium){
-		//Do Nothing
-		//this.selenium=newSelenium
-	}
-	public String inputCase(String strTransactionType,Map mapPricingApiLibraryInput,Map mapPricingApiLibraryOutput){
-		String lreturn=''
+	public static WebDriver driver=null
+	public static Boolean inputPricingApiLibraryRequest(WebDriver webDriver,Map mapCaseDataCurrentInput,Map mapCollectedPricingApiDetailResult){
+		Boolean lreturn=false
+		Boolean lResult=false
 		try{
-			IGNUemaHelper.printLog(strTransactionType)
-			if(IGNUemaHelper.checkObjectEmptyOfString(strTransactionType)){
+			if(!webDriver){
 				return lreturn
 			}
-			String lPricingApiTransactionType=strTransactionType.trim()
-			if(IGNUemaHelper.checkObjectEmptyOfMap(mapPricingApiLibraryInput)){
+			if(IGNUemaHelper.checkObjectEmptyOfMap(mapCaseDataCurrentInput)){
 				return lreturn
 			}
-			Map lMapPricingApiLibraryInput=mapPricingApiLibraryInput
-			Map lMapPricingApiLibraryOutput=mapPricingApiLibraryOutput
-			String lPricingApiLibraryUrl=lMapPricingApiLibraryInput.PricingApiLibraryHostUrl
-			if(!GlobalVariable.BrowserInit){
-				GlobalVariable.BrowserInit=IGNBrowserConfig.openBrowser(lPricingApiLibraryUrl,true)
-				IGNUemaHelper.delayThreadSecond(1)
+			Map lMapCaseDataCurrentInput=mapCaseDataCurrentInput
+			if(IGNUemaHelper.checkObjectEmptyOfMap(mapCollectedPricingApiDetailResult)){
+				return lreturn
 			}
-			if(!GlobalVariable.BrowserInit){
-				WebUI.navigateToUrl(lPricingApiLibraryUrl)
-				IGNUemaHelper.delayThreadSecond(2)
+			Map lMapCollectedPricingApiDetailResult=mapCollectedPricingApiDetailResult
+			String lStrPricingApiQuoteRequiredTransactionType=lMapCaseDataCurrentInput.GroupPricingApiShareQuoteAllStage02DoGetPriceListFieldPricingApiQuoteRequiredTransactionType
+			String lStrPricingApiLibraryJsonQuotationInput=lMapCollectedPricingApiDetailResult.StrPricingApiLibraryJsonQuotationInput
+			this.driver=webDriver
+			Boolean lIsOK=true
+			WebElement lElementPricingApiCalculateMultiPlanButton=null
+			String lStrLocatorToCheck1='select#paymentFrequency'
+			Boolean lIsPricingApiLibraryPageLoadedOK=IGNUemaHelper.waitElementVisibleByLocator(driver,lStrLocatorToCheck1,3)
+			if(!lIsPricingApiLibraryPageLoadedOK){
+				lIsPricingApiLibraryPageLoadedOK=IGNUemaHelper.waitElementVisibleByLocator(driver,lStrLocatorToCheck1,5)
 			}
-			if(!GlobalVariable.BrowserInit){
-				WebUI.navigateToUrl(lPricingApiLibraryUrl)
-				IGNUemaHelper.delayThreadSecond(3)
+			if(!lIsPricingApiLibraryPageLoadedOK){
+				lIsPricingApiLibraryPageLoadedOK=IGNUemaHelper.waitElementVisibleByLocator(driver,lStrLocatorToCheck1,7)
 			}
-			if(GlobalVariable.BrowserInit){
-				WebUI.refresh()
-				this.driver=DriverFactory.getWebDriver()
-				this.selenium=this.driver
-				Map lMapPricingApiLibraryRequestResult=this.inputPricingApiLibraryRequest(lPricingApiTransactionType,lMapPricingApiLibraryInput,lMapPricingApiLibraryOutput)
+			if(!lIsPricingApiLibraryPageLoadedOK){
+				lIsPricingApiLibraryPageLoadedOK=IGNUemaHelper.waitElementVisibleByLocator(driver,lStrLocatorToCheck1,10)
+			}
+			if(!lIsPricingApiLibraryPageLoadedOK){
+				lIsPricingApiLibraryPageLoadedOK=IGNUemaHelper.waitElementVisibleByLocator(driver,lStrLocatorToCheck1,12)
+			}
+			WebElement lElementPricingInput=null
+			if(lIsPricingApiLibraryPageLoadedOK){
+				lElementPricingInput=this.getElementRootPricingInput('Pricing Input')
+			}
+			if(!lElementPricingInput){
+				return lreturn
+			}
+			lStrPricingApiLibraryJsonQuotationInput=IGNUemaHelper.typeSetTextByWebElement(this.driver,lElementPricingInput,lStrPricingApiLibraryJsonQuotationInput)
+			if(lStrPricingApiQuoteRequiredTransactionType=='New Biz'){
+				lElementPricingApiCalculateMultiPlanButton=this.getElementPricingApiCalculatePlanPriceButton('Calculate Multiplan')
+			}
+			else{
+				lElementPricingApiCalculateMultiPlanButton=this.getElementPricingApiCalculatePlanPriceButton('Calculate EndtMultiplan')
+			}
+			Boolean lIsPricingApiCalculateMultiPlanButtonClickOK=false
+			if(lElementPricingApiCalculateMultiPlanButton){
+				lIsPricingApiCalculateMultiPlanButtonClickOK=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementPricingApiCalculateMultiPlanButton)
+			}
+			if(!lIsPricingApiCalculateMultiPlanButtonClickOK){
+				lIsPricingApiCalculateMultiPlanButtonClickOK=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementPricingApiCalculateMultiPlanButton)
+			}
+			String lStrLocatorToCheck02='p'
+			Boolean lIsPricingApiVisibleLocatorToCheck02OK=IGNUemaHelper.waitElementVisibleByLocator(driver,lStrLocatorToCheck02,3)
+			if(!lIsPricingApiVisibleLocatorToCheck02OK){
+				lIsPricingApiVisibleLocatorToCheck02OK=IGNUemaHelper.waitElementVisibleByLocator(driver,lStrLocatorToCheck02,4)
+			}
+			if(!lIsPricingApiVisibleLocatorToCheck02OK){
+				lIsPricingApiVisibleLocatorToCheck02OK=IGNUemaHelper.waitElementVisibleByLocator(driver,lStrLocatorToCheck02,8)
+			}
+			if(lIsPricingApiVisibleLocatorToCheck02OK){
+				WebElement lElementPricingApiLibraryTotalPremium=IGNUemaHelper.getWebElementFromCssLocator(this.driver,lStrLocatorToCheck02)
+				if(!lElementPricingApiLibraryTotalPremium){
+					return lreturn
+				}
+				String lStrElementPricingApiLibraryTotalPremiumText=lElementPricingApiLibraryTotalPremium.getText()
+				if(lStrElementPricingApiLibraryTotalPremiumText.contains('Total Premium')){
+					lResult=true
+				}
+			}
+			if(lResult){
+				lreturn=lResult
 			}
 		}catch(Exception e){
 			return lreturn
 		}
 		return lreturn
 	}
-	public Map inputPricingApiLibraryRequest(String strPricingApiTransactionType,Map mapPricingApiLibraryInput,Map mapPricingApiLibraryOutput){
-		Map lreturn=[:]
+	public static Boolean inputPricingApiLibraryCoverAndCoverage(WebDriver webDriver,Map mapCaseDataCurrentInput,Map mapCollectedPricingApiDetailResult,Map mapPricingApiInputOutput){
+		Boolean lreturn=false
 		Boolean lResult=false
-		List lPricingApiLibraryGetPlanPriceAdditionalCoverageNameList=new ArrayList()
-		List lPricingApiLibraryGetPlanPriceAdditionalCoveragePremiumList=new ArrayList()
-		List lPricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremiumList=new ArrayList()
-		String lPricingApiLibraryGetPlanPriceTotalPremium=''
-		String lPricingApiLibraryGetPlanPriceDownPayment=''
-		String lPricingApiLibraryGetPlanPriceInstallmentAmount=''
-		String lPricingApiLibraryGetPlanWithInstallmentPriceTotalPremium=''
-		String lPricingApiLibraryGetPlanWithInstallmentPriceDownPayment=''
-		String lPricingApiLibraryGetPlanWithInstallmentPriceInstallmentAmount=''
-		List lPricingApiLibraryGetPlanWithInstallmentPaymentDetailList=[]
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectEmptyOfMap(mapCaseDataCurrentInput)){
+			return lreturn
+		}
+		Map lMapCaseDataCurrentInput=mapCaseDataCurrentInput
+		if(IGNUemaHelper.checkObjectEmptyOfMap(mapCollectedPricingApiDetailResult)){
+			return lreturn
+		}
+		Map lMapCollectedPricingApiDetailResult=mapCollectedPricingApiDetailResult
+		if(IGNUemaHelper.checkObjectEmptyOfMap(mapPricingApiInputOutput)){
+			return lreturn
+		}
+		Map lMapPricingApiInputOutput=mapPricingApiInputOutput
 		try{
-			lreturn.put('PricingApiLibraryGetPlanPriceAdditionalCoverageNameList',lPricingApiLibraryGetPlanPriceAdditionalCoverageNameList)
-			lreturn.put('PricingApiLibraryGetPlanPriceAdditionalCoveragePremiumList',lPricingApiLibraryGetPlanPriceAdditionalCoveragePremiumList)
-			lreturn.put('PricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremiumList',lPricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremiumList)
-			lreturn.put('Result',lResult)
-			if(IGNUemaHelper.checkObjectEmptyOfMap(mapPricingApiLibraryInput)){
-				return lreturn
+			Boolean lIsOK=true
+			List<GroovyRowResult> lListPricingApiDependencyCoverageMappingResultSet=[]
+			String lStrPricingApiQuoteRequiredProductType=lMapCollectedPricingApiDetailResult.StrPricingApiRequestProductTypeName
+			List lListCollectedPricingApiCover=lMapCollectedPricingApiDetailResult.ListCollectedPricingApiCover
+			List lListCollectedPricingApiCoverageName=lMapCollectedPricingApiDetailResult.ListCollectedPricingApiCoverageName
+			List lListCollectedPricingApiCoverageSA=lMapCollectedPricingApiDetailResult.ListCollectedPricingApiCoverageSA
+			List lListCollectedPricingApiPlanOption=lMapCollectedPricingApiDetailResult.ListCollectedPricingApiPlanOption
+			String lStrPricingApiMultiPlanPricingApiResponse=mapPricingApiInputOutput.MultiplePlanPriceResponseText
+			Map lMapPricingApiMultiPlanPriceResponse=new JsonSlurper().parseText(lStrPricingApiMultiPlanPricingApiResponse)
+			String lStrPricingModelVersion=lMapPricingApiMultiPlanPriceResponse.root.Quote.Pricing_Model_Version
+			Boolean lIsPricingApiLibraryInputPlanOptionOK=false
+			if(lStrPricingApiQuoteRequiredProductType.contains('Motor')){
+				lIsPricingApiLibraryInputPlanOptionOK=this.inputPricingApiLibraryPlanOptionA(lMapCollectedPricingApiDetailResult)
 			}
-			Map lMapPricingApiLibraryInput=mapPricingApiLibraryInput
-			Map lMapPricingApiLibraryOutput=mapPricingApiLibraryOutput
-			String lPricingApiMultiPlanRequest=lMapPricingApiLibraryInput.PricingApiLibraryMultiPlanRequest
-			String lPaymentFrequency=lMapPricingApiLibraryInput.PolicyPaymentFrequency
-			List lCoverageNameList=lMapPricingApiLibraryInput.PricingApiLibrarySelectedCoverageNameList
-			List lCoverageSequenceList=lMapPricingApiLibraryInput.PricingApiLibrarySelectedCoverageSequenceList
-			List lCoverageSAList=lMapPricingApiLibraryInput.PricingApiLibrarySelectedCoverageSAList
-			List lCoverList=lMapPricingApiLibraryInput.PricingApiLibraryCoverList
-			Map lMapPlanOption=lMapPricingApiLibraryInput.PricingApiLibraryPlanOption
-			if(IGNUemaHelper.checkObjectEmptyOfString(lPricingApiMultiPlanRequest)){
-				return lreturn
+			else{
+				lIsPricingApiLibraryInputPlanOptionOK=this.inputPricingApiLibraryPlanOptionB(lMapCollectedPricingApiDetailResult,lMapPricingApiInputOutput)
 			}
-			if(IGNUemaHelper.checkObjectEmptyOfString(lPaymentFrequency)){
-				return lreturn
-			}
-			if(IGNUemaHelper.checkObjectEmptyOfList(lCoverageNameList)){
-				return lreturn
-			}
-			if(IGNUemaHelper.checkObjectEmptyOfList(lCoverageSAList)){
-				return lreturn
-			}
-			if(IGNUemaHelper.checkObjectEmptyOfList(lCoverList)){
-				return lreturn
-			}
-			if(IGNUemaHelper.checkObjectEmptyOfMap(lMapPlanOption)){
-				return lreturn
-			}
-			if(IGNUemaHelper.checkObjectEmptyOfString(strPricingApiTransactionType)){
-				return lreturn
-			}
-			String lPricingApiTransactionType=strPricingApiTransactionType.trim()
-			WebElement lElementPricingInput=this.getPricingInputElement('Pricing Input')
-			if(lElementPricingInput){
-				lPricingApiMultiPlanRequest=IGNUemaHelper.typeSetTextByWebElement(this.driver,lElementPricingInput,lPricingApiMultiPlanRequest)
-				String lLocatorCalculateMultiPlanButton=''
-				IGNUemaHelper.printLog('StartButtonAction')
-				WebElement lElementCalculateMultiPlan=null
-				if(lPricingApiTransactionType=='New Biz'){
-					lElementCalculateMultiPlan=this.getCalculatePlanPriceButtonElement('Calculate Multiplan')
-				}
-				else{
-					lElementCalculateMultiPlan=this.getCalculatePlanPriceButtonElement('Calculate EndtMultiplan')
-				}
-				if(lElementCalculateMultiPlan){
-					IGNUemaHelper.printLog('Element found')
-					Boolean lIsCalculateMultiPlanButtonClicked=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementCalculateMultiPlan)
-					IGNUemaHelper.printLog(lIsCalculateMultiPlanButtonClicked)
-					IGNUemaHelper.printLog('lIsCalculateMultiPlanButtonClicked')
-					if(!lIsCalculateMultiPlanButtonClicked){
-						lIsCalculateMultiPlanButtonClicked=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementCalculateMultiPlan)
-					}
-					if(!lIsCalculateMultiPlanButtonClicked){
-						lIsCalculateMultiPlanButtonClicked=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementCalculateMultiPlan)
-					}
-					if(lIsCalculateMultiPlanButtonClicked){
-						IGNUemaHelper.printLog(lCoverList)
-						for(Integer lCoverIndex=0;lCoverIndex<=lCoverList.size()-1;lCoverIndex++){
-							String lCoverName=lCoverList.get(lCoverIndex)
-							Boolean lIsPlanOptionEnteredOK=this.inputPlanOption(lMapPlanOption,lCoverName)
-							if(!lIsPlanOptionEnteredOK){
-								return lreturn
-							}
-							Boolean lIsPaymentFrequencyEnteredOK=this.inputPaymentFrequency(lPaymentFrequency)
-							if(!lIsPaymentFrequencyEnteredOK){
-								return lreturn
-							}
-							if(lCoverageNameList.size()>0){
-								String lLocatorCoverage=''
-								lLocatorCoverage='input[type="checkbox"]'
-								List<WebElement>  lElementCoverageList=null
-								if(IGNUemaHelper.checkElementPresentByLocator(this.driver,lLocatorCoverage,15)){
-									IGNUemaHelper.printLog('Found')
-									lElementCoverageList=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorCoverage)
-									for(Integer lIndex=0;lIndex<=lCoverageNameList.size()-1;lIndex++){
-										List lSelectedCoverageNameList=lCoverageNameList.getAt(lIndex)
-										List lSelectedCoverageSequenceList=lCoverageSequenceList.getAt(lIndex)
-										List lSelectedCoverageSAList=lCoverageSAList.get(lIndex)
-										for(Integer lCoverageIndex=0;lCoverageIndex<=lSelectedCoverageNameList.size()-1;lCoverageIndex++){
-											WebElement lTargetElementCoverage=null
-											IGNUemaHelper.printLog('Get Coverage name SA List Inside Library')
-											IGNUemaHelper.printLog(lSelectedCoverageNameList.get(lCoverageIndex))
-											IGNUemaHelper.printLog(lSelectedCoverageSequenceList.get(lCoverageIndex))
-											String lCoverageName=lSelectedCoverageNameList.get(lCoverageIndex)
-											if(lElementCoverageList.size()>0){
-												for(Integer lWebIndex=0;lWebIndex<=lElementCoverageList.size()-1;lWebIndex++){
-													WebElement lElementCoverage=lElementCoverageList.get(lWebIndex)
-													WebElement lFirstParentElementCoverage=IGNUemaHelper.getParentElementOfWebElement(this.driver,lElementCoverage)
-													WebElement lSecondParentElementCoverage=IGNUemaHelper.getParentElementOfWebElement(this.driver,lFirstParentElementCoverage)
-													WebElement lChildOfSecondParentElementCoverage=IGNUemaHelper.getChildWebElementOfWebElement(this.driver,lSecondParentElementCoverage,'td',true)
-													IGNUemaHelper.printLog('CoverageElement found')
-													IGNUemaHelper.printLog(lSecondParentElementCoverage.getText())
-													String lChildCoverageSequence=lChildOfSecondParentElementCoverage.getText()
-													IGNUemaHelper.printLog(lChildCoverageSequence)
-													if(lCoverageName.contains(lChildCoverageSequence)){
-														IGNUemaHelper.printLog('Matching Coverage')
-														IGNUemaHelper.printLog(lChildCoverageSequence)
-														IGNUemaHelper.printLog(lCoverageName)
-														lTargetElementCoverage=lElementCoverage
-													}
-												}
-											}
-											if(!IGNUemaHelper.checkObjectNullOfObject(lTargetElementCoverage)){
-												IGNUemaHelper.clickByWebElementWithScroll(this.driver,lTargetElementCoverage)
-											}
-											else{
-												IGNUemaHelper.printLog('Non Matching Coverage')
-												IGNUemaHelper.printLog(lCoverageName)
-												String lCoverageSequence=lSelectedCoverageSequenceList.get(lCoverageIndex)
-												String lCoverageSA=lSelectedCoverageSAList.get(lCoverageIndex)
-												lLocatorCoverage='select[name='+lCoverageSequence+']'
-												lTargetElementCoverage=IGNUemaHelper.getWebElementFromCssLocator(this.driver,lLocatorCoverage)
-												if(lTargetElementCoverage){
-													IGNUemaHelper.printLog('Non Matching Coverage-Drop Down')
-													String lSelectedOptionValue=IGNUemaHelper.selectOptionSelectByWebElementV1(this.driver,lTargetElementCoverage,lCoverageSA,false,false)
-												}
-											}
-										}
-									}
-								}
-							}
+			Boolean lIsInputPricingApiLibraryCoverageOK=false
+			for(Integer lIndex=0;lIndex<=lListCollectedPricingApiCover.size()-1;lIndex++){
+				String lStrCoverName=lListCollectedPricingApiCover.get(lIndex)
+				List lListCurrentPricingApiCoverageName=lListCollectedPricingApiCoverageName.get(lIndex)
+				IGNUemaHelper.printLog(lListCurrentPricingApiCoverageName)
+				IGNUemaHelper.printLog('lListCurrentPricingApiCoverageName')
+				List lListCurrentPricingApiCoverageSA=lListCollectedPricingApiCoverageSA.get(lIndex)
+				if(lListCurrentPricingApiCoverageName.size()>0){
+					for(Integer lCoverageIndex=0;lCoverageIndex<=lListCurrentPricingApiCoverageName.size()-1;lCoverageIndex++){
+						String lStrCoverageName=lListCurrentPricingApiCoverageName.get(lCoverageIndex)
+						String lStrCoverageSA=lListCurrentPricingApiCoverageSA.get(lCoverageIndex)
+						Map lMapPricingApiCoverageDependencyResult=IDNPricingApiHelper.getDependencyTable(lStrPricingModelVersion,lStrPricingApiQuoteRequiredProductType,lStrCoverageName)
+						if(!lMapPricingApiCoverageDependencyResult.Result){
+							return lreturn
 						}
-						WebElement lElementCalculateGetPlanPriceButton=null
-						if(lPricingApiTransactionType=='New Biz'){
-							lElementCalculateGetPlanPriceButton=this.getCalculatePlanPriceButtonElement('Calculate GetPlanPrice')
+						lListPricingApiDependencyCoverageMappingResultSet=lMapPricingApiCoverageDependencyResult.DependencyCodeMappingResultSet
+						if(lListPricingApiDependencyCoverageMappingResultSet.size()==0){
+							return lreturn
+						}
+						String lStrPricingApiCoverageOptionSequence=lListPricingApiDependencyCoverageMappingResultSet.get(0).option_name
+						String lStrPricingApiCoverageSelectionDependentCode=lListPricingApiDependencyCoverageMappingResultSet.get(0).selection_dependent_code
+						if(IGNUemaHelper.checkObjectEmptyOfString(lStrPricingApiCoverageSelectionDependentCode)){
+							if(lStrPricingApiCoverageOptionSequence.contains('SumAssured')){
+								lIsInputPricingApiLibraryCoverageOK=this.inputPricingApiLibraryAdditionalCoverageBySelectButton(lStrPricingApiCoverageOptionSequence,lStrCoverageName,lStrCoverageSA)
+							}else{
+								lIsInputPricingApiLibraryCoverageOK=this.inputPricingApiLibraryAdditionalCoverageByCheckBoxButton(lStrCoverageName)
+							}
+						}else{
+							lIsInputPricingApiLibraryCoverageOK=this.inputPricingApiLibraryAdditionalCoverageByCheckBoxButton(lStrCoverageName)
+						}
+						if(!lIsInputPricingApiLibraryCoverageOK){
+							lIsOK=false
+						}
+					}
+				}
+			}
+			lResult=lIsOK
+			if(lResult){
+				lreturn=lResult
+			}
+		}catch(Exception e){
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Boolean inputPricingApiLibraryAdditionalCoverageBySelectButton(String strPricingApiAdditionalCoverageOptionName,String strPricingApiCoverageName,String strPricingApiCoverageSA){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(IGNUemaHelper.checkObjectNullOfObject(strPricingApiAdditionalCoverageOptionName)){
+			return lreturn
+		}
+		String lStrPricingApiAdditionalCoverageOptionName=strPricingApiAdditionalCoverageOptionName.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrPricingApiAdditionalCoverageOptionName)){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(strPricingApiCoverageName)){
+			return lreturn
+		}
+		String lStrPricingApiCoverageName=strPricingApiCoverageName.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrPricingApiCoverageName)){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(strPricingApiCoverageSA)){
+			return lreturn
+		}
+		String lStrPricingApiCoverageSA=strPricingApiCoverageSA.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrPricingApiCoverageSA)){
+			return lreturn
+		}
+		try{
+			String lStrPricingApiPlanOptionValue=''
+			String lLocatorPricingApiPlanOptionButton='select[name='+lStrPricingApiAdditionalCoverageOptionName+']'
+			WebElement lElementPricingApiLibrarySelectedPlanOptionButton=null
+			if(IGNUemaHelper.checkElementPresentByLocator(this.driver,lLocatorPricingApiPlanOptionButton,3)){
+				lElementPricingApiLibrarySelectedPlanOptionButton=IGNUemaHelper.getWebElementFromCssLocator(this.driver,lLocatorPricingApiPlanOptionButton)
+				if(lElementPricingApiLibrarySelectedPlanOptionButton){
+					IGNUemaHelper.printLog('Coverage Select'+lStrPricingApiCoverageSA+' '+lStrPricingApiCoverageName)
+					IGNUemaHelper.webJsScrollToElement(this.driver,lElementPricingApiLibrarySelectedPlanOptionButton)
+					lStrPricingApiPlanOptionValue=IGNUemaHelper.selectOptionSelectByWebElementV1(this.driver,lElementPricingApiLibrarySelectedPlanOptionButton,lStrPricingApiCoverageSA,false,false)
+					IGNUemaHelper.printLog('Library Select Coverage'+lStrPricingApiPlanOptionValue)
+				}
+			}
+			lResult=lStrPricingApiPlanOptionValue.length()>0
+			if(lResult){
+				lreturn=lResult
+			}
+		}catch(Exception e){
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Boolean inputPricingApiLibraryAdditionalCoverageByCheckBoxButton(String strPricingApiAdditionalCoverageName){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(IGNUemaHelper.checkObjectNullOfObject(strPricingApiAdditionalCoverageName)){
+			return lreturn
+		}
+		String lStrPricingApiAdditionalCoverageName=strPricingApiAdditionalCoverageName.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrPricingApiAdditionalCoverageName)){
+			return lreturn
+		}
+		try{
+			WebElement lElementTargetAdditionalCoverage=null
+			Boolean lIsPricingApiCoverageCheckBoxButtonClickedOK=false
+			String lLocatorPricingApiCoverage='input[type="checkbox"]'
+			List<WebElement> lListElementPricingApiCoverage=null
+			if(IGNUemaHelper.checkElementPresentByLocator(this.driver,lLocatorPricingApiCoverage,15)){
+				IGNUemaHelper.printLog('Found')
+				lListElementPricingApiCoverage=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorPricingApiCoverage)
+				if(lListElementPricingApiCoverage.size()>0){
+					for(Integer lWebIndex=0;lWebIndex<=lListElementPricingApiCoverage.size()-1;lWebIndex++){
+						WebElement lElementPricingApiCoverage=lListElementPricingApiCoverage.get(lWebIndex)
+						WebElement lElementSearchInput01InputLevel01PricingApiCoverageParent01=IGNUemaHelper.getParentElementOfWebElement(this.driver,lElementPricingApiCoverage)
+						WebElement lElementSearchInput01InputLevel01PricingApiCoverageParent02=IGNUemaHelper.getParentElementOfWebElement(this.driver,lElementSearchInput01InputLevel01PricingApiCoverageParent01)
+						WebElement lElementSearchInput01InputLevel01PricingApiCoverageChild01=IGNUemaHelper.getChildWebElementOfWebElement(this.driver,lElementSearchInput01InputLevel01PricingApiCoverageParent02,'td',true)
+						String lStrPricingApiCoverageNameText=lElementSearchInput01InputLevel01PricingApiCoverageChild01.getText()
+						if(lStrPricingApiCoverageNameText==lStrPricingApiAdditionalCoverageName){
+							IGNUemaHelper.webJsScrollToElement(this.driver,lElementPricingApiCoverage)
+							lIsPricingApiCoverageCheckBoxButtonClickedOK=IGNUemaHelper.clickByWebElementNoScroll(this.driver,lElementPricingApiCoverage)
+						}
+					}
+				}
+			}
+			lResult=lIsPricingApiCoverageCheckBoxButtonClickedOK
+			if(lResult){
+				lreturn=lResult
+			}
+		}catch(Exception e){
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Boolean inputPricingApiLibraryPlanOptionA(Map mapCollectedPricingApiDetailResult){
+		Boolean lreturn=false
+		Boolean lResult=true
+		if(IGNUemaHelper.checkObjectEmptyOfMap(mapCollectedPricingApiDetailResult)){
+			return lreturn
+		}
+		try{
+			Map lMapCollectedPricingApiDetailResult=mapCollectedPricingApiDetailResult
+			List lListCollectedPricingApiCover=lMapCollectedPricingApiDetailResult.ListCollectedPricingApiCover
+			List lListCollectedPricingApiPlanOption=lMapCollectedPricingApiDetailResult.ListCollectedPricingApiPlanOption
+			for(Integer lIndex=0;lIndex<=lListCollectedPricingApiCover.size()-1;lIndex++){
+				String lStrCoverName=lListCollectedPricingApiCover.get(lIndex)
+				Map lMapPricingApiPlanOption=lListCollectedPricingApiPlanOption.get(lIndex)
+				for(Map.Entry lEntry in lMapPricingApiPlanOption){
+					String lStrPricingApiLibrarySelectedPlanName=lEntry.key.toString()
+					String lStrPricingApiLibrarySelectedOptionValue=lEntry.value.toString()
+					lStrPricingApiLibrarySelectedPlanName=lStrCoverName+lStrPricingApiLibrarySelectedPlanName
+					String lLocatorPricingApiPlanOptionButton='select[name='+lStrPricingApiLibrarySelectedPlanName+']'
+					WebElement lElementPricingApiLibrarySelectedPlanOptionButton=null
+					if(IGNUemaHelper.checkElementPresentByLocator(this.driver,lLocatorPricingApiPlanOptionButton,3)){
+						lElementPricingApiLibrarySelectedPlanOptionButton=IGNUemaHelper.getWebElementFromCssLocator(this.driver,lLocatorPricingApiPlanOptionButton)
+						if(lElementPricingApiLibrarySelectedPlanOptionButton){
+							lStrPricingApiLibrarySelectedOptionValue=IGNUemaHelper.selectOptionSelectByWebElementV1(this.driver,lElementPricingApiLibrarySelectedPlanOptionButton,lStrPricingApiLibrarySelectedOptionValue,true,false)
 						}
 						else{
-							lElementCalculateGetPlanPriceButton=this.getCalculatePlanPriceButtonElement('Calculate EndtMultiplan')
-						}
-						if(lElementCalculateGetPlanPriceButton){
-							IGNUemaHelper.printLog('Element found')
-							Boolean lIsCalculateGetPlanPriceButtonClicked=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementCalculateGetPlanPriceButton)
-							if(lIsCalculateGetPlanPriceButtonClicked){
-								Map lMapPricingApiGetPlanPriceTotalPremiumResult=this.getTotalPremium()
-								if(lMapPricingApiGetPlanPriceTotalPremiumResult.Result){
-									lPricingApiLibraryGetPlanPriceTotalPremium=lMapPricingApiGetPlanPriceTotalPremiumResult.TotalPremium
-									lPricingApiLibraryGetPlanPriceDownPayment=lMapPricingApiGetPlanPriceTotalPremiumResult.TotalDownPayment
-									lPricingApiLibraryGetPlanPriceInstallmentAmount=lMapPricingApiGetPlanPriceTotalPremiumResult.InstallmentAmount
-									IGNUemaHelper.printLog('lPricingApiLibraryGetPlanPriceTotalPremium')
-									IGNUemaHelper.printLog(lPricingApiLibraryGetPlanPriceTotalPremium)
-								}
-								else{
-									return lreturn
-								}
-								if(lCoverageNameList.size()>0){
-									for(Integer lIndex=0;lIndex<=lCoverageNameList.size()-1;lIndex++){
-										List lSelectedCoverageNameList=lCoverageNameList.getAt(lIndex)
-										Map lMapGetPlanPriceAdditionalCoveragePremiumResult=this.getTotalAdditionalCoveragePremium(lSelectedCoverageNameList)
-										if(lMapGetPlanPriceAdditionalCoveragePremiumResult.Result){
-											List lGetPlanPriceAdditionalCoveragePremiumList=lMapGetPlanPriceAdditionalCoveragePremiumResult.AdditionalCoveragePremiumList
-											lPricingApiLibraryGetPlanPriceAdditionalCoveragePremiumList.add(lGetPlanPriceAdditionalCoveragePremiumList)
-											List lGetPlanPriceAdditionalCoverageNameList=lMapGetPlanPriceAdditionalCoveragePremiumResult.AdditionalCoverageNameList
-											lPricingApiLibraryGetPlanPriceAdditionalCoverageNameList.add(lGetPlanPriceAdditionalCoverageNameList)
-										}
-									}
-									WebElement lElementCalculateGetPlanWithInstallmentPriceButton=null
-									if(lPricingApiTransactionType=='New Biz'){
-										lElementCalculateGetPlanWithInstallmentPriceButton=this.getCalculatePlanPriceButtonElement('Calculate GetPlanPriceInst')
-									}
-									else{
-										lElementCalculateGetPlanWithInstallmentPriceButton=this.getCalculatePlanPriceButtonElement('Calculate EndtPlanPriceInst')
-									}
-									Boolean lIsCalculateGetPlanPriceWithInstallmentButtonClickedOK=false
-									if(lElementCalculateGetPlanWithInstallmentPriceButton){
-										IGNUemaHelper.printLog('lElementCalculateGetPlanWithInstallment found')
-										lIsCalculateGetPlanPriceWithInstallmentButtonClickedOK=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementCalculateGetPlanWithInstallmentPriceButton)
-									}
-									if(lIsCalculateGetPlanPriceWithInstallmentButtonClickedOK){
-										Map lMapPricingApiGetPlanWithInstallmentPriceTotalPremiumResult=this.getTotalPremium()
-										if(lMapPricingApiGetPlanWithInstallmentPriceTotalPremiumResult.Result){
-											lPricingApiLibraryGetPlanWithInstallmentPriceTotalPremium=lMapPricingApiGetPlanWithInstallmentPriceTotalPremiumResult.TotalPremium
-											lPricingApiLibraryGetPlanWithInstallmentPriceDownPayment=lMapPricingApiGetPlanWithInstallmentPriceTotalPremiumResult.TotalDownPayment
-											lPricingApiLibraryGetPlanWithInstallmentPriceInstallmentAmount=lMapPricingApiGetPlanWithInstallmentPriceTotalPremiumResult.InstallmentAmount
-										}
-										else{
-											return lreturn
-										}
-										for(Integer lIndex=0;lIndex<=lCoverageNameList.size()-1;lIndex++){
-											List lSelectedCoverageNameList=lCoverageNameList.getAt(lIndex)
-											Map lMapGetPlanWithInstallmentPriceAdditionalCoveragePremiumResult=this.getTotalAdditionalCoveragePremium(lSelectedCoverageNameList)
-											if(lMapGetPlanWithInstallmentPriceAdditionalCoveragePremiumResult.Result){
-												List lGetPlanWithInstallmentPriceAdditionalCoveragePremiumList=lMapGetPlanWithInstallmentPriceAdditionalCoveragePremiumResult.AdditionalCoveragePremiumList
-												lPricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremiumList.add(lGetPlanWithInstallmentPriceAdditionalCoveragePremiumList)
-											}
-										}
-										Map lMapGetPlanWithInstallmentPaymentDetailResult=this.getPaymentDetail()
-										if(lMapGetPlanWithInstallmentPaymentDetailResult.Result){
-											lPricingApiLibraryGetPlanWithInstallmentPaymentDetailList=lMapGetPlanWithInstallmentPaymentDetailResult.PricingApiLibraryPaymentDetail
-										}
-									}
-								}
-							}
+							lResult=false
 						}
 					}
 				}
-			}
-			lMapPricingApiLibraryOutput.PricingApiLibraryGetPlanPriceTotalPremium=lPricingApiLibraryGetPlanPriceTotalPremium
-			lMapPricingApiLibraryOutput.PricingApiLibraryGetPlanPriceDownPayment=lPricingApiLibraryGetPlanPriceDownPayment
-			lMapPricingApiLibraryOutput.PricingApiLibraryGetPlanPriceInstallmentAmount=lPricingApiLibraryGetPlanPriceInstallmentAmount
-			lMapPricingApiLibraryOutput.PricingApiLibraryGetPlanWithInstallmentPriceTotalPremium=lPricingApiLibraryGetPlanWithInstallmentPriceTotalPremium
-			lMapPricingApiLibraryOutput.PricingApiLibraryGetPlanWithInstallmentPriceDownPayment=lPricingApiLibraryGetPlanWithInstallmentPriceDownPayment
-			lMapPricingApiLibraryOutput.PricingApiLibraryGetPlanWithInstallmentPriceInstallmentAmount=lPricingApiLibraryGetPlanWithInstallmentPriceInstallmentAmount
-			lMapPricingApiLibraryOutput.PricingApiLibraryGetPlanPriceAdditionalCoverageNameList=lPricingApiLibraryGetPlanPriceAdditionalCoverageNameList
-			lMapPricingApiLibraryOutput.PricingApiLibraryGetPlanPriceAdditionalCoveragePremiumList=lPricingApiLibraryGetPlanPriceAdditionalCoveragePremiumList
-			lMapPricingApiLibraryOutput.PricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremiumList=lPricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremiumList
-			lMapPricingApiLibraryOutput.PricingApiLibraryGetPlanPriceWithInstallmentPaymentDetailList=lPricingApiLibraryGetPlanWithInstallmentPaymentDetailList
-			IGNUemaHelper.printLog('PricingApiLibrary-TestResult')
-			IGNUemaHelper.printLog(lMapPricingApiLibraryOutput)
-			if(lResult){
-				lreturn.put('PricingApiLibraryGetPlanPriceAdditionalCoverageNameList',lPricingApiLibraryGetPlanPriceAdditionalCoverageNameList)
-				lreturn.put('PricingApiLibraryGetPlanPriceAdditionalCoveragePremiumList',lPricingApiLibraryGetPlanPriceAdditionalCoveragePremiumList)
-				lreturn.put('PricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremiumList',lPricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremiumList)
-				lreturn.put('Result',lResult)
 			}
 		}catch(Exception e){
 			return lreturn
 		}
 		return lreturn
 	}
-	public WebElement getCalculatePlanPriceButtonElement(String strLocatorPlanPriceButtonName){
+	public static Boolean inputPricingApiLibraryPlanOptionB(Map mapCollectedPricingApiDetailResult,Map mapPricingApiInputOutput){
+		Boolean lreturn=false
+		if(IGNUemaHelper.checkObjectEmptyOfMap(mapCollectedPricingApiDetailResult)){
+			return lreturn
+		}
+		Map lMapCollectedPricingApiDetailResult=mapCollectedPricingApiDetailResult
+		if(IGNUemaHelper.checkObjectEmptyOfMap(mapPricingApiInputOutput)){
+			return lreturn
+		}
+		Map lMapPricingApiInputOutput=mapPricingApiInputOutput
+		try{
+			String lStrPricingApiMultiPlanPricingApiResponse=mapPricingApiInputOutput.MultiplePlanPriceResponseText
+			Map lMapPricingApiMultiPlanPriceResponse=new JsonSlurper().parseText(lStrPricingApiMultiPlanPricingApiResponse)
+			String lStrPolicyProductVersion=lMapPricingApiMultiPlanPriceResponse.root.Quote.Policy_Product_Version
+			List lListCollectedPricingApiCover=lMapCollectedPricingApiDetailResult.ListCollectedPricingApiCover
+			List lListCollectedPricingApiPlanOption=lMapCollectedPricingApiDetailResult.ListCollectedPricingApiPlanOption
+			for(Integer lIndex=0;lIndex<=lListCollectedPricingApiCover.size()-1;lIndex++){
+				String lStrCoverName=lListCollectedPricingApiCover.get(lIndex)
+				Map lMapPricingApiPlanOption=lListCollectedPricingApiPlanOption.get(lIndex)
+				for(Map.Entry lEntry in lMapPricingApiPlanOption){
+					String lStrPricingApiLibrarySelectedPlanName=lEntry.key.toString()
+					String lStrPricingApiLibrarySelectedOptionValue=lEntry.value.toString()
+					lStrPricingApiLibrarySelectedPlanName=lStrCoverName+lStrPricingApiLibrarySelectedPlanName
+					String lLocatorPricingApiPlanOptionButton='select[name='+lStrPricingApiLibrarySelectedPlanName+']'
+					WebElement lElementPricingApiLibrarySelectedPlanOptionButton=null
+					if(IGNUemaHelper.checkElementPresentByLocator(this.driver,lLocatorPricingApiPlanOptionButton,3)){
+						lElementPricingApiLibrarySelectedPlanOptionButton=IGNUemaHelper.getWebElementFromCssLocator(this.driver,lLocatorPricingApiPlanOptionButton)
+						if(lElementPricingApiLibrarySelectedPlanOptionButton){
+							IGNUemaHelper.webJsScrollToElement(this.driver,lElementPricingApiLibrarySelectedPlanOptionButton)
+							lStrPricingApiLibrarySelectedOptionValue=IGNUemaHelper.selectOptionSelectByWebElementV1(this.driver,lElementPricingApiLibrarySelectedPlanOptionButton,lStrPricingApiLibrarySelectedOptionValue,false,false)
+						}
+					}
+				}
+			}
+		}catch(Exception e){
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Map getPricingApiLibraryGetPlanPricePremiumResult(WebDriver webDriver,Map mapCaseDataCurrentInput,Map mapCollectedPricingApiDetailResult,Map mapPricingApiInputOutput){
+		Map lreturn=[:]
+		Boolean lResult=false
+		String lStrPricingApiLibraryGetPlanPriceTotalPremium=''
+		String lStrPricingApiLibraryGetPlanPriceDownPayment=''
+		String lStrPricingApiLibraryGetPlanPriceInstallmentAmount=''
+		List lListPricingApiLibraryGetPlanPriceAdditionalCoveragePremium=new ArrayList()
+		String lStrPricingApiLibraryGetPlanPriceWithInstallmentTotalPremium=''
+		String lStrPricingApiLibraryGetPlanPriceWithInstallmentDownPayment=''
+		String lStrPricingApiLibraryGetPlanPriceWithInstallmentInstallmentAmount=''
+		List lListPricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremium=new ArrayList()
+		List lListPricingApiLibraryGetPlanPriceWithInstallmentPaymentDetail=new ArrayList()
+		try{
+			lreturn.put('StrPricingApiLibraryGetPlanPriceTotalPremium',lStrPricingApiLibraryGetPlanPriceTotalPremium)
+			lreturn.put('StrPricingApiLibraryGetPlanPriceDownPayment',lStrPricingApiLibraryGetPlanPriceDownPayment)
+			lreturn.put('StrPricingApiLibraryGetPlanPriceInstallmentAmount',lStrPricingApiLibraryGetPlanPriceInstallmentAmount)
+			lreturn.put('ListPricingApiLibraryGetPlanPriceAdditionalCoveragePremium',lListPricingApiLibraryGetPlanPriceAdditionalCoveragePremium)
+			lreturn.put('ListPricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremium',lListPricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremium)
+			lreturn.put('StrPricingApiLibraryGetPlanPriceWithInstallmentTotalPremium',lStrPricingApiLibraryGetPlanPriceWithInstallmentTotalPremium)
+			lreturn.put('StrPricingApiLibraryGetPlanPriceWithInstallmentDownPayment',lStrPricingApiLibraryGetPlanPriceWithInstallmentDownPayment)
+			lreturn.put('StrPricingApiLibraryGetPlanPriceWithInstallmentInstallmentAmount',lStrPricingApiLibraryGetPlanPriceWithInstallmentInstallmentAmount)
+			lreturn.put('ListPricingApiLibraryGetPlanPriceWithInstallmentPaymentDetail',lListPricingApiLibraryGetPlanPriceWithInstallmentPaymentDetail)
+			if(!webDriver){
+				return lreturn
+			}
+			if(IGNUemaHelper.checkObjectEmptyOfMap(mapCaseDataCurrentInput)){
+				return lreturn
+			}
+			Map lMapCaseDataCurrentInput=mapCaseDataCurrentInput
+			if(IGNUemaHelper.checkObjectEmptyOfMap(mapCollectedPricingApiDetailResult)){
+				return lreturn
+			}
+			Map lMapCollectedPricingApiDetailResult=mapCollectedPricingApiDetailResult
+			if(IGNUemaHelper.checkObjectEmptyOfMap(mapPricingApiInputOutput)){
+				return lreturn
+			}
+			Map lMapPricingApiInputOutput=mapPricingApiInputOutput
+			List lListCollectedPricingApiCover=lMapCollectedPricingApiDetailResult.ListCollectedPricingApiCover
+			List lListCollectedPricingApiCoverageName=lMapCollectedPricingApiDetailResult.ListCollectedPricingApiCoverageName
+			String lStrPricingApiQuoteRequiredTransactionType=lMapCaseDataCurrentInput.GroupPricingApiShareQuoteAllStage02DoGetPriceListFieldPricingApiQuoteRequiredTransactionType
+			WebElement lElementPricingApiCalculateGetPlanPriceButton=null
+			if(lStrPricingApiQuoteRequiredTransactionType=='New Biz'){
+				lElementPricingApiCalculateGetPlanPriceButton=this.getElementPricingApiCalculatePlanPriceButton('Calculate GetPlanPrice')
+			}
+			else{
+				lElementPricingApiCalculateGetPlanPriceButton=this.getElementPricingApiCalculatePlanPriceButton('Calculate EndtMultiplan')
+			}
+			Boolean lIsPricingApiCalculateGetPlanPriceButtonClickOK=false
+			if(lElementPricingApiCalculateGetPlanPriceButton){
+				lIsPricingApiCalculateGetPlanPriceButtonClickOK=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementPricingApiCalculateGetPlanPriceButton)
+			}
+			if(!lIsPricingApiCalculateGetPlanPriceButtonClickOK){
+				lIsPricingApiCalculateGetPlanPriceButtonClickOK=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementPricingApiCalculateGetPlanPriceButton)
+			}
+			Boolean lIsPricingApiLibraryPremiumLoadedOK=false
+			if(!lIsPricingApiLibraryPremiumLoadedOK){
+				lIsPricingApiLibraryPremiumLoadedOK=this.waitUntilPricingApiLibraryPremiumLoaded()
+			}
+			if(!lIsPricingApiLibraryPremiumLoadedOK){
+				lIsPricingApiLibraryPremiumLoadedOK=this.waitUntilPricingApiLibraryPremiumLoaded()
+			}
+			if(!lIsPricingApiLibraryPremiumLoadedOK){
+				lIsPricingApiLibraryPremiumLoadedOK=this.waitUntilPricingApiLibraryPremiumLoaded()
+			}
+			Boolean lIsFlagApplyLoadingFactorOK=lMapCollectedPricingApiDetailResult.BoolIsPricingApiFlagApplyLoadingFactor
+			if(!lIsFlagApplyLoadingFactorOK){
+				Map lMapPricingApiGetPlanPriceTotalPremiumResult=this.getPricingApiLibraryTotalPremium()
+				if(!lMapPricingApiGetPlanPriceTotalPremiumResult.Result){
+					return lreturn
+				}
+				lStrPricingApiLibraryGetPlanPriceTotalPremium=lMapPricingApiGetPlanPriceTotalPremiumResult.StrPricingApiLibraryTotalPremium
+				lStrPricingApiLibraryGetPlanPriceDownPayment=lMapPricingApiGetPlanPriceTotalPremiumResult.StrPricingApiLibraryTotalDownPayment
+				lStrPricingApiLibraryGetPlanPriceInstallmentAmount=lMapPricingApiGetPlanPriceTotalPremiumResult.StrPricingApiLibraryInstallmentAmount
+				for(Integer lIndex=0;lIndex<=lListCollectedPricingApiCover.size()-1;lIndex++){
+					String lStrCoverName=lListCollectedPricingApiCover.get(lIndex)
+					List lListCurrentPricingApiCoverageName=lListCollectedPricingApiCoverageName.get(lIndex)
+					Map lMapPricingApiLibraryAdditionalCoveragePremiumResult=this.getPricingApiLibraryAdditionalCoveragePremium(lListCurrentPricingApiCoverageName)
+					List lListCurrentPricingApiLibraryAdditionalCoveragePremium=lMapPricingApiLibraryAdditionalCoveragePremiumResult.ListPricingApiLibraryAdditionalCoveragePremium
+					lListPricingApiLibraryGetPlanPriceAdditionalCoveragePremium.add(lListCurrentPricingApiLibraryAdditionalCoveragePremium)
+				}
+			}
+			WebElement lElementPricingApiCalculateGetPlanPriceWithInstallmentButton=null
+			if(lStrPricingApiQuoteRequiredTransactionType=='New Biz'){
+				lElementPricingApiCalculateGetPlanPriceWithInstallmentButton=this.getElementPricingApiCalculatePlanPriceButton('Calculate GetPlanPriceInst')
+			}
+			else{
+				lElementPricingApiCalculateGetPlanPriceWithInstallmentButton=this.getElementPricingApiCalculatePlanPriceButton('Calculate EndtPlanPriceInst')
+			}
+			Boolean lIsPricingApiCalculateGetPlanPriceWithInstallmentButtonClickOK=false
+			if(lIsPricingApiCalculateGetPlanPriceWithInstallmentButtonClickOK){
+				lIsPricingApiCalculateGetPlanPriceWithInstallmentButtonClickOK=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementPricingApiCalculateGetPlanPriceWithInstallmentButton)
+			}
+			if(!lIsPricingApiCalculateGetPlanPriceWithInstallmentButtonClickOK){
+				lIsPricingApiCalculateGetPlanPriceWithInstallmentButtonClickOK=IGNUemaHelper.clickByWebElementWithScroll(this.driver,lElementPricingApiCalculateGetPlanPriceWithInstallmentButton)
+			}
+			Boolean lIsPricingApiLibraryGetPlanPriceWithInstallmentPremiumLoadedOK=false
+			if(!lIsPricingApiLibraryGetPlanPriceWithInstallmentPremiumLoadedOK){
+				lIsPricingApiLibraryGetPlanPriceWithInstallmentPremiumLoadedOK=this.waitUntilPricingApiLibraryPremiumLoaded()
+			}
+			if(!lIsPricingApiLibraryGetPlanPriceWithInstallmentPremiumLoadedOK){
+				lIsPricingApiLibraryGetPlanPriceWithInstallmentPremiumLoadedOK=this.waitUntilPricingApiLibraryPremiumLoaded()
+			}
+			if(!lIsPricingApiLibraryGetPlanPriceWithInstallmentPremiumLoadedOK){
+				lIsPricingApiLibraryGetPlanPriceWithInstallmentPremiumLoadedOK=this.waitUntilPricingApiLibraryPremiumLoaded()
+			}
+			IGNUemaHelper.delayThreadSecond(5)
+			Map lMapPricingApiGetPlanPriceWithInstallmentTotalPremiumResult=this.getPricingApiLibraryTotalPremium()
+			if(!lMapPricingApiGetPlanPriceWithInstallmentTotalPremiumResult.Result){
+				return lreturn
+			}
+			lStrPricingApiLibraryGetPlanPriceWithInstallmentTotalPremium=lMapPricingApiGetPlanPriceWithInstallmentTotalPremiumResult.StrPricingApiLibraryTotalPremium
+			lStrPricingApiLibraryGetPlanPriceWithInstallmentDownPayment=lMapPricingApiGetPlanPriceWithInstallmentTotalPremiumResult.StrPricingApiLibraryTotalDownPayment
+			lStrPricingApiLibraryGetPlanPriceWithInstallmentInstallmentAmount=lMapPricingApiGetPlanPriceWithInstallmentTotalPremiumResult.StrPricingApiLibraryInstallmentAmount
+			for(Integer lIndex=0;lIndex<=lListCollectedPricingApiCover.size()-1;lIndex++){
+				String lStrCoverName=lListCollectedPricingApiCover.get(lIndex)
+				List lListCurrentPricingApiCoverageName=lListCollectedPricingApiCoverageName.get(lIndex)
+				Map lMapPricingApiLibraryAdditionalCoveragePremiumResult=this.getPricingApiLibraryAdditionalCoveragePremium(lListCurrentPricingApiCoverageName)
+				List lListCurrentPricingApiLibraryAdditionalCoveragePremium=lMapPricingApiLibraryAdditionalCoveragePremiumResult.ListPricingApiLibraryAdditionalCoveragePremium
+				lListPricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremium.add(lListCurrentPricingApiLibraryAdditionalCoveragePremium)
+			}
+			Map lMapPricingApiLibraryPaymentDetailResult=this.getPricingApiLibraryPaymentDetail()
+			lListPricingApiLibraryGetPlanPriceWithInstallmentPaymentDetail=lMapPricingApiLibraryPaymentDetailResult.ListPricingApiLibraryPaymentDetail
+			lreturn.put('StrPricingApiLibraryGetPlanPriceTotalPremium',lStrPricingApiLibraryGetPlanPriceTotalPremium)
+			lreturn.put('StrPricingApiLibraryGetPlanPriceDownPayment',lStrPricingApiLibraryGetPlanPriceDownPayment)
+			lreturn.put('StrPricingApiLibraryGetPlanPriceInstallmentAmount',lStrPricingApiLibraryGetPlanPriceInstallmentAmount)
+			lreturn.put('ListPricingApiLibraryGetPlanPriceAdditionalCoveragePremium',lListPricingApiLibraryGetPlanPriceAdditionalCoveragePremium)
+			lreturn.put('ListPricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremium',lListPricingApiLibraryGetPlanPriceWithInstallmentAdditionalCoveragePremium)
+			lreturn.put('StrPricingApiLibraryGetPlanPriceWithInstallmentTotalPremium',lStrPricingApiLibraryGetPlanPriceWithInstallmentTotalPremium)
+			lreturn.put('StrPricingApiLibraryGetPlanPriceWithInstallmentDownPayment',lStrPricingApiLibraryGetPlanPriceWithInstallmentDownPayment)
+			lreturn.put('StrPricingApiLibraryGetPlanPriceWithInstallmentInstallmentAmount',lStrPricingApiLibraryGetPlanPriceWithInstallmentInstallmentAmount)
+			lreturn.put('ListPricingApiLibraryGetPlanPriceWithInstallmentPaymentDetail',lListPricingApiLibraryGetPlanPriceWithInstallmentPaymentDetail)
+		}catch(Exception e){
+			return lreturn
+		}
+		return lreturn
+	}
+	public static WebElement getElementPricingApiCalculatePlanPriceButton(String strLocatorPlanPriceButtonName){
 		WebElement lreturn=null
 		Boolean lResult=false
 		if(IGNUemaHelper.checkObjectEmptyOfString(strLocatorPlanPriceButtonName)){
@@ -324,31 +491,23 @@ public class IDNPricingApiLibraryGetPriceListMainUtil{
 		}
 		String lLocatorPlanPriceButtonName=strLocatorPlanPriceButtonName.trim()
 		try{
-			String lLocatorButton='button'
-			List<WebElement> lElementCalculatePlanPriceButtonList=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorButton)
+			String lLocatorPricingApiCalculatePlanPriceButton='button'
+			List<WebElement> lListElementPricingApiCalculatePlanPriceButton=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorPricingApiCalculatePlanPriceButton)
 			WebElement lTargetElement=null
-			for(Integer lWebIndex=0;lWebIndex<=lElementCalculatePlanPriceButtonList.size()-1;lWebIndex++){
-				WebElement lElementCalculatePlanPriceButton=lElementCalculatePlanPriceButtonList.get(lWebIndex)
-				String lLocatorCalculatePlanPriceButtonText=lElementCalculatePlanPriceButton.getText()
-				IGNUemaHelper.printLog(lLocatorCalculatePlanPriceButtonText)
-				IGNUemaHelper.printLog(lLocatorPlanPriceButtonName)
+			for(Integer lWebIndex=0;lWebIndex<=lListElementPricingApiCalculatePlanPriceButton.size()-1;lWebIndex++){
+				WebElement lElementPricingApiCalculatePlanPriceButton=lListElementPricingApiCalculatePlanPriceButton.get(lWebIndex)
+				String lLocatorCalculatePlanPriceButtonText=lElementPricingApiCalculatePlanPriceButton.getText()
 				if(lLocatorCalculatePlanPriceButtonText==lLocatorPlanPriceButtonName){
-					IGNUemaHelper.printLog('Calculate Plan Price Button Found')
-					lTargetElement=lElementCalculatePlanPriceButton
+					lreturn=lElementPricingApiCalculatePlanPriceButton
+					return lreturn
 				}
-			}
-			if(lTargetElement){
-				lResult=true
-			}
-			if(lResult){
-				lreturn=lTargetElement
 			}
 		}catch(Exception e){
 			return lreturn
 		}
 		return lreturn
 	}
-	public Boolean inputPaymentFrequency(String strPaymentFrquency){
+	public static Boolean inputPaymentFrequency(String strPaymentFrquency){
 		Boolean lreturn=false
 		if(IGNUemaHelper.checkObjectEmptyOfString(strPaymentFrquency)){
 			return lreturn
@@ -373,139 +532,118 @@ public class IDNPricingApiLibraryGetPriceListMainUtil{
 		}
 		return lreturn
 	}
-	public Boolean inputPlanOption(Map mapPlanOption,String strCoverName){
-		Boolean lreturn=false
-		if(IGNUemaHelper.checkObjectEmptyOfMap(mapPlanOption)){
-			return lreturn
-		}
-		Map lMapPlanOption=mapPlanOption
-		if(IGNUemaHelper.checkObjectEmptyOfString(strCoverName)){
-			return lreturn
-		}
-		String lCoverName=strCoverName
-		try{
-			Boolean lResult=true
-			for(Map.Entry lEntry in lMapPlanOption){
-				String lSelectedPlanName=lEntry.key.toString()
-				String lSelectedOptionValue=lEntry.value.toString()
-				lSelectedPlanName=lCoverName+lSelectedPlanName
-				IGNUemaHelper.printLog('Input Plan In Library')
-				IGNUemaHelper.printLog(lSelectedPlanName)
-				IGNUemaHelper.printLog(lCoverName)
-				String lLocatorPlanOptionButton='select[name='+lSelectedPlanName+']'
-				WebElement lElementSelectedPlanOptionButton=null
-				if(IGNUemaHelper.checkElementPresentByLocator(this.driver,lLocatorPlanOptionButton,15)){
-					IGNUemaHelper.printLog('PlanOption Present')
-				}
-				lElementSelectedPlanOptionButton=IGNUemaHelper.getWebElementFromCssLocator(this.driver,lLocatorPlanOptionButton)
-				if(lElementSelectedPlanOptionButton){
-					IGNUemaHelper.printLog('PlanOptionFound')
-					lSelectedOptionValue=IGNUemaHelper.selectOptionSelectByWebElementV1(this.driver,lElementSelectedPlanOptionButton,lSelectedOptionValue,false,false)
-				}
-				else{
-					lResult=false
-				}
-			}
-			lreturn=lResult
-		}catch(Exception e){
-			return lreturn
-		}
-		return lreturn
-	}
-	public WebElement getPricingInputElement(String strPricingInput){
+	public static WebElement getElementRootPricingInput(String strPricingInput){
 		WebElement lreturn=null
 		Boolean lResult=false
 		if(IGNUemaHelper.checkObjectEmptyOfString(strPricingInput)){
 			return lreturn
 		}
-		String lPricingInput=strPricingInput
+		String lStrPricingInput=strPricingInput
 		try{
-			String lLocatorInputTag='textarea'
-			List<WebElement> lElementPricingInputTextAreaList=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorInputTag)
+			String lLocatorPricingApiInputTextArea='textarea'
+			List<WebElement> lListElementPricingApiInputTextArea=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorPricingApiInputTextArea)
 			WebElement lTargetElement=null
-			if(lElementPricingInputTextAreaList.size()>0){
-				for(Integer lWebIndex=0;lWebIndex<=lElementPricingInputTextAreaList.size()-1;lWebIndex++){
-					WebElement lElementInput=lElementPricingInputTextAreaList.get(lWebIndex)
-					WebElement lElementFirstParentInput=IGNUemaHelper.getParentElementOfWebElement(this.driver,lElementInput)
-					WebElement lElementSecondParentInput=IGNUemaHelper.getParentElementOfWebElement(this.driver,lElementFirstParentInput)
-					List<WebElement>  lElementChildOfSecondParentInputList=IGNUemaHelper.getChildWebElementListOfWebElement(this.driver,lElementSecondParentInput,'td')
-					for(Integer lWebChildIndex=0;lWebChildIndex<=lElementChildOfSecondParentInputList.size()-1;lWebChildIndex++){
-						WebElement lElementChildInput=lElementChildOfSecondParentInputList.get(lWebChildIndex)
-						String lElementChildText=lElementChildInput.getText()
-						if(lPricingInput.contains(lElementChildText)){
-							lTargetElement=lElementInput
-							break
+			if(lListElementPricingApiInputTextArea.size()>0){
+				for(Integer lWebIndex=0;lWebIndex<=lListElementPricingApiInputTextArea.size()-1;lWebIndex++){
+					WebElement lElementPricingApiInputTextArea=lListElementPricingApiInputTextArea.get(lWebIndex)
+					WebElement lElementParent01PricingApiInputTextArea=IGNUemaHelper.getParentElementOfWebElement(this.driver,lElementPricingApiInputTextArea)
+					WebElement lElementParent02PricingApiInputTextArea=IGNUemaHelper.getParentElementOfWebElement(this.driver,lElementParent01PricingApiInputTextArea)
+					List<WebElement>  lListElementChild01PricingApiInputTextArea=IGNUemaHelper.getChildWebElementListOfWebElement(this.driver,lElementParent02PricingApiInputTextArea,'td')
+					for(Integer lWebChildIndex=0;lWebChildIndex<=lListElementChild01PricingApiInputTextArea.size()-1;lWebChildIndex++){
+						WebElement lElementChild01PricingApiInputTextArea=lListElementChild01PricingApiInputTextArea.get(lWebChildIndex)
+						String lStrElementChild01PricingApiInputTextArea=lElementChild01PricingApiInputTextArea.getText()
+						if(lStrPricingInput.contains(lStrElementChild01PricingApiInputTextArea)){
+							lreturn=lElementPricingApiInputTextArea
+							return lreturn
 						}
 					}
-					if(!IGNUemaHelper.checkObjectNullOfObject(lTargetElement)){
+				}
+			}
+		}catch(Exception e){
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Boolean waitUntilPricingApiLibraryPremiumLoaded(Integer seconds=5){
+		Boolean lreturn=false
+		try{
+			Integer count=0
+			while(count<seconds){
+				if(this.checkPricingApiLibraryPremiumLoaded()){
+					lreturn=true
+					return lreturn
+				}
+				count++
+			}
+		}catch(Exception e){
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Boolean checkPricingApiLibraryPremiumLoaded(){
+		Boolean lreturn=false
+		try{
+			String lLocatorPricingApiPremium='div'
+			List<WebElement> lListElementPricingApiPremium=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorPricingApiPremium)
+			for(Integer lWebMainIndex=1;lWebMainIndex<=lListElementPricingApiPremium.size()-1;lWebMainIndex++){
+				WebElement lElementSearch01InputLevel01PricingApiPremiumParent=lListElementPricingApiPremium.get(lWebMainIndex)
+				String lStrElementSearch01InputLevel01PricingApiPremiumParentText=lElementSearch01InputLevel01PricingApiPremiumParent.getText()
+				if(lStrElementSearch01InputLevel01PricingApiPremiumParentText.contains('Additional Coverages')){
+					lreturn=true
+					return lreturn
+				}
+			}
+		}catch(Exception e){
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Map getPricingApiLibraryTotalPremium(){
+		Map lreturn=[:]
+		Boolean lResult=false
+		String lStrPricingApiLibraryTotalPremium=''
+		String lStrPricingApiLibraryTotalDownPayment=''
+		String lStrPricingApiLibraryInstallmentAmount=''
+		try{
+			lreturn.put('StrPricingApiLibraryTotalPremium',lStrPricingApiLibraryTotalPremium)
+			lreturn.put('StrPricingApiLibraryTotalDownPayment',lStrPricingApiLibraryTotalDownPayment)
+			lreturn.put('StrPricingApiLibraryInstallmentAmount',lStrPricingApiLibraryInstallmentAmount)
+			lreturn.put('Result',lResult)
+			String lLocatorPricingApiPremium='div'
+			Boolean lIsPricingApiLibraryPremiumLoadedOK=true
+
+			if(lIsPricingApiLibraryPremiumLoadedOK){
+				List<WebElement> lListElementPricingApiPremium=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorPricingApiPremium)
+				for(Integer lWebMainIndex=1;lWebMainIndex<=lListElementPricingApiPremium.size()-1;lWebMainIndex++){
+					WebElement lElementSearch01InputLevel01PricingApiPremiumParent=lListElementPricingApiPremium.get(lWebMainIndex)
+					String lStrElementSearch01InputLevel01PricingApiPremiumParentText=lElementSearch01InputLevel01PricingApiPremiumParent.getText()
+					WebElement lElementSearch01InputLevel01PricingApiPremiumChild01=null
+					if(lStrElementSearch01InputLevel01PricingApiPremiumParentText.contains('Total Premium')){
+						List<WebElement> lListElementSearch01InputLevel01PricingApiPremiumChild01=IGNUemaHelper.getChildWebElementListOfWebElement(this.driver,lElementSearch01InputLevel01PricingApiPremiumParent,'')
+						for(Integer lWebChildIndex=0;lWebChildIndex<=lListElementSearch01InputLevel01PricingApiPremiumChild01.size()-1;lWebChildIndex++){
+							lElementSearch01InputLevel01PricingApiPremiumChild01=lListElementSearch01InputLevel01PricingApiPremiumChild01.get(lWebChildIndex)
+							String lStrElementSearch01InputLevel01PricingApiPremiumChild01Text=lElementSearch01InputLevel01PricingApiPremiumChild01.getText().trim()
+							if(lStrElementSearch01InputLevel01PricingApiPremiumChild01Text.contains('Total Premium')){
+								lStrPricingApiLibraryTotalPremium=this.getStringPricingApiTotalPremiumBySplit(lStrElementSearch01InputLevel01PricingApiPremiumChild01Text)
+							}
+							if(lStrElementSearch01InputLevel01PricingApiPremiumChild01Text.contains('First Installment Premium')){
+								lStrPricingApiLibraryInstallmentAmount=this.getStringPricingApiTotalPremiumBySplit(lStrElementSearch01InputLevel01PricingApiPremiumChild01Text)
+							}
+							if(lStrElementSearch01InputLevel01PricingApiPremiumChild01Text.contains('Recurring Premium')){
+								lStrPricingApiLibraryTotalDownPayment=this.getStringPricingApiTotalPremiumBySplit(lStrElementSearch01InputLevel01PricingApiPremiumChild01Text)
+							}
+						}
+					}
+					if(lElementSearch01InputLevel01PricingApiPremiumChild01){
 						break
 					}
 				}
 			}
-			if(!IGNUemaHelper.checkObjectNullOfObject(lTargetElement)){
-				lResult=true
-				IGNUemaHelper.printLog('Target found')
-			}
+			lResult=(lStrPricingApiLibraryTotalPremium.length()>0)
 			if(lResult){
-				lreturn=lTargetElement
-			}
-		}catch(Exception e){
-			return lreturn
-		}
-		return lreturn
-	}
-	public Map getTotalPremium(){
-		Map lreturn=[:]
-		Boolean lResult=false
-		String lTotalPremium=''
-		String lTotalDownPayment=''
-		String lInstallmentAmount=''
-		try{
-			lreturn.put('TotalPremium',lTotalPremium)
-			lreturn.put('TotalDownPayment',lTotalDownPayment)
-			lreturn.put('InstallmentAmount',lInstallmentAmount)
-			lreturn.put('Result',lResult)
-			String lLocatorTargetMainTag='div'
-			List<WebElement> lElementMainList=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorTargetMainTag)
-			WebElement lElementTargetMain=lElementMainList.get(1)
-			for(Integer lWebMainIndex=1;lWebMainIndex<=lElementMainList.size()-1;lWebMainIndex++){
-				WebElement lElementTargetMainParent=lElementMainList.get(lWebMainIndex)
-				IGNUemaHelper.printLog('lElementTargetMainChild found')
-				IGNUemaHelper.printLog('WebMainIndex'+lWebMainIndex)
-				IGNUemaHelper.printLog(lElementTargetMainParent.getText())
-				String lElementTargetMainParentText=lElementTargetMainParent.getText()
-				WebElement lElementTargetMainChild=null
-				if(lElementTargetMainParentText.contains('Total Premium')){
-					List<WebElement> lElementTargetMainChildList=IGNUemaHelper.getChildWebElementListOfWebElement(this.driver,lElementTargetMainParent,'')
-					for(Integer lWebChildIndex=0;lWebChildIndex<=lElementTargetMainChildList.size()-1;lWebChildIndex++){
-						lElementTargetMainChild=lElementTargetMainChildList.get(lWebChildIndex)
-						String lElementChildText=lElementTargetMainChild.getText().trim()
-						if(lElementChildText.contains('Total Premium')){
-							String[] lChildElementSubListText=lElementChildText.split(':')
-							lTotalPremium=lChildElementSubListText[1]
-							IGNUemaHelper.printLog(lTotalPremium)
-						}
-						if(lElementChildText.contains('First Installment Premium')){
-							String[] lChildElementSubListText=lElementChildText.split(':')
-							lInstallmentAmount=lChildElementSubListText[1]
-							IGNUemaHelper.printLog(lInstallmentAmount)
-						}
-						if(lElementChildText.contains('Recurring Premium')){
-							String[] lChildElementSubListText=lElementChildText.split(':')
-							lTotalDownPayment=lChildElementSubListText[1]
-							IGNUemaHelper.printLog(lTotalDownPayment)
-						}
-					}
-				}
-				if(lElementTargetMainChild){
-					break
-				}
-			}
-			lResult=(lTotalPremium.length()>0)
-			if(lResult){
-				lreturn.put('TotalPremium',lTotalPremium)
-				lreturn.put('TotalDownPayment',lTotalDownPayment)
-				lreturn.put('InstallmentAmount',lInstallmentAmount)
+				lreturn.put('StrPricingApiLibraryTotalPremium',lStrPricingApiLibraryTotalPremium)
+				lreturn.put('StrPricingApiLibraryTotalDownPayment',lStrPricingApiLibraryTotalDownPayment)
+				lreturn.put('StrPricingApiLibraryInstallmentAmount',lStrPricingApiLibraryInstallmentAmount)
 				lreturn.put('Result',lResult)
 			}
 		}catch(Exception e){
@@ -513,57 +651,75 @@ public class IDNPricingApiLibraryGetPriceListMainUtil{
 		}
 		return lreturn
 	}
-	public Map getTotalAdditionalCoveragePremium(List strCoverageList){
+	public static String getStringPricingApiTotalPremiumBySplit(String strPricingApiLibraryPremiumValue){
+		String lreturn=''
+		if(IGNUemaHelper.checkObjectEmptyOfString(strPricingApiLibraryPremiumValue)){
+			return lreturn
+		}
+		String lStrPricingApiLibraryPremiumValue=strPricingApiLibraryPremiumValue
+		try{
+			String[] lArrayPricingApiLibraryPremiumValue=lStrPricingApiLibraryPremiumValue.split(':')
+			lreturn=lArrayPricingApiLibraryPremiumValue[1]
+		}catch(Exception e){
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Map getPricingApiLibraryAdditionalCoveragePremium(List strCoverageList){
 		Map lreturn=[:]
 		Boolean lResult=false
-		List lLibraryCoveragePremiumList=[]
-		List lLibraryCoverageNameList=[]
+		List lListPricingApiLibraryAdditionalCoveragePremium=new ArrayList()
 		try{
-			lreturn.put('AdditionalCoverageNameList',lLibraryCoverageNameList)
-			lreturn.put('AdditionalCoveragePremiumList',lLibraryCoveragePremiumList)
+			lreturn.put('ListPricingApiLibraryAdditionalCoveragePremium',lListPricingApiLibraryAdditionalCoveragePremium)
 			lreturn.put('Result',lResult)
 			if(IGNUemaHelper.checkObjectEmptyOfList(strCoverageList)){
 				return lreturn
 			}
-			List lCoverageList=strCoverageList
-			String lLocatorTargetMainTag='div[class=row]'
-			List<WebElement> lElementMainList=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorTargetMainTag)
-			WebElement lElementTargetMain=lElementMainList.get(1)
-			List lAdditionalCoveragePremiumList=[]
-			for(Integer lWebMainIndex=1;lWebMainIndex<=lElementMainList.size()-1;lWebMainIndex++){
-				WebElement lElementTargetMainParent=lElementMainList.get(lWebMainIndex)
-				IGNUemaHelper.printLog('lElementTargetMainChild found')
-				IGNUemaHelper.printLog('WebMainIndex'+lWebMainIndex)
-				IGNUemaHelper.printLog(lElementTargetMainParent.getText())
-				String lElementTargetMainParentText=lElementTargetMainParent.getText()
-				if(lElementTargetMainParentText.contains('Premium')){
-					IGNUemaHelper.printLog('Additional Coverage ParentFound')
-					lAdditionalCoveragePremiumList.add(lElementTargetMainParentText)
+			List lListPricingApiCoverage=strCoverageList
+			Boolean lIsPricingApiLibraryPremiumLoadedOK=this.waitUntilPricingApiLibraryPremiumLoaded()
+			if(!lIsPricingApiLibraryPremiumLoadedOK){
+				lIsPricingApiLibraryPremiumLoadedOK=this.waitUntilPricingApiLibraryPremiumLoaded()
+			}
+			if(!lIsPricingApiLibraryPremiumLoadedOK){
+				lIsPricingApiLibraryPremiumLoadedOK=this.waitUntilPricingApiLibraryPremiumLoaded()
+			}
+			if(!lIsPricingApiLibraryPremiumLoadedOK){
+				lIsPricingApiLibraryPremiumLoadedOK=this.waitUntilPricingApiLibraryPremiumLoaded()
+			}
+			IGNUemaHelper.delayThreadSecond(5)
+			List lListPricingApiAdditionalCoveragePremium=new ArrayList()
+			if(lIsPricingApiLibraryPremiumLoadedOK){
+				String lLocatorPricingApiLibraryAdditionalCoverage='div.column'
+				List<WebElement> lListElementPricingApiLibraryAdditionalCoverage=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorPricingApiLibraryAdditionalCoverage)
+				for(Integer lWebMainIndex=0;lWebMainIndex<=lListElementPricingApiLibraryAdditionalCoverage.size()-1;lWebMainIndex++){
+					WebElement lElementPricingApiLibraryAdditionalCoverage=lListElementPricingApiLibraryAdditionalCoverage.get(lWebMainIndex)
+					if(lElementPricingApiLibraryAdditionalCoverage){
+						String lStrPricingApiLibraryAdditionalCoverageText=lElementPricingApiLibraryAdditionalCoverage.getText()
+						if(lStrPricingApiLibraryAdditionalCoverageText.contains('Premium')){
+							lListPricingApiAdditionalCoveragePremium.add(lStrPricingApiLibraryAdditionalCoverageText)
+						}
+					}
 				}
 			}
-			IGNUemaHelper.printLog('lAdditionalCoveragePremiumList-Library')
-			IGNUemaHelper.printLog(lAdditionalCoveragePremiumList.size())
-			IGNUemaHelper.printLog(lCoverageList.size())
-			if(lAdditionalCoveragePremiumList.size()>0){
-				for(Integer lCoverageIndex=0;lCoverageIndex<=lCoverageList.size()-1;lCoverageIndex++){
-					String lCoverageName=lCoverageList.get(lCoverageIndex)
-					String lCoverageNameWithPremiumText=lAdditionalCoveragePremiumList.get(lCoverageIndex)
-					String[] lCoverageNameWithPremiumTextList=lCoverageNameWithPremiumText.split(' ')
-					String lLibraryCoverageName=lCoverageNameWithPremiumTextList[0]
-					Integer lLastIndex=lCoverageNameWithPremiumTextList.size()
-					String lCoveragePremium=lCoverageNameWithPremiumTextList[lLastIndex-1]
-					lLibraryCoverageNameList.add(lLibraryCoverageName)
-					lLibraryCoveragePremiumList.add(lCoveragePremium)
+			if(lListPricingApiAdditionalCoveragePremium.size()>0){
+				for(Integer lCoverageIndex=0;lCoverageIndex<=lListPricingApiCoverage.size()-1;lCoverageIndex++){
+					String lStrCoverageName=lListPricingApiCoverage.get(lCoverageIndex)
+					for(Integer lIndex=0;lIndex<=lListPricingApiAdditionalCoveragePremium.size()-1;lIndex++){
+						String lStrPricingApiLibraryCoverageNameWithPremiumText=lListPricingApiAdditionalCoveragePremium.get(lIndex)
+						String[] lArrayPricingApiLibraryCoverageNameWithPremiumText=lStrPricingApiLibraryCoverageNameWithPremiumText.split(':')
+						String lStrPricingApiLibraryExtractCoverageName=lArrayPricingApiLibraryCoverageNameWithPremiumText[0]
+						lStrPricingApiLibraryExtractCoverageName=lStrPricingApiLibraryExtractCoverageName.replace('SumAssured','')
+						lStrPricingApiLibraryExtractCoverageName=lStrPricingApiLibraryExtractCoverageName.trim()
+						if(lStrPricingApiLibraryExtractCoverageName==lStrCoverageName){
+							String lStrPricingApiLibraryCoveragePremium=this.getStringPricingApiAdditionalCoveragePremiumBySplit(lStrPricingApiLibraryCoverageNameWithPremiumText)
+							lListPricingApiLibraryAdditionalCoveragePremium.add(lStrPricingApiLibraryCoveragePremium)
+						}
+					}
 				}
 			}
-			IGNUemaHelper.printLog('lAdditionalCoveragePremiumList-In List')
-			IGNUemaHelper.printLog(lLibraryCoverageNameList)
-			IGNUemaHelper.printLog(lLibraryCoveragePremiumList)
-			IGNUemaHelper.printLog(lCoverageList)
-			lResult=lLibraryCoveragePremiumList.size()>0
+			lResult=lListPricingApiLibraryAdditionalCoveragePremium.size()>0
 			if(lResult){
-				lreturn.put('AdditionalCoverageNameList',lLibraryCoverageNameList)
-				lreturn.put('AdditionalCoveragePremiumList',lLibraryCoveragePremiumList)
+				lreturn.put('ListPricingApiLibraryAdditionalCoveragePremium',lListPricingApiLibraryAdditionalCoveragePremium)
 				lreturn.put('Result',lResult)
 			}
 		}catch(Exception e){
@@ -571,61 +727,81 @@ public class IDNPricingApiLibraryGetPriceListMainUtil{
 		}
 		return lreturn
 	}
-	public Map getPaymentDetail(){
+	public static String getStringPricingApiAdditionalCoveragePremiumBySplit(String strPricingApiLibraryPremiumValue){
+		String lreturn=''
+		Boolean lResult=false
+		if(IGNUemaHelper.checkObjectEmptyOfString(strPricingApiLibraryPremiumValue)){
+			return lreturn
+		}
+		String lStrPricingApiLibraryPremiumValue=strPricingApiLibraryPremiumValue
+		try{
+			String lStrAdditionalCoveragePremiumValue=''
+			String[] lArrayPricingApiLibraryPremiumValue=lStrPricingApiLibraryPremiumValue.split(',')
+			for(Integer lIndex=0;lIndex<=lArrayPricingApiLibraryPremiumValue.size()-1;lIndex++){
+				String lStrPricingApiLibraryPremiumText=lArrayPricingApiLibraryPremiumValue[lIndex]
+				if(lStrPricingApiLibraryPremiumText.contains('Premium')){
+					lStrAdditionalCoveragePremiumValue=this.getStringPricingApiTotalPremiumBySplit(lStrPricingApiLibraryPremiumText)
+				}
+			}
+			lResult=lStrAdditionalCoveragePremiumValue.length()>0
+			if(lResult){
+				lreturn=lStrAdditionalCoveragePremiumValue
+			}
+		}catch(Exception e){
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Map getPricingApiLibraryPaymentDetail(){
 		Map lreturn=[:]
 		Boolean lResult=false
-		List lLibraryPaymentDetailList=[]
+		List lListPricingApiLibraryPaymentDetail=new ArrayList()
 		try{
-			lreturn.put('PricingApiLibraryPaymentDetail',lLibraryPaymentDetailList)
+			lreturn.put('ListPricingApiLibraryPaymentDetail',lListPricingApiLibraryPaymentDetail)
 			lreturn.put('Result',lResult)
-			String lLocatorTargetMainTag='div'
-			List<WebElement> lElementMainList=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorTargetMainTag)
-			WebElement lElementTargetMain=lElementMainList.get(1)
-			for(Integer lWebMainIndex=1;lWebMainIndex<=lElementMainList.size()-1;lWebMainIndex++){
-				WebElement lElementTargetMainParent=lElementMainList.get(lWebMainIndex)
-				IGNUemaHelper.printLog('Payment Detail-lElementTargetMainChild found')
-				IGNUemaHelper.printLog('WebMainIndex'+lWebMainIndex)
-				IGNUemaHelper.printLog(lElementTargetMainParent.getText())
-				String lElementTargetMainParentText=lElementTargetMainParent.getText()
-				WebElement lElementTargetMainChild=null
-				if(lElementTargetMainParentText.contains('Payment Details')){
-					IGNUemaHelper.printLog('Payment Detail ParentFound')
-					List<WebElement> lElementTargetMainChildList=IGNUemaHelper.getChildWebElementListOfWebElement(this.driver,lElementTargetMainParent,'div')
-					for(Integer lWebChildIndex=0;lWebChildIndex<=lElementTargetMainChildList.size()-1;lWebChildIndex++){
-						lElementTargetMainChild=lElementTargetMainChildList.get(lWebChildIndex)
-						List<WebElement> lElementTargetNestedChildList=IGNUemaHelper.getChildWebElementListOfWebElement(this.driver,lElementTargetMainChild,'div')
-						Map lMapPaymentDetail=[:]
-						for(Integer lNestedWebChildIndex=0;lNestedWebChildIndex<=lElementTargetNestedChildList.size()-1;lNestedWebChildIndex++){
-							WebElement lElementNestedChild=lElementTargetNestedChildList.get(lNestedWebChildIndex)
-							IGNUemaHelper.webJsScrollToElement(this.driver,lElementNestedChild)
-							String lElementChildText=lElementNestedChild.getText().trim()
-							String[] lNestedChildTextList=lElementChildText.split(':')
-							String lNestedKey=''
-							String lNestedValue=''
-							if(lNestedChildTextList.size()==1){
-								lNestedKey=lNestedChildTextList[0].trim()
-								lNestedValue=''
+			String lLocatorPricingApiLibraryPaymentDetail='div'
+			IGNUemaHelper.delayThreadSecond(5)
+			List<WebElement> lListElementPricingApiLibraryPayment=IGNUemaHelper.getWebElementListFromCssLocator(this.driver,lLocatorPricingApiLibraryPaymentDetail)
+			WebElement lElementTargetMain=lListElementPricingApiLibraryPayment.get(1)
+			for(Integer lWebMainIndex=1;lWebMainIndex<=lListElementPricingApiLibraryPayment.size()-1;lWebMainIndex++){
+				WebElement lElementSearchInput01Level01PricingApiLibraryPaymentParent=lListElementPricingApiLibraryPayment.get(lWebMainIndex)
+				String lStrElementSearchInput01Level01PricingApiLibraryPaymentParentText=lElementSearchInput01Level01PricingApiLibraryPaymentParent.getText()
+				WebElement lElementSearchInput01Level01PricingApiLibraryPaymentChild01=null
+				if(lStrElementSearchInput01Level01PricingApiLibraryPaymentParentText.contains('Payment Details')){
+					List<WebElement> lListElementSearchInput01Level01PricingApiLibraryPaymentChild01=IGNUemaHelper.getChildWebElementListOfWebElement(this.driver,lElementSearchInput01Level01PricingApiLibraryPaymentParent,'div')
+					for(Integer lWebChildIndex=0;lWebChildIndex<=lListElementSearchInput01Level01PricingApiLibraryPaymentChild01.size()-1;lWebChildIndex++){
+						lElementSearchInput01Level01PricingApiLibraryPaymentChild01=lListElementSearchInput01Level01PricingApiLibraryPaymentChild01.get(lWebChildIndex)
+						List<WebElement> lListElementSearchInput01Level01PricingApiLibraryPaymentChild02=IGNUemaHelper.getChildWebElementListOfWebElement(this.driver,lElementSearchInput01Level01PricingApiLibraryPaymentChild01,'div')
+						Map lMapPricingApiLibraryPaymentDetail=[:]
+						for(Integer lNestedWebChildIndex=0;lNestedWebChildIndex<=lListElementSearchInput01Level01PricingApiLibraryPaymentChild02.size()-1;lNestedWebChildIndex++){
+							WebElement lElementSearchInput01Level01PricingApiLibraryPaymentChild02=lListElementSearchInput01Level01PricingApiLibraryPaymentChild02.get(lNestedWebChildIndex)
+							IGNUemaHelper.webJsScrollToElement(this.driver,lElementSearchInput01Level01PricingApiLibraryPaymentChild02)
+							String lStrSearchInput01Level01PricingApiLibraryPaymentChild02Text=lElementSearchInput01Level01PricingApiLibraryPaymentChild02.getText().trim()
+							String[] lArraySearchInput01Level01PricingApiLibraryPaymentChild02=lStrSearchInput01Level01PricingApiLibraryPaymentChild02Text.split(':')
+							String lStrPricingApiLibraryPaymentNestedKey=''
+							String lStrPricingApiLibraryPaymentNestedValue=''
+							if(lArraySearchInput01Level01PricingApiLibraryPaymentChild02.size()==1){
+								lStrPricingApiLibraryPaymentNestedKey=lArraySearchInput01Level01PricingApiLibraryPaymentChild02[0].trim()
+								lStrPricingApiLibraryPaymentNestedValue=''
 							}
 							else{
-								lNestedKey=lNestedChildTextList[0].trim()
-								lNestedValue=lNestedChildTextList[1].trim()
+								lStrPricingApiLibraryPaymentNestedKey=lArraySearchInput01Level01PricingApiLibraryPaymentChild02[0].trim()
+								lStrPricingApiLibraryPaymentNestedValue=lArraySearchInput01Level01PricingApiLibraryPaymentChild02[1].trim()
 							}
-							lMapPaymentDetail.put(lNestedKey,lNestedValue)
+							lMapPricingApiLibraryPaymentDetail.put(lStrPricingApiLibraryPaymentNestedKey,lStrPricingApiLibraryPaymentNestedValue)
 						}
-						if(!IGNUemaHelper.checkObjectEmptyOfMap(lMapPaymentDetail)){
-							lLibraryPaymentDetailList.add(lMapPaymentDetail)
+						if(!IGNUemaHelper.checkObjectEmptyOfMap(lMapPricingApiLibraryPaymentDetail)){
+							lListPricingApiLibraryPaymentDetail.add(lMapPricingApiLibraryPaymentDetail)
 						}
 					}
 				}
-				if(lElementTargetMainChild){
+				if(lElementSearchInput01Level01PricingApiLibraryPaymentChild01){
 					break
 				}
 			}
-			IGNUemaHelper.printLog('LibraryPaymentList')
-			IGNUemaHelper.printLog(lLibraryPaymentDetailList)
-			lResult=lLibraryPaymentDetailList.size()>0
+			lResult=lListPricingApiLibraryPaymentDetail.size()>0
 			if(lResult){
-				lreturn.put('PricingApiLibraryPaymentDetail',lLibraryPaymentDetailList)
+				lreturn.put('PricingApiLibraryPaymentDetail',lListPricingApiLibraryPaymentDetail)
 				lreturn.put('Result',lResult)
 			}
 		}catch(Exception e){

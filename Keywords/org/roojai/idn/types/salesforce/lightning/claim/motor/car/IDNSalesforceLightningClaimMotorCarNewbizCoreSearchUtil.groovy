@@ -170,7 +170,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreSearchUtil{
 					lStrSalesforceSearchGenerateUrlAccessSfObject=''
 				}else{
 					lStrSalesforceSearchGenerateTargetSalesforceFullId=lMapinputMapSalesforceSearchDetailByDefaultOption.StrSalesforceTargetRecordId
-					lStrSalesforceSearchGenerateUrlAccessSfObject=lMapinputMapSalesforceSearchDetailByDefaultOption.StrSalesforceTargetFullAccessPageUrl
+					lStrSalesforceSearchGenerateUrlAccessSfObject=lMapinputMapSalesforceSearchDetailByDefaultOption.StrSalesforceTargetFullUrlRecordId
 				}
 				lIsInputMapSalesforceSearchDetailByDefaultOptionResult=lMapinputMapSalesforceSearchDetailByDefaultOption.Result
 				lIsInputMapSalesforceRecordIdPageResult=lIsInputMapSalesforceSearchDetailByDefaultOptionResult

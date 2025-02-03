@@ -37,1352 +37,73 @@ public class IDNPricingApiPrepareGenericDataInputUtil{
 	public IDNPricingApiPrepareGenericDataInputUtil(){
 		super()
 	}
-	private IDNPricingApiGetPriceListMainUtil lIDNPricingApiGetPriceListUtil=null
+	private static IDNPricingApiGetPriceListMainUtil lIDNPricingApiGetPriceListUtil=null
 	private IDNPricingApiGetPriceListMainUtil getlIDNPricingApiGetPriceListUtil(){
 		return this.lIDNPricingApiGetPriceListUtil
 	}
 	private void setlIDNPricingApiGetPriceListUtil(IDNPricingApiGetPriceListMainUtil newlIDNPricingApiGetPriceListUtil){
 		//Do Nothing
 	}
-	public static final Hashtable<String,ArrayList<String>> PRODUCT_CODE_TABLE=new Hashtable<String,ArrayList<String>>()
-	public static final String CURRENT_TEST_TRANSFORM_DATA_FILE_INPUT_GENERIC_MOTOR_CAR='Data Files/Release_UAT/Roojai/IDN/IGNGenericTemplatePricingAPI_MotorCar.xlsx'
-	public static final String CURRENT_TEST_TRANSFORM_DATA_FILE_INPUT_GENERIC_MOTOR_BIKE='Data Files/Release_UAT/Roojai/IDN/IGNGenericTemplatePricingAPI_MotorBike.xlsx'
-	public static final String CURRENT_TEST_TRANSFORM_DATA_FILE_INPUT_GENERIC_NON_MOTOR_PERSONAL_ACCIDENT='Data Files/Release_UAT/Roojai/IDN/IGNGenericTemplatePricingAPI_NonMotor_PA.xlsx'
-	public static final String CURRENT_TEST_TRANSFORM_DATA_FILE_INPUT_GENERIC_NON_MOTOR_CANCER='Data Files/Release_UAT/Roojai/IDN/IGNGenericTemplatePricingAPI_NonMotor_CA.xlsx'
-	public static final String CURRENT_TEST_TRANSFORM_DATA_FILE_INPUT_GENERIC_NON_MOTOR_CRITICAL_ILLNESS='Data Files/Release_UAT/Roojai/IDN/IGNGenericTemplatePricingAPI_NonMotor_CI.xlsx'
-	public static final String CURRENT_TEST_TRANSFORM_DATA_FILE_INPUT_MACRO_MOTOR_CAR='Data Files/Release_UAT/Roojai/IDN/IGNGenericTemplatePricingAPI_MotorCar.xlsm'
-	public static final String CURRENT_TEST_TRANSFORM_DATA_FILE_INPUT_MACRO_MOTOR_BIKE='Data Files/Release_UAT/Roojai/IDN/IGNGenericTemplatePricingAPI_MotorBike.xlsm'
-	public static final String CURRENT_TEST_TRANSFORM_DATA_FILE_INPUT_MACRO_NON_MOTOR_PERSONAL_ACCIDENT='Data Files/Release_UAT/Roojai/IDN/IGNGenericTemplatePricingAPI_NonMotor_PA.xlsm'
-	public static final String CURRENT_TEST_TRANSFORM_DATA_FILE_INPUT_MACRO_NON_MOTOR_CANCER='Data Files/Release_UAT/Roojai/IDN/IGNGenericTemplatePricingAPI_NonMotor_CA.xlsm'
-	public static final String CURRENT_TEST_TRANSFORM_DATA_FILE_INPUT_MACRO_NON_MOTOR_CRITICAL_ILLNESS='Data Files/Release_UAT/Roojai/IDN/IGNGenericTemplatePricingAPI_NonMotor_CI.xlsm'
+
 	public static final String CURRENT_TEST_TRANSFORM_DATA_FILE_OUTPUT_USER='Data Files/ZPrepareHere/Ignite/IDN/Excel_IgniteUniversalTestData_UserDataPricingAPIAll.xlsx'
 	public static final String CURRENT_TEST_IGN_LIBRARY_HOST_URL='http://localhost:5173/'
 	public  Boolean inputGenericPricingApiDataToUserDataSheet(){
 		String lResult=''
 		Boolean lreturn=false
-		this.PRODUCT_CODE_TABLE.put("ProductCode",Arrays.asList('1','2','3','4','5'))
-		List lProductCodeList=this.PRODUCT_CODE_TABLE.get("ProductCode")
-		IGNUemaHelper.printLog('lProductCodeList')
-		IGNUemaHelper.printLog(lProductCodeList)
 		String lPath='Data Files/Release_UAT/Roojai/IDN/'
-		List<String> lPricingApiFileList=IDNUemaHelper.getPricingApiFileList(lPath)
-		List<String> lPricingApiExcelFilePathList=[]
-		List<String> lPricingApiMacroFilePathList=[]
-		for(Integer lTargetFileIndex=0;lTargetFileIndex<=lPricingApiFileList.size()-1;lTargetFileIndex++){
-			String lFileName=lPricingApiFileList.get(lTargetFileIndex)
-			if(lFileName.contains('IGNGenericTemplatePricingAPI')){
-				if(lFileName.contains('.xlsx')){
-					lPricingApiExcelFilePathList.add(lFileName)
-				}
-				else{
-					lPricingApiMacroFilePathList.add(lFileName)
-				}
-			}
+		List<String> lListPricingApiFile=IDNPricingApiHelper.getPricingApiFileList(lPath)
+		List<String> lListPricingApiExcelFile=[]
+		List<String> lListPricingApiMacroFile=[]
+		Map lMapPricingApiSourceFileResult=IDNPricingApiHelper.getMapPricingApiSourceFileList(lListPricingApiFile)
+		if(!lMapPricingApiSourceFileResult.Result){
+			return lreturn
 		}
+		lListPricingApiExcelFile=lMapPricingApiSourceFileResult.ListExcelGenericFile
+		lListPricingApiMacroFile=lMapPricingApiSourceFileResult.ListMacroGenericFile
 		try{
-			for(Integer lMainIndex=0;lMainIndex<=lPricingApiExcelFilePathList.size()-1;lMainIndex++){
-				String lExcelFileName=lPricingApiExcelFilePathList.get(lMainIndex)
-				Workbook lTestExcelFileGenericTestDataWorkBook=null
-				Sheet lPricingApiSheet=null
-				String lExcelGenericFilename=''
-				lTestExcelFileGenericTestDataWorkBook=IGNUemaHelper.getExcelWorkbookInstanceFromFileName(lExcelFileName)
-				lPricingApiSheet=IGNUemaHelper.getExcelWorkSheetFromExcelWorkbook(lTestExcelFileGenericTestDataWorkBook,'PricingAPI')
-				if(!IGNUemaHelper.checkObjectNullOfObject(lTestExcelFileGenericTestDataWorkBook)){
-					if(IGNUemaHelper.checkObjectNullOfObject(lPricingApiSheet)){
-						IGNUemaHelper.printLog('PricingApi Generic  Sheet not valid')
+			for(Integer lMainIndex=0;lMainIndex<=lListPricingApiExcelFile.size()-1;lMainIndex++){
+				String lStrExcelFileName=lListPricingApiExcelFile.get(lMainIndex)
+				Workbook lWorkBookExcelFileGenericTestData=null
+				Sheet lSheetPricingApi=null
+				lWorkBookExcelFileGenericTestData=IGNUemaHelper.getExcelWorkbookInstanceFromFileName(lStrExcelFileName)
+				lSheetPricingApi=IGNUemaHelper.getExcelWorkSheetFromExcelWorkbook(lWorkBookExcelFileGenericTestData,'PricingAPI')
+				if(!IGNUemaHelper.checkObjectNullOfObject(lWorkBookExcelFileGenericTestData)){
+					if(IGNUemaHelper.checkObjectNullOfObject(lSheetPricingApi)){
 						return lreturn
 					}
-					this.lIDNPricingApiGetPriceListUtil=new IDNPricingApiGetPriceListMainUtil()
-					Workbook lTestExcelFileUserTestDataWorkBook=IGNUemaHelper.getExcelWorkbookInstanceFromFileName(this.CURRENT_TEST_TRANSFORM_DATA_FILE_OUTPUT_USER)
-					Sheet lPricingApiUserSheet=IGNUemaHelper.getExcelWorkSheetFromExcelWorkbook(lTestExcelFileUserTestDataWorkBook,'UserDataPricingAPIAll')
-					Integer lPricingApiSheetFirstRowNum=lPricingApiSheet.getFirstRowNum()
-					Row lPricingApiSheetFirstRow=lPricingApiSheet.getRow(lPricingApiSheetFirstRowNum)
-					Integer lLastRowNumber=lPricingApiSheet.getLastRowNum()
-					Row lFirstRow=lPricingApiSheet.getRow(lPricingApiSheetFirstRowNum+1)
-					Integer lGenericDataSheetLastColumnNum=lFirstRow.getLastCellNum()
-					Integer lTargetedRowNumber=lFirstRow.rowNum
-					Integer lSubSetColumnIndex=0
-					Integer lTransactionColumnIndex=0
-					Integer lReferCaseIndex=0
-					Integer lReferCaseValid=0
-					for(Integer lIndex=0;lIndex<=lGenericDataSheetLastColumnNum;lIndex++){
-						Cell lTrackCell=ExcelKeywords.getCellByIndex(lPricingApiSheet,lTargetedRowNumber,lIndex)
-						IGNUemaHelper.printLog('lCellValue')
-						if(!IGNUemaHelper.checkObjectNullOfObject(lTrackCell)){
-							IGNUemaHelper.printLog(lTrackCell)
-							IGNUemaHelper.printLog(lTrackCell.getColumnIndex())
-							String lCellValue=lTrackCell.getStringCellValue()
-							Integer lColumnIndex=lTrackCell.getColumnIndex()
-							IGNUemaHelper.printLog(lCellValue)
-							if(lCellValue=='Subset'){
-								lSubSetColumnIndex=lColumnIndex
-							}
-							if(lCellValue=='TransactionType'){
-								lTransactionColumnIndex=lColumnIndex
-							}
-							if(lCellValue=='ReferSubset'){
-								lReferCaseIndex=lColumnIndex
-							}
-							if(lCellValue=='ReferCaseValid'){
-								lReferCaseValid=lColumnIndex
-							}
+					Integer lNumUserDataSheetLastRow=lSheetPricingApi.getLastRowNum()
+					Integer lNumLastRow=lSheetPricingApi.getLastRowNum()
+					if(lNumLastRow>2){
+						Workbook lWorkBookExcelFileUserTestData=IGNUemaHelper.getExcelWorkbookInstanceFromFileName(this.CURRENT_TEST_TRANSFORM_DATA_FILE_OUTPUT_USER)
+						Sheet lSheetUserData=IGNUemaHelper.getExcelWorkSheetFromExcelWorkbook(lWorkBookExcelFileUserTestData,'UserDataPricingAPIAll')
+						Integer lNumPricingApiSheetFirstRow=lSheetPricingApi.getFirstRowNum()
+						Row lRowPricingApiSheetFirst=lSheetPricingApi.getRow(lNumPricingApiSheetFirstRow)
+						String lStrProductVariable=''
+						String lStrProductName=''
+						Map lMapPricingApiProductTypeAndNameResult=this.getMapPricingApiProductTypeAndValueFromExcelSheet(lRowPricingApiSheetFirst)
+						if(!lMapPricingApiProductTypeAndNameResult.Result){
+							return lreturn
 						}
+						lStrProductVariable=lMapPricingApiProductTypeAndNameResult.StrProductType
+						lStrProductName=lMapPricingApiProductTypeAndNameResult.StrProductName
+						Map lMapPricingApiMergeCellRangeAddressListResult=this.getMapPricingApiMergeCellRangeAddressList(lSheetPricingApi,lStrProductName)
+						Map lMapPricingApiPrepareJsonInputFromExcelSheetResult=this.getMapPricingApiPrepareJsonInputFromExcelSheet(lWorkBookExcelFileGenericTestData,lSheetPricingApi,lMapPricingApiMergeCellRangeAddressListResult)
+						if(!lMapPricingApiPrepareJsonInputFromExcelSheetResult.Result){
+							return lreturn
+						}
+						Boolean lIsWriteOutputResultDone=IGNUemaHelper.saveExcelWorkbookByFileName(lStrExcelFileName,lWorkBookExcelFileGenericTestData)
+						if(!lIsWriteOutputResultDone){
+							return lreturn
+						}
+						if(IGNUemaHelper.checkObjectNullOfObject(lWorkBookExcelFileUserTestData)){
+							return lreturn
+						}
+						if(IGNUemaHelper.checkObjectNullOfObject(lSheetUserData)){
+							return lreturn
+						}
+						Boolean lIsPricingApiInputDataToUserExcelSheetOK=this.inputPricingApiInputDataToUserExcelSheet(lWorkBookExcelFileUserTestData,lSheetUserData,lMapPricingApiPrepareJsonInputFromExcelSheetResult)
+						ExcelKeywords.saveWorkbook(this.CURRENT_TEST_TRANSFORM_DATA_FILE_OUTPUT_USER,lWorkBookExcelFileUserTestData)
 					}
-					Boolean lIsWriteTestDataOk=true
-					Integer lUserDataSheetFirstRowNum=lPricingApiUserSheet.getFirstRowNum()
-					Integer lLastRow=lPricingApiUserSheet.getLastRowNum()
-					Row lPricingApiUserSheetCurrentRow=lPricingApiUserSheet.getRow(lUserDataSheetFirstRowNum)
-					Integer lCurrentRowNumber=lPricingApiUserSheetCurrentRow.rowNum
-					Integer lUserDataSheetLastColumnNum=lPricingApiUserSheetCurrentRow.getLastCellNum()
-					Integer lAppendIndex
-					String lTestCaseNumber=''
-					for(Integer lIndex=0;lIndex<lUserDataSheetLastColumnNum;lIndex++){
-						Cell lTrackCell=ExcelKeywords.getCellByIndex(lPricingApiUserSheet,lCurrentRowNumber,lIndex)
-						String lCellValue=lTrackCell.getStringCellValue()
-						Integer lColumnIndex=lTrackCell.getColumnIndex()
-						if(lCellValue=='PricingApiJsonRootQuotationInputPartOne'){
-							for(Integer lInputIndex=1;lInputIndex<=lLastRow;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lInputIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lExcelCellvalue=ExcelKeywords.getCellValueByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex)
-								if(lExcelCellvalue.isEmpty()){
-									lAppendIndex=lInputIndex
-									break
-								}
-							}
-						}
-					}
-					for(Integer lIndex=0;lIndex<lUserDataSheetLastColumnNum;lIndex++){
-						Cell lCurrentCell=ExcelKeywords.getCellByIndex(lPricingApiUserSheet,lCurrentRowNumber,lIndex)
-						String lCellValue=lCurrentCell.getStringCellValue()
-						Integer lColumnIndex=lCurrentCell.getColumnIndex()
-						Integer lTestCaseIndex=lAppendIndex
-						if(lCellValue=='Test_Case_No'){
-							Row lInputRow=lPricingApiUserSheet.getRow(lTestCaseIndex)
-							Integer lRowIndex=lInputRow.rowNum
-							lTestCaseNumber=lIDNPricingApiGetPriceListUtil.getValueFromExcelSheetForValidation(lPricingApiUserSheet,lRowIndex,lColumnIndex)
-							lTestCaseIndex=lTestCaseIndex+1
-						}
-					}
-					IGNUemaHelper.printLog('lFirstCaseNumber')
-					IGNUemaHelper.printLog(lTestCaseNumber)
-					String lProductVariable=''
-					String lProductName=''
-					Map lMapGetProductTypeAndValueResult=this.getMapProductTypeAndValueFromExcelSheet(lPricingApiSheetFirstRow)
-					if(lMapGetProductTypeAndValueResult.Result){
-						lProductVariable=lMapGetProductTypeAndValueResult.ProductType
-						lProductName=lMapGetProductTypeAndValueResult.ProductName
-					}
-					Map lMapGetTransactionHeader=this.getMapTransactionTypeAndHeaderFromExcelSheet(lPricingApiSheet)
-					String lTransactionTypeHeader=lIDNPricingApiGetPriceListUtil.getValueFromExcelSheetForValidation(lPricingApiSheet,1,1)
-					Integer lNumGenericTestDataCellMergeList=lPricingApiSheet.getNumMergedRegions()
-					CellRangeAddress[] lCellRangeAddressMergedList=new CellRangeAddress[lNumGenericTestDataCellMergeList]
-					for(Integer lIndex=0;lIndex<lCellRangeAddressMergedList.length;lIndex++){
-						lCellRangeAddressMergedList[lIndex]=lPricingApiSheet.getMergedRegion(lIndex)
-					}
-					CellRangeAddress lCellRangeAddressQuotationInput
-					CellRangeAddress lCellRangeAddressPlanOption
-					CellRangeAddress lCellRangeAddressMultiCover
-					CellRangeAddress lCellRangeAddressAdditionalCoverage
-					CellRangeAddress lCellRangeAddressOptionalData
-					CellRangeAddress lCellRangeAddressInputPremium
-					CellRangeAddress lCellRangeAddressPayment
-					CellRangeAddress lCellRangeAddressTransaction
-					CellRangeAddress lCellRangeAddressPremium
-					CellRangeAddress lCellRangeAddressVehicleData
-					CellRangeAddress lCellRangeAddressInsuredData
-					CellRangeAddress lCellRangeAddressAdditionalInsuredData
-					CellRangeAddress lCellRangeAddressPolicyHolderData
-					String lOptionalDataParameterName=''
-					String lAdditionalInsuredDataParameterName=''
-					for(Integer lIndex=0;lIndex<lNumGenericTestDataCellMergeList;lIndex++){
-						Row lCurrentRow=lPricingApiSheet.getRow(lCellRangeAddressMergedList[lIndex].getFirstRow())
-						Cell lCell=lCurrentRow.getCell(lCellRangeAddressMergedList[lIndex].getFirstColumn())
-						IGNUemaHelper.printLog(lCell)
-						String lCellRangeAddressHeading=lCell.getStringCellValue()
-						IGNUemaHelper.printLog('lCellRangeAddressHeading')
-						IGNUemaHelper.printLog(lCellRangeAddressHeading)
-						if(lCellRangeAddressHeading=='QuotationInput'){
-							lCellRangeAddressQuotationInput=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='VehicleAccessories'){
-							lOptionalDataParameterName=lCellRangeAddressHeading
-							lCellRangeAddressOptionalData=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='HealthQuestion'){
-							lOptionalDataParameterName=lCellRangeAddressHeading
-							lCellRangeAddressOptionalData=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='NamedDriver'){
-							lOptionalDataParameterName=lCellRangeAddressHeading
-							lCellRangeAddressOptionalData=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='PlanOption'){
-							lCellRangeAddressPlanOption=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='MultiCover'){
-							lCellRangeAddressMultiCover=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='AdditionalCoverage'){
-							lCellRangeAddressAdditionalCoverage=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='InputPremium'){
-							lCellRangeAddressInputPremium=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='Payment'){
-							lCellRangeAddressPayment=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='Transaction'){
-							lCellRangeAddressTransaction=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='Premium'){
-							lCellRangeAddressPremium=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='VehicleData'){
-							lCellRangeAddressVehicleData=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='InsuredData'){
-							lCellRangeAddressInsuredData=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='AdditionalInsuredData'){
-							lAdditionalInsuredDataParameterName=lCellRangeAddressHeading
-							lCellRangeAddressAdditionalInsuredData=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='BeneficiaryInsuredData'){
-							lAdditionalInsuredDataParameterName=lCellRangeAddressHeading
-							lCellRangeAddressAdditionalInsuredData=lCellRangeAddressMergedList[lIndex]
-						}
-						if(lCellRangeAddressHeading=='PolicyHolderData'){
-							lCellRangeAddressPolicyHolderData=lCellRangeAddressMergedList[lIndex]
-						}
-					}
-					IGNUemaHelper.printLog(lCellRangeAddressMergedList)
-					Row lSubHeaderRow=lPricingApiSheet.getRow(lCellRangeAddressMergedList[0].getFirstRow()+1)
-					Boolean lCheckRow=IGNUemaHelper.checkObjectNullOfObject(lSubHeaderRow)
-					List<String> lQuotationInputSubHeaderList=[]
-					Integer lCellRangeAddressQuotationInputColumnLast=lCellRangeAddressQuotationInput.getLastColumn()-lCellRangeAddressQuotationInput.getFirstColumn()
-					Map lMapQuotationInputSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressQuotationInput,lSubHeaderRow,lCellRangeAddressQuotationInputColumnLast,false)
-					if(lMapQuotationInputSubHeaderList.Result){
-						lQuotationInputSubHeaderList=lMapQuotationInputSubHeaderList.CellValueList
-					}
-					IGNUemaHelper.printLog(lCellRangeAddressPlanOption)
-					List<String> lPlanOptionSubHeaderList=[]
-					Integer lCellRangeAddressPlanOptionColumnLast=lCellRangeAddressPlanOption.getLastColumn()-lCellRangeAddressPlanOption.getFirstColumn()
-					Map lMapPlanOptionSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressPlanOption,lSubHeaderRow,lCellRangeAddressPlanOptionColumnLast,false)
-					if(lMapPlanOptionSubHeaderList.Result){
-						lPlanOptionSubHeaderList=lMapPlanOptionSubHeaderList.CellValueList
-					}
-					IGNUemaHelper.printLog(lCellRangeAddressMultiCover)
-					List<String> lMultiCoverSubHeaderList=[]
-					Integer lCellRangeAddressMultiCoverColumnLast=lCellRangeAddressMultiCover.getLastColumn()-lCellRangeAddressMultiCover.getFirstColumn()
-					Map lMapMultiCoverSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressMultiCover,lSubHeaderRow,lCellRangeAddressMultiCoverColumnLast,false)
-					if(lMapMultiCoverSubHeaderList.Result){
-						lMultiCoverSubHeaderList=lMapMultiCoverSubHeaderList.CellValueList
-					}
-					List<String> lOptionalDataSubHeaderList=[]
-					Integer lCellRangeAddressOptionalDataColumnLast=lCellRangeAddressOptionalData.getLastColumn()-lCellRangeAddressOptionalData.getFirstColumn()
-					Map lMapOptionalDataSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressOptionalData,lSubHeaderRow,lCellRangeAddressOptionalDataColumnLast,false)
-					if(lMapOptionalDataSubHeaderList.Result){
-						lOptionalDataSubHeaderList=lMapOptionalDataSubHeaderList.CellValueList
-					}
-					List<String> lAdditionalCoverageSubHeaderList=[]
-					Integer lCellRangeAddressAdditionalCoverageColumnLast=lCellRangeAddressAdditionalCoverage.getLastColumn()-lCellRangeAddressAdditionalCoverage.getFirstColumn()
-					Map lMapAdditionalCoverageSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressAdditionalCoverage,lSubHeaderRow,lCellRangeAddressAdditionalCoverageColumnLast,false)
-					if(lMapAdditionalCoverageSubHeaderList.Result){
-						lAdditionalCoverageSubHeaderList=lMapAdditionalCoverageSubHeaderList.CellValueList
-					}
-					List<String> lInputPremiumSubHeaderList=[]
-					Integer lCellRangeAddressInputPremiumColumnLast=lCellRangeAddressInputPremium.getLastColumn()-lCellRangeAddressInputPremium.getFirstColumn()
-					Map lMapInputPremiumSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressInputPremium,lSubHeaderRow,lCellRangeAddressInputPremiumColumnLast,false)
-					if(lMapInputPremiumSubHeaderList.Result){
-						lInputPremiumSubHeaderList=lMapInputPremiumSubHeaderList.CellValueList
-					}
-					List<String> lPaymentSubHeaderList=[]
-					Integer lCellRangeAddressPaymentColumnLast=lCellRangeAddressPayment.getLastColumn()-lCellRangeAddressPayment.getFirstColumn()
-					Map lMapPaymentSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressPayment,lSubHeaderRow,lCellRangeAddressPaymentColumnLast,false)
-					if(lMapPaymentSubHeaderList.Result){
-						lPaymentSubHeaderList=lMapPaymentSubHeaderList.CellValueList
-					}
-					List<String> lTransactionSubHeaderList=[]
-					Integer lCellRangeAddressTransactionColumnLast=lCellRangeAddressTransaction.getLastColumn()-lCellRangeAddressTransaction.getFirstColumn()
-					Map lMapTransactionSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressTransaction,lSubHeaderRow,lCellRangeAddressTransactionColumnLast,false)
-					if(lMapTransactionSubHeaderList.Result){
-						lTransactionSubHeaderList=lMapTransactionSubHeaderList.CellValueList
-					}
-					List<String> lPremiumSubHeaderList=[]
-					Integer lCellRangeAddressPremiumColumnLast=lCellRangeAddressPremium.getLastColumn()-lCellRangeAddressPremium.getFirstColumn()
-					Map lMapPremiumSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressPremium,lSubHeaderRow,lCellRangeAddressPremiumColumnLast,false)
-					if(lMapPremiumSubHeaderList.Result){
-						lPremiumSubHeaderList=lMapPremiumSubHeaderList.CellValueList
-					}
-					List<String> lVehicleDataSubHeaderList=[]
-					Integer lCellRangeAddressVehicleDataColumnLast=0
-					if(lProductName.contains('Motor')){
-						lCellRangeAddressVehicleDataColumnLast=lCellRangeAddressVehicleData.getLastColumn()-lCellRangeAddressVehicleData.getFirstColumn()
-						Map lMapVehicleDataSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressVehicleData,lSubHeaderRow,lCellRangeAddressVehicleDataColumnLast,false)
-						if(lMapVehicleDataSubHeaderList.Result){
-							lVehicleDataSubHeaderList=lMapVehicleDataSubHeaderList.CellValueList
-						}
-					}
-					List<String> lInsuredDataSubHeaderList=[]
-					Integer lCellRangeAddressInsuredDataColumnLast=lCellRangeAddressInsuredData.getLastColumn()-lCellRangeAddressInsuredData.getFirstColumn()
-					Map lMapInsuredDataSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressInsuredData,lSubHeaderRow,lCellRangeAddressInsuredDataColumnLast,false)
-					if(lMapInsuredDataSubHeaderList.Result){
-						lInsuredDataSubHeaderList=lMapInsuredDataSubHeaderList.CellValueList
-					}
-					IGNUemaHelper.printLog(lCellRangeAddressAdditionalInsuredData)
-					List<String> lAdditionalInsuredDataSubHeaderList=[]
-					Integer lCellRangeAddressAdditionalInsuredDataColumnLast=lCellRangeAddressAdditionalInsuredData.getLastColumn()-lCellRangeAddressAdditionalInsuredData.getFirstColumn()
-					Map lMapAdditionalInsuredDataSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressAdditionalInsuredData,lSubHeaderRow,lCellRangeAddressAdditionalInsuredDataColumnLast,false)
-					if(lMapAdditionalInsuredDataSubHeaderList.Result){
-						lAdditionalInsuredDataSubHeaderList=lMapAdditionalInsuredDataSubHeaderList.CellValueList
-					}
-					List<String> lPolicyHolderDataSubHeaderList=[]
-					Integer lCellRangeAddressPolicyHolderDataColumnLast=lCellRangeAddressPolicyHolderData.getLastColumn()-lCellRangeAddressPolicyHolderData.getFirstColumn()
-					Map lMapPolicyHolderDataSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressPolicyHolderData,lSubHeaderRow,lCellRangeAddressPolicyHolderDataColumnLast,false)
-					if(lMapPolicyHolderDataSubHeaderList.Result){
-						lPolicyHolderDataSubHeaderList=lMapPolicyHolderDataSubHeaderList.CellValueList
-					}
-					List lCurrentCellQuotationInputList=[]
-					List lCurrentCellInsuredDataList=[]
-					List lCurrentCellAdditionalInsuredDataList=[]
-					List lCurrentCellPolicyHolderDataList=[]
-					List lCurrentCellVehicleDataList=[]
-					List lCurrentCellOptionalDataList=[]
-					List lCurrentCellPlanOptionList=[]
-					List lCurrentCellMultiCover=[]
-					List lCurrentCellMultiCoverDataList=[]
-					List lCurrentCellAdditionalCoverageList=[]
-					List lCurrentCellInputPremiumList=[]
-					List lCurrentCellPaymentList=[]
-					List lCurrentCellTransactionList=[]
-					List lCurrentCellPremiumList=[]
-					List lJsonQuotationInputList=[]
-					List lJsonVehicleDataList=[]
-					List lJsonPremiumList=[]
-					List lJsonPlanOptionList=[]
-					List lJsonMultiCoverList=[]
-					List lJsonPlanAdditionalCoverageDataList=[]
-					List lJsonInputPremiumDataList=[]
-					List lJsonPaymentList=[]
-					List lJsonTransactionList=[]
-					List lQuotationInputDateList=[]
-					List<String> lReferCaseNumberList=[]
-					List<String> lQuotationInputList=new ArrayList<String>()
-					List<String> lInsuredDataList=new ArrayList<String>()
-					List<String> lAdditionalInsuredDataList=new ArrayList<String>()
-					List<String> lPolicyHolderDataList=new ArrayList<String>()
-					List<String> lVehicleDataList=new ArrayList<String>()
-					List<String> lTransactionList=new ArrayList<String>()
-					List<String> lOptionalDataList=new ArrayList<String>()
-					List<String> lPlanOptionList=new ArrayList<String>()
-					List<String> lMultiCoverList=new ArrayList<String>()
-					List<String> lAdditionalCoverageList=new ArrayList<String>()
-					List<String> lInputPremiumList=new ArrayList<String>()
-					List<String> lPremiumList=new ArrayList<String>()
-					List<String> lPaymentList=new ArrayList<String>()
-					List<String> lTransactionTypeList=new ArrayList<String>()
-					List lPlanOptionListAll=new ArrayList()
-					List lPaymentRowKeyList=new ArrayList()
-					List lPlanOptionRowKeyListAll=new ArrayList()
-					List lPlanOptionRowKeyList=new ArrayList()
-					Boolean lIsMultiCoverFlag=true
-					List lMultiCoverListAll=new ArrayList()
-					List lSubsetListAll=new ArrayList()
-					List lReferSubSetListAll=new ArrayList()
-					String lPreviousMultiCover=''
-					List lAdditionalCoverageListAll=new ArrayList()
-					List lInputPremiumListAll=new ArrayList()
-					List lPaymentListAll=new ArrayList()
-					List lTransactionListAll=new ArrayList()
-					List lPremiumListAll=new ArrayList()
-					List lInvalidReferCaseList=[]
-					Boolean lIsWriteReferCaseStatusToSheet=false
-					for(Integer lIndex=2;lIndex<=lLastRowNumber;lIndex++){
-						IGNUemaHelper.printLog('llCellRangeAddressQuotationInput.getFirstRow()'+lIndex)
-						String lSubSetValue=lIDNPricingApiGetPriceListUtil.getValueFromExcelSheetForValidation(lPricingApiSheet,lIndex,lSubSetColumnIndex)
-						String lReferTestCaseValue=lIDNPricingApiGetPriceListUtil.getValueFromExcelSheetForValidation(lPricingApiSheet,lIndex,lReferCaseIndex)
-						String lTransactionTypeValue=lIDNPricingApiGetPriceListUtil.getValueFromExcelSheetForValidation(lPricingApiSheet,lIndex,lTransactionColumnIndex)
-						Integer lLastTransactionIndex=lTransactionTypeList.size()-1
-						IGNUemaHelper.printLog(lTransactionTypeList+''+lTransactionTypeList.size()+''+lLastTransactionIndex)
-						if(IGNUemaHelper.checkObjectEmptyOfString(lTransactionTypeValue)){
-							lTransactionTypeValue=lTransactionTypeList.get(lLastTransactionIndex)
-							Boolean lIsWriteTransactionTypeValueToSheet=lIDNPricingApiGetPriceListUtil.inputPricingApiResultToExcelSheetForValidation(lPricingApiSheet,lIndex,lTransactionColumnIndex,lTransactionTypeValue)
-							if(!lIsWriteTransactionTypeValueToSheet){
-								return lreturn
-							}
-						}else{
-							lTransactionTypeList.add(lTransactionTypeValue)
-						}
-						if(!lSubSetValue.isEmpty()){
-							lSubsetListAll.add(lSubSetValue)
-						}
-						if(!lReferTestCaseValue.isEmpty()){
-							lReferSubSetListAll.add(lReferTestCaseValue)
-							if(lTransactionTypeValue=='New Biz'){
-								lInvalidReferCaseList.add(lSubSetValue)
-								lIsWriteReferCaseStatusToSheet=lIDNPricingApiGetPriceListUtil.inputPricingApiResultToExcelSheetForValidation(lPricingApiSheet,lIndex,lReferCaseValid,'Invalid')
-							}
-							else{
-								if(lInvalidReferCaseList.contains(lReferTestCaseValue)){
-									lIsWriteReferCaseStatusToSheet=lIDNPricingApiGetPriceListUtil.inputPricingApiResultToExcelSheetForValidation(lPricingApiSheet,lIndex,lReferCaseValid,'Invalid')
-								}
-								else{
-									lIsWriteReferCaseStatusToSheet=lIDNPricingApiGetPriceListUtil.inputPricingApiResultToExcelSheetForValidation(lPricingApiSheet,lIndex,lReferCaseValid,'Valid')
-								}
-							}
-							if(!lIsWriteReferCaseStatusToSheet){
-								return lreturn
-							}
-						}
-						Row lCurrentRow=lPricingApiSheet.getRow(lCellRangeAddressQuotationInput.getFirstRow()+lIndex)
-						Map lMapCurrentCellQuotationInputList=this.getMapQuotationInputValueFromExcelSpecificRange(lTestExcelFileGenericTestDataWorkBook,lPricingApiSheet,lCellRangeAddressQuotationInput,lCurrentRow,lCellRangeAddressQuotationInputColumnLast,true)
-						if(lMapCurrentCellQuotationInputList.Result){
-							lCurrentCellQuotationInputList=lMapCurrentCellQuotationInputList.CellValueList
-						}
-						Boolean lIsCurrentCellQuotationInputListValueAllContainStringNone=IGNUemaHelper.checkAllValueInListContainSameString(lCurrentCellQuotationInputList,'None')
-						if(lIsCurrentCellQuotationInputListValueAllContainStringNone){
-							lCurrentCellQuotationInputList=[]
-						}
-						Map lMapCurrentCellInsuredDataList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressInsuredData,lCurrentRow,lCellRangeAddressInsuredDataColumnLast,true)
-						if(lMapCurrentCellInsuredDataList.Result){
-							lCurrentCellInsuredDataList=lMapCurrentCellInsuredDataList.CellValueList
-						}
-						Map lMapCurrentCellAdditionalInsuredDataList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressAdditionalInsuredData,lCurrentRow,lCellRangeAddressAdditionalInsuredDataColumnLast,true)
-						if(lMapCurrentCellAdditionalInsuredDataList.Result){
-							lCurrentCellAdditionalInsuredDataList=lMapCurrentCellAdditionalInsuredDataList.CellValueList
-						}
-						Map lMapCurrentCellPolicyHolderDataList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressPolicyHolderData,lCurrentRow,lCellRangeAddressPolicyHolderDataColumnLast,true)
-						if(lMapCurrentCellPolicyHolderDataList.Result){
-							lCurrentCellPolicyHolderDataList=lMapCurrentCellPolicyHolderDataList.CellValueList
-						}
-						List lMapPlanOptionRowKeyList=[]
-						Map lMapCurrentCellPlanOptionList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressPlanOption,lCurrentRow,lCellRangeAddressPlanOptionColumnLast,true)
-						if(lMapCurrentCellPlanOptionList.Result){
-							lCurrentCellPlanOptionList=lMapCurrentCellPlanOptionList.CellValueList
-							Map lMapPlanOptionRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellPlanOptionList)
-							if(lMapPlanOptionRowKeyListResult.Result){
-								lMapPlanOptionRowKeyList=lMapPlanOptionRowKeyListResult.TargetInputRowKeyList
-								IGNUemaHelper.printLog(lMapPlanOptionRowKeyList)
-							}
-						}
-						lPlanOptionRowKeyList.add(lMapPlanOptionRowKeyList)
-						if(!lCurrentCellPlanOptionList.isEmpty()){
-							lPlanOptionList.add(lCurrentCellPlanOptionList)
-						}
-						Map lQuotationInputDate=[:]
-						List lMapQuotationInputRowKeyList=[]
-						Map lMapQuotationInputRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellQuotationInputList)
-						if(lMapQuotationInputRowKeyListResult.Result){
-							lMapQuotationInputRowKeyList=lMapQuotationInputRowKeyListResult.TargetInputRowKeyList
-						}
-						for(Integer lQuotationInputIndex=0;lQuotationInputIndex<=lQuotationInputSubHeaderList.size()-1;lQuotationInputIndex++){
-							String lQuotationHeaderValue=lQuotationInputSubHeaderList.get(lQuotationInputIndex)
-							if(lQuotationHeaderValue=='StartDate'){
-								lQuotationInputDate.put(lQuotationInputSubHeaderList.get(lQuotationInputIndex),lMapQuotationInputRowKeyList.get(lQuotationInputIndex))
-							}
-							if(lQuotationHeaderValue=='EffectiveDate'){
-								lQuotationInputDate.put(lQuotationInputSubHeaderList.get(lQuotationInputIndex),lMapQuotationInputRowKeyList.get(lQuotationInputIndex))
-							}
-							if(lQuotationHeaderValue=='FirstQuote'){
-								lQuotationInputDate.put(lQuotationInputSubHeaderList.get(lQuotationInputIndex),lMapQuotationInputRowKeyList.get(lQuotationInputIndex))
-							}
-							if(lQuotationHeaderValue=='QuoteDate'){
-								lQuotationInputDate.put(lQuotationInputSubHeaderList.get(lQuotationInputIndex),lMapQuotationInputRowKeyList.get(lQuotationInputIndex))
-							}
-							if(lQuotationHeaderValue=='EndDate'){
-								lQuotationInputDate.put(lQuotationInputSubHeaderList.get(lQuotationInputIndex),lMapQuotationInputRowKeyList.get(lQuotationInputIndex))
-							}
-							if(lQuotationHeaderValue=='MasterSetId'){
-								lQuotationInputDate.put(lQuotationInputSubHeaderList.get(lQuotationInputIndex),lMapQuotationInputRowKeyList.get(lQuotationInputIndex))
-							}
-							if(lQuotationHeaderValue=='EndorseCancellationMethod'){
-								lQuotationInputDate.put(lQuotationInputSubHeaderList.get(lQuotationInputIndex),lMapQuotationInputRowKeyList.get(lQuotationInputIndex))
-							}
-						}
-						lQuotationInputDateList.add(lQuotationInputDate)
-						if(lProductName.contains('Motor')){
-							Map lMapCurrentCellVehicleDataList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressVehicleData,lCurrentRow,lCellRangeAddressVehicleDataColumnLast,false)
-							if(lMapCurrentCellVehicleDataList.Result){
-								lCurrentCellVehicleDataList=lMapCurrentCellVehicleDataList.CellValueList
-							}
-							Boolean lIsCurrentCellVehicleDataListValueAllContainStringNone=IGNUemaHelper.checkAllValueInListContainSameString(lCurrentCellVehicleDataList,'None')
-							if(lIsCurrentCellVehicleDataListValueAllContainStringNone){
-								lCurrentCellVehicleDataList=[]
-							}
-						}
-
-						Map lMapPremium=[:]
-						if(!lCurrentCellQuotationInputList.isEmpty()){
-							lQuotationInputList.addAll(lCurrentCellQuotationInputList)
-							lInsuredDataList.addAll(lCurrentCellInsuredDataList)
-							lAdditionalInsuredDataList.addAll(lCurrentCellAdditionalInsuredDataList)
-							lPolicyHolderDataList.addAll(lCurrentCellPolicyHolderDataList)
-							lVehicleDataList.addAll(lCurrentCellVehicleDataList)
-							lPlanOptionRowKeyListAll.add(lMapPlanOptionRowKeyList)
-							lPlanOptionListAll.add(lCurrentCellPlanOptionList)
-							lReferTestCaseValue=lIDNPricingApiGetPriceListUtil.getValueFromExcelSheetForValidation(lPricingApiSheet,lIndex,lReferCaseIndex)
-							lReferCaseNumberList.add(lReferTestCaseValue)
-						}
-						Map lMapCurrentCellOptionalDataList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressOptionalData,lCurrentRow,lCellRangeAddressOptionalDataColumnLast,false)
-						if(lMapCurrentCellOptionalDataList.Result){
-							lCurrentCellOptionalDataList=lMapCurrentCellOptionalDataList.CellValueList
-						}
-						Boolean lIsCurrentCellOptionalDataListValueAllContainStringNone=IGNUemaHelper.checkAllValueInListContainSameString(lCurrentCellOptionalDataList,'None')
-						if(lIsCurrentCellOptionalDataListValueAllContainStringNone){
-							lCurrentCellOptionalDataList=[]
-						}
-						if(!lCurrentCellOptionalDataList.isEmpty()){
-							lOptionalDataList.addAll(lCurrentCellOptionalDataList)
-						}
-						if(lCurrentCellQuotationInputList.isEmpty()){
-							if(!lSubSetValue.isEmpty()){
-								lPlanOptionListAll.add(lCurrentCellPlanOptionList)
-								lPlanOptionRowKeyListAll.add(lMapPlanOptionRowKeyList)
-								lAdditionalCoverageListAll.add(lAdditionalCoverageList)
-								lAdditionalCoverageList=[]
-								lInputPremiumListAll.add(lInputPremiumList)
-								lInputPremiumList=[]
-								lPaymentListAll.add(lPaymentList)
-								lPaymentList=[]
-								lPremiumListAll.add(lPremiumList)
-								lPremiumList=[]
-								lTransactionListAll.add(lTransactionList)
-								lTransactionList=[]
-								if(!lIsMultiCoverFlag){
-									lMultiCoverListAll.add(lMultiCoverList)
-									lMultiCoverList=[]
-								}else{
-									IGNUemaHelper.printLog('SubSet Starts Flag Yes'+lIndex)
-									lMultiCoverListAll.add(lMultiCoverList)
-									lMultiCoverList=[]
-								}
-							}else{
-								lAdditionalCoverageListAll.add(lAdditionalCoverageList)
-								lInputPremiumListAll.add(lInputPremiumList)
-								lPaymentListAll.add(lPaymentList)
-								lTransactionListAll.add(lTransactionList)
-							}
-						}
-						Row lMultiCoverCurrentRow=lPricingApiSheet.getRow(lCellRangeAddressMultiCover.getFirstRow()+lIndex)
-						Map lMapCurrentCellMultiCover=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressMultiCover,lCurrentRow,lCellRangeAddressMultiCoverColumnLast,true)
-						if(lMapCurrentCellMultiCover.Result){
-							lCurrentCellMultiCover=lMapCurrentCellMultiCover.CellValueList
-						}
-						String lMultiCoverFlag=lCurrentCellMultiCover.get(0)
-						if(!IGNUemaHelper.checkObjectEmptyOfString(lMultiCoverFlag)){
-							lIsMultiCoverFlag=IGNUemaHelper.convertStringToBoolean(lMultiCoverFlag)
-						}
-						Boolean lCheckCurrentCellMultiCoverListIsNone=IGNUemaHelper.checkAllValueInListContainSameString(lCurrentCellMultiCover,'None')
-						if(lCheckCurrentCellMultiCoverListIsNone){
-							lCurrentCellMultiCover=[]
-						}
-						if(!lCurrentCellMultiCover.isEmpty() || lIsMultiCoverFlag){
-							IGNUemaHelper.printLog('First Add the MulticoverList'+' '+lIsMultiCoverFlag)
-							lPreviousMultiCover=lCurrentCellMultiCover.get(1)
-							lMultiCoverList.add(lCurrentCellMultiCover.get(1))
-						}else{
-							List lMapInputMultiCoverRowKeyList=[]
-							Map lMapMultiCoverRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellMultiCover)
-							if(lMapMultiCoverRowKeyListResult.Result){
-								lMapInputMultiCoverRowKeyList=lMapMultiCoverRowKeyListResult.TargetInputRowKeyList
-							}
-							Map lMapMultiCoverRowNumberAndColumnNumber=lMapInputMultiCoverRowKeyList.get(1)
-							Integer lMultiCoverRowNumber=lMapMultiCoverRowNumberAndColumnNumber.RowNumber
-							Integer lMultiCoverColumnNumber=lMapMultiCoverRowNumberAndColumnNumber.ColumnNumber
-							Boolean lIsWriteMultiCoverToExcelSheet=lIDNPricingApiGetPriceListUtil.inputPricingApiResultToExcelSheetForValidation(lPricingApiSheet,lMultiCoverRowNumber,lMultiCoverColumnNumber,lPreviousMultiCover)
-							if(!lIsWriteMultiCoverToExcelSheet){
-								return lreturn
-							}
-							lMultiCoverList.add(lPreviousMultiCover)
-						}
-						Map lMapAdditionalCoverage=[:]
-						Table<Integer,Integer,String> lTableExcelSheetAdditionalCoverage=HashBasedTable.create()
-						Map lMapCurrentCellAdditionalCoverageList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressAdditionalCoverage,lCurrentRow,lCellRangeAddressAdditionalCoverageColumnLast,true)
-						if(lMapCurrentCellAdditionalCoverageList.Result){
-							lCurrentCellAdditionalCoverageList=lMapCurrentCellAdditionalCoverageList.CellValueList
-							List lMapAdditionalCoverageRowKeyList=[]
-							Map lMapAdditionalCoverageRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellAdditionalCoverageList)
-							if(lMapAdditionalCoverageRowKeyListResult.Result){
-								lMapAdditionalCoverageRowKeyList=lMapAdditionalCoverageRowKeyListResult.TargetInputRowKeyList
-							}
-							if(!lCurrentCellAdditionalCoverageList.isEmpty()){
-								for(Integer lAdditionalCoverageIndex=0;lAdditionalCoverageIndex<=lCurrentCellAdditionalCoverageList.size()-1;lAdditionalCoverageIndex++){
-									String lHeaderValue=lAdditionalCoverageSubHeaderList.get(lAdditionalCoverageIndex)
-									if(lHeaderValue.endsWith('Premium')||(lHeaderValue.contains('ValidationTestResult'))){
-										lMapAdditionalCoverage.put(lAdditionalCoverageSubHeaderList.get(lAdditionalCoverageIndex),lMapAdditionalCoverageRowKeyList.get(lAdditionalCoverageIndex))
-									}else{
-										lMapAdditionalCoverage.put(lAdditionalCoverageSubHeaderList.get(lAdditionalCoverageIndex),lCurrentCellAdditionalCoverageList.get(lAdditionalCoverageIndex))
-									}
-								}
-								lAdditionalCoverageList.add(lMapAdditionalCoverage)
-							}
-						}
-						Map lMapInputPremium=[:]
-						Table<Integer,Integer,String> lTableExcelSheetInputPremium=HashBasedTable.create()
-						Map lMapCurrentCellInputPremiumList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressInputPremium,lCurrentRow,lCellRangeAddressInputPremiumColumnLast,true)
-						if(lMapCurrentCellInputPremiumList.Result){
-							lCurrentCellInputPremiumList=lMapCurrentCellInputPremiumList.CellValueList
-							lTableExcelSheetInputPremium=lMapCurrentCellInputPremiumList.CellTable
-							Set<Integer> lTableInputPremiumKeySet=lTableExcelSheetInputPremium.columnKeySet()
-							List lMapInputPremiumRowKeyList=[]
-							Map lMapInputPremiumRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellInputPremiumList)
-							if(lMapInputPremiumRowKeyListResult.Result){
-								lMapInputPremiumRowKeyList=lMapInputPremiumRowKeyListResult.TargetInputRowKeyList
-							}
-							if(!lCurrentCellInputPremiumList.isEmpty()){
-								for(Integer lInputPremiumIndex=0;lInputPremiumIndex<=lCurrentCellInputPremiumList.size()-1;lInputPremiumIndex++){
-									String lHeaderValue=lInputPremiumSubHeaderList.get(lInputPremiumIndex)
-									if(lHeaderValue.endsWith('Premium')){
-										lMapInputPremium.put(lInputPremiumSubHeaderList.get(lInputPremiumIndex),lMapInputPremiumRowKeyList.get(lInputPremiumIndex))
-									}else{
-										lMapInputPremium.put(lInputPremiumSubHeaderList.get(lInputPremiumIndex),lCurrentCellInputPremiumList.get(lInputPremiumIndex))
-									}
-								}
-								lInputPremiumList.add(lMapInputPremium)
-							}
-						}
-						Map lMapPaymentList=[:]
-						Map lMapCurrentCellPaymentList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressPayment,lCurrentRow,lCellRangeAddressPaymentColumnLast,true)
-						if(lMapCurrentCellPaymentList.Result){
-							lCurrentCellPaymentList=lMapCurrentCellPaymentList.CellValueList
-							Table<Integer,Integer,String> lTableExcelSheetPayment=HashBasedTable.create()
-							lTableExcelSheetPayment=lMapCurrentCellPaymentList.CellTable
-							Set<Integer> lTablePaymentKeySet=lTableExcelSheetPayment.columnKeySet()
-							List lMapPaymentRowKeyList=[]
-							Map lMapPaymentRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellPaymentList)
-							if(lMapPaymentRowKeyListResult.Result){
-								lMapPaymentRowKeyList=lMapPaymentRowKeyListResult.TargetInputRowKeyList
-							}
-							if(!lCurrentCellPaymentList.isEmpty()){
-								for(Integer lCurrentPaymentIndex=0;lCurrentPaymentIndex<=lCurrentCellPaymentList.size()-1;lCurrentPaymentIndex++){
-									String lPaymentHeaderValue=lPaymentSubHeaderList.get(lCurrentPaymentIndex)
-									if(lPaymentHeaderValue=='PaymentFrequency' && lCurrentCellPaymentList.get(lCurrentPaymentIndex) !='None' ){
-										lMapPaymentList.put(lPaymentSubHeaderList.get(lCurrentPaymentIndex),lCurrentCellPaymentList.get(lCurrentPaymentIndex))
-									}else{
-										lMapPaymentList.put(lPaymentSubHeaderList.get(lCurrentPaymentIndex),lMapPaymentRowKeyList.get(lCurrentPaymentIndex))
-									}
-								}
-								lPaymentList.add(lMapPaymentList)
-							}
-						}
-						Map lMapTransactionList=[:]
-						Map lMapCurrentCellTransactionList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressTransaction,lCurrentRow,lCellRangeAddressTransactionColumnLast,true)
-						if(lMapCurrentCellTransactionList.Result){
-							lCurrentCellTransactionList=lMapCurrentCellTransactionList.CellValueList
-							List lMapTransactionRowKeyList=[]
-							Map lMapTransactionRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellTransactionList)
-							if(lMapTransactionRowKeyListResult.Result){
-								lMapTransactionRowKeyList=lMapTransactionRowKeyListResult.TargetInputRowKeyList
-							}
-							if(!lCurrentCellTransactionList.isEmpty()){
-								for(Integer lCurrentTransactionIndex=0;lCurrentTransactionIndex<=lCurrentCellTransactionList.size()-1;lCurrentTransactionIndex++){
-									String lTransactionHeaderValue=lTransactionSubHeaderList.get(lCurrentTransactionIndex)
-									lMapTransactionList.put(lTransactionSubHeaderList.get(lCurrentTransactionIndex),lMapTransactionRowKeyList.get(lCurrentTransactionIndex))
-								}
-								lTransactionList.add(lMapTransactionList)
-							}
-						}
-						Table<Integer,Integer,String> lTableExcelSheetPremium=HashBasedTable.create()
-						Map lMapCurrentCellPremiumList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressPremium,lCurrentRow,lCellRangeAddressPremiumColumnLast,true)
-						if(lMapCurrentCellPremiumList.Result){
-							lCurrentCellPremiumList=lMapCurrentCellPremiumList.CellValueList
-							List lMapPremiumRowKeyList=[]
-							Map lMapPremiumRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellPremiumList)
-							if(lMapPremiumRowKeyListResult.Result){
-								lMapPremiumRowKeyList=lMapPremiumRowKeyListResult.TargetInputRowKeyList
-							}
-							if(!lCurrentCellPremiumList.isEmpty()){
-								for(Integer lPremiumIndex=0;lPremiumIndex<=lCurrentCellPremiumList.size()-1;lPremiumIndex++){
-									String lHeaderValue=lPremiumSubHeaderList.get(lPremiumIndex)
-									lMapPremium.put(lPremiumSubHeaderList.get(lPremiumIndex),lMapPremiumRowKeyList.get(lPremiumIndex))
-								}
-								lPremiumList.add(lMapPremium)
-							}
-						}
-						Integer lNexRowIndex=lCellRangeAddressQuotationInput.getFirstRow()+lIndex+1
-						Row lNextRow=lPricingApiSheet.getRow(lNexRowIndex)
-						List lNextRowQuotationInputList=[]
-						Map lMapNextRowQuotationInputList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lPricingApiSheet,lCellRangeAddressQuotationInput,lNextRow,lCellRangeAddressQuotationInputColumnLast,false)
-						if(lMapNextRowQuotationInputList.Result){
-							lNextRowQuotationInputList=lMapNextRowQuotationInputList.CellValueList
-						}
-						Boolean lCheckNextRowQuotationInputListIsNone=IGNUemaHelper.checkAllValueInListContainSameString(lNextRowQuotationInputList,'None')
-						if(lCheckNextRowQuotationInputListIsNone){
-							lNextRowQuotationInputList=[]
-						}
-						IGNUemaHelper.printLog('lNextRowQuotationInputList')
-						IGNUemaHelper.printLog(lNextRowQuotationInputList)
-						if(!lNextRowQuotationInputList.isEmpty()||(lIndex==lLastRowNumber)){
-							Map lMapQuotationInput=[:]
-							Map lMapQuotationInputAll=[:]
-							Map lMapInsuredData=[:]
-							Map lMapAdditionalInsuredData=[:]
-							Map lMapPolicyHolderData=[:]
-							Map lMapVehicleData=[:]
-							Map lMapVehicleDataAll=[:]
-							Map lMapAdditionalCoverageData=[:]
-							Map lMapAdditionalCoverageDataAll=[:]
-							Map lMapInputPremiumData=[:]
-							Map lMapInputPremiumDataAll=[:]
-							Map lMapMultiCoverAll=[:]
-							Map lMapPaymentData=[:]
-							Map lMapPaymentDataAll=[:]
-							Map lMapPremiumDataAll=[:]
-							Map lMapTransactionData=[:]
-							List lPlanOptionListFinal=[]
-							for(Integer lPlanOptionIndex=0;lPlanOptionIndex<=lPlanOptionListAll.size()-1;lPlanOptionIndex++){
-								List lCurrentPlanOptionList=lPlanOptionListAll.get(lPlanOptionIndex)
-								List lCurrentPlanOptionRowKeyList=lPlanOptionRowKeyListAll.get(lPlanOptionIndex)
-								Map lMapPlanOptionList=[:]
-								for(Integer lCurrentPlanOptionIndex=0;lCurrentPlanOptionIndex<=lCurrentPlanOptionList.size()-1;lCurrentPlanOptionIndex++){
-									String lPlanName=lCurrentPlanOptionList.get(lCurrentPlanOptionIndex)
-									IGNUemaHelper.printLog(lPlanName)
-									if(lPlanName=='None'){
-										lMapPlanOptionList.put(lPlanOptionSubHeaderList.get(lCurrentPlanOptionIndex),lCurrentPlanOptionRowKeyList.get(lCurrentPlanOptionIndex))
-									}else{
-										lMapPlanOptionList.put(lPlanOptionSubHeaderList.get(lCurrentPlanOptionIndex),lCurrentPlanOptionList.get(lCurrentPlanOptionIndex))
-									}
-								}
-								lPlanOptionListFinal.add(lMapPlanOptionList)
-							}
-							lMapQuotationInputAll.put(lProductVariable,lProductName)
-							lMapQuotationInputAll.put(lTransactionTypeHeader,lTransactionTypeValue)
-							for(Integer lInsuredDataIndex=0;lInsuredDataIndex<=lInsuredDataList.size()-1;lInsuredDataIndex++){
-								String lInsuredDataValue=lInsuredDataList.get(lInsuredDataIndex)
-								String lQuotationHeaderValue=lInsuredDataSubHeaderList.get(lInsuredDataIndex)
-								lMapInsuredData.put(lInsuredDataSubHeaderList.get(lInsuredDataIndex),lInsuredDataValue)
-							}
-							String lAdditionalInsuredDataFirstHeaderValue=lAdditionalInsuredDataSubHeaderList.get(0)
-							String lAdditionalInsuredDataMainFirstIndex=''
-							Map lMapAdditionalInsuredDataFirstResult=this.getAdditionalInputData(lAdditionalInsuredDataFirstHeaderValue)
-							if(lMapAdditionalInsuredDataFirstResult.Result){
-								lAdditionalInsuredDataMainFirstIndex=lMapAdditionalInsuredDataFirstResult.TargetDataIndex
-							}
-							String lAdditionalInsuredDataMainIndex=''
-							String lAdditionalInsuredDataHeaderMainValue=''
-							List lMapAdditionalInsuredDataList=[]
-							for(Integer lAdditionalInsuredDataIndex=0;lAdditionalInsuredDataIndex<=lAdditionalInsuredDataList.size()-1;lAdditionalInsuredDataIndex++){
-								String lAdditionalInsuredDataValue=lAdditionalInsuredDataList.get(lAdditionalInsuredDataIndex)
-								String lAdditionalInsuredDataHeaderValue=lAdditionalInsuredDataSubHeaderList.get(lAdditionalInsuredDataIndex)
-								Map lMapAdditionalInsuredDataResult=this.getAdditionalInputData(lAdditionalInsuredDataHeaderValue)
-								if(lMapAdditionalInsuredDataResult.Result){
-									lAdditionalInsuredDataMainIndex=lMapAdditionalInsuredDataResult.TargetDataIndex
-									lAdditionalInsuredDataHeaderMainValue=lMapAdditionalInsuredDataResult.TargetMainHeaderValue
-								}
-								if(lAdditionalInsuredDataMainFirstIndex!=lAdditionalInsuredDataMainIndex){
-									lAdditionalInsuredDataMainFirstIndex=lAdditionalInsuredDataMainIndex
-									lMapAdditionalInsuredDataList.add(lMapAdditionalInsuredData)
-									lMapAdditionalInsuredData=[:]
-								}
-								lMapAdditionalInsuredData.put(lAdditionalInsuredDataHeaderMainValue,lAdditionalInsuredDataValue)
-							}
-							lMapAdditionalInsuredDataList.add(lMapAdditionalInsuredData)
-							for(Integer lPolicyHolderDataIndex=0;lPolicyHolderDataIndex<=lPolicyHolderDataList.size()-1;lPolicyHolderDataIndex++){
-								String lPolicyHolderDataValue=lPolicyHolderDataList.get(lPolicyHolderDataIndex)
-								String lQuotationHeaderValue=lPolicyHolderDataSubHeaderList.get(lPolicyHolderDataIndex)
-								lMapPolicyHolderData.put(lPolicyHolderDataSubHeaderList.get(lPolicyHolderDataIndex),lPolicyHolderDataValue)
-							}
-							for(Integer lQuotationInputIndex=0;lQuotationInputIndex<=lQuotationInputList.size()-1;lQuotationInputIndex++){
-								String lQuotationInputValue=lQuotationInputList.get(lQuotationInputIndex)
-								String lQuotationHeaderValue=lQuotationInputSubHeaderList.get(lQuotationInputIndex)
-								lMapQuotationInputAll.put(lQuotationInputSubHeaderList.get(lQuotationInputIndex),lQuotationInputValue)
-							}
-							for(Integer lVehicleDataIndex=0;lVehicleDataIndex<=lVehicleDataList.size()-1;lVehicleDataIndex++){
-								String lVehicleDataValue=lVehicleDataList.get(lVehicleDataIndex)
-								lMapVehicleDataAll.put(lVehicleDataSubHeaderList.get(lVehicleDataIndex),lVehicleDataValue)
-							}
-							List lMapOptionalDataList=[]
-							for(Integer lOptionalDataIndex=0;lOptionalDataIndex<lOptionalDataList.size()-1;lOptionalDataIndex=lOptionalDataIndex+2){
-								Map lMapOptionalData=[:]
-								String lOptionalDataName=lOptionalDataList.get(lOptionalDataIndex)
-								String lOptionalDataValue=lOptionalDataList.get(lOptionalDataIndex+1)
-								if(lOptionalDataName!='None'){
-									lMapOptionalData.put(lOptionalDataSubHeaderList.get(lOptionalDataIndex),lOptionalDataName)
-									lMapOptionalData.put(lOptionalDataSubHeaderList.get(lOptionalDataIndex+1),lOptionalDataValue)
-									lMapOptionalDataList.add(lMapOptionalData)
-								}
-							}
-							Map lMapOptionalDataAll=[:]
-							lMapQuotationInputAll.put(lOptionalDataParameterName,lMapOptionalDataList)
-							if(lIndex<=(lLastRowNumber)){
-								IGNUemaHelper.printLog('Adding Last Subset in the List'+lIndex+'  '+lLastRowNumber)
-								lMultiCoverListAll.add(lMultiCoverList)
-								lAdditionalCoverageListAll.add(lMapAdditionalCoverage)
-								lInputPremiumListAll.add(lMapInputPremium)
-								lPaymentListAll.add(lMapPaymentList)
-								lTransactionListAll.add(lMapTransactionList)
-								lPremiumListAll.add(lMapPremium)
-							}
-							lMapQuotationInput.put('QuotationInput',lMapQuotationInputAll)
-							lMapQuotationInput.put('InsuredData',lMapInsuredData)
-							lMapQuotationInput.put('AdditionalInsuredData',lMapAdditionalInsuredDataList)
-							lMapQuotationInput.put('PolicyHolderData',lMapPolicyHolderData)
-							IGNUemaHelper.printLog('lSubSetList')
-							if(lProductName.contains('Motor')){
-								lMapVehicleData.put('VehicleData',lMapVehicleDataAll)
-							}
-							lMapVehicleData.put('QuotationInputDateList',lQuotationInputDateList)
-							lMapVehicleData.put('SubSetList',lSubsetListAll)
-							lMapVehicleData.put('ReferSubSetList',lReferSubSetListAll)
-							lMapPremiumDataAll.put('Premium',lPremiumListAll)
-							lMapMultiCoverAll.put('CoverList',lMultiCoverListAll)
-							lMapAdditionalCoverageData.put('AdditionalCoverage',lAdditionalCoverageListAll)
-							lMapPaymentData.put('PaymentList',lPaymentListAll)
-							lMapInputPremiumData.put('InputPremium',lInputPremiumListAll)
-							lMapAdditionalCoverageDataAll.put('AdditionalCoverageList',lMapAdditionalCoverageData)
-							lMapPaymentDataAll.put('Payment',lMapPaymentData)
-							lMapInputPremiumDataAll.put('InputPremiumList',lMapInputPremiumData)
-							lMapTransactionData.put('Transaction',lTransactionListAll)
-							JsonBuilder lJsonQuotationInput=new JsonBuilder(lMapQuotationInput)
-							JsonBuilder lJsonVehicleData=new JsonBuilder(lMapVehicleData)
-							JsonBuilder lJsonPremiumData=new JsonBuilder(lMapPremiumDataAll)
-							JsonBuilder lJsonPlanListnput=new JsonBuilder(lPlanOptionListFinal)
-							JsonBuilder lJsonMultiCoverInput=new JsonBuilder(lMapMultiCoverAll)
-							JsonBuilder lJsonAddditionalCoverageListInput=new JsonBuilder(lMapAdditionalCoverageDataAll)
-							JsonBuilder lJsonInputPremiumList=new JsonBuilder(lMapInputPremiumDataAll)
-							JsonBuilder lJsonPaymentListInput=new JsonBuilder(lMapPaymentDataAll)
-							JsonBuilder lJsonTransactionInput=new JsonBuilder(lMapTransactionData)
-							lJsonQuotationInputList.add(lJsonQuotationInput.toString())
-							lJsonVehicleDataList.add(lJsonVehicleData.toString())
-							lJsonPremiumList.add(lJsonPremiumData.toString())
-							lJsonPlanOptionList.add(lJsonPlanListnput.toString())
-							lJsonPaymentList.add(lJsonPaymentListInput.toString())
-							lJsonMultiCoverList.add(lJsonMultiCoverInput.toString())
-							lJsonPlanAdditionalCoverageDataList.add(lJsonAddditionalCoverageListInput.toString())
-							lJsonInputPremiumDataList.add(lJsonInputPremiumList.toString())
-							lJsonTransactionList.add(lJsonTransactionInput.toString())
-							lPlanOptionList.clear()
-							lPlanOptionListAll=[]
-							lPlanOptionRowKeyListAll=[]
-							lPlanOptionRowKeyList.clear()
-							lMultiCoverList.clear()
-							lTransactionList.clear()
-							lSubsetListAll=[]
-							lReferSubSetListAll=[]
-							lPremiumListAll=[]
-							lCurrentCellAdditionalCoverageList.clear()
-							lMultiCoverListAll=[]
-							lQuotationInputList=[]
-							lInsuredDataList=[]
-							lAdditionalInsuredDataList=[]
-							lPolicyHolderDataList=[]
-							lVehicleDataList=[]
-							lPremiumList=[]
-							lOptionalDataList=[]
-							lPaymentList.clear()
-							lInputPremiumList.clear()
-							lPaymentRowKeyList.clear()
-							lAdditionalCoverageListAll=[]
-							lAdditionalCoverageList=[]
-							lPaymentListAll=[]
-							lTransactionListAll=[]
-							lQuotationInputDateList=[]
-							lInputPremiumListAll=[]
-						}
-						lCurrentCellQuotationInputList=[]
-						lCurrentCellVehicleDataList=[]
-						lCurrentCellPlanOptionList=[]
-						lCurrentCellMultiCover=[]
-						lCurrentCellAdditionalCoverageList=[]
-						lCurrentCellOptionalDataList=[]
-						lCurrentCellPaymentList=[]
-						lCurrentCellTransactionList
-					}
-					IGNUemaHelper.printLog('Save WorkBook')
-					Boolean lIsWriteOutputResultDone=IGNUemaHelper.saveExcelWorkbookByFileName(lExcelFileName,lTestExcelFileGenericTestDataWorkBook)
-					if(!lIsWriteOutputResultDone){
-						return lreturn
-					}
-					IGNUemaHelper.printLog('GetExcel WorkBook')
-					Sheet lMasterDataMappingSheet=IGNUemaHelper.getExcelWorkSheetFromExcelWorkbook(lTestExcelFileGenericTestDataWorkBook,'MasterData-Mapping')
-					if(IGNUemaHelper.checkObjectNullOfObject(lMasterDataMappingSheet)){
-						IGNUemaHelper.printLog('MasterdataSheet not found')
-						return lreturn
-					}
-					List lJsonFinalQuotationInputList=[]
-					IGNUemaHelper.printLog('lJsonQuotationInputList')
-					IGNUemaHelper.printLog(lJsonQuotationInputList)
-					IGNUemaHelper.printLog(lJsonQuotationInputList.size())
-					Map lMapQuotationInputParameterWithMasterParameterResult=this.inputMapQuotationInputParameterWithMasterParameter(lMasterDataMappingSheet,lOptionalDataParameterName)
-					if(lMapQuotationInputParameterWithMasterParameterResult.Result){
-						Map lMapQuotationInputParameterWithMasterParameterVehicleData=lMapQuotationInputParameterWithMasterParameterResult.VehicleDataParameter
-						Map lMapQuotationInputParameterWithMasterParameterInsuredList=lMapQuotationInputParameterWithMasterParameterResult.InsuredListParameter
-						Map lMapQuotationInputParameterWithMasterParameterQuoteData=lMapQuotationInputParameterWithMasterParameterResult.QuoteDataParameter
-						Map lMapQuotationInputParameterWithMasterParameterOptionalData=lMapQuotationInputParameterWithMasterParameterResult.OptionalDataParameter
-						Map lMapQuotationInputParameterWithMasterParameterBrokerInformation=lMapQuotationInputParameterWithMasterParameterResult.BrokerInformationParameter
-						Map lMapQuotationInputParameterWithMasterParameterInsuredData=lMapQuotationInputParameterWithMasterParameterResult.InsuredDataParameter
-						Map lMapQuotationInputParameterWithMasterParameterContactAddress=lMapQuotationInputParameterWithMasterParameterResult.ContactAddressParameter
-						List lMasterOptionalDataParameterList=[]
-						Map lMapMasterVehicleDataParameter=[:]
-						Map lMapMasterInsuredListParameter=[:]
-						Map lMapMasterQuoteDataParameter=[:]
-						Map lMapPreviousCoverDataParameter=[:]
-						Map lMapMasterBrokerInformation=[:]
-						Map lMapMasterInsuredData=[:]
-						Map lMapMasterInsuredContactAddressData=[:]
-						Map lMapMasterAdditionalInsuredData=[:]
-						Map lMapMasterAdditionalInsuredContactAddressData=[:]
-						Map lMapMasterPolicyHolderData=[:]
-						Map lMapMasterPolicyHolderContactAddressData=[:]
-						String  lMasterProductType=''
-						String  lMasterProductName=''
-						for(Integer lIndex=0;lIndex<lJsonQuotationInputList.size();lIndex++){
-							Map lMapQuotationInputData=[:]
-							lMapMasterVehicleDataParameter=[:]
-							lMapMasterInsuredListParameter=[:]
-							lMapMasterQuoteDataParameter=[:]
-							lMapMasterBrokerInformation=[:]
-							lMapMasterInsuredData=[:]
-							lMapMasterAdditionalInsuredData=[:]
-							lMapMasterPolicyHolderData=[:]
-							List lMasterInsuredListParameter=[]
-							List lMapMasterOptionalDataParameterList=[]
-							String lQuotationInput=lJsonQuotationInputList.get(lIndex)
-							Map lMapJson=new JsonSlurper().parseText(lQuotationInput)
-							Map lMapQuotationInput=lMapJson.QuotationInput
-							Map lMapInsuredData=lMapJson.InsuredData
-							List lMapAdditionalInsuredDataList=lMapJson.AdditionalInsuredData
-							IGNUemaHelper.printLog('lMapAdditionalInsuredDataList-Check')
-							IGNUemaHelper.printLog(lMapAdditionalInsuredDataList)
-							Map lMapPolicyHolderData=lMapJson.PolicyHolderData
-							for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterInsuredData){
-								String lMasterKey=lEntry.key.toString()
-								String lMasterKeyValue=lEntry.Value.toString()
-								String lMasterValue=lMapInsuredData.getAt(lMasterKey)
-								if(lMasterValue=='None'){
-									lMasterValue=''
-								}
-								lMapMasterInsuredData.put(lMasterKeyValue,lMasterValue)
-							}
-							for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterContactAddress){
-								String lMasterKey=lEntry.key.toString()
-								String lMasterKeyValue=lEntry.Value.toString()
-								String lMasterValue=lMapInsuredData.getAt(lMasterKey)
-								if(lMasterValue=='None'){
-									lMasterValue=''
-								}
-								lMapMasterInsuredContactAddressData.put(lMasterKeyValue,lMasterValue)
-							}
-							List lMasterInsuredContactAddressDataList=[]
-							lMasterInsuredContactAddressDataList.add(lMapMasterInsuredContactAddressData)
-							lMapMasterInsuredData.put('contactAddresses',lMasterInsuredContactAddressDataList)
-							Map lMapAdditionalInsuredData=[:]
-							List lMapMasterAdditionalInsuredDataList=[]
-							List lMasterAdditionalInsuredContactAddressDataList=[]
-							for(Integer lAdditionalInsuredIndex=0;lAdditionalInsuredIndex<=lMapAdditionalInsuredDataList.size()-1;lAdditionalInsuredIndex++){
-								lMapAdditionalInsuredData=lMapAdditionalInsuredDataList.get(lAdditionalInsuredIndex)
-								lMapMasterAdditionalInsuredData=[:]
-								lMasterAdditionalInsuredContactAddressDataList=[]
-								for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterInsuredData){
-									String lMasterKey=lEntry.key.toString()
-									String lMasterKeyValue=lEntry.Value.toString()
-									String lMasterValue=lMapAdditionalInsuredData.getAt(lMasterKey)
-									if(lMasterValue=='None'){
-										lMasterValue=''
-									}
-									lMapMasterAdditionalInsuredData.put(lMasterKeyValue,lMasterValue)
-								}
-								for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterContactAddress){
-									String lMasterKey=lEntry.key.toString()
-									String lMasterKeyValue=lEntry.Value.toString()
-									String lMasterValue=lMapAdditionalInsuredData.getAt(lMasterKey)
-									if(lMasterValue=='None'){
-										lMasterValue=''
-									}
-									lMapMasterAdditionalInsuredContactAddressData.put(lMasterKeyValue,lMasterValue)
-								}
-								lMasterAdditionalInsuredContactAddressDataList.add(lMapMasterAdditionalInsuredContactAddressData)
-								lMapMasterAdditionalInsuredData.put('contactAddresses',lMasterAdditionalInsuredContactAddressDataList)
-								lMapMasterAdditionalInsuredDataList.add(lMapMasterAdditionalInsuredData)
-							}
-							IGNUemaHelper.printLog('lMapMasterAdditionalInsuredDataList')
-							IGNUemaHelper.printLog(lMapMasterAdditionalInsuredDataList)
-							for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterInsuredData){
-								String lMasterKey=lEntry.key.toString()
-								String lMasterKeyValue=lEntry.Value.toString()
-								String lMasterValue=lMapPolicyHolderData.getAt(lMasterKey)
-								if(lMasterValue=='None'){
-									lMasterValue=''
-								}
-								lMapMasterPolicyHolderData.put(lMasterKeyValue,lMasterValue)
-							}
-							for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterContactAddress){
-								String lMasterKey=lEntry.key.toString()
-								String lMasterKeyValue=lEntry.Value.toString()
-								String lMasterValue=lMapPolicyHolderData.getAt(lMasterKey)
-								if(lMasterValue=='None'){
-									lMasterValue=''
-								}
-								lMapMasterPolicyHolderContactAddressData.put(lMasterKeyValue,lMasterValue)
-							}
-							List lMasterPolicyHolderContactAddressDataList=[]
-							lMasterPolicyHolderContactAddressDataList.add(lMapMasterPolicyHolderContactAddressData)
-							lMapMasterPolicyHolderData.put('contactAddresses',lMasterPolicyHolderContactAddressDataList)
-							for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterBrokerInformation){
-								String lMasterKey=lEntry.key.toString()
-								String lMasterKeyValue=lEntry.Value.toString()
-								String lMasterValue=lMapQuotationInput.getAt(lMasterKey)
-								if(lMasterValue=='None'){
-									lMasterValue=''
-								}
-								lMapMasterBrokerInformation.put(lMasterKeyValue,lMasterValue)
-							}
-							lMapMasterQuoteDataParameter.put('brokerInfo',lMapMasterBrokerInformation)
-							lMapMasterQuoteDataParameter.put('insuredData',lMapMasterInsuredData)
-							lMapMasterQuoteDataParameter.put('policyHolderData',lMapMasterPolicyHolderData)
-							lMapMasterQuoteDataParameter.put(lAdditionalInsuredDataParameterName,lMapMasterAdditionalInsuredDataList)
-							for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterQuoteData){
-								String lMasterKey=lEntry.key.toString()
-								Map lMapMasterOptionalDataParameter=[:]
-								String lMasterKeyValue=lEntry.Value.toString()
-								if(lMasterKey==lOptionalDataParameterName){
-									List lMapOptionalDataValueList=lMapQuotationInput.getAt(lMasterKey)
-									for(Integer lDataIndex=0;lDataIndex<=lMapOptionalDataValueList.size()-1;lDataIndex++){
-										Map lMapOptionalData=lMapOptionalDataValueList.get(lDataIndex)
-										for(Map.Entry lOptionalDataEntry in lMapQuotationInputParameterWithMasterParameterOptionalData){
-											String lOptionalDataKey=lOptionalDataEntry.key.toString()
-											String lOptionalDataValue=lOptionalDataEntry.Value.toString()
-											String lMasterValue=lMapOptionalData.getAt(lOptionalDataKey)
-											lMapMasterOptionalDataParameter.put(lOptionalDataValue,lMasterValue)
-										}
-										lMapMasterOptionalDataParameterList.add(lMapMasterOptionalDataParameter)
-										lMapMasterOptionalDataParameter=[:]
-									}
-									String lMasterOptionalDataParameterName=lMapQuotationInputParameterWithMasterParameterQuoteData.getAt(lOptionalDataParameterName)
-									IGNUemaHelper.printLog('lMasterOptionalDataParameterName')
-									IGNUemaHelper.printLog(lMasterOptionalDataParameterName)
-									lMapMasterQuoteDataParameter.put(lMasterOptionalDataParameterName,lMapMasterOptionalDataParameterList)
-								}else{
-									String lMasterValue=lMapQuotationInput.getAt(lMasterKey)
-									if(lMasterKeyValue=='Covers'){
-										List lMapMasterCoverList=[]
-										lMapMasterQuoteDataParameter.put(lMasterKeyValue,lMapMasterCoverList)
-									}else if(lMasterKeyValue=='Quote_Date_of_Quote'){
-										Map lMapQuoteRequiredQuoteDate=lIDNPricingApiGetPriceListUtil.inputQuoteRequiredQuoteDate('Yes',lMasterValue,'')
-										if(lMapQuoteRequiredQuoteDate.Result){
-											String lQuoteDateValue=lMapQuoteRequiredQuoteDate.QuoteRequiredQuoteDate
-											lMapMasterQuoteDataParameter.put(lMasterKeyValue,lQuoteDateValue)
-										}
-									}
-									else if(lMasterKeyValue=='Product_Type'){
-										lMasterProductType=lMasterKeyValue
-										lMasterProductName=lMasterValue
-										lMapMasterQuoteDataParameter.put(lMasterProductType,lMasterProductName)
-									}else{
-										if(lMasterValue=='None'){
-											lMasterValue=''
-										}
-										lMapMasterQuoteDataParameter.put(lMasterKeyValue,lMasterValue)
-									}
-								}
-							}
-							if(lTransactionTypeList.get(lIndex)=='Endorsement'||lTransactionTypeList.get(lIndex)=='Cancellation'){
-								Map lMapQuotationInputParameterWithMasterParameterPreviousCoverParameter=lMapQuotationInputParameterWithMasterParameterResult.PreviousCoverParameter
-								IGNUemaHelper.printLog('lMapQuotationInputParameterWithMasterParameterPreviousCoverParameter')
-								IGNUemaHelper.printLog(lMapQuotationInputParameterWithMasterParameterPreviousCoverParameter)
-								for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterPreviousCoverParameter){
-									String lMasterKey=lEntry.key.toString()
-									String lMasterValue=lEntry.value.toString()
-									if(lMasterValue=='None'){
-										lMasterValue=''
-									}
-									lMapPreviousCoverDataParameter.put(lMasterKey,lMasterValue)
-								}
-								lMapMasterQuoteDataParameter.put('PreviousCovers',lMapPreviousCoverDataParameter)
-							}
-							List lQuotationInputParameterWithMasterParameterVehicleDataList=[]
-							Boolean lIsMapQuotationInputParameterWithMasterParameterVehicleDataEmpty=IGNUemaHelper.checkObjectEmptyOfMap(lMapQuotationInputParameterWithMasterParameterVehicleData)
-							if(lIsMapQuotationInputParameterWithMasterParameterVehicleDataEmpty){
-								lQuotationInputParameterWithMasterParameterVehicleDataList=[]
-								lMapMasterQuoteDataParameter.put('vehicleData',lQuotationInputParameterWithMasterParameterVehicleDataList)
-							}else{
-								Map lMapMasterOptionalDataParameter=[:]
-								for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterVehicleData){
-									String lMasterKey=lEntry.key.toString()
-									String lMasterKeyValue=lEntry.Value.toString()
-									IGNUemaHelper.printLog(lMasterKey)
-									if(lMasterKey==lOptionalDataParameterName){
-										List lMapOptionalDataValueList=lMapQuotationInput.getAt(lMasterKey)
-										for(Integer lDataIndex=0;lDataIndex<=lMapOptionalDataValueList.size()-1;lDataIndex++){
-											Map lMapOptionalData=lMapOptionalDataValueList.get(lDataIndex)
-											for(Map.Entry lOptionalDataEntry in lMapQuotationInputParameterWithMasterParameterOptionalData){
-												String lOptionalDataKey=lOptionalDataEntry.key.toString()
-												String lOptionalDataValue=lOptionalDataEntry.Value.toString()
-												String lMasterValue=lMapOptionalData.getAt(lOptionalDataKey)
-												IGNUemaHelper.printLog(lMasterValue)
-												lMapMasterOptionalDataParameter.put(lOptionalDataValue,lMasterValue)
-											}
-											lMapMasterOptionalDataParameterList.add(lMapMasterOptionalDataParameter)
-											lMapMasterOptionalDataParameter=[:]
-										}
-										String lMasterOptionalDataParameterName=lMapQuotationInputParameterWithMasterParameterVehicleData.getAt(lOptionalDataParameterName)
-										lMapMasterVehicleDataParameter.put(lMasterOptionalDataParameterName,lMapMasterOptionalDataParameterList)
-									}else{
-										String lMasterValue=lMapQuotationInput.getAt(lMasterKey)
-										if(lMasterValue=='None'){
-											lMasterValue=''
-										}
-										lMapMasterVehicleDataParameter.put(lMasterKeyValue,lMasterValue)
-									}
-								}
-								lMapMasterQuoteDataParameter.put('vehicleData',lMapMasterVehicleDataParameter)
-							}
-							Map lMapRootQuotationInputData=[:]
-							lMapRootQuotationInputData.put(lMasterProductType,lMasterProductName)
-							lMapQuotationInputData.put('Quote',lMapMasterQuoteDataParameter)
-							lMapRootQuotationInputData.put('root',lMapQuotationInputData)
-							JsonBuilder lJsonQuotationInput=new JsonBuilder(lMapMasterQuoteDataParameter)
-							IGNUemaHelper.printLog('ProcessedlJsonQuotationInput')
-							IGNUemaHelper.printLog(lJsonQuotationInput)
-							lJsonFinalQuotationInputList.add(lJsonQuotationInput.toString())
-						}
-					}
-					IGNUemaHelper.printLog(lPricingApiSheet.getPhysicalNumberOfRows())
-					if(IGNUemaHelper.checkObjectNullOfObject(lTestExcelFileUserTestDataWorkBook)){
-						IGNUemaHelper.printLog('PricingApi WorkBook not valid')
-						return lreturn
-					}
-					if(IGNUemaHelper.checkObjectNullOfObject(lPricingApiUserSheet)){
-						IGNUemaHelper.printLog('PricingApi User Sheet not valid')
-						return lreturn
-					}
-					for(Integer lIndex=0;lIndex<lUserDataSheetLastColumnNum;lIndex++){
-						Cell lCurrentCell=ExcelKeywords.getCellByIndex(lPricingApiUserSheet,lCurrentRowNumber,lIndex)
-						String lCellValue=lCurrentCell.getStringCellValue()
-						Integer lColumnIndex=lCurrentCell.getColumnIndex()
-						IGNUemaHelper.printLog('Inside Loop')
-						Integer lTestCaseIndex=lAppendIndex
-						if(lCellValue=='Test_Case_To_Do'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonFinalQuotationInputList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lTestCaseIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lTestCaseAction='Yes'
-								ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lTestCaseAction)
-								lTestCaseIndex=lTestCaseIndex+1
-							}
-						}
-						Integer lReferCaseNumberIndex=lAppendIndex
-						if(lCellValue=='Refer_Case_No'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonFinalQuotationInputList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lReferCaseNumberIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lStrReferCase=lReferCaseNumberList.get(lInputIndex)
-								if(!IGNUemaHelper.checkObjectEmptyOfString(lStrReferCase)){
-									Integer lReferTestCaseNum=IGNUemaHelper.convertStringToInteger(lStrReferCase,0)
-									Integer lUserSheetTestCaseNumber=IGNUemaHelper.convertStringToInteger(lTestCaseNumber,0)
-									Integer lReferCase=lUserSheetTestCaseNumber+lReferTestCaseNum
-									lReferCase=lReferCase-1
-									String lStrReferCaseNum=lReferCase.toString()
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lStrReferCaseNum)
-								}
-								lReferCaseNumberIndex=lReferCaseNumberIndex+1
-							}
-						}
-						Integer lGroupListIndex=lAppendIndex
-						if(lCellValue=='Product_Group_List_Field_Value_Story_Name'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonFinalQuotationInputList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lGroupListIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lProductGroupListFieldValueStoryName='0034_Group_Pricing_Api_Share_Quote_All_Name_Product_All_Story_Get_Price_List'
-								ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lProductGroupListFieldValueStoryName)
-								String lProductStoryUserDescription=IGNUemaHelper.concatMessageLeftRightByEnter('GetPriceListOf',lTransactionTypeList.get(lInputIndex))
-								ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex+1,lProductStoryUserDescription)
-								lGroupListIndex=lGroupListIndex+1
-							}
-						}
-						Integer lForceStartIndex=lAppendIndex
-						if(lCellValue=='Force_Start'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonFinalQuotationInputList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lForceStartIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lForceStartAction='Yes'
-								ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lForceStartAction)
-								lForceStartIndex=lForceStartIndex+1
-							}
-						}
-						Integer lProductTypeIndex=lAppendIndex
-						if(lCellValue=='PricingApiQuoteRequiredProductType'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonFinalQuotationInputList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lProductTypeIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lRequiredProductType=lProductName
-								ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lRequiredProductType)
-								ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex+1,lTransactionTypeList.get(lInputIndex))
-								lProductTypeIndex=lProductTypeIndex+1
-							}
-						}
-						Integer lLibraryHostUrlIndex=lAppendIndex
-						if(lCellValue=='PricingApiLibraryHostUrl'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonFinalQuotationInputList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lLibraryHostUrlIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lPricingApiLibraryHostUrl=this.CURRENT_TEST_IGN_LIBRARY_HOST_URL
-								ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lPricingApiLibraryHostUrl)
-								lLibraryHostUrlIndex=lLibraryHostUrlIndex+1
-							}
-						}
-						Integer lVehicleDataIndex=lAppendIndex
-						if(lCellValue=='PricingApiJsonRootVehicleData'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonVehicleDataList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lVehicleDataIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lJsonVehicleData=lJsonVehicleDataList.get(lInputIndex)
-								String lExcelFitValueJsonVehicleData=IGNUemaHelper.copyStringFitForExcelCell(lJsonVehicleData)
-								ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lExcelFitValueJsonVehicleData)
-								lVehicleDataIndex=lVehicleDataIndex+1
-							}
-						}
-						Integer lQuotationInputIndex=lAppendIndex
-						if(lCellValue=='PricingApiJsonRootQuotationInputPartOne'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonFinalQuotationInputList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lQuotationInputIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lJsonFinalQuotationInput=lJsonFinalQuotationInputList.get(lInputIndex)
-								List lEncodedJsonQuotationInputDataList=IGNUemaHelper.getStringEncodedForExcelCell(lJsonFinalQuotationInput)
-								if(lEncodedJsonQuotationInputDataList.size()==2){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonQuotationInputDataList.get(0))
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex+1,lEncodedJsonQuotationInputDataList.get(1))
-								}
-								else if(lEncodedJsonQuotationInputDataList.size()==1){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonQuotationInputDataList.get(0))
-								}
-								lQuotationInputIndex=lQuotationInputIndex+1
-							}
-						}
-						Integer lPlanOptionIndex=lAppendIndex
-						if(lCellValue=='PricingApiJsonRootPlanOptionPartOne'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonPlanOptionList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lPlanOptionIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lJsonPlanOption=lJsonPlanOptionList.get(lInputIndex)
-								List lEncodedJsonPlanOptionDataList=IGNUemaHelper.getStringEncodedForExcelCell(lJsonPlanOption)
-								if(lEncodedJsonPlanOptionDataList.size()==2){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,IGNUemaHelper.getStringDecodedForExcelCell(lEncodedJsonPlanOptionDataList))
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex+1,lEncodedJsonPlanOptionDataList.get(1))
-								}
-								else if(lEncodedJsonPlanOptionDataList.size()==1){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonPlanOptionDataList.get(0))
-								}
-								lPlanOptionIndex=lPlanOptionIndex+1
-							}
-						}
-						Integer lMultiCoverIndex=lAppendIndex
-						if(lCellValue=='PricingApiJsonRootMultiCoverPartOne'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonMultiCoverList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lMultiCoverIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lJsonMultiCover=lJsonMultiCoverList.get(lInputIndex)
-								List lEncodedJsonMultiCoverDataList=IGNUemaHelper.getStringEncodedForExcelCell(lJsonMultiCover)
-								if(lEncodedJsonMultiCoverDataList.size()==2){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonMultiCoverDataList.get(0))
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex+1,lEncodedJsonMultiCoverDataList.get(1))
-								}
-								else if(lEncodedJsonMultiCoverDataList.size()==1){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,IGNUemaHelper.getStringDecodedForExcelCell(lEncodedJsonMultiCoverDataList))
-								}
-								lMultiCoverIndex=lMultiCoverIndex+1
-							}
-						}
-						Integer lAdditionalCoverageIndex=lAppendIndex
-						if(lCellValue=='PricingApiJsonRootAdditionalCoveragePartOne'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonPlanAdditionalCoverageDataList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lAdditionalCoverageIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								IGNUemaHelper.printLog(lJsonPlanAdditionalCoverageDataList.get(lInputIndex))
-								String lJsonPlanAdditionalCoverageData=lJsonPlanAdditionalCoverageDataList.get(lInputIndex)
-								List lEncodedJsonAdditionalCoverageDataList=IGNUemaHelper.getStringEncodedForExcelCell(lJsonPlanAdditionalCoverageData)
-								if(lEncodedJsonAdditionalCoverageDataList.size()==2){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonAdditionalCoverageDataList.get(0))
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex+1,lEncodedJsonAdditionalCoverageDataList.get(1))
-								}
-								else if(lEncodedJsonAdditionalCoverageDataList.size()==1){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,IGNUemaHelper.getStringDecodedForExcelCell(lEncodedJsonAdditionalCoverageDataList))
-								}
-								lAdditionalCoverageIndex=lAdditionalCoverageIndex+1
-							}
-						}
-						Integer lInputPremiumIndex=lAppendIndex
-						if(lCellValue=='PricingApiJsonRootInputPremiumPartOne'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonInputPremiumDataList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lInputPremiumIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								IGNUemaHelper.printLog(lJsonInputPremiumDataList.get(lInputIndex))
-								String lJsonInputPremiumData=lJsonInputPremiumDataList.get(lInputIndex)
-								List lEncodedJsonInputPremiumDataList=IGNUemaHelper.getStringEncodedForExcelCell(lJsonInputPremiumData)
-								if(lEncodedJsonInputPremiumDataList.size()==2){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonInputPremiumDataList.get(0))
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex+1,lEncodedJsonInputPremiumDataList.get(1))
-								}
-								else if(lEncodedJsonInputPremiumDataList.size()==1){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonInputPremiumDataList.get(0))
-								}
-								lInputPremiumIndex=lInputPremiumIndex+1
-							}
-						}
-						Integer lPaymentIndex=lAppendIndex
-						if(lCellValue=='PricingApiJsonRootPaymentPartOne'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonPaymentList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lPaymentIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lJsonPayment=lJsonPaymentList.get(lInputIndex)
-								List lEncodedJsonPaymentList=IGNUemaHelper.getStringEncodedForExcelCell(lJsonPayment)
-								if(lEncodedJsonPaymentList.size()==2){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonPaymentList.get(0))
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex+1,lEncodedJsonPaymentList.get(1))
-								}
-								else if(lEncodedJsonPaymentList.size()==1){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonPaymentList.get(0))
-								}
-								lPaymentIndex=lPaymentIndex+1
-							}
-						}
-						Integer lTransactionIndex=lAppendIndex
-						if(lCellValue=='PricingApiJsonRootTransactionPartOne'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonTransactionList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lTransactionIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lJsonTransaction=lJsonTransactionList.get(lInputIndex)
-								List lEncodedJsonTransactionList=IGNUemaHelper.getStringEncodedForExcelCell(lJsonTransaction)
-								if(lEncodedJsonTransactionList.size()==2){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonTransactionList.get(0))
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex+1,lEncodedJsonTransactionList.get(1))
-								}
-								else if(lEncodedJsonTransactionList.size()==1){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonTransactionList.get(0))
-								}
-								lTransactionIndex=lTransactionIndex+1
-							}
-						}
-						Integer lPremiumIndex=lAppendIndex
-						if(lCellValue=='PricingApiJsonRootTotalPremiumPartOne'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonPremiumList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lPremiumIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								String lJsonPremium=lJsonPremiumList.get(lInputIndex)
-								Integer lSplitIndex=lJsonPremium.indexOf('}},',0)
-								List lEncodedJsonPremiumList=IGNUemaHelper.getStringEncodedForExcelCell(lJsonPremium)
-								if(lEncodedJsonPremiumList.size()==2){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonPremiumList.get(0))
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex+1,lEncodedJsonPremiumList.get(1))
-								}
-								else if(lEncodedJsonPremiumList.size()==1){
-									ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,lEncodedJsonPremiumList.get(0))
-								}
-								lPremiumIndex=lPremiumIndex+1
-							}
-						}
-						Integer lPositiveCaseIndex=lAppendIndex
-						if(lCellValue=='PositiveCase'){
-							for(Integer lInputIndex=0;lInputIndex<=lJsonPremiumList.size()-1;lInputIndex++){
-								Row lInputRow=lPricingApiUserSheet.getRow(lPositiveCaseIndex)
-								Integer lRowIndex=lInputRow.rowNum
-								ExcelKeywords.setValueToCellByIndex(lPricingApiUserSheet,lRowIndex,lColumnIndex,'Yes')
-								lPositiveCaseIndex=lPositiveCaseIndex+1
-							}
-						}
-					}
-					ExcelKeywords.saveWorkbook(this.CURRENT_TEST_TRANSFORM_DATA_FILE_OUTPUT_USER,lTestExcelFileUserTestDataWorkBook)
 				}
 			}
 			lResult='Generic Test Data has been Transformed successfully'
@@ -1392,51 +113,1702 @@ public class IDNPricingApiPrepareGenericDataInputUtil{
 		}
 		return lreturn
 	}
-	public static Map getMapTransactionTypeAndHeaderFromExcelSheet(Sheet targetSheet){
+	public static Integer getNumUserDataSheetLastDataEntry(Sheet sheetUserData){
+		Boolean lResult=false
+		Integer lreturn=0
+		if(IGNUemaHelper.checkObjectNullOfObject(sheetUserData)){
+			return lreturn
+		}
+		Sheet lSheetUserData=sheetUserData
+		try{
+			Integer lNumUserDataSheetFirstRow=lSheetUserData.getFirstRowNum()
+			Integer lNumUserDataSheetLastRow=lSheetUserData.getLastRowNum()
+			Row lRowUserSheetDataFirst=lSheetUserData.getRow(lNumUserDataSheetFirstRow)
+			Integer lNumUserDataSheetRow=lRowUserSheetDataFirst.rowNum
+			Integer lNumUserDataSheetLastColumn=lRowUserSheetDataFirst.getLastCellNum()
+			Integer lNumUserDatalastEntryIndex=0
+			for(Integer lIndex=0;lIndex<lNumUserDataSheetLastColumn;lIndex++){
+				Cell lCellCurrent=ExcelKeywords.getCellByIndex(lSheetUserData,lNumUserDataSheetRow,lIndex)
+				String lStrCellCurrentValue=lCellCurrent.getStringCellValue()
+				Integer lNumColumnIndex=lCellCurrent.getColumnIndex()
+				if(lStrCellCurrentValue=='PricingApiJsonRootQuotationInputPartOne'){
+					for(Integer lInputIndex=1;lInputIndex<=lNumUserDataSheetLastRow;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lInputIndex)
+						Integer lNumRowInputIndex=lRowInput.rowNum
+						String lStrCellvalue=ExcelKeywords.getCellValueByIndex(lSheetUserData,lNumRowInputIndex,lNumColumnIndex)
+						if(lStrCellvalue.isEmpty()){
+							lNumUserDatalastEntryIndex=lInputIndex
+							break
+						}
+					}
+				}
+			}
+			lResult=lNumUserDatalastEntryIndex>0
+			if(lResult){
+				lreturn=lNumUserDatalastEntryIndex
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static String getNumUserDataSheetFirstTestCase(Sheet sheetUserData,Integer numUserDatalastEntryIndex){
+		String lreturn=''
+		Boolean lResult=false
+		if(IGNUemaHelper.checkObjectNullOfObject(sheetUserData)){
+			return lreturn
+		}
+		Sheet lSheetUserData=sheetUserData
+		Integer lNumUserDatalastEntryIndex=numUserDatalastEntryIndex
+		try{
+			Integer lNumUserDataSheetFirstRow=lSheetUserData.getFirstRowNum()
+			Row lRowUserSheetDataFirst=lSheetUserData.getRow(lNumUserDataSheetFirstRow)
+			Integer lNumUserDataSheetRow=lRowUserSheetDataFirst.rowNum
+			Integer lNumUserDataSheetLastColumn=lRowUserSheetDataFirst.getLastCellNum()
+			String lStrTestCaseNumber=''
+			for(Integer lIndex=0;lIndex<lNumUserDataSheetLastColumn;lIndex++){
+				Cell lCellCurrent=ExcelKeywords.getCellByIndex(lSheetUserData,lNumUserDataSheetRow,lIndex)
+				String lStrCellValue=lCellCurrent.getStringCellValue()
+				Integer lNumColumnIndex=lCellCurrent.getColumnIndex()
+				Integer lNumTestCaseIndex=lNumUserDatalastEntryIndex
+				if(lStrCellValue=='Test_Case_No'){
+					Row lRowInput=lSheetUserData.getRow(lNumUserDatalastEntryIndex)
+					Integer lNumRowIndex=lRowInput.rowNum
+					lStrTestCaseNumber=IDNPricingApiHelper.getValueFromExcelSheetForValidation(lSheetUserData,lNumRowIndex,lNumColumnIndex)
+					lNumUserDatalastEntryIndex=lNumUserDatalastEntryIndex+1
+				}
+			}
+			lResult=lStrTestCaseNumber.length()>0
+			if(lResult){
+				lreturn=lStrTestCaseNumber
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static List getListPricingApiMergeCellSubHeader(Sheet sheetPricingApi,CellRangeAddress cellRangeAddressTargetHeader,Row rowSubHeader){
+		List lreturn=[]
+		Boolean lResult=false
+		if(IGNUemaHelper.checkObjectNullOfObject(sheetPricingApi)){
+			return lreturn
+		}
+		Sheet lSheetPricingApi=sheetPricingApi
+		if(IGNUemaHelper.checkObjectNullOfObject(cellRangeAddressTargetHeader)){
+			return lreturn
+		}
+		CellRangeAddress lCellRangeAddressTargetHeader=cellRangeAddressTargetHeader
+		Row lRowSubHeader=rowSubHeader
+		List lListTargetSubHeader=new ArrayList<>()
+		try{
+			Integer lNumCellRangeAddressTargetHeaderColumnLast=lCellRangeAddressTargetHeader.getLastColumn()-lCellRangeAddressTargetHeader.getFirstColumn()
+			Map lMapTargetHeaderSubHeaderList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressTargetHeader,lRowSubHeader,lNumCellRangeAddressTargetHeaderColumnLast,false)
+			if(lMapTargetHeaderSubHeaderList.Result){
+				lListTargetSubHeader=lMapTargetHeaderSubHeaderList.CellValueList
+			}
+			lResult=lListTargetSubHeader.size()>0
+			if(lResult){
+				lreturn=lListTargetSubHeader
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map getMapPricingApiMergeCellRangeAddressList(Sheet sheetPricingApi,String strProductName){
 		Boolean lResult=false
 		Map lreturn=[:]
-		String lTransactionType=''
-		String lTransactionHeader=''
+		CellRangeAddress lCellRangeAddressQuotationInput=null
+		CellRangeAddress lCellRangeAddressPlanOption=null
+		CellRangeAddress lCellRangeAddressMultiCover=null
+		CellRangeAddress lCellRangeAddressAdditionalCoverage=null
+		CellRangeAddress lCellRangeAddressOptionalData=null
+		CellRangeAddress lCellRangeAddressInputPremium=null
+		CellRangeAddress lCellRangeAddressPayment=null
+		CellRangeAddress lCellRangeAddressTransaction=null
+		CellRangeAddress lCellRangeAddressPremium=null
+		CellRangeAddress lCellRangeAddressVehicleData=null
+		CellRangeAddress lCellRangeAddressInsuredData=null
+		CellRangeAddress lCellRangeAddressPolicyHolderData=null
+		Integer lNumCellRangeAddressQuotationInputColumnLast=0
+		Integer lNumCellRangeAddressPlanOptionColumnLast=0
+		Integer lNumCellRangeAddressMultiCoverColumnLast=0
+		Integer lNumCellRangeAddressAdditionalCoverageColumnLast=0
+		Integer lNumCellRangeAddressOptionalDataColumnLast=0
+		Integer lNumCellRangeAddressInputPremiumColumnLast=0
+		Integer lNumCellRangeAddressPaymentColumnLast=0
+		Integer lNumCellRangeAddressTransactionColumnLast=0
+		Integer lNumCellRangeAddressPremiumColumnLast=0
+		Integer lNumCellRangeAddressVehicleDataColumnLast=0
+		Integer lNumCellRangeAddressInsuredDataColumnLast=0
+		Integer lNumCellRangeAddressPolicyHolderDataColumnLast=0
+		List<String> lListQuotationInputSubHeader=new ArrayList<String>()
+		List<String> lListPlanOptionSubHeader=new ArrayList<String>()
+		List<String> lListMultiCoverSubHeader=new ArrayList<String>()
+		List<String> lListAdditionalCoverageSubHeader=new ArrayList<String>()
+		List<String> lListOptionalDataSubHeader=new ArrayList<String>()
+		List<String> lListInputPremiumSubHeader=new ArrayList<String>()
+		List<String> lListPaymentSubHeader=new ArrayList<String>()
+		List<String> lListTransactionSubHeader=new ArrayList<String>()
+		List<String> lListPremiumSubHeader=new ArrayList<String>()
+		List<String> lListVehicleDataSubHeader=new ArrayList<String>()
+		List<String> lListInsuredDataSubHeader=new ArrayList<String>()
+		List<String> lListPolicyHolderDataSubHeader=new ArrayList<String>()
+		String lStrOptionalDataParameterName=''
+		Boolean lIsOK=true
 		try{
 			lreturn.put('Result',lResult)
-			lreturn.put('TransactionHeader',lTransactionHeader)
-			if(IGNUemaHelper.checkObjectNullOfObject(targetSheet)){
+			lreturn.put('CellRangeAddressQuotationInput',lCellRangeAddressQuotationInput)
+			lreturn.put('CellRangeAddressPlanOption',lCellRangeAddressPlanOption)
+			lreturn.put('CellRangeAddressMultiCover',lCellRangeAddressMultiCover)
+			lreturn.put('CellRangeAddressAdditionalCoverage',lCellRangeAddressAdditionalCoverage)
+			lreturn.put('CellRangeAddressOptionalData',lCellRangeAddressOptionalData)
+			lreturn.put('CellRangeAddressInputPremium',lCellRangeAddressInputPremium)
+			lreturn.put('CellRangeAddressPayment',lCellRangeAddressPayment)
+			lreturn.put('CellRangeAddressTransaction',lCellRangeAddressTransaction)
+			lreturn.put('CellRangeAddressPremium',lCellRangeAddressPremium)
+			lreturn.put('CellRangeAddressVehicleData',lCellRangeAddressVehicleData)
+			lreturn.put('CellRangeAddressInsuredData',lCellRangeAddressInsuredData)
+			lreturn.put('CellRangeAddressPolicyHolderData',lCellRangeAddressPolicyHolderData)
+			lreturn.put('NumCellRangeAddressQuotationInputColumnLast',lNumCellRangeAddressQuotationInputColumnLast)
+			lreturn.put('NumCellRangeAddressPlanOptionColumnLast',lNumCellRangeAddressPlanOptionColumnLast)
+			lreturn.put('NumCellRangeAddressMultiCoverColumnLast',lNumCellRangeAddressMultiCoverColumnLast)
+			lreturn.put('NumCellRangeAddressAdditionalCoverageColumnLast',lNumCellRangeAddressAdditionalCoverageColumnLast)
+			lreturn.put('NumCellRangeAddressOptionalDataColumnLast',lNumCellRangeAddressOptionalDataColumnLast)
+			lreturn.put('NumCellRangeAddressInputPremiumColumnLast',lNumCellRangeAddressInputPremiumColumnLast)
+			lreturn.put('NumCellRangeAddressPaymentColumnLast',lNumCellRangeAddressPaymentColumnLast)
+			lreturn.put('NumCellRangeAddressTransactionColumnLast',lNumCellRangeAddressTransactionColumnLast)
+			lreturn.put('NumCellRangeAddressPremiumColumnLast',lNumCellRangeAddressPremiumColumnLast)
+			lreturn.put('NumCellRangeAddressVehicleDataColumnLast',lNumCellRangeAddressVehicleDataColumnLast)
+			lreturn.put('NumCellRangeAddressInsuredDataColumnLast',lNumCellRangeAddressInsuredDataColumnLast)
+			lreturn.put('NumCellRangeAddressPolicyHolderDataColumnLast',lNumCellRangeAddressPolicyHolderDataColumnLast)
+			lreturn.put('ListQuotationInputSubHeader',lListQuotationInputSubHeader)
+			lreturn.put('ListPlanOptionSubHeader',lListPlanOptionSubHeader)
+			lreturn.put('ListMultiCoverSubHeader',lListMultiCoverSubHeader)
+			lreturn.put('ListAdditionalCoverageSubHeader',lListAdditionalCoverageSubHeader)
+			lreturn.put('ListOptionalDataSubHeader',lListOptionalDataSubHeader)
+			lreturn.put('ListInputPremiumSubHeader',lListInputPremiumSubHeader)
+			lreturn.put('ListPaymentSubHeader',lListPaymentSubHeader)
+			lreturn.put('ListTransactionSubHeader',lListTransactionSubHeader)
+			lreturn.put('ListPremiumSubHeader',lListPremiumSubHeader)
+			lreturn.put('ListVehicleDataSubHeader',lListVehicleDataSubHeader)
+			lreturn.put('ListInsuredDataSubHeader',lListInsuredDataSubHeader)
+			lreturn.put('ListPolicyHolderDataSubHeader',lListPolicyHolderDataSubHeader)
+			lreturn.put('StrOptionalDataParameterName',lStrOptionalDataParameterName)
+			if(IGNUemaHelper.checkObjectNullOfObject(sheetPricingApi)){
 				return lreturn
 			}
-			Sheet lTargetSheet=targetSheet
-			lTransactionHeader=ExcelKeywords.getCellValueByIndex(lTargetSheet,1,1)
-			lResult=lTransactionHeader.length()>=1
+			Sheet lSheetPricingApi=sheetPricingApi
+			if(IGNUemaHelper.checkObjectNullOfObject(strProductName)){
+				return lreturn
+			}
+			String lStrProductName=strProductName
+			if(IGNUemaHelper.checkObjectEmptyOfString(lStrProductName)){
+				return lreturn
+			}
+			Integer lNumGenericTestDataCellMergeList=lSheetPricingApi.getNumMergedRegions()
+			CellRangeAddress[] lCellRangeAddressMergedList=new CellRangeAddress[lNumGenericTestDataCellMergeList]
+			for(Integer lIndex=0;lIndex<lCellRangeAddressMergedList.length;lIndex++){
+				lCellRangeAddressMergedList[lIndex]=lSheetPricingApi.getMergedRegion(lIndex)
+			}
+			for(Integer lIndex=0;lIndex<lNumGenericTestDataCellMergeList;lIndex++){
+				Row lRowCurrent=lSheetPricingApi.getRow(lCellRangeAddressMergedList[lIndex].getFirstRow())
+				Cell lCell=lRowCurrent.getCell(lCellRangeAddressMergedList[lIndex].getFirstColumn())
+				String lStrCellRangeAddressHeading=lCell.getStringCellValue()
+				if(lStrCellRangeAddressHeading=='QuotationInput'){
+					lCellRangeAddressQuotationInput=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='VehicleAccessoryList'){
+					lStrOptionalDataParameterName=lStrCellRangeAddressHeading
+					lCellRangeAddressOptionalData=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='HealthQuestion'){
+					lStrOptionalDataParameterName=lStrCellRangeAddressHeading
+					lCellRangeAddressOptionalData=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='NamedDriver'){
+					lStrOptionalDataParameterName=lStrCellRangeAddressHeading
+					lCellRangeAddressOptionalData=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='PlanOption'){
+					lCellRangeAddressPlanOption=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='MultiCover'){
+					lCellRangeAddressMultiCover=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='AdditionalCoverage'){
+					lCellRangeAddressAdditionalCoverage=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='InputPremium'){
+					lCellRangeAddressInputPremium=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='Payment'){
+					lCellRangeAddressPayment=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='Transaction'){
+					lCellRangeAddressTransaction=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='Premium'){
+					lCellRangeAddressPremium=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='VehicleData'){
+					lCellRangeAddressVehicleData=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='MainDriverData'){
+					lCellRangeAddressInsuredData=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='InsuredData'){
+					lCellRangeAddressInsuredData=lCellRangeAddressMergedList[lIndex]
+				}
+				if(lStrCellRangeAddressHeading=='PolicyHolderData'){
+					lCellRangeAddressPolicyHolderData=lCellRangeAddressMergedList[lIndex]
+				}
+			}
+			Row lRowSubHeader=lSheetPricingApi.getRow(lCellRangeAddressMergedList[0].getFirstRow()+1)
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressQuotationInput)){
+				lListQuotationInputSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressQuotationInput,lRowSubHeader)
+				lNumCellRangeAddressQuotationInputColumnLast=lCellRangeAddressQuotationInput.getLastColumn()-lCellRangeAddressQuotationInput.getFirstColumn()
+			}
+			else{
+				lIsOK=false
+			}
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressPlanOption)){
+				lListPlanOptionSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressPlanOption,lRowSubHeader)
+				lNumCellRangeAddressPlanOptionColumnLast=lCellRangeAddressPlanOption.getLastColumn()-lCellRangeAddressPlanOption.getFirstColumn()
+			}
+			else{
+				lIsOK=false
+			}
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressMultiCover)){
+				lListMultiCoverSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressMultiCover,lRowSubHeader)
+				lNumCellRangeAddressMultiCoverColumnLast=lCellRangeAddressMultiCover.getLastColumn()-lCellRangeAddressMultiCover.getFirstColumn()
+			}
+			else{
+				lIsOK=false
+			}
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressOptionalData)){
+				lListOptionalDataSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressOptionalData,lRowSubHeader)
+				lNumCellRangeAddressOptionalDataColumnLast=lCellRangeAddressOptionalData.getLastColumn()-lCellRangeAddressOptionalData.getFirstColumn()
+			}
+			else{
+				lIsOK=false
+			}
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressAdditionalCoverage)){
+				lListAdditionalCoverageSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressAdditionalCoverage,lRowSubHeader)
+				lNumCellRangeAddressAdditionalCoverageColumnLast=lCellRangeAddressAdditionalCoverage.getLastColumn()-lCellRangeAddressAdditionalCoverage.getFirstColumn()
+			}
+			else{
+				lIsOK=false
+			}
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressInputPremium)){
+				lListInputPremiumSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressInputPremium,lRowSubHeader)
+				lNumCellRangeAddressInputPremiumColumnLast=lCellRangeAddressInputPremium.getLastColumn()-lCellRangeAddressInputPremium.getFirstColumn()
+			}
+			else{
+				lIsOK=false
+			}
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressPremium)){
+				lListPremiumSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressPremium,lRowSubHeader)
+				lNumCellRangeAddressPremiumColumnLast=lCellRangeAddressPremium.getLastColumn()-lCellRangeAddressPremium.getFirstColumn()
+			}
+			else{
+				lIsOK=false
+			}
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressPayment)){
+				lListPaymentSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressPayment,lRowSubHeader)
+				lNumCellRangeAddressPaymentColumnLast=lCellRangeAddressPayment.getLastColumn()-lCellRangeAddressPayment.getFirstColumn()
+			}
+			else{
+				lIsOK=false
+			}
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressTransaction)){
+				lListTransactionSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressTransaction,lRowSubHeader)
+				lNumCellRangeAddressTransactionColumnLast=lCellRangeAddressTransaction.getLastColumn()-lCellRangeAddressTransaction.getFirstColumn()
+			}
+			else{
+				lIsOK=false
+			}
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressInsuredData)){
+				lListInsuredDataSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressInsuredData,lRowSubHeader)
+				lNumCellRangeAddressInsuredDataColumnLast=lCellRangeAddressInsuredData.getLastColumn()-lCellRangeAddressInsuredData.getFirstColumn()
+			}
+			else{
+				lIsOK=false
+			}
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressPolicyHolderData)){
+				lListPolicyHolderDataSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressPolicyHolderData,lRowSubHeader)
+				lNumCellRangeAddressPolicyHolderDataColumnLast=lCellRangeAddressPolicyHolderData.getLastColumn()-lCellRangeAddressPolicyHolderData.getFirstColumn()
+			}
+			else{
+				lIsOK=false
+			}
+			if(lStrProductName.contains('Motor')){
+				if(!IGNUemaHelper.checkObjectNullOfObject(lCellRangeAddressVehicleData)){
+					lListVehicleDataSubHeader=this.getListPricingApiMergeCellSubHeader(lSheetPricingApi,lCellRangeAddressVehicleData,lRowSubHeader)
+					lNumCellRangeAddressVehicleDataColumnLast=lCellRangeAddressVehicleData.getLastColumn()-lCellRangeAddressVehicleData.getFirstColumn()
+				}
+				else{
+					lIsOK=false
+				}
+			}
+			lResult=lIsOK
 			if(lResult){
 				lreturn.put('Result',lResult)
-				lreturn.put('TransactionHeader',lTransactionHeader)
+				lreturn.put('CellRangeAddressQuotationInput',lCellRangeAddressQuotationInput)
+				lreturn.put('CellRangeAddressPlanOption',lCellRangeAddressPlanOption)
+				lreturn.put('CellRangeAddressMultiCover',lCellRangeAddressMultiCover)
+				lreturn.put('CellRangeAddressAdditionalCoverage',lCellRangeAddressAdditionalCoverage)
+				lreturn.put('CellRangeAddressOptionalData',lCellRangeAddressOptionalData)
+				lreturn.put('CellRangeAddressInputPremium',lCellRangeAddressInputPremium)
+				lreturn.put('CellRangeAddressPayment',lCellRangeAddressPayment)
+				lreturn.put('CellRangeAddressTransaction',lCellRangeAddressTransaction)
+				lreturn.put('CellRangeAddressPremium',lCellRangeAddressPremium)
+				lreturn.put('CellRangeAddressVehicleData',lCellRangeAddressVehicleData)
+				lreturn.put('CellRangeAddressInsuredData',lCellRangeAddressInsuredData)
+				lreturn.put('CellRangeAddressPolicyHolderData',lCellRangeAddressPolicyHolderData)
+				lreturn.put('NumCellRangeAddressQuotationInputColumnLast',lNumCellRangeAddressQuotationInputColumnLast)
+				lreturn.put('NumCellRangeAddressPlanOptionColumnLast',lNumCellRangeAddressPlanOptionColumnLast)
+				lreturn.put('NumCellRangeAddressMultiCoverColumnLast',lNumCellRangeAddressMultiCoverColumnLast)
+				lreturn.put('NumCellRangeAddressAdditionalCoverageColumnLast',lNumCellRangeAddressAdditionalCoverageColumnLast)
+				lreturn.put('NumCellRangeAddressOptionalDataColumnLast',lNumCellRangeAddressOptionalDataColumnLast)
+				lreturn.put('NumCellRangeAddressInputPremiumColumnLast',lNumCellRangeAddressInputPremiumColumnLast)
+				lreturn.put('NumCellRangeAddressPaymentColumnLast',lNumCellRangeAddressPaymentColumnLast)
+				lreturn.put('NumCellRangeAddressTransactionColumnLast',lNumCellRangeAddressTransactionColumnLast)
+				lreturn.put('NumCellRangeAddressPremiumColumnLast',lNumCellRangeAddressPremiumColumnLast)
+				lreturn.put('NumCellRangeAddressVehicleDataColumnLast',lNumCellRangeAddressVehicleDataColumnLast)
+				lreturn.put('NumCellRangeAddressInsuredDataColumnLast',lNumCellRangeAddressInsuredDataColumnLast)
+				lreturn.put('NumCellRangeAddressPolicyHolderDataColumnLast',lNumCellRangeAddressPolicyHolderDataColumnLast)
+				lreturn.put('ListQuotationInputSubHeader',lListQuotationInputSubHeader)
+				lreturn.put('ListPlanOptionSubHeader',lListPlanOptionSubHeader)
+				lreturn.put('ListMultiCoverSubHeader',lListMultiCoverSubHeader)
+				lreturn.put('ListAdditionalCoverageSubHeader',lListAdditionalCoverageSubHeader)
+				lreturn.put('ListOptionalDataSubHeader',lListOptionalDataSubHeader)
+				lreturn.put('ListInputPremiumSubHeader',lListInputPremiumSubHeader)
+				lreturn.put('ListPaymentSubHeader',lListPaymentSubHeader)
+				lreturn.put('ListTransactionSubHeader',lListTransactionSubHeader)
+				lreturn.put('ListPremiumSubHeader',lListPremiumSubHeader)
+				lreturn.put('ListVehicleDataSubHeader',lListVehicleDataSubHeader)
+				lreturn.put('ListInsuredDataSubHeader',lListInsuredDataSubHeader)
+				lreturn.put('ListPolicyHolderDataSubHeader',lListPolicyHolderDataSubHeader)
+				lreturn.put('StrOptionalDataParameterName',lStrOptionalDataParameterName)
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map getMapPricingApiPrepareJsonInputFromExcelSheet(Workbook workBookExcelFileGenericTestData,Sheet sheetPricingApi,Map mapPricingApiMergeCellRangeAddressList){
+		Map lreturn=[:]
+		Boolean lResult=false
+		List<String> lListJsonQuotationInput=new ArrayList<String>()
+		List<String> lListJsonVehicleData=new ArrayList<String>()
+		List<String> lListJsonPremium=new ArrayList<String>()
+		List<String> lListJsonPlanOption=new ArrayList<String>()
+		List<String> lListJsonMultiCover=new ArrayList<String>()
+		List<String> lListJsonPlanAdditionalCoverageData=new ArrayList<String>()
+		List<String> lListJsonInputPremiumData=new ArrayList<String>()
+		List<String> lListJsonPayment=new ArrayList<String>()
+		List<String> lListJsonTransaction=new ArrayList<String>()
+		List<String> lListReferCaseNumber=new ArrayList<String>()
+		List<String> lListTransactionType=new ArrayList<String>()
+		String lStrProductName=''
+		try{
+			lreturn.put('Result',lResult)
+			lreturn.put('ListJsonQuotationInput',lListJsonQuotationInput)
+			lreturn.put('ListJsonVehicleData',lListJsonVehicleData)
+			lreturn.put('ListJsonPremium',lListJsonPremium)
+			lreturn.put('ListJsonPlanOption',lListJsonPlanOption)
+			lreturn.put('ListJsonMultiCover',lListJsonMultiCover)
+			lreturn.put('ListJsonPlanAdditionalCoverageData',lListJsonPlanAdditionalCoverageData)
+			lreturn.put('ListJsonInputPremiumData',lListJsonInputPremiumData)
+			lreturn.put('ListJsonPayment',lListJsonPayment)
+			lreturn.put('ListJsonTransaction',lListJsonTransaction)
+			lreturn.put('ListReferCaseNumber',lListReferCaseNumber)
+			lreturn.put('ListTransactionType',lListTransactionType)
+			lreturn.put('lStrProductName',lStrProductName)
+			if(IGNUemaHelper.checkObjectEmptyOfMap(mapPricingApiMergeCellRangeAddressList)){
+				return lreturn
+			}
+			Map lMapPricingApiMergeCellRangeAddressList=mapPricingApiMergeCellRangeAddressList
+			if(IGNUemaHelper.checkObjectNullOfObject(sheetPricingApi)){
+				return lreturn
+			}
+			Sheet lSheetPricingApi=sheetPricingApi
+			if(IGNUemaHelper.checkObjectNullOfObject(workBookExcelFileGenericTestData)){
+				return lreturn
+			}
+			Workbook  lWorkBookExcelFileGenericTestData=workBookExcelFileGenericTestData
+			Sheet lMasterDataMappingSheet=IGNUemaHelper.getExcelWorkSheetFromExcelWorkbook(lWorkBookExcelFileGenericTestData,'MasterData-Mapping')
+			if(IGNUemaHelper.checkObjectNullOfObject(lMasterDataMappingSheet)){
+				return lreturn
+			}
+			CellRangeAddress lCellRangeAddressQuotationInput=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressQuotationInput
+			CellRangeAddress lCellRangeAddressPlanOption=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressPlanOption
+			CellRangeAddress lCellRangeAddressMultiCover=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressMultiCover
+			CellRangeAddress lCellRangeAddressAdditionalCoverage=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressAdditionalCoverage
+			CellRangeAddress lCellRangeAddressOptionalData=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressOptionalData
+			CellRangeAddress lCellRangeAddressInputPremium=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressInputPremium
+			CellRangeAddress lCellRangeAddressPayment=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressPayment
+			CellRangeAddress lCellRangeAddressTransaction=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressTransaction
+			CellRangeAddress lCellRangeAddressPremium=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressPremium
+			CellRangeAddress lCellRangeAddressVehicleData=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressVehicleData
+			CellRangeAddress lCellRangeAddressInsuredData=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressInsuredData
+			CellRangeAddress lCellRangeAddressPolicyHolderData=lMapPricingApiMergeCellRangeAddressList.CellRangeAddressPolicyHolderData
+			Integer lNumCellRangeAddressQuotationInputColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressQuotationInputColumnLast
+			Integer lNumCellRangeAddressPlanOptionColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressPlanOptionColumnLast
+			Integer lNumCellRangeAddressMultiCoverColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressMultiCoverColumnLast
+			Integer lNumCellRangeAddressAdditionalCoverageColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressAdditionalCoverageColumnLast
+			Integer lNumCellRangeAddressOptionalDataColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressOptionalDataColumnLast
+			Integer lNumCellRangeAddressInputPremiumColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressInputPremiumColumnLast
+			Integer lNumCellRangeAddressPaymentColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressPaymentColumnLast
+			Integer lNumCellRangeAddressTransactionColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressTransactionColumnLast
+			Integer lNumCellRangeAddressPremiumColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressPremiumColumnLast
+			Integer lNumCellRangeAddressVehicleDataColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressVehicleDataColumnLast
+			Integer lNumCellRangeAddressInsuredDataColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressInsuredDataColumnLast
+			Integer lNumCellRangeAddressPolicyHolderDataColumnLast=lMapPricingApiMergeCellRangeAddressList.NumCellRangeAddressPolicyHolderDataColumnLast
+			List<String> lListQuotationInputSubHeader=lMapPricingApiMergeCellRangeAddressList.ListQuotationInputSubHeader
+			List<String> lListPlanOptionSubHeader=lMapPricingApiMergeCellRangeAddressList.ListPlanOptionSubHeader
+			List<String> lListMultiCoverSubHeader=lMapPricingApiMergeCellRangeAddressList.ListMultiCoverSubHeader
+			List<String> lListAdditionalCoverageSubHeader=lMapPricingApiMergeCellRangeAddressList.ListAdditionalCoverageSubHeader
+			List<String> lListOptionalDataSubHeader=lMapPricingApiMergeCellRangeAddressList.ListOptionalDataSubHeader
+			List<String> lListInputPremiumSubHeader=lMapPricingApiMergeCellRangeAddressList.ListInputPremiumSubHeader
+			List<String> lListPaymentSubHeader=lMapPricingApiMergeCellRangeAddressList.ListPaymentSubHeader
+			List<String> lListTransactionSubHeader=lMapPricingApiMergeCellRangeAddressList.ListTransactionSubHeader
+			List<String> lListPremiumSubHeader=lMapPricingApiMergeCellRangeAddressList.ListPremiumSubHeader
+			List<String> lListVehicleDataSubHeader=lMapPricingApiMergeCellRangeAddressList.ListVehicleDataSubHeader
+			List<String> lListInsuredDataSubHeader=lMapPricingApiMergeCellRangeAddressList.ListInsuredDataSubHeader
+			List<String> lListPolicyHolderDataSubHeader=lMapPricingApiMergeCellRangeAddressList.ListPolicyHolderDataSubHeader
+			String lStrOptionalDataParameterName=lMapPricingApiMergeCellRangeAddressList.StrOptionalDataParameterName
+			List<String> lListCurrentCellQuotationInput=new ArrayList<String>()
+			List<String> lListCurrentCellInsuredData=new ArrayList<String>()
+			List<String> lListCurrentCellPolicyHolderData=new ArrayList<String>()
+			List<String> lListCurrentCellVehicleData=new ArrayList<String>()
+			List<String> lListCurrentCellOptionalData=new ArrayList<String>()
+			List<String> lListCurrentCellPlanOption=new ArrayList<String>()
+			List<String> lListCurrentCellMultiCover=new ArrayList<String>()
+			List<String> lListCurrentCellMultiCoverData=new ArrayList<String>()
+			List<String> lListCurrentCellAdditionalCoverage=new ArrayList<String>()
+			List<String> lListCurrentCellInputPremium=new ArrayList<String>()
+			List<String> lListCurrentCellPayment=new ArrayList<String>()
+			List<String> lListCurrentCellTransaction=new ArrayList<String>()
+			List<String> lListCurrentCellPremium=new ArrayList<String>()
+			List<String> lListQuotationInputDate=new ArrayList<String>()
+			List<String> lListMapVehicleData=new ArrayList<String>()
+			List<String> lListQuotationInput=new ArrayList<String>()
+			List<String> lListInsuredData=new ArrayList<String>()
+			List<String> lListPolicyHolderData=new ArrayList<String>()
+			List<String> lListVehicleData=new ArrayList<String>()
+			List<String> lListTransaction=new ArrayList<String>()
+			List<String> lListOptionalData=new ArrayList<String>()
+			List<String> lListPlanOption=new ArrayList<String>()
+			List<String> lListMultiCover=new ArrayList<String>()
+			List<String> lListAdditionalCoverage=new ArrayList<String>()
+			List<String> lListInputPremium=new ArrayList<String>()
+			List<String> lListPremium=new ArrayList<String>()
+			List<String> lListPayment=new ArrayList<String>()
+			List<String> lListPlanOptionAll=new ArrayList()
+			List<String> lListPaymentRowKey=new ArrayList()
+			List<String> lListPlanOptionRowKeyAll=new ArrayList()
+			List<String> lListPlanOptionRowKey=new ArrayList()
+			List<String> lListMultiCoverAll=new ArrayList()
+			List<String> lListSubsetAll=new ArrayList()
+			List<String> lListReferSubSetAll=new ArrayList()
+			List<String> lListAdditionalCoverageAll=new ArrayList()
+			List<String> lListInputPremiumAll=new ArrayList()
+			List<String> lListPaymentAll=new ArrayList()
+			List<String> lListTransactionAll=new ArrayList()
+			List<String> lListPremiumAll=new ArrayList()
+			List<String> lListInvalidReferCase=[]
+			List<String> lListInputValidRow=[]
+			String lStrPreviousMultiCover=''
+			Boolean lIsMultiCoverFlag=true
+			Boolean lIsWriteReferCaseStatusToSheet=false
+			Integer lNumPricingApiSheetFirstRow=lSheetPricingApi.getFirstRowNum()
+			Row lSheetPricingApiFirstRow=lSheetPricingApi.getRow(lNumPricingApiSheetFirstRow)
+			Row lRowFirst=lSheetPricingApi.getRow(lNumPricingApiSheetFirstRow+1)
+			Integer lNumLastRow=lSheetPricingApi.getLastRowNum()
+			Integer lNumGenericDataSheetLastColumn=lRowFirst.getLastCellNum()
+			Integer lNumTargetedRow=lRowFirst.rowNum
+			Integer lNumSubSetColumnIndex=0
+			Integer lNumTransactionColumnIndex=0
+			Integer lNumReferCaseIndex=0
+			Integer lNumReferCaseValid=0
+			Integer lNumInputValidColumnIndex=0
+			String lStrProductVariable=''
+			lNumSubSetColumnIndex=this.getTargetColumnIndexByColumnName(lSheetPricingApi,'Subset',lNumTargetedRow,lNumGenericDataSheetLastColumn)
+			lNumTransactionColumnIndex=this.getTargetColumnIndexByColumnName(lSheetPricingApi,'TransactionType',lNumTargetedRow,lNumGenericDataSheetLastColumn)
+			lNumReferCaseIndex=this.getTargetColumnIndexByColumnName(lSheetPricingApi,'ReferSubset',lNumTargetedRow,lNumGenericDataSheetLastColumn)
+			lNumReferCaseValid=this.getTargetColumnIndexByColumnName(lSheetPricingApi,'ReferCaseValid',lNumTargetedRow,lNumGenericDataSheetLastColumn)
+			lNumInputValidColumnIndex=this.getTargetColumnIndexByColumnName(lSheetPricingApi,'InputValid',lNumTargetedRow,lNumGenericDataSheetLastColumn)
+			Map lMapPricingApiProductTypeAndNameResult=this.getMapPricingApiProductTypeAndValueFromExcelSheet(lSheetPricingApiFirstRow)
+			if(!lMapPricingApiProductTypeAndNameResult.Result){
+				return lreturn
+			}
+			lStrProductVariable=lMapPricingApiProductTypeAndNameResult.StrProductType
+			lStrProductName=lMapPricingApiProductTypeAndNameResult.StrProductName
+			Map lMapPricingApiTransactionHeaderResult=this.getMapPricingApiTransactionTypeAndHeaderFromExcelSheet(lSheetPricingApi)
+			if(!lMapPricingApiTransactionHeaderResult.Result){
+				return lreturn
+			}
+			String lStrTransactionTypeHeader=lMapPricingApiTransactionHeaderResult.StrTransactionHeader
+			Map lMapOptionalDataParameterWithMasterParameter=this.inputMapTargetParameterWithMasterParameter(lMasterDataMappingSheet,lStrOptionalDataParameterName)
+			if(!lMapOptionalDataParameterWithMasterParameter.Result){
+				return lreturn
+			}
+			Map lMapOptionalDataParameter=lMapOptionalDataParameterWithMasterParameter.MasterDataParameter
+			for(Integer lIndex=2;lIndex<=lNumLastRow;lIndex++){
+				String lStrSubSetValue=IDNPricingApiHelper.getValueFromExcelSheetForValidation(lSheetPricingApi,lIndex,lNumSubSetColumnIndex)
+				String lStrReferTestCaseValue=IDNPricingApiHelper.getValueFromExcelSheetForValidation(lSheetPricingApi,lIndex,lNumReferCaseIndex)
+				String lStrTransactionTypeValue=IDNPricingApiHelper.getValueFromExcelSheetForValidation(lSheetPricingApi,lIndex,lNumTransactionColumnIndex)
+				Integer lLastTransactionIndex=lListTransactionType.size()-1
+				if(IGNUemaHelper.checkObjectEmptyOfString(lStrTransactionTypeValue)){
+					lStrTransactionTypeValue=lListTransactionType.get(lLastTransactionIndex)
+					Boolean lIsWriteTransactionTypeValueToSheet=IDNPricingApiHelper.inputPricingApiResultToExcelSheetForValidation(lSheetPricingApi,lIndex,lNumTransactionColumnIndex,lStrTransactionTypeValue)
+					if(!lIsWriteTransactionTypeValueToSheet){
+						return lreturn
+					}
+				}else{
+					lListTransactionType.add(lStrTransactionTypeValue)
+				}
+				if(!lStrSubSetValue.isEmpty()){
+					lListInputValidRow.add(lIndex)
+					lListSubsetAll.add(lStrSubSetValue)
+				}
+				if(!lStrReferTestCaseValue.isEmpty()){
+					lListReferSubSetAll.add(lStrReferTestCaseValue)
+					if(lStrTransactionTypeValue=='New Biz'){
+						lListInvalidReferCase.add(lStrSubSetValue)
+						lIsWriteReferCaseStatusToSheet=IDNPricingApiHelper.inputPricingApiResultToExcelSheetForValidation(lSheetPricingApi,lIndex,lNumReferCaseValid,'Invalid')
+					}
+					else{
+						if(lListInvalidReferCase.contains(lStrReferTestCaseValue)){
+							lIsWriteReferCaseStatusToSheet=IDNPricingApiHelper.inputPricingApiResultToExcelSheetForValidation(lSheetPricingApi,lIndex,lNumReferCaseValid,'Invalid')
+						}
+						else{
+							lIsWriteReferCaseStatusToSheet=IDNPricingApiHelper.inputPricingApiResultToExcelSheetForValidation(lSheetPricingApi,lIndex,lNumReferCaseValid,'Valid')
+						}
+					}
+					if(!lIsWriteReferCaseStatusToSheet){
+						return lreturn
+					}
+				}
+				Row lRowCurrent=lSheetPricingApi.getRow(lCellRangeAddressQuotationInput.getFirstRow()+lIndex)
+				Map lMapCurrentCellListQuotationInput=this.getMapQuotationInputValueFromExcelSpecificRange(lWorkBookExcelFileGenericTestData,lSheetPricingApi,lCellRangeAddressQuotationInput,lRowCurrent,lNumCellRangeAddressQuotationInputColumnLast,true,true)
+				if(lMapCurrentCellListQuotationInput.Result){
+					lListCurrentCellQuotationInput=lMapCurrentCellListQuotationInput.CellValueList
+				}
+				Map lMapCurrentCellListInsuredData=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressInsuredData,lRowCurrent,lNumCellRangeAddressInsuredDataColumnLast,true)
+				if(lMapCurrentCellListInsuredData.Result){
+					lListCurrentCellInsuredData=lMapCurrentCellListInsuredData.CellValueList
+				}
+				Map lMapCurrentCellListPolicyHolderData=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressPolicyHolderData,lRowCurrent,lNumCellRangeAddressPolicyHolderDataColumnLast,true)
+				if(lMapCurrentCellListPolicyHolderData.Result){
+					lListCurrentCellPolicyHolderData=lMapCurrentCellListPolicyHolderData.CellValueList
+				}
+				List lListMapPlanOptionRowKey=[]
+				Map lMapCurrentCellListPlanOption=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressPlanOption,lRowCurrent,lNumCellRangeAddressPlanOptionColumnLast,true)
+				if(lMapCurrentCellListPlanOption.Result){
+					lListCurrentCellPlanOption=lMapCurrentCellListPlanOption.CellValueList
+					Map lMapPlanOptionRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellListPlanOption)
+					if(lMapPlanOptionRowKeyListResult.Result){
+						lListMapPlanOptionRowKey=lMapPlanOptionRowKeyListResult.TargetInputRowKeyList
+					}
+				}
+				Map lMapQuotationInputDate=[:]
+				List lListMapQuotationInputRowKey=[]
+				Map lMapQuotationInputRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellListQuotationInput)
+				if(lMapQuotationInputRowKeyListResult.Result){
+					lListMapQuotationInputRowKey=lMapQuotationInputRowKeyListResult.TargetInputRowKeyList
+				}
+				for(Integer lNumQuotationInputIndex=0;lNumQuotationInputIndex<=lListQuotationInputSubHeader.size()-1;lNumQuotationInputIndex++){
+					String lStrQuotationHeaderValue=lListQuotationInputSubHeader.get(lNumQuotationInputIndex)
+					if(lStrQuotationHeaderValue=='StartDate'){
+						lMapQuotationInputDate.put(lListQuotationInputSubHeader.get(lNumQuotationInputIndex),lListMapQuotationInputRowKey.get(lNumQuotationInputIndex))
+					}
+					if(lStrQuotationHeaderValue=='EffectiveDate'){
+						lMapQuotationInputDate.put(lListQuotationInputSubHeader.get(lNumQuotationInputIndex),lListMapQuotationInputRowKey.get(lNumQuotationInputIndex))
+					}
+					if(lStrQuotationHeaderValue=='QuoteFirstQuote'){
+						lMapQuotationInputDate.put(lListQuotationInputSubHeader.get(lNumQuotationInputIndex),lListMapQuotationInputRowKey.get(lNumQuotationInputIndex))
+					}
+					if(lStrQuotationHeaderValue=='QuoteDate'){
+						lMapQuotationInputDate.put(lListQuotationInputSubHeader.get(lNumQuotationInputIndex),lListMapQuotationInputRowKey.get(lNumQuotationInputIndex))
+					}
+					if(lStrQuotationHeaderValue=='EndDate'){
+						lMapQuotationInputDate.put(lListQuotationInputSubHeader.get(lNumQuotationInputIndex),lListMapQuotationInputRowKey.get(lNumQuotationInputIndex))
+					}
+					if(lStrQuotationHeaderValue=='QuoteMasterSetId'){
+						lMapQuotationInputDate.put(lListQuotationInputSubHeader.get(lNumQuotationInputIndex),lListMapQuotationInputRowKey.get(lNumQuotationInputIndex))
+					}
+					if(lStrQuotationHeaderValue=='EndorseCancellationMethod'){
+						lMapQuotationInputDate.put(lListQuotationInputSubHeader.get(lNumQuotationInputIndex),lListMapQuotationInputRowKey.get(lNumQuotationInputIndex))
+					}
+				}
+				lListQuotationInputDate.add(lMapQuotationInputDate)
+				if(lStrProductName.contains('Motor')){
+					Map lMapVehicleDataInput=[:]
+					Map lMapCurrentCellListVehicleData=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressVehicleData,lRowCurrent,lNumCellRangeAddressVehicleDataColumnLast,true)
+					if(lMapCurrentCellListVehicleData.Result){
+						lListCurrentCellVehicleData=lMapCurrentCellListVehicleData.CellValueList
+						if(!lListCurrentCellQuotationInput.isEmpty()){
+							List lListMapVehicleDataRowKey=[]
+							Map lListMapVehicleDataRowKeyResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellListVehicleData)
+							if(lListMapVehicleDataRowKeyResult.Result){
+								lListMapVehicleDataRowKey=lListMapVehicleDataRowKeyResult.TargetInputRowKeyList
+								for(Integer lNumVehicleDataIndex=0;lNumVehicleDataIndex<=lListVehicleDataSubHeader.size()-1;lNumVehicleDataIndex++){
+									String lStrVehicleDataHeaderValue=lListVehicleDataSubHeader.get(lNumVehicleDataIndex)
+									lMapVehicleDataInput.put(lStrVehicleDataHeaderValue,lListMapVehicleDataRowKey.get(lNumVehicleDataIndex))
+								}
+							}
+							lListMapVehicleData.add(lMapVehicleDataInput)
+						}
+					}
+					Boolean lIsCurrentCellListVehicleDataValueAllContainStringNone=IGNUemaHelper.checkAllValueInListContainSameString(lListCurrentCellVehicleData,'None')
+					if(lIsCurrentCellListVehicleDataValueAllContainStringNone){
+						lListCurrentCellVehicleData=[]
+					}
+				}
+				Map lMapPremium=[:]
+				if(!lListCurrentCellQuotationInput.isEmpty()){
+					lListQuotationInput.addAll(lListCurrentCellQuotationInput)
+					lListInsuredData.addAll(lListCurrentCellInsuredData)
+					lListPolicyHolderData.addAll(lListCurrentCellPolicyHolderData)
+					lListVehicleData.addAll(lListCurrentCellVehicleData)
+					lStrReferTestCaseValue=IDNPricingApiHelper.getValueFromExcelSheetForValidation(lSheetPricingApi,lIndex,lNumReferCaseIndex)
+					lListReferCaseNumber.add(lStrReferTestCaseValue)
+				}
+				Map lMapCurrentCellListOptionalData=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressOptionalData,lRowCurrent,lNumCellRangeAddressOptionalDataColumnLast,false)
+				if(lMapCurrentCellListOptionalData.Result){
+					lListCurrentCellOptionalData=lMapCurrentCellListOptionalData.CellValueList
+				}
+				Boolean lIsCurrentCellListOptionalDataValueAllContainStringNone=IGNUemaHelper.checkAllValueInListContainSameString(lListCurrentCellOptionalData,'None')
+				if(lIsCurrentCellListOptionalDataValueAllContainStringNone){
+					lListCurrentCellOptionalData=[]
+				}
+				if(!lListCurrentCellOptionalData.isEmpty()){
+					lListOptionalData.addAll(lListCurrentCellOptionalData)
+				}
+				if(lListCurrentCellQuotationInput.isEmpty()){
+					if(!lStrSubSetValue.isEmpty()){
+						lListAdditionalCoverageAll.add(lListAdditionalCoverage)
+						lListAdditionalCoverage=[]
+						lListInputPremiumAll.add(lListInputPremium)
+						lListInputPremium=[]
+						lListPaymentAll.add(lListPayment)
+						lListPayment=[]
+						lListPremiumAll.add(lListPremium)
+						lListPremium=[]
+						lListTransactionAll.add(lListTransaction)
+						lListTransaction=[]
+						if(!lIsMultiCoverFlag){
+							lListPlanOptionRowKeyAll.add(lListPlanOptionRowKey)
+							lListPlanOptionAll.add(lListPlanOption)
+							lListMultiCoverAll.add(lListMultiCover)
+							lListMultiCover=[]
+							lListPlanOption=[]
+							lListPlanOptionRowKey=[]
+						}else{
+							lListPlanOptionRowKeyAll.add(lListPlanOptionRowKey)
+							lListPlanOptionAll.add(lListPlanOption)
+							lListMultiCoverAll.add(lListMultiCover)
+							lListMultiCover=[]
+							lListPlanOption=[]
+							lListPlanOptionRowKey=[]
+						}
+					}
+				}
+				Row lRowCurrentMultiCover=lSheetPricingApi.getRow(lCellRangeAddressMultiCover.getFirstRow()+lIndex)
+				Map lMapCurrentCellMultiCover=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressMultiCover,lRowCurrent,lNumCellRangeAddressMultiCoverColumnLast,true)
+				if(lMapCurrentCellMultiCover.Result){
+					lListCurrentCellMultiCover=lMapCurrentCellMultiCover.CellValueList
+				}
+				String lMultiCoverFlag=lListCurrentCellMultiCover.get(0)
+				if(!IGNUemaHelper.checkObjectEmptyOfString(lMultiCoverFlag)){
+					lIsMultiCoverFlag=IGNUemaHelper.convertStringToBoolean(lMultiCoverFlag)
+				}
+				Boolean lIsCheckCurrentCellListMultiCoverNone=IGNUemaHelper.checkAllValueInListContainSameString(lListCurrentCellMultiCover,'None')
+				if(lIsCheckCurrentCellListMultiCoverNone){
+					lListCurrentCellMultiCover=[]
+				}
+
+				Map lMapAdditionalCoverage=[:]
+				Table<Integer,Integer,String> lTableExcelSheetAdditionalCoverage=HashBasedTable.create()
+				Map lMapCurrentCellListAdditionalCoverage=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressAdditionalCoverage,lRowCurrent,lNumCellRangeAddressAdditionalCoverageColumnLast,true)
+				if(lMapCurrentCellListAdditionalCoverage.Result){
+					lListCurrentCellAdditionalCoverage=lMapCurrentCellListAdditionalCoverage.CellValueList
+					List lListMapAdditionalCoverageRowKey=[]
+					Map lMapAdditionalCoverageRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellListAdditionalCoverage)
+					if(lMapAdditionalCoverageRowKeyListResult.Result){
+						lListMapAdditionalCoverageRowKey=lMapAdditionalCoverageRowKeyListResult.TargetInputRowKeyList
+					}
+					if(!lListCurrentCellAdditionalCoverage.isEmpty()){
+						for(Integer lNumAdditionalCoverageIndex=0;lNumAdditionalCoverageIndex<=lListCurrentCellAdditionalCoverage.size()-1;lNumAdditionalCoverageIndex++){
+							String lStrHeaderValue=lListAdditionalCoverageSubHeader.get(lNumAdditionalCoverageIndex)
+							if(lStrHeaderValue.endsWith('Premium')||(lStrHeaderValue.contains('ValidationTestResult'))){
+								lMapAdditionalCoverage.put(lListAdditionalCoverageSubHeader.get(lNumAdditionalCoverageIndex),lListMapAdditionalCoverageRowKey.get(lNumAdditionalCoverageIndex))
+							}else{
+								lMapAdditionalCoverage.put(lListAdditionalCoverageSubHeader.get(lNumAdditionalCoverageIndex),lListCurrentCellAdditionalCoverage.get(lNumAdditionalCoverageIndex))
+							}
+						}
+					}
+				}
+				Map lMapInputPremium=[:]
+				Table<Integer,Integer,String> lTableExcelSheetInputPremium=HashBasedTable.create()
+				Map lMapCurrentCellListInputPremium=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressInputPremium,lRowCurrent,lNumCellRangeAddressInputPremiumColumnLast,true)
+				if(lMapCurrentCellListInputPremium.Result){
+					lListCurrentCellInputPremium=lMapCurrentCellListInputPremium.CellValueList
+					lTableExcelSheetInputPremium=lMapCurrentCellListInputPremium.CellTable
+					Set<Integer> lTableInputPremiumKeySet=lTableExcelSheetInputPremium.columnKeySet()
+					List lListMapInputPremiumRowKey=[]
+					Map lMapInputPremiumRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellListInputPremium)
+					if(lMapInputPremiumRowKeyListResult.Result){
+						lListMapInputPremiumRowKey=lMapInputPremiumRowKeyListResult.TargetInputRowKeyList
+					}
+					if(!lListCurrentCellInputPremium.isEmpty()){
+						for(Integer lNumInputPremiumIndex=0;lNumInputPremiumIndex<=lListCurrentCellInputPremium.size()-1;lNumInputPremiumIndex++){
+							String lStrHeaderValue=lListInputPremiumSubHeader.get(lNumInputPremiumIndex)
+							if(lStrHeaderValue.endsWith('Premium')){
+								lMapInputPremium.put(lListInputPremiumSubHeader.get(lNumInputPremiumIndex),lListMapInputPremiumRowKey.get(lNumInputPremiumIndex))
+							}else{
+								lMapInputPremium.put(lListInputPremiumSubHeader.get(lNumInputPremiumIndex),lListCurrentCellInputPremium.get(lNumInputPremiumIndex))
+							}
+						}
+						//lListInputPremium.add(lMapInputPremium)
+					}
+				}
+				Map lMapPaymentList=[:]
+				Map lMapCurrentCellListPayment=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressPayment,lRowCurrent,lNumCellRangeAddressPaymentColumnLast,true)
+				if(lMapCurrentCellListPayment.Result){
+					lListCurrentCellPayment=lMapCurrentCellListPayment.CellValueList
+					Table<Integer,Integer,String> lTableExcelSheetPayment=HashBasedTable.create()
+					lTableExcelSheetPayment=lMapCurrentCellListPayment.CellTable
+					Set<Integer> lTablePaymentKeySet=lTableExcelSheetPayment.columnKeySet()
+					List lListMapPaymentRowKey=[]
+					Map lMapPaymentRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellListPayment)
+					if(lMapPaymentRowKeyListResult.Result){
+						lListMapPaymentRowKey=lMapPaymentRowKeyListResult.TargetInputRowKeyList
+					}
+					if(!lListCurrentCellPayment.isEmpty()){
+						for(Integer lCurrentPaymentIndex=0;lCurrentPaymentIndex<=lListCurrentCellPayment.size()-1;lCurrentPaymentIndex++){
+							String lStrPaymentHeaderValue=lListPaymentSubHeader.get(lCurrentPaymentIndex)
+							if(lStrPaymentHeaderValue=='PaymentFrequency' && lListCurrentCellPayment.get(lCurrentPaymentIndex) !='None' ){
+								lMapPaymentList.put(lListPaymentSubHeader.get(lCurrentPaymentIndex),lListCurrentCellPayment.get(lCurrentPaymentIndex))
+							}else{
+								lMapPaymentList.put(lListPaymentSubHeader.get(lCurrentPaymentIndex),lListMapPaymentRowKey.get(lCurrentPaymentIndex))
+							}
+						}
+						//lListPayment.add(lMapPaymentList)
+					}
+				}
+				Map lMapTransactionList=[:]
+				Map lMapCurrentCellListTransaction=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressTransaction,lRowCurrent,lNumCellRangeAddressTransactionColumnLast,true)
+				if(lMapCurrentCellListTransaction.Result){
+					lListCurrentCellTransaction=lMapCurrentCellListTransaction.CellValueList
+					List lListMapTransactionRowKey=[]
+					Map lMapTransactionRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellListTransaction)
+					if(lMapTransactionRowKeyListResult.Result){
+						lListMapTransactionRowKey=lMapTransactionRowKeyListResult.TargetInputRowKeyList
+					}
+					if(!lListCurrentCellTransaction.isEmpty()){
+						for(Integer lCurrentTransactionIndex=0;lCurrentTransactionIndex<=lListCurrentCellTransaction.size()-1;lCurrentTransactionIndex++){
+							String lStrTransactionHeaderValue=lListTransactionSubHeader.get(lCurrentTransactionIndex)
+							lMapTransactionList.put(lStrTransactionHeaderValue,lListMapTransactionRowKey.get(lCurrentTransactionIndex))
+						}
+						//lListTransaction.add(lMapTransactionList)
+					}
+				}
+				Map lMapCurrentCellListPremium=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressPremium,lRowCurrent,lNumCellRangeAddressPremiumColumnLast,true)
+				if(lMapCurrentCellListPremium.Result){
+					lListCurrentCellPremium=lMapCurrentCellListPremium.CellValueList
+					List lListMapPremiumRowKey=[]
+					Map lMapPremiumRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellListPremium)
+					if(lMapPremiumRowKeyListResult.Result){
+						lListMapPremiumRowKey=lMapPremiumRowKeyListResult.TargetInputRowKeyList
+					}
+					if(!lListCurrentCellPremium.isEmpty()){
+						for(Integer lNumPremiumIndex=0;lNumPremiumIndex<=lListCurrentCellPremium.size()-1;lNumPremiumIndex++){
+							String lStrHeaderValue=lListPremiumSubHeader.get(lNumPremiumIndex)
+							lMapPremium.put(lListPremiumSubHeader.get(lNumPremiumIndex),lListMapPremiumRowKey.get(lNumPremiumIndex))
+						}
+						lListPremium.add(lMapPremium)
+					}
+				}
+				if(!lListCurrentCellMultiCover.isEmpty() || lIsMultiCoverFlag){
+					lStrPreviousMultiCover=lListCurrentCellMultiCover.get(1)
+					lListMultiCover.add(lListCurrentCellMultiCover.get(1))
+					lListPlanOptionRowKey.add(lListMapPlanOptionRowKey)
+					lListPlanOption.add(lListCurrentCellPlanOption)
+					lListTransaction.add(lMapTransactionList)
+					lListPayment.add(lMapPaymentList)
+					lListInputPremium.add(lMapInputPremium)
+					lListAdditionalCoverage.add(lMapAdditionalCoverage)
+				}else{
+					List lListMapInputMultiCoverRowKey=[]
+					Map lMapMultiCoverRowKeyListResult=this.getMapHashTableInformationForProccesingInput(lMapCurrentCellMultiCover)
+					if(lMapMultiCoverRowKeyListResult.Result){
+						lListMapInputMultiCoverRowKey=lMapMultiCoverRowKeyListResult.TargetInputRowKeyList
+					}
+					Map lMapMultiCoverRowNumberAndColumnNumber=lListMapInputMultiCoverRowKey.get(1)
+					Integer lNumMultiCoverRowNumber=lMapMultiCoverRowNumberAndColumnNumber.RowNumber
+					Integer lNumMultiCoverColumnNumber=lMapMultiCoverRowNumberAndColumnNumber.ColumnNumber
+					Boolean lIsWriteMultiCoverToExcelSheet=IDNPricingApiHelper.inputPricingApiResultToExcelSheetForValidation(lSheetPricingApi,lNumMultiCoverRowNumber,lNumMultiCoverColumnNumber,lStrPreviousMultiCover)
+					if(!lIsWriteMultiCoverToExcelSheet){
+						return lreturn
+					}
+					lListMultiCover.add(lStrPreviousMultiCover)
+					lListPlanOptionRowKey.add(lListMapPlanOptionRowKey)
+					lListPlanOption.add(lListCurrentCellPlanOption)
+					lListTransaction.add(lMapTransactionList)
+					lListPayment.add(lMapPaymentList)
+					lListInputPremium.add(lMapInputPremium)
+					lListAdditionalCoverage.add(lMapAdditionalCoverage)
+				}
+				Integer lNumNextRowIndex=lCellRangeAddressQuotationInput.getFirstRow()+lIndex+1
+				Row lRowNext=lSheetPricingApi.getRow(lNumNextRowIndex)
+				List lListNextRowQuotationInput=[]
+				Map lMapNextRowQuotationInputList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(lSheetPricingApi,lCellRangeAddressQuotationInput,lRowNext,lNumCellRangeAddressQuotationInputColumnLast,false)
+				if(lMapNextRowQuotationInputList.Result){
+					lListNextRowQuotationInput=lMapNextRowQuotationInputList.CellValueList
+				}
+				Boolean lIsCheckNextRowQuotationInputListNone=IGNUemaHelper.checkAllValueInListContainSameString(lListNextRowQuotationInput,'None')
+				if(lIsCheckNextRowQuotationInputListNone){
+					lListNextRowQuotationInput=[]
+				}
+				if(!lListNextRowQuotationInput.isEmpty()||(lIndex==lNumLastRow)){
+					Map lMapQuotationInput=[:]
+					Map lMapQuotationInputAll=[:]
+					Map lMapInsuredData=[:]
+					Map lMapPolicyHolderData=[:]
+					Map lMapVehicleData=[:]
+					Map lMapVehicleDataAll=[:]
+					Map lMapAdditionalCoverageData=[:]
+					Map lMapAdditionalCoverageDataAll=[:]
+					Map lMapInputPremiumData=[:]
+					Map lMapInputPremiumDataAll=[:]
+					Map lMapMultiCoverAll=[:]
+					Map lMapPaymentData=[:]
+					Map lMapPaymentDataAll=[:]
+					Map lMapPremiumDataAll=[:]
+					Map lMapTransactionData=[:]
+					List lListPlanOptionFinal=[]
+					lMapQuotationInputAll.put(lStrProductVariable,lStrProductName)
+					lMapQuotationInputAll.put(lStrTransactionTypeHeader,lStrTransactionTypeValue)
+					for(Integer lInsuredDataIndex=0;lInsuredDataIndex<=lListInsuredData.size()-1;lInsuredDataIndex++){
+						String lStrInsuredDataValue=lListInsuredData.get(lInsuredDataIndex)
+						String lStrInsuredHeaderValue=lListInsuredDataSubHeader.get(lInsuredDataIndex)
+						lMapInsuredData.put(lStrInsuredHeaderValue,lStrInsuredDataValue)
+					}
+					for(Integer lPolicyHolderDataIndex=0;lPolicyHolderDataIndex<=lListPolicyHolderData.size()-1;lPolicyHolderDataIndex++){
+						String lStrPolicyHolderDataValue=lListPolicyHolderData.get(lPolicyHolderDataIndex)
+						String lStrPolicyHeaderValue=lListPolicyHolderDataSubHeader.get(lPolicyHolderDataIndex)
+						lMapPolicyHolderData.put(lStrPolicyHeaderValue,lStrPolicyHolderDataValue)
+					}
+					for(Integer lNumQuotationInputIndex=0;lNumQuotationInputIndex<=lListQuotationInput.size()-1;lNumQuotationInputIndex++){
+						String lStrQuotationInputValue=lListQuotationInput.get(lNumQuotationInputIndex)
+						String lStrQuotationHeaderValue=lListQuotationInputSubHeader.get(lNumQuotationInputIndex)
+						lMapQuotationInputAll.put(lStrQuotationHeaderValue,lStrQuotationInputValue)
+					}
+					if(lStrProductName.contains('Motor')){
+						for(Integer lNumVehicleDataIndex=0;lNumVehicleDataIndex<=lListVehicleData.size()-1;lNumVehicleDataIndex++){
+							String lStrVehicleDataValue=lListVehicleData.get(lNumVehicleDataIndex)
+							String lStrVehicleHeaderValue=lListVehicleDataSubHeader.get(lNumVehicleDataIndex)
+							lMapVehicleDataAll.put(lStrVehicleHeaderValue,lStrVehicleDataValue)
+						}
+					}
+					List lListMapOptionalData=[]
+					Integer lNumOptionalDataParameterSize=lMapOptionalDataParameter.size()
+					Integer lOptionalDataIndex=0
+					while(lOptionalDataIndex<lListOptionalData.size()-1){
+						Map lMapOptionalData=[:]
+						for(Integer lOptionalDataMapIndex=0;lOptionalDataMapIndex<=lNumOptionalDataParameterSize-1;lOptionalDataMapIndex++){
+							String lStrOptionalDataName=lListOptionalData.get(lOptionalDataIndex)
+							if(lStrOptionalDataName!='None'){
+								lMapOptionalData.put(lListOptionalDataSubHeader.get(lOptionalDataMapIndex),lStrOptionalDataName)
+							}
+							lOptionalDataIndex=lOptionalDataIndex+1
+						}
+						if(!IGNUemaHelper.checkObjectEmptyOfMap(lMapOptionalData)){
+							lListMapOptionalData.add(lMapOptionalData)
+						}
+					}
+					Map lMapOptionalDataAll=[:]
+					if(lStrProductName.contains('Motor')){
+						lMapQuotationInputAll.put('VehicleData',lMapVehicleDataAll)
+					}
+					lMapQuotationInputAll.put(lStrOptionalDataParameterName,lListMapOptionalData)
+					if(lIndex<=(lNumLastRow)){
+						lListPlanOptionRowKeyAll.add(lListPlanOptionRowKey)
+						lListPlanOptionAll.add(lListPlanOption)
+						lListMultiCoverAll.add(lListMultiCover)
+						lListAdditionalCoverageAll.add(lMapAdditionalCoverage)
+						lListInputPremiumAll.add(lMapInputPremium)
+						lListPaymentAll.add(lMapPaymentList)
+						lListTransactionAll.add(lMapTransactionList)
+						lListPremiumAll.add(lMapPremium)
+					}
+					for(Integer lNumPlanOptionIndex=0;lNumPlanOptionIndex<=lListPlanOptionAll.size()-1;lNumPlanOptionIndex++){
+						List lListCurrentPlanOption=lListPlanOptionAll.get(lNumPlanOptionIndex)
+						List lListCurrentPlanOptionRowKey=lListPlanOptionRowKeyAll.get(lNumPlanOptionIndex)
+						List lListSelectedPlanOption=[]
+						for(Integer lCurrentPlanOptionIndex=0;lCurrentPlanOptionIndex<=lListCurrentPlanOption.size()-1;lCurrentPlanOptionIndex++){
+							Map lMapPlanOptionList=[:]
+							List lListPlanOptionMain=lListCurrentPlanOption.get(lCurrentPlanOptionIndex)
+							List lListPlanOptionRowKeyMain=lListCurrentPlanOptionRowKey.get(lCurrentPlanOptionIndex)
+							for(Integer lMainIndex=0;lMainIndex<=lListPlanOptionMain.size()-1;lMainIndex++){
+								String lStrPlanName=lListPlanOptionMain.get(lMainIndex)
+								if(lStrPlanName=='None'){
+									lMapPlanOptionList.put(lListPlanOptionSubHeader.get(lMainIndex),lListPlanOptionRowKeyMain.get(lMainIndex))
+								}else{
+									lMapPlanOptionList.put(lListPlanOptionSubHeader.get(lMainIndex),lStrPlanName)
+								}
+							}
+							lListSelectedPlanOption.add(lMapPlanOptionList)
+						}
+						lListPlanOptionFinal.add(lListSelectedPlanOption)
+					}
+					lMapQuotationInput.put('QuotationInput',lMapQuotationInputAll)
+					if(lStrProductName.contains('Motor')){
+						lMapQuotationInput.put('MainDriverData',lMapInsuredData)
+					}else{
+						lMapQuotationInput.put('InsuredData',lMapInsuredData)
+					}
+					lMapQuotationInput.put('PolicyHolderData',lMapPolicyHolderData)
+					if(lStrProductName.contains('Motor')){
+						lMapVehicleData.put('VehicleData',lListMapVehicleData)
+					}
+					lMapVehicleData.put('QuotationInputDateList',lListQuotationInputDate)
+					lMapVehicleData.put('SubSetList',lListSubsetAll)
+					lMapVehicleData.put('ReferSubSetList',lListReferSubSetAll)
+					lMapPremiumDataAll.put('Premium',lListPremiumAll)
+					lMapMultiCoverAll.put('CoverList',lListMultiCoverAll)
+					lMapAdditionalCoverageData.put('AdditionalCoverage',lListAdditionalCoverageAll)
+					lMapPaymentData.put('PaymentList',lListPaymentAll)
+					lMapInputPremiumData.put('InputPremium',lListInputPremiumAll)
+					lMapAdditionalCoverageDataAll.put('AdditionalCoverageList',lMapAdditionalCoverageData)
+					lMapPaymentDataAll.put('Payment',lMapPaymentData)
+					lMapInputPremiumDataAll.put('InputPremiumList',lMapInputPremiumData)
+					lMapTransactionData.put('Transaction',lListTransactionAll)
+					IGNUemaHelper.printLog('Pricing Api InputData List')
+					Integer lNumPricingApiSubSetSize=lListSubsetAll.size()
+					Boolean lIsMultiCoverListOK=true
+					List<List> lLisPricingApiDataInput=[
+						lListMultiCoverAll,
+						lListPremiumAll,
+						lListAdditionalCoverageAll,
+						lListInputPremiumAll
+					]
+					Boolean lIsPricingApiListOK=this.checkAllPricingApiDataInputAreSameSize(lNumPricingApiSubSetSize,lLisPricingApiDataInput)
+					for(Integer lInputValidIndex=0;lInputValidIndex<=lListInputValidRow.size()-1;lInputValidIndex++){
+						Integer lNumInputValidRow=lListInputValidRow.get(lInputValidIndex)
+						Boolean lIsWriteInputValidStatusToExcelSheet=false
+						List lListCurrentMultiCover=lListMultiCoverAll.get(lInputValidIndex)
+						for(Integer lMultiCoverIndex=0;lMultiCoverIndex<=lListCurrentMultiCover.size()-1;lMultiCoverIndex++){
+							String lStrCurrentMultiCover=lListCurrentMultiCover.get(lMultiCoverIndex)
+							if(IGNUemaHelper.checkObjectEmptyOfString(lStrCurrentMultiCover)){
+								lIsMultiCoverListOK=false
+							}
+						}
+						lIsPricingApiListOK=lIsPricingApiListOK&&lIsMultiCoverListOK
+						if(lIsPricingApiListOK){
+							lIsWriteInputValidStatusToExcelSheet=IDNPricingApiHelper.inputPricingApiResultToExcelSheetForValidation(lSheetPricingApi,lNumInputValidRow,lNumInputValidColumnIndex,'Valid')
+						}else{
+							lIsWriteInputValidStatusToExcelSheet=IDNPricingApiHelper.inputPricingApiResultToExcelSheetForValidation(lSheetPricingApi,lNumInputValidRow,lNumInputValidColumnIndex,'Invalid')
+						}
+						if(!lIsWriteInputValidStatusToExcelSheet){
+							return lreturn
+						}
+					}
+					JsonBuilder lJsonQuotationInput=new JsonBuilder(lMapQuotationInput)
+					JsonBuilder lStrJsonVehicleData=new JsonBuilder(lMapVehicleData)
+					JsonBuilder lJsonPremiumData=new JsonBuilder(lMapPremiumDataAll)
+					JsonBuilder lJsonPlanListnput=new JsonBuilder(lListPlanOptionFinal)
+					JsonBuilder lJsonMultiCoverInput=new JsonBuilder(lMapMultiCoverAll)
+					JsonBuilder lJsonAddditionalCoverageListInput=new JsonBuilder(lMapAdditionalCoverageDataAll)
+					JsonBuilder lJsonInputPremiumList=new JsonBuilder(lMapInputPremiumDataAll)
+					JsonBuilder lListJsonPaymentInput=new JsonBuilder(lMapPaymentDataAll)
+					JsonBuilder lJsonTransactionInput=new JsonBuilder(lMapTransactionData)
+					lListJsonQuotationInput.add(lJsonQuotationInput.toString())
+					lListJsonVehicleData.add(lStrJsonVehicleData.toString())
+					lListJsonPremium.add(lJsonPremiumData.toString())
+					lListJsonPlanOption.add(lJsonPlanListnput.toString())
+					lListJsonPayment.add(lListJsonPaymentInput.toString())
+					lListJsonMultiCover.add(lJsonMultiCoverInput.toString())
+					lListJsonPlanAdditionalCoverageData.add(lJsonAddditionalCoverageListInput.toString())
+					lListJsonInputPremiumData.add(lJsonInputPremiumList.toString())
+					lListJsonTransaction.add(lJsonTransactionInput.toString())
+					lListPlanOption.clear()
+					lListPlanOptionAll=[]
+					lListPlanOptionRowKeyAll=[]
+					lListPlanOptionRowKey.clear()
+					lListMultiCover.clear()
+					lListTransaction.clear()
+					lListSubsetAll=[]
+					lListReferSubSetAll=[]
+					lListPremiumAll=[]
+					lListCurrentCellAdditionalCoverage.clear()
+					lListMultiCoverAll=[]
+					lListQuotationInput=[]
+					lListInsuredData=[]
+					lListPolicyHolderData=[]
+					lListVehicleData=[]
+					lListPremium=[]
+					lListOptionalData=[]
+					lListPayment.clear()
+					lListInputPremium.clear()
+					lListPaymentRowKey.clear()
+					lListAdditionalCoverageAll=[]
+					lListAdditionalCoverage=[]
+					lListPaymentAll=[]
+					lListTransactionAll=[]
+					lListQuotationInputDate=[]
+					lListInputPremiumAll=[]
+					lListMapVehicleData=[]
+					lListInputValidRow=[]
+				}
+				lListCurrentCellQuotationInput=[]
+				lListCurrentCellVehicleData=[]
+				lListCurrentCellPlanOption=[]
+				lListCurrentCellMultiCover=[]
+				lListCurrentCellAdditionalCoverage=[]
+				lListCurrentCellOptionalData=[]
+				lListCurrentCellPayment=[]
+				lListCurrentCellTransaction=[]
+			}
+			Map lMapPricingApiFinalQuotationInputResult=this.getMapPricingApiFinalQuotationInput(lMasterDataMappingSheet,lListJsonQuotationInput,lListJsonVehicleData,lListTransactionType,lStrOptionalDataParameterName,lStrProductName)
+			List lListPricingApiFinalQuotationInput=lMapPricingApiFinalQuotationInputResult.ListJsonFinalQuotationInput
+			if(lStrProductName.contains('Motor')){
+				lListJsonVehicleData=lMapPricingApiFinalQuotationInputResult.ListJsonFinalVehicleDataInput
+			}
+			lResult=lListPricingApiFinalQuotationInput.size()>0
+			if(lResult){
+				lreturn.put('Result',lResult)
+				lreturn.put('ListJsonQuotationInput',lListPricingApiFinalQuotationInput)
+				lreturn.put('ListJsonVehicleData',lListJsonVehicleData)
+				lreturn.put('ListJsonPremium',lListJsonPremium)
+				lreturn.put('ListJsonPlanOption',lListJsonPlanOption)
+				lreturn.put('ListJsonMultiCover',lListJsonMultiCover)
+				lreturn.put('ListJsonPlanAdditionalCoverageData',lListJsonPlanAdditionalCoverageData)
+				lreturn.put('ListJsonInputPremiumData',lListJsonInputPremiumData)
+				lreturn.put('ListJsonPayment',lListJsonPayment)
+				lreturn.put('ListJsonTransaction',lListJsonTransaction)
+				lreturn.put('ListReferCaseNumber',lListReferCaseNumber)
+				lreturn.put('ListTransactionType',lListTransactionType)
+				lreturn.put('lStrProductName',lStrProductName)
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static boolean checkAllPricingApiDataInputAreSameSize(Integer numTargetSize,List<List> arrayListPricingApiDataInput){
+		Boolean lreturn=false
+		Boolean lResult=true
+		if(IGNUemaHelper.checkObjectEmptyOfList(arrayListPricingApiDataInput)){
+			return lreturn
+		}
+		List lArrayListPricingApiDataInput=arrayListPricingApiDataInput
+		try{
+			Integer lNumTargetSize=numTargetSize
+			for (List lListPricingApiDataInput in arrayListPricingApiDataInput){
+				if(lListPricingApiDataInput.size()!=lNumTargetSize){
+					lResult=false
+				}
+			}
+			if(lResult){
+				lreturn=lResult
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputPricingApiInputDataToUserExcelSheet(Workbook workBookExcelFileUserTestData,Sheet sheetUserData,Map mapPricingApiJsonInputFromExcelSheet){
+		Boolean lreturn=false
+		if(IGNUemaHelper.checkObjectNullOfObject(workBookExcelFileUserTestData)){
+			return lreturn
+		}
+		Workbook  lWorkBookExcelFileUserTestData=workBookExcelFileUserTestData
+		if(IGNUemaHelper.checkObjectNullOfObject(sheetUserData)){
+			return lreturn
+		}
+		Sheet lSheetUserData=sheetUserData
+		if(IGNUemaHelper.checkObjectEmptyOfMap(mapPricingApiJsonInputFromExcelSheet)){
+			return lreturn
+		}
+		Map lMapPricingApiJsonInputFromExcelSheet=mapPricingApiJsonInputFromExcelSheet
+		try{
+			List<String> lListJsonFinalQuotationInput=lMapPricingApiJsonInputFromExcelSheet.ListJsonQuotationInput
+			List<String> lListJsonVehicleData=lMapPricingApiJsonInputFromExcelSheet.ListJsonVehicleData
+			List<String> lListJsonPremium=lMapPricingApiJsonInputFromExcelSheet.ListJsonPremium
+			List<String> lListJsonPlanOption=lMapPricingApiJsonInputFromExcelSheet.ListJsonPlanOption
+			List<String> lListJsonMultiCover=lMapPricingApiJsonInputFromExcelSheet.ListJsonMultiCover
+			List<String> lListJsonPlanAdditionalCoverageData=lMapPricingApiJsonInputFromExcelSheet.ListJsonPlanAdditionalCoverageData
+			List<String> lListJsonInputPremiumData=lMapPricingApiJsonInputFromExcelSheet.ListJsonInputPremiumData
+			List<String> lListJsonPayment=lMapPricingApiJsonInputFromExcelSheet.ListJsonPayment
+			List<String> lListJsonTransaction=lMapPricingApiJsonInputFromExcelSheet.ListJsonTransaction
+			List<String> lListReferCaseNumber=lMapPricingApiJsonInputFromExcelSheet.ListReferCaseNumber
+			List<String> lListTransactionType=lMapPricingApiJsonInputFromExcelSheet.ListTransactionType
+			String lStrProductName=lMapPricingApiJsonInputFromExcelSheet.lStrProductName
+			Integer lNumUserDataSheetFirstRow=lSheetUserData.getFirstRowNum()
+			Integer lNumUserDataSheetLastRow=lSheetUserData.getLastRowNum()
+			Row lRowUserSheetDataFirst=lSheetUserData.getRow(lNumUserDataSheetFirstRow)
+			Integer lNumUserDataSheetRow=lRowUserSheetDataFirst.rowNum
+			Integer lNumUserDataSheetLastColumn=lRowUserSheetDataFirst.getLastCellNum()
+			Integer lNumUserDataSheetLastDataEntry=this.getNumUserDataSheetLastDataEntry(lSheetUserData)
+			String lStrUserDataFirstTestCase=this.getNumUserDataSheetFirstTestCase(lSheetUserData,lNumUserDataSheetLastDataEntry)
+			for(Integer lIndex=0;lIndex<lNumUserDataSheetLastColumn;lIndex++){
+				Cell lCellCurrent=ExcelKeywords.getCellByIndex(lSheetUserData,lNumUserDataSheetRow,lIndex)
+				String lStrCellValue=lCellCurrent.getStringCellValue()
+				Integer lNumColumnIndex=lCellCurrent.getColumnIndex()
+				Integer lNumTestCaseIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='Test_Case_To_Do'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonFinalQuotationInput.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumTestCaseIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrTestCaseAction='Yes'
+						ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lStrTestCaseAction)
+						lNumTestCaseIndex=lNumTestCaseIndex+1
+					}
+				}
+				Integer lNumReferCaseNumberIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='Refer_Case_No'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonFinalQuotationInput.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumReferCaseNumberIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrReferCase=lListReferCaseNumber.get(lInputIndex)
+						if(!IGNUemaHelper.checkObjectEmptyOfString(lStrReferCase)){
+							Integer lNumReferTestCase=IGNUemaHelper.convertStringToInteger(lStrReferCase,0)
+							Integer lNumUserSheetTestCase=IGNUemaHelper.convertStringToInteger(lStrUserDataFirstTestCase,0)
+							Integer lNumReferCase=lNumUserSheetTestCase+lNumReferTestCase
+							lNumReferCase=lNumReferCase-1
+							String lStrReferCaseNum=lNumReferCase.toString()
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lStrReferCaseNum)
+						}
+						lNumReferCaseNumberIndex=lNumReferCaseNumberIndex+1
+					}
+				}
+				Integer lNumGroupListIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='Product_Group_List_Field_Value_Story_Name'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonFinalQuotationInput.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumGroupListIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrProductGroupListFieldValueStoryName='0042_Group_Pricing_Api_Share_Quote_All_Name_Product_All_Story_Get_Price_List'
+						ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lStrProductGroupListFieldValueStoryName)
+						String lStrProductStoryUserDescription=IGNUemaHelper.concatMessageLeftRightByEnter('GetPriceListOf',lListTransactionType.get(lInputIndex))
+						ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex+1,lStrProductStoryUserDescription)
+						lNumGroupListIndex=lNumGroupListIndex+1
+					}
+				}
+				Integer lNumForceStartIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='Force_Start'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonFinalQuotationInput.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumForceStartIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrForceStartAction='Yes'
+						ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lStrForceStartAction)
+						lNumForceStartIndex=lNumForceStartIndex+1
+					}
+				}
+				Integer lNumProductTypeIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PricingApiQuoteRequiredProductType'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonFinalQuotationInput.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumProductTypeIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrRequiredProductType=lStrProductName
+						ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lStrRequiredProductType)
+						ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex+1,lListTransactionType.get(lInputIndex))
+						lNumProductTypeIndex=lNumProductTypeIndex+1
+					}
+				}
+				Integer lNumLibraryHostUrlIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PricingApiLibraryHostUrl'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonFinalQuotationInput.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumLibraryHostUrlIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrPricingApiLibraryHostUrl=this.CURRENT_TEST_IGN_LIBRARY_HOST_URL
+						ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lStrPricingApiLibraryHostUrl)
+						lNumLibraryHostUrlIndex=lNumLibraryHostUrlIndex+1
+					}
+				}
+				Integer lNumVehicleDataIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PricingApiJsonRootVehicleData'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonVehicleData.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumVehicleDataIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrJsonVehicleData=lListJsonVehicleData.get(lInputIndex)
+						String lStrExcelFitValueJsonVehicleData=IGNUemaHelper.copyStringFitForExcelCell(lStrJsonVehicleData)
+						ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lStrExcelFitValueJsonVehicleData)
+						lNumVehicleDataIndex=lNumVehicleDataIndex+1
+					}
+				}
+				Integer lNumQuotationInputIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PricingApiJsonRootQuotationInputPartOne'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonFinalQuotationInput.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumQuotationInputIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrJsonFinalQuotationInput=lListJsonFinalQuotationInput.get(lInputIndex)
+						List lListEncodedJsonQuotationInputData=IGNUemaHelper.getStringEncodedForExcelCell(lStrJsonFinalQuotationInput)
+						if(lListEncodedJsonQuotationInputData.size()==2){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonQuotationInputData.get(0))
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex+1,lListEncodedJsonQuotationInputData.get(1))
+						}
+						else if(lListEncodedJsonQuotationInputData.size()==1){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonQuotationInputData.get(0))
+						}
+						lNumQuotationInputIndex=lNumQuotationInputIndex+1
+					}
+				}
+				Integer lNumPlanOptionIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PricingApiJsonRootPlanOptionPartOne'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonPlanOption.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumPlanOptionIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrJsonPlanOption=lListJsonPlanOption.get(lInputIndex)
+						List lListEncodedJsonPlanOptionData=IGNUemaHelper.getStringEncodedForExcelCell(lStrJsonPlanOption)
+						if(lListEncodedJsonPlanOptionData.size()==2){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,IGNUemaHelper.getStringDecodedForExcelCell(lListEncodedJsonPlanOptionData))
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex+1,lListEncodedJsonPlanOptionData.get(1))
+						}
+						else if(lListEncodedJsonPlanOptionData.size()==1){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonPlanOptionData.get(0))
+						}
+						lNumPlanOptionIndex=lNumPlanOptionIndex+1
+					}
+				}
+				Integer lNumMultiCoverIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PricingApiJsonRootMultiCoverPartOne'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonMultiCover.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumMultiCoverIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrJsonMultiCover=lListJsonMultiCover.get(lInputIndex)
+						List lListEncodedJsonMultiCoverData=IGNUemaHelper.getStringEncodedForExcelCell(lStrJsonMultiCover)
+						if(lListEncodedJsonMultiCoverData.size()==2){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonMultiCoverData.get(0))
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex+1,lListEncodedJsonMultiCoverData.get(1))
+						}
+						else if(lListEncodedJsonMultiCoverData.size()==1){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,IGNUemaHelper.getStringDecodedForExcelCell(lListEncodedJsonMultiCoverData))
+						}
+						lNumMultiCoverIndex=lNumMultiCoverIndex+1
+					}
+				}
+				Integer lNumAdditionalCoverageIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PricingApiJsonRootAdditionalCoveragePartOne'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonPlanAdditionalCoverageData.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumAdditionalCoverageIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrJsonPlanAdditionalCoverageData=lListJsonPlanAdditionalCoverageData.get(lInputIndex)
+						List lListEncodedJsonAdditionalCoverageData=IGNUemaHelper.getStringEncodedForExcelCell(lStrJsonPlanAdditionalCoverageData)
+						if(lListEncodedJsonAdditionalCoverageData.size()==2){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonAdditionalCoverageData.get(0))
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex+1,lListEncodedJsonAdditionalCoverageData.get(1))
+						}
+						else if(lListEncodedJsonAdditionalCoverageData.size()==1){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,IGNUemaHelper.getStringDecodedForExcelCell(lListEncodedJsonAdditionalCoverageData))
+						}
+						lNumAdditionalCoverageIndex=lNumAdditionalCoverageIndex+1
+					}
+				}
+				Integer lNumInputPremiumIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PricingApiJsonRootInputPremiumPartOne'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonInputPremiumData.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumInputPremiumIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrJsonInputPremiumData=lListJsonInputPremiumData.get(lInputIndex)
+						List lListEncodedJsonInputPremiumData=IGNUemaHelper.getStringEncodedForExcelCell(lStrJsonInputPremiumData)
+						if(lListEncodedJsonInputPremiumData.size()==2){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonInputPremiumData.get(0))
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex+1,lListEncodedJsonInputPremiumData.get(1))
+						}
+						else if(lListEncodedJsonInputPremiumData.size()==1){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonInputPremiumData.get(0))
+						}
+						lNumInputPremiumIndex=lNumInputPremiumIndex+1
+					}
+				}
+				Integer lNumPaymentIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PricingApiJsonRootPaymentPartOne'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonPayment.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumPaymentIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrJsonPayment=lListJsonPayment.get(lInputIndex)
+						List lListEncodedJsonPayment=IGNUemaHelper.getStringEncodedForExcelCell(lStrJsonPayment)
+						if(lListEncodedJsonPayment.size()==2){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonPayment.get(0))
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex+1,lListEncodedJsonPayment.get(1))
+						}
+						else if(lListEncodedJsonPayment.size()==1){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonPayment.get(0))
+						}
+						lNumPaymentIndex=lNumPaymentIndex+1
+					}
+				}
+				Integer lNumTransactionIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PricingApiJsonRootTransactionPartOne'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonTransaction.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumTransactionIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrJsonTransaction=lListJsonTransaction.get(lInputIndex)
+						List lListEncodedJsonTransaction=IGNUemaHelper.getStringEncodedForExcelCell(lStrJsonTransaction)
+						if(lListEncodedJsonTransaction.size()==2){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonTransaction.get(0))
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex+1,lListEncodedJsonTransaction.get(1))
+						}
+						else if(lListEncodedJsonTransaction.size()==1){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonTransaction.get(0))
+						}
+						lNumTransactionIndex=lNumTransactionIndex+1
+					}
+				}
+				Integer lNumPremiumIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PricingApiJsonRootTotalPremiumPartOne'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonPremium.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumPremiumIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						String lStrJsonPremium=lListJsonPremium.get(lInputIndex)
+						Integer lNumSplitIndex=lStrJsonPremium.indexOf('}},',0)
+						List lListEncodedJsonPremium=IGNUemaHelper.getStringEncodedForExcelCell(lStrJsonPremium)
+						if(lListEncodedJsonPremium.size()==2){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonPremium.get(0))
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex+1,lListEncodedJsonPremium.get(1))
+						}
+						else if(lListEncodedJsonPremium.size()==1){
+							ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,lListEncodedJsonPremium.get(0))
+						}
+						lNumPremiumIndex=lNumPremiumIndex+1
+					}
+				}
+				Integer lNumPositiveCaseIndex=lNumUserDataSheetLastDataEntry
+				if(lStrCellValue=='PositiveCase'){
+					for(Integer lInputIndex=0;lInputIndex<=lListJsonPremium.size()-1;lInputIndex++){
+						Row lRowInput=lSheetUserData.getRow(lNumPositiveCaseIndex)
+						Integer lNumRowIndex=lRowInput.rowNum
+						ExcelKeywords.setValueToCellByIndex(lSheetUserData,lNumRowIndex,lNumColumnIndex,'Yes')
+						lNumPositiveCaseIndex=lNumPositiveCaseIndex+1
+					}
+				}
+			}
+			ExcelKeywords.saveWorkbook(this.CURRENT_TEST_TRANSFORM_DATA_FILE_OUTPUT_USER,lWorkBookExcelFileUserTestData)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map getMapPricingApiFinalQuotationInput(Sheet sheetMasterDataMappingSheet,List listJsonQuotationInput,List listJsonVehicleData,List listTransactionType,String strOptionalDataParameterName,String strProductName){
+		Map lreturn=[:]
+		Boolean lResult=false
+		List<String> lListJsonFinalQuotationInput=new ArrayList<String>()
+		List<String> lListJsonFinalVehicleDataInput=new ArrayList<String>()
+		try{
+			lreturn.put('ListJsonFinalQuotationInput',lListJsonFinalQuotationInput)
+			lreturn.put('ListJsonFinalVehicleDataInput',lListJsonFinalVehicleDataInput)
+			lreturn.put('Result',lResult)
+			if(IGNUemaHelper.checkObjectNullOfObject(sheetMasterDataMappingSheet)){
+				return lreturn
+			}
+			Sheet lSheetMasterDataMapping=sheetMasterDataMappingSheet
+			if(IGNUemaHelper.checkObjectEmptyOfList(listJsonQuotationInput)){
+				return lreturn
+			}
+			List lListJsonQuotationInput=listJsonQuotationInput
+			if(IGNUemaHelper.checkObjectEmptyOfList(listJsonVehicleData)){
+				return lreturn
+			}
+			List lListJsonVehicleData=listJsonVehicleData
+			if(IGNUemaHelper.checkObjectEmptyOfList(listTransactionType)){
+				return lreturn
+			}
+			List lListTransactionType=listTransactionType
+			if(IGNUemaHelper.checkObjectNullOfObject(strOptionalDataParameterName)){
+				return lreturn
+			}
+			String lStrOptionalDataParameterName=strOptionalDataParameterName
+			if(IGNUemaHelper.checkObjectEmptyOfString(lStrOptionalDataParameterName)){
+				return lreturn
+			}
+			if(IGNUemaHelper.checkObjectNullOfObject(strProductName)){
+				return lreturn
+			}
+			String lStrProductName=strProductName
+			if(IGNUemaHelper.checkObjectEmptyOfString(lStrProductName)){
+				return lreturn
+			}
+			this.lIDNPricingApiGetPriceListUtil=new IDNPricingApiGetPriceListMainUtil()
+			Map lMapQuotationInputParameterWithMasterParameterResult=this.inputMapQuotationInputParameterWithMasterParameter(lSheetMasterDataMapping,lStrOptionalDataParameterName,lStrProductName)
+			if(lMapQuotationInputParameterWithMasterParameterResult.Result){
+				Map  lMapQuotationInputParameterWithMasterParameterVehicleData=[:]
+				if(lStrProductName.contains('Motor')){
+					lMapQuotationInputParameterWithMasterParameterVehicleData=lMapQuotationInputParameterWithMasterParameterResult.VehicleDataParameter
+				}
+				Map lMapQuotationInputParameterWithMasterParameterInsuredList=lMapQuotationInputParameterWithMasterParameterResult.InsuredListParameter
+				Map lMapQuotationInputParameterWithMasterParameterQuoteData=lMapQuotationInputParameterWithMasterParameterResult.QuoteDataParameter
+				Map lMapQuotationInputParameterWithMasterParameterOptionalData=lMapQuotationInputParameterWithMasterParameterResult.OptionalDataParameter
+				Map lMapQuotationInputParameterWithMasterParameterBrokerInformation=lMapQuotationInputParameterWithMasterParameterResult.BrokerInformationParameter
+				Map lMapQuotationInputParameterWithMasterParameterInsuredData=lMapQuotationInputParameterWithMasterParameterResult.InsuredDataParameter
+				Map lMapQuotationInputParameterWithMasterParameterPolicyHolderData=lMapQuotationInputParameterWithMasterParameterResult.PolicyHolderDataParameter
+				Map lMapMasterVehicleDataParameter=[:]
+				Map lMapMasterInsuredListParameter=[:]
+				Map lMapMasterQuoteDataParameter=[:]
+				Map lMapPreviousCoverDataParameter=[:]
+				Map lMapMasterBrokerInformation=[:]
+				Map lMapMasterInsuredData=[:]
+				Map lMapMasterInsuredContactAddressData=[:]
+				Map lMapMasterPolicyHolderData=[:]
+				Map lMapMasterPolicyHolderContactAddressData=[:]
+				Map lMapMasterVehicleData=[:]
+				String  lStrMasterProductType=''
+				String  lStrMasterProductName=''
+				for(Integer lIndex=0;lIndex<lListJsonQuotationInput.size();lIndex++){
+					Map lMapQuotationInputData=[:]
+					lMapMasterVehicleDataParameter=[:]
+					lMapMasterInsuredListParameter=[:]
+					lMapMasterQuoteDataParameter=[:]
+					lMapMasterBrokerInformation=[:]
+					lMapMasterInsuredData=[:]
+					lMapMasterPolicyHolderData=[:]
+					List lListMasterInsuredParameter=[]
+					List lListMasterOptionalDataParameter=[]
+					String lStrQuotationInput=lListJsonQuotationInput.get(lIndex)
+					Map lMapJson=new JsonSlurper().parseText(lStrQuotationInput)
+					String lStrVehicleData=lListJsonVehicleData.get(lIndex)
+					Map lMapJsonVehicleData=new JsonSlurper().parseText(lStrVehicleData)
+					Map lMapQuotationInput=lMapJson.QuotationInput
+					Map lMapVehicleDataInput=lMapQuotationInput.VehicleData
+					Map lMapInsuredData=[:]
+					if(lStrProductName.contains('Motor')){
+						lMapInsuredData=lMapJson.MainDriverData
+					}else{
+						lMapInsuredData=lMapJson.InsuredData
+					}
+					Map lMapPolicyHolderData=lMapJson.PolicyHolderData
+					for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterInsuredData){
+						String lStrMasterKey=lEntry.key.toString()
+						String lStrMasterKeyValue=lEntry.Value.toString()
+						String lStrMasterValue=lMapInsuredData.getAt(lStrMasterKey)
+						if(lStrMasterValue=='None'){
+							lStrMasterValue=''
+						}
+						lMapMasterInsuredData.put(lStrMasterKeyValue,lStrMasterValue)
+					}
+					for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterPolicyHolderData){
+						String lStrMasterKey=lEntry.key.toString()
+						String lStrMasterKeyValue=lEntry.Value.toString()
+						String lStrMasterValue=lMapPolicyHolderData.getAt(lStrMasterKey)
+						if(lStrMasterValue=='None'){
+							lStrMasterValue=''
+						}
+						lMapMasterPolicyHolderData.put(lStrMasterKeyValue,lStrMasterValue)
+					}
+					for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterBrokerInformation){
+						String lStrMasterKey=lEntry.key.toString()
+						String lStrMasterKeyValue=lEntry.Value.toString()
+						String lStrMasterValue=lMapQuotationInput.getAt(lStrMasterKey)
+						if(lStrMasterValue=='None'){
+							lStrMasterValue=''
+						}
+						lMapMasterBrokerInformation.put(lStrMasterKeyValue,lStrMasterValue)
+					}
+					lMapMasterQuoteDataParameter.put('brokerInfo',lMapMasterBrokerInformation)
+					lMapMasterQuoteDataParameter.put('insuredData',lMapMasterInsuredData)
+					lMapMasterQuoteDataParameter.put('policyHolderData',lMapMasterPolicyHolderData)
+					for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterQuoteData){
+						String lStrMasterKey=lEntry.key.toString()
+						Map lMapMasterOptionalDataParameter=[:]
+						String lStrMasterKeyValue=lEntry.Value.toString()
+						if(lStrMasterKey==lStrOptionalDataParameterName){
+							List lListMapOptionalDataValue=lMapQuotationInput.getAt(lStrMasterKey)
+							for(Integer lDataIndex=0;lDataIndex<=lListMapOptionalDataValue.size()-1;lDataIndex++){
+								Map lMapOptionalData=lListMapOptionalDataValue.get(lDataIndex)
+								for(Map.Entry lOptionalDataEntry in lMapQuotationInputParameterWithMasterParameterOptionalData){
+									String lStrOptionalDataKey=lOptionalDataEntry.key.toString()
+									String lStrOptionalDataValue=lOptionalDataEntry.Value.toString()
+									String lStrMasterValue=lMapOptionalData.getAt(lStrOptionalDataKey)
+									lMapMasterOptionalDataParameter.put(lStrOptionalDataValue,lStrMasterValue)
+								}
+								lListMasterOptionalDataParameter.add(lMapMasterOptionalDataParameter)
+								lMapMasterOptionalDataParameter=[:]
+							}
+							String lStrMasterOptionalDataParameterName=lMapQuotationInputParameterWithMasterParameterQuoteData.getAt(lStrOptionalDataParameterName)
+							lMapMasterQuoteDataParameter.put(lStrMasterOptionalDataParameterName,lListMasterOptionalDataParameter)
+						}else{
+							String lStrMasterValue=lMapQuotationInput.getAt(lStrMasterKey)
+							if(lStrMasterKeyValue=='covers'){
+								List lListMapMasterCover=[]
+								lMapMasterQuoteDataParameter.put(lStrMasterKeyValue,lListMapMasterCover)
+							}else if(lStrMasterKeyValue=='Quote_Date_of_Quote'){
+								Map lMapQuoteRequiredQuoteDate=lIDNPricingApiGetPriceListUtil.inputQuoteRequiredQuoteDate('Yes',lStrMasterValue,'')
+								if(lMapQuoteRequiredQuoteDate.Result){
+									String lQuoteDateValue=lMapQuoteRequiredQuoteDate.QuoteRequiredQuoteDate
+									lMapMasterQuoteDataParameter.put(lStrMasterKeyValue,lQuoteDateValue)
+								}
+							}
+							else if(lStrMasterKey=='ProductType'){
+								lStrMasterProductType=lStrMasterKeyValue
+								if(lStrProductName.contains('Motor')){
+									lMapMasterQuoteDataParameter.put(lStrMasterProductType,lStrProductName)
+								}else{
+									lMapMasterQuoteDataParameter.put(lStrMasterProductType,'Health')
+								}
+							}else if(lStrMasterKeyValue=='transactionType'){
+								String lTransactionType=lListTransactionType.get(lIndex)
+								lMapMasterQuoteDataParameter.put(lStrMasterKeyValue,lTransactionType)
+							}else{
+								if(lStrMasterValue=='None'){
+									lStrMasterValue=''
+								}
+								lMapMasterQuoteDataParameter.put(lStrMasterKeyValue,lStrMasterValue)
+							}
+						}
+					}
+					if(lListTransactionType.get(lIndex)=='Endorsement'||lListTransactionType.get(lIndex)=='Cancellation'){
+						Map lMapQuotationInputParameterWithMasterParameterPreviousCoverParameter=lMapQuotationInputParameterWithMasterParameterResult.PreviousCoverParameter
+						for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterPreviousCoverParameter){
+							String lStrMasterKey=lEntry.key.toString()
+							String lStrMasterValue=lEntry.value.toString()
+							if(lStrMasterValue=='None'){
+								lStrMasterValue=''
+							}
+							lMapPreviousCoverDataParameter.put(lStrMasterKey,lStrMasterValue)
+						}
+						lMapMasterQuoteDataParameter.put('PreviousCovers',lMapPreviousCoverDataParameter)
+					}
+					if(lStrProductName.contains('Motor')){
+						List lListQuotationInputParameterWithMasterParameterVehicleData=[]
+						Boolean lIsMapQuotationInputParameterWithMasterParameterVehicleDataEmpty=IGNUemaHelper.checkObjectEmptyOfMap(lMapQuotationInputParameterWithMasterParameterVehicleData)
+						if(lIsMapQuotationInputParameterWithMasterParameterVehicleDataEmpty){
+							lListQuotationInputParameterWithMasterParameterVehicleData=[]
+							lMapMasterQuoteDataParameter.put('vehicleData',lListQuotationInputParameterWithMasterParameterVehicleData)
+						}else{
+							Map lMapMasterOptionalDataParameter=[:]
+							for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterVehicleData){
+								String lStrMasterKey=lEntry.key.toString()
+								String lStrMasterKeyValue=lEntry.Value.toString()
+								if(lStrMasterKey==lStrOptionalDataParameterName){
+									List lListMapOptionalDataValue=lMapQuotationInput.getAt(lStrMasterKey)
+									for(Integer lDataIndex=0;lDataIndex<=lListMapOptionalDataValue.size()-1;lDataIndex++){
+										Map lMapOptionalData=lListMapOptionalDataValue.get(lDataIndex)
+										for(Map.Entry lOptionalDataEntry in lMapQuotationInputParameterWithMasterParameterOptionalData){
+											String lStrOptionalDataKey=lOptionalDataEntry.key.toString()
+											String lStrOptionalDataValue=lOptionalDataEntry.Value.toString()
+											String lStrMasterValue=lMapOptionalData.getAt(lStrOptionalDataKey)
+											lMapMasterOptionalDataParameter.put(lStrOptionalDataValue,lStrMasterValue)
+										}
+										lListMasterOptionalDataParameter.add(lMapMasterOptionalDataParameter)
+										lMapMasterOptionalDataParameter=[:]
+									}
+									String lStrMasterOptionalDataParameterName=lMapQuotationInputParameterWithMasterParameterVehicleData.getAt(lStrOptionalDataParameterName)
+									lMapMasterVehicleDataParameter.put(lStrMasterOptionalDataParameterName,lListMasterOptionalDataParameter)
+								}else{
+									String lStrMasterValue=lMapVehicleDataInput.getAt(lStrMasterKey)
+									if(lStrMasterValue=='None'){
+										lStrMasterValue=''
+									}
+									lMapMasterVehicleDataParameter.put(lStrMasterKeyValue,lStrMasterValue)
+								}
+							}
+							lMapMasterQuoteDataParameter.put('vehicleData',lMapMasterVehicleDataParameter)
+						}
+						List lListPricingApiVehicleData=lMapJsonVehicleData.VehicleData
+						Map lMapPricingApiVehicleData=lListPricingApiVehicleData.get(0)
+						for(Map.Entry lEntry in lMapQuotationInputParameterWithMasterParameterVehicleData){
+							String lStrMasterKey=lEntry.key.toString()
+							String lStrMasterKeyValue=lEntry.Value.toString()
+							Map lMapVehicleData=lMapPricingApiVehicleData.get(lStrMasterKey)
+							lMapMasterVehicleData.put(lStrMasterKeyValue,lMapVehicleData)
+						}
+					}
+					Map lMapRootQuotationInputData=[:]
+					lMapQuotationInputData.put('quoteData',lMapMasterQuoteDataParameter)
+					lMapRootQuotationInputData.put('root',lMapQuotationInputData)
+					JsonBuilder lJsonQuotationInput=new JsonBuilder(lMapRootQuotationInputData)
+					lListJsonFinalQuotationInput.add(lJsonQuotationInput.toString())
+					if(lStrProductName.contains('Motor')){
+						lMapJsonVehicleData.put('VehicleData',lMapMasterVehicleData)
+						JsonBuilder lJsonVehicleData=new JsonBuilder(lMapJsonVehicleData)
+						lListJsonFinalVehicleDataInput.add(lJsonVehicleData.toString())
+					}
+				}
+			}
+			if(!lStrProductName.contains('Motor')){
+				lListJsonFinalVehicleDataInput=lListJsonVehicleData
+			}
+			lResult=lListJsonFinalQuotationInput.size()>0
+			if(lResult){
+				lreturn.put('ListJsonFinalQuotationInput',lListJsonFinalQuotationInput)
+				lreturn.put('ListJsonFinalVehicleDataInput',lListJsonFinalVehicleDataInput)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map getMapPricingApiTransactionTypeAndHeaderFromExcelSheet(Sheet sheetPricingApi){
+		Boolean lResult=false
+		Map lreturn=[:]
+		String lStrTransactionType=''
+		String lStrTransactionHeader=''
+		try{
+			lreturn.put('Result',lResult)
+			lreturn.put('StrTransactionHeader',lStrTransactionHeader)
+			if(IGNUemaHelper.checkObjectNullOfObject(sheetPricingApi)){
+				return lreturn
+			}
+			Sheet lSheetPricingApi=sheetPricingApi
+			lStrTransactionHeader=IDNPricingApiHelper.getValueFromExcelSheetForValidation(lSheetPricingApi,1,1)
+			lResult=lStrTransactionHeader.length()>=1
+			if(lResult){
+				lreturn.put('Result',lResult)
+				lreturn.put('StrTransactionHeader',lStrTransactionHeader)
 			}
 		}catch(Exception e){
 			//e.printStackTrace()
 		}
+		return lreturn
 	}
-	public static Map getMapProductTypeAndValueFromExcelSheet(Row rowPricingSheetFirstRow){
+	public static Map getMapPricingApiProductTypeAndValueFromExcelSheet(Row rowPricingSheetFirstRow){
 		Boolean lResult=false
 		Map lreturn=[:]
-		String lProductType=''
-		String lProductName=''
+		String lStrProductType=''
+		String lStrProductName=''
 		try{
 			lreturn.put('Result',lResult)
-			lreturn.put('ProductType',lProductType)
-			lreturn.put('ProductName',lProductName)
+			lreturn.put('StrProductType',lStrProductType)
+			lreturn.put('StrProductName',lStrProductName)
 			if(IGNUemaHelper.checkObjectNullOfObject(rowPricingSheetFirstRow)){
 				return lreturn
 			}
-			IGNUemaHelper.printLog('Row Empty')
-			Row lPricingApiSheetFirstRow=rowPricingSheetFirstRow
-			Cell lProductVariableCell=lPricingApiSheetFirstRow.getCell(0)
-			lProductType=lProductVariableCell.getStringCellValue()
-			Cell lProductNameCell=lPricingApiSheetFirstRow.getCell(1)
-			lProductName=lProductNameCell.getStringCellValue()
-			lResult=lProductName.length()>1
+			Row lRowPricingApiSheetFirst=rowPricingSheetFirstRow
+			Cell lCellProductVariable=lRowPricingApiSheetFirst.getCell(0)
+			lStrProductType=lCellProductVariable.getStringCellValue()
+			Cell lCellProductName=lRowPricingApiSheetFirst.getCell(1)
+			lStrProductName=lCellProductName.getStringCellValue()
+			lResult=lStrProductName.length()>1
 			if(lResult){
 				lreturn.put('Result',lResult)
-				lreturn.put('ProductType',lProductType)
-				lreturn.put('ProductName',lProductName)
+				lreturn.put('StrProductType',lStrProductType)
+				lreturn.put('StrProductName',lStrProductName)
+			}
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static Integer getTargetColumnIndexByColumnName(Sheet sheetPricingApiSheet,String strTargetColumnName,Integer numTargetRow,Integer numGenericDataSheetLastColumn){
+		Integer lreturn=0
+		if(IGNUemaHelper.checkObjectNullOfObject(strTargetColumnName)){
+			return lreturn
+		}
+		String lStrTargetColumnName=strTargetColumnName
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrTargetColumnName)){
+			return lreturn
+		}
+		Integer lNumTargetRow=numTargetRow
+		Integer lNumGenericDataSheetLastColumn=numGenericDataSheetLastColumn
+		try{
+
+			for(Integer lIndex=0;lIndex<=lNumGenericDataSheetLastColumn;lIndex++){
+				Cell lCell=ExcelKeywords.getCellByIndex(sheetPricingApiSheet,lNumTargetRow,lIndex)
+				if(!IGNUemaHelper.checkObjectNullOfObject(lCell)){
+					String lStrCellValue=lCell.getStringCellValue()
+					Integer lNumColumnIndex=lCell.getColumnIndex()
+					if(lStrCellValue==lStrTargetColumnName){
+						lreturn=lNumColumnIndex
+						return lreturn=lNumColumnIndex
+					}
+				}
 			}
 		}catch(Exception e){
 			//e.printStackTrace()
@@ -1446,10 +1818,10 @@ public class IDNPricingApiPrepareGenericDataInputUtil{
 	public static Map getMapHashTableInformationForProccesingInput(Map mapTargetInputList){
 		Boolean lResult=false
 		Map lreturn=[:]
-		List lMapTargetInputRowKeyList=[]
+		List lListMapTargetInputRowKey=[]
 		try{
 			lreturn.put('Result',lResult)
-			lreturn.put('TargetInputRowKeyList',lMapTargetInputRowKeyList)
+			lreturn.put('TargetInputRowKeyList',lListMapTargetInputRowKey)
 			if(IGNUemaHelper.checkObjectNullOfObject(mapTargetInputList)){
 				return lreturn
 			}
@@ -1457,7 +1829,6 @@ public class IDNPricingApiPrepareGenericDataInputUtil{
 			Table<Integer,Integer,String> lTableExcelSheetTargetInput=HashBasedTable.create()
 			lTableExcelSheetTargetInput=lMapCurrentCellTargetInputList.CellTable
 			Set<Integer> lTableTargetInputKeySet=lTableExcelSheetTargetInput.columnKeySet()
-			IGNUemaHelper.printLog(lTableTargetInputKeySet)
 			for(Integer lTableKey:lTableTargetInputKeySet){
 				Map lMapTargetInputRowColumnNumber=[:]
 				Map lMapRowKey=lTableExcelSheetTargetInput.column(lTableKey)
@@ -1465,157 +1836,154 @@ public class IDNPricingApiPrepareGenericDataInputUtil{
 					lMapTargetInputRowColumnNumber.put('RowNumber',entry.getKey())
 					lMapTargetInputRowColumnNumber.put('ColumnNumber',lTableKey)
 				}
-				lMapTargetInputRowKeyList.add(lMapTargetInputRowColumnNumber)
+				lListMapTargetInputRowKey.add(lMapTargetInputRowColumnNumber)
 			}
-			lResult=lMapTargetInputRowKeyList.size()>1
+			lResult=lListMapTargetInputRowKey.size()>1
 			if(lResult){
 				lreturn.put('Result',lResult)
-				lreturn.put('TargetInputRowKeyList',lMapTargetInputRowKeyList)
+				lreturn.put('TargetInputRowKeyList',lListMapTargetInputRowKey)
 			}
 		}catch(Exception e){
 			//e.printStackTrace()
 		}
 		return lreturn
 	}
-	public static Map inputMapQuotationInputParameterWithMasterParameter(Sheet sheetMasterDataMappingSheet,String strOptionalDataParameterName){
+	public static Map inputMapQuotationInputParameterWithMasterParameter(Sheet sheetMasterDataMappingSheet,String strOptionalDataParameterName,String strProductName){
 		Boolean lResult=false
 		Map lreturn=[:]
 		Map lMapVehicleDataParameter=[:]
-		Map lMapInsuredListParameter=[:]
+		Map lMapPolicyHolderDataParameter=[:]
 		Map lQuoteDataParameter=[:]
 		Map lMapOptionalDataParameter=[:]
 		Map lMapPreviousCoverParameter=[:]
 		Map lMapBrokerInformationParameter=[:]
 		Map lMapInsuredDataParameter=[:]
-		Map lMapContactAddressParameter=[:]
-		List lMappingRootDataParameterList=[]
-		String lOptionalDataParameterName=strOptionalDataParameterName.trim()
+		List lListMappingRootDataParameter=[]
+		String lStrOptionalDataParameterName=strOptionalDataParameterName.trim()
 		try{
 			lreturn.put('VehicleDataParameter',lMapVehicleDataParameter)
-			lreturn.put('InsuredListParameter',lMapInsuredListParameter)
+			lreturn.put('PolicyHolderDataParameter',lMapPolicyHolderDataParameter)
 			lreturn.put('QuoteDataParameter',lQuoteDataParameter)
 			lreturn.put('OptionalDataParameter',lMapOptionalDataParameter)
 			lreturn.put('PreviousCoverParameter',lMapPreviousCoverParameter)
 			lreturn.put('BrokerInformationParameter',lMapBrokerInformationParameter)
 			lreturn.put('InsuredDataParameter',lMapInsuredDataParameter)
-			lreturn.put('ContactAddressParameter',lMapContactAddressParameter)
 			lreturn.put('Result',lResult)
 			if(IGNUemaHelper.checkObjectNullOfObject(sheetMasterDataMappingSheet)){
 				return lreturn
 			}
-			Integer lGenericTestDataCellMergeList=sheetMasterDataMappingSheet.getNumMergedRegions()
+			Integer lNumGenericTestDataCellMerge=sheetMasterDataMappingSheet.getNumMergedRegions()
 			CellRangeAddress[] lCellRangeAddressMergedList=new CellRangeAddress[sheetMasterDataMappingSheet.getNumMergedRegions()]
 			for(Integer i=0; i < lCellRangeAddressMergedList.length; i++){
 				lCellRangeAddressMergedList[i]=sheetMasterDataMappingSheet.getMergedRegion(i)
 			}
-			Integer lLastRowNumber=sheetMasterDataMappingSheet.getLastRowNum()
+			if(IGNUemaHelper.checkObjectNullOfObject(strProductName)){
+				return lreturn
+			}
+			String lStrProductName=strProductName
+			if(IGNUemaHelper.checkObjectEmptyOfString(lStrProductName)){
+				return lreturn
+			}
+			Integer lNumLastRow=sheetMasterDataMappingSheet.getLastRowNum()
 			CellRangeAddress lCellRangeAddressQuote
-			CellRangeAddress lCellRangeAddressInsuredList
+			CellRangeAddress lCellRangeAddressPolicyHolderData
 			CellRangeAddress lCellRangeAddressVehicleData
 			CellRangeAddress lCellRangeAddressOptionalData
 			CellRangeAddress lCellRangeAddressPreviousCoverData
 			CellRangeAddress lCellRangeAddressBrokerInformation
 			CellRangeAddress lCellRangeAddressInsuredData
-			CellRangeAddress lCellRangeAddressContactAddress
-			for(Integer lIndex=0;lIndex<lGenericTestDataCellMergeList;lIndex++){
-				Row lInputCurrentRow=sheetMasterDataMappingSheet.getRow(lCellRangeAddressMergedList[lIndex].getFirstRow())
-				Cell lCell=lInputCurrentRow.getCell(lCellRangeAddressMergedList[lIndex].getFirstColumn())
-				String lCellRangeAddressHeading=lCell.getStringCellValue()
-				IGNUemaHelper.printLog('MasterDatalCellRangeAddressHeading')
-				IGNUemaHelper.printLog(lCellRangeAddressHeading)
-				if(IGNUemaHelper.checkStringContainString(lCellRangeAddressHeading,'Quote')){
+			for(Integer lIndex=0;lIndex<lNumGenericTestDataCellMerge;lIndex++){
+				Row lRowCurrent=sheetMasterDataMappingSheet.getRow(lCellRangeAddressMergedList[lIndex].getFirstRow())
+				Cell lCell=lRowCurrent.getCell(lCellRangeAddressMergedList[lIndex].getFirstColumn())
+				String lStrCellRangeAddressHeading=lCell.getStringCellValue()
+				if(IGNUemaHelper.checkStringContainString(lStrCellRangeAddressHeading,'Quote')){
 					lCellRangeAddressQuote=lCellRangeAddressMergedList[lIndex]
 				}
-				if(IGNUemaHelper.checkStringContainString(lCellRangeAddressHeading,'insuredData')){
-					lCellRangeAddressInsuredList=lCellRangeAddressMergedList[lIndex]
+				if(IGNUemaHelper.checkStringContainString(lStrCellRangeAddressHeading,'PolicyHolderDetail')){
+					lCellRangeAddressPolicyHolderData=lCellRangeAddressMergedList[lIndex]
 				}
-				if(IGNUemaHelper.checkStringContainString(lCellRangeAddressHeading,'vehicleData')){
+				if(IGNUemaHelper.checkStringContainString(lStrCellRangeAddressHeading,'VehicleDetail')){
 					lCellRangeAddressVehicleData=lCellRangeAddressMergedList[lIndex]
 				}
-				if(IGNUemaHelper.checkStringContainString(lCellRangeAddressHeading,lOptionalDataParameterName)){
+				if(IGNUemaHelper.checkStringContainString(lStrCellRangeAddressHeading,lStrOptionalDataParameterName)){
 					lCellRangeAddressOptionalData=lCellRangeAddressMergedList[lIndex]
 				}
-				if(IGNUemaHelper.checkStringContainString(lCellRangeAddressHeading,'PreviousCovers')){
+				if(IGNUemaHelper.checkStringContainString(lStrCellRangeAddressHeading,'PreviousCoverDetail')){
 					lCellRangeAddressPreviousCoverData=lCellRangeAddressMergedList[lIndex]
 				}
-				if(IGNUemaHelper.checkStringContainString(lCellRangeAddressHeading,'brokerInfo')){
+				if(IGNUemaHelper.checkStringContainString(lStrCellRangeAddressHeading,'brokerInfo')){
 					lCellRangeAddressBrokerInformation=lCellRangeAddressMergedList[lIndex]
 				}
-				if(IGNUemaHelper.checkStringContainString(lCellRangeAddressHeading,'InsuredData')){
-					lCellRangeAddressInsuredData=lCellRangeAddressMergedList[lIndex]
-				}
-				if(IGNUemaHelper.checkStringContainString(lCellRangeAddressHeading,'ContactAddresses')){
-					lCellRangeAddressContactAddress=lCellRangeAddressMergedList[lIndex]
+				if(lStrProductName.contains('Motor')){
+					if(IGNUemaHelper.checkStringContainString(lStrCellRangeAddressHeading,'MainDriverDetail')){
+						lCellRangeAddressInsuredData=lCellRangeAddressMergedList[lIndex]
+					}
+				}else{
+					if(IGNUemaHelper.checkStringContainString(lStrCellRangeAddressHeading,'InsuredDetail')){
+						lCellRangeAddressInsuredData=lCellRangeAddressMergedList[lIndex]
+					}
 				}
 			}
-			List lCurrentCellQuotationInputList=[]
+			List lListCurrentCellQuotationInput=[]
 			Boolean lIsMappingWithMasterParameterDone=true
-			Integer lCellRangeAddressQuotationInputColumnLast=lCellRangeAddressQuote.getLastColumn()-lCellRangeAddressQuote.getFirstColumn()
+			Integer lNumCellRangeAddressQuotationInputColumnLast=lCellRangeAddressQuote.getLastColumn()-lCellRangeAddressQuote.getFirstColumn()
 			Integer lQuotationLastRowNumber=lCellRangeAddressQuote.getLastRow()
-			Map lMappingParameterQuoteDataResult=this.getMasterDataParameterMapping(lCellRangeAddressQuote,sheetMasterDataMappingSheet,lLastRowNumber)
+			Map lMappingParameterQuoteDataResult=this.getMasterDataParameterMapping(lCellRangeAddressQuote,sheetMasterDataMappingSheet,lNumLastRow)
 			if(lMappingParameterQuoteDataResult.Result){
 				lQuoteDataParameter=lMappingParameterQuoteDataResult.MasterDataMappingParameter
-				IGNUemaHelper.printLog('lQuoteDataParameter')
-				IGNUemaHelper.printLog(lQuoteDataParameter)
 			}else{
 				lIsMappingWithMasterParameterDone=false
 			}
-			Integer lInsuredListRowNumber=lCellRangeAddressInsuredList.getLastRow()
-			Map lMappingParameterInsuredListResult=this.getMasterDataParameterMapping(lCellRangeAddressInsuredList,sheetMasterDataMappingSheet,lLastRowNumber)
-			if(lMappingParameterInsuredListResult.Result){
-				lMapInsuredListParameter=lMappingParameterInsuredListResult.MasterDataMappingParameter
+			Integer lInsuredListRowNumber=lCellRangeAddressPolicyHolderData.getLastRow()
+			Map lMappingParameterPolicyHolderResult=this.getMasterDataParameterMapping(lCellRangeAddressPolicyHolderData,sheetMasterDataMappingSheet,lNumLastRow)
+			if(lMappingParameterPolicyHolderResult.Result){
+				lMapPolicyHolderDataParameter=lMappingParameterPolicyHolderResult.MasterDataMappingParameter
 			}else{
 				lIsMappingWithMasterParameterDone=false
 			}
-			Integer lVehicleDataRowNumber=lCellRangeAddressVehicleData.getLastRow()
-			Map lMappingParameterVehicleDataResult=this.getMasterDataParameterMapping(lCellRangeAddressVehicleData,sheetMasterDataMappingSheet,lLastRowNumber)
-			lMapVehicleDataParameter=lMappingParameterVehicleDataResult.MasterDataMappingParameter
-			IGNUemaHelper.printLog(lMapVehicleDataParameter)
-			if(lMappingParameterVehicleDataResult.Result){
+			if(lStrProductName.contains('Motor')){
+				Integer lVehicleDataRowNumber=lCellRangeAddressVehicleData.getLastRow()
+				Map lMappingParameterVehicleDataResult=this.getMasterDataParameterMapping(lCellRangeAddressVehicleData,sheetMasterDataMappingSheet,lNumLastRow)
 				lMapVehicleDataParameter=lMappingParameterVehicleDataResult.MasterDataMappingParameter
-			}else{
-				lIsMappingWithMasterParameterDone=false
+				if(lMappingParameterVehicleDataResult.Result){
+					lMapVehicleDataParameter=lMappingParameterVehicleDataResult.MasterDataMappingParameter
+				}else{
+					lIsMappingWithMasterParameterDone=false
+				}
 			}
-			Map lMappingParameterOptionalDataResult=this.getMasterDataParameterMapping(lCellRangeAddressOptionalData,sheetMasterDataMappingSheet,lLastRowNumber)
+			Map lMappingParameterOptionalDataResult=this.getMasterDataParameterMapping(lCellRangeAddressOptionalData,sheetMasterDataMappingSheet,lNumLastRow)
 			if(lMappingParameterOptionalDataResult.Result){
 				lMapOptionalDataParameter=lMappingParameterOptionalDataResult.MasterDataMappingParameter
 			}else{
 				lIsMappingWithMasterParameterDone=false
 			}
-			Map lMappingParameterPreviousCoverResult=this.getMasterDataParameterMapping(lCellRangeAddressPreviousCoverData,sheetMasterDataMappingSheet,lLastRowNumber)
+			Map lMappingParameterPreviousCoverResult=this.getMasterDataParameterMapping(lCellRangeAddressPreviousCoverData,sheetMasterDataMappingSheet,lNumLastRow)
 			if(lMappingParameterPreviousCoverResult.Result){
 				lMapPreviousCoverParameter=lMappingParameterPreviousCoverResult.MasterDataMappingParameter
 			}else{
 				lIsMappingWithMasterParameterDone=false
 			}
-			Map lMappingParameterBrokerInformationResult=this.getMasterDataParameterMapping(lCellRangeAddressBrokerInformation,sheetMasterDataMappingSheet,lLastRowNumber)
+			Map lMappingParameterBrokerInformationResult=this.getMasterDataParameterMapping(lCellRangeAddressBrokerInformation,sheetMasterDataMappingSheet,lNumLastRow)
 			if(lMappingParameterBrokerInformationResult.Result){
 				lMapBrokerInformationParameter=lMappingParameterBrokerInformationResult.MasterDataMappingParameter
 			}else{
 				lIsMappingWithMasterParameterDone=false
 			}
-			Map lMappingParameterInsuredDataResult=this.getMasterDataParameterMapping(lCellRangeAddressInsuredData,sheetMasterDataMappingSheet,lLastRowNumber)
+			Map lMappingParameterInsuredDataResult=this.getMasterDataParameterMapping(lCellRangeAddressInsuredData,sheetMasterDataMappingSheet,lNumLastRow)
 			if(lMappingParameterInsuredDataResult.Result){
 				lMapInsuredDataParameter=lMappingParameterInsuredDataResult.MasterDataMappingParameter
-			}else{
-				lIsMappingWithMasterParameterDone=false
-			}
-			Map lMappingParameterContactAddressResult=this.getMasterDataParameterMapping(lCellRangeAddressContactAddress,sheetMasterDataMappingSheet,lLastRowNumber)
-			if(lMappingParameterContactAddressResult.Result){
-				lMapContactAddressParameter=lMappingParameterContactAddressResult.MasterDataMappingParameter
 			}else{
 				lIsMappingWithMasterParameterDone=false
 			}
 			lResult=lIsMappingWithMasterParameterDone
 			if(lResult){
 				lreturn.put('VehicleDataParameter',lMapVehicleDataParameter)
-				lreturn.put('InsuredListParameter',lMapInsuredListParameter)
+				lreturn.put('PolicyHolderDataParameter',lMapPolicyHolderDataParameter)
 				lreturn.put('QuoteDataParameter',lQuoteDataParameter)
 				lreturn.put('OptionalDataParameter',lMapOptionalDataParameter)
 				lreturn.put('PreviousCoverParameter',lMapPreviousCoverParameter)
 				lreturn.put('BrokerInformationParameter',lMapBrokerInformationParameter)
 				lreturn.put('InsuredDataParameter',lMapInsuredDataParameter)
-				lreturn.put('ContactAddressParameter',lMapContactAddressParameter)
 				lreturn.put('Result',lResult)
 			}
 		}catch(Exception e){
@@ -1631,32 +1999,31 @@ public class IDNPricingApiPrepareGenericDataInputUtil{
 			lreturn.put('MasterDataMappingParameter',lMasterDataMappingParameter)
 			lreturn.put('Result',lResult)
 			if(IGNUemaHelper.checkObjectNullOfObject(targetSheet)){
-				IGNUemaHelper.printLog('Not found sheet')
 				return lreturn
 			}
 			if(IGNUemaHelper.checkObjectNullOfObject(targetCellRangeAddress)){
 				return lreturn
 			}
-			List lCurrentCellMappingParamterList=[]
-			ArrayList lCurrentCellMappingParamterListAll=new ArrayList()
-			Integer lTargetRangeAddressColumnLast=targetCellRangeAddress.getLastColumn()-targetCellRangeAddress.getFirstColumn()
+			List lListCellCurrentMappingParameter=[]
+			List lListCurrentCellMappingParameterAll=new ArrayList()
+			Integer lNumTargetRangeAddressColumnLast=targetCellRangeAddress.getLastColumn()-targetCellRangeAddress.getFirstColumn()
 			for(Integer lIndex=1;lIndex<targetRowNumber;lIndex++){
-				Row lCurrentRow=targetSheet.getRow(targetCellRangeAddress.getFirstRow()+lIndex)
-				Map lMapCurrentCellMappingParamterList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(targetSheet,targetCellRangeAddress,lCurrentRow,lTargetRangeAddressColumnLast,false)
-				if(lMapCurrentCellMappingParamterList.Result){
-					lCurrentCellMappingParamterList=lMapCurrentCellMappingParamterList.CellValueList
-					Boolean lIsCheckCurrentCellListValueContainSameStringNone=IGNUemaHelper.checkAllValueInListContainSameString(lCurrentCellMappingParamterList,'None')
+				Row lRowCurrent=targetSheet.getRow(targetCellRangeAddress.getFirstRow()+lIndex)
+				Map lMapCurrentCellMappingParameterList=IGNUemaHelper.getMapExcelCellValueInSpecificRange(targetSheet,targetCellRangeAddress,lRowCurrent,lNumTargetRangeAddressColumnLast,false)
+				if(lMapCurrentCellMappingParameterList.Result){
+					lListCellCurrentMappingParameter=lMapCurrentCellMappingParameterList.CellValueList
+					Boolean lIsCheckCurrentCellListValueContainSameStringNone=IGNUemaHelper.checkAllValueInListContainSameString(lListCellCurrentMappingParameter,'None')
 				}
-				Boolean lIsCheckCurrentCellListValueContainSameStringNone=IGNUemaHelper.checkAllValueInListContainSameString(lCurrentCellMappingParamterList,'None')
+				Boolean lIsCheckCurrentCellListValueContainSameStringNone=IGNUemaHelper.checkAllValueInListContainSameString(lListCellCurrentMappingParameter,'None')
 				if(lIsCheckCurrentCellListValueContainSameStringNone){
-					lCurrentCellMappingParamterList=[]
+					lListCellCurrentMappingParameter=[]
 				}
-				if(!IGNUemaHelper.checkObjectEmptyOfList(lCurrentCellMappingParamterList)){
-					lCurrentCellMappingParamterListAll.add(lCurrentCellMappingParamterList)
-					lMasterDataMappingParameter.put(lCurrentCellMappingParamterList.get(0),lCurrentCellMappingParamterList.get(1))
+				if(!IGNUemaHelper.checkObjectEmptyOfList(lListCellCurrentMappingParameter)){
+					lListCurrentCellMappingParameterAll.add(lListCellCurrentMappingParameter)
+					lMasterDataMappingParameter.put(lListCellCurrentMappingParameter.get(0),lListCellCurrentMappingParameter.get(1))
 				}
 			}
-			lResult=lCurrentCellMappingParamterListAll.size()>=0
+			lResult=lListCurrentCellMappingParameterAll.size()>=0
 			if(lResult){
 				lreturn.put('MasterDataMappingParameter',lMasterDataMappingParameter)
 				lreturn.put('Result',lResult)
@@ -1666,51 +2033,20 @@ public class IDNPricingApiPrepareGenericDataInputUtil{
 		}
 		return lreturn
 	}
-	public static Map getAdditionalInputData(String strTargetHeaderValue){
-		Map lreturn=[:]
-		Boolean lResult=false
-		String lTargetDataIndex=''
-		String lTargetHeaderMainValue=''
-		try{
-			lreturn.put('TargetDataIndex',lTargetDataIndex)
-			lreturn.put('TargetMainHeaderValue',lTargetHeaderMainValue)
-			lreturn.put('Result',lResult)
-			if(IGNUemaHelper.checkObjectEmptyOfString(strTargetHeaderValue)){
-				return lreturn
-			}
-			String lTargetHeaderValue=strTargetHeaderValue
-			String[] lTargetHeaderValueList=lTargetHeaderValue.split('_')
-			lTargetHeaderMainValue=lTargetHeaderValueList[1]
-			String lTargetHeaderPrefixValue=lTargetHeaderValueList[0]
-			String[] lTargetPrefixValueList=lTargetHeaderPrefixValue.split('-')
-			lTargetDataIndex=lTargetPrefixValueList[1]
-			lResult=lTargetDataIndex.length()>=1
-			IGNUemaHelper.printLog('lTargetDataIndex')
-			IGNUemaHelper.printLog(lResult)
-			if(lResult){
-				lreturn.put('TargetDataIndex',lTargetDataIndex)
-				lreturn.put('TargetMainHeaderValue',lTargetHeaderMainValue)
-				lreturn.put('Result',lResult)
-			}
-		}catch(Exception e){
-			//e.printStackTrace()
-		}
-		return lreturn
-	}
-	public Map<String,Object> getMapQuotationInputValueFromExcelSpecificRange(Workbook workBookTestExcelFileGenericTestData,Sheet targetSheet,CellRangeAddress targetCellRangeAddress,Row targetRow,Integer targetColumnNumber,Boolean boolIsRecordCellTable){
+	public static Map<String,Object> getMapQuotationInputValueFromExcelSpecificRange(Workbook workBookTestExcelFileGenericTestData,Sheet targetSheet,CellRangeAddress targetCellRangeAddress,Row targetRow,Integer targetColumnNumber,Boolean boolIsRecordCellTable,Boolean boolIsCheckEmptyRowValue){
 		Map<String,Object> lreturn=[:]
 		Boolean lResult=false
 		try{
 			lreturn=new HashMap<>()
-			List<String> lCellValueList=new ArrayList<>()
+			List<String> lListCellValue=new ArrayList<>()
 			Table<Integer,Integer,String> lTableExcelSheetSrc=HashBasedTable.create()
-			lreturn.put('CellValueList',lCellValueList)
+			lreturn.put('CellValueList',lListCellValue)
 			lreturn.put('CellTable',lTableExcelSheetSrc)
 			lreturn.put('Result',lResult)
 			if(IGNUemaHelper.checkObjectNullOfObject(targetSheet)){
 				return lreturn
 			}
-			Sheet lTargetSheet=targetSheet
+			Sheet lSheetTarget=targetSheet
 			if(IGNUemaHelper.checkObjectNullOfObject(targetCellRangeAddress)){
 				return lreturn
 			}
@@ -1722,50 +2058,49 @@ public class IDNPricingApiPrepareGenericDataInputUtil{
 			if(targetColumnNumber<0){
 				return lreturn
 			}
-			Integer lTargetColumnNumber=targetColumnNumber
+			Integer lNumTargetColumnIndex=targetColumnNumber
 			Boolean lIsRecordCellTable=boolIsRecordCellTable
+			Boolean lIsCheckEmptyRowValue=boolIsCheckEmptyRowValue
 			String lStrCellValue=''
-			String lStartDateText=''
-			String lPolicyStartDateOffset=''
-			String lPolicyEffectiveDateOffset=''
-			for(Integer lIndex=0;lIndex<=lTargetColumnNumber;lIndex++){
+			String lStrStartDateText=''
+			String lStrPolicyStartDateOffset=''
+			String lStrPolicyEffectiveDateOffset=''
+			for(Integer lIndex=0;lIndex<=lNumTargetColumnIndex;lIndex++){
 				Cell lCell=lTargetRow.getCell(lTargetCellRangeAddress.getFirstColumn()+lIndex)
-				Row lCurrentRow=lTargetSheet.getRow(lTargetCellRangeAddress.firstRow+1)
-				Cell lHeaderCell=lCurrentRow.getCell(lTargetCellRangeAddress.getFirstColumn()+lIndex)
-				Object lCellValueObject=null
-				String lHeaderValueObject=''
+				Row lRowCurrent=lSheetTarget.getRow(lTargetCellRangeAddress.firstRow+1)
+				Cell lCellHeader=lRowCurrent.getCell(lTargetCellRangeAddress.getFirstColumn()+lIndex)
+				String lStrHeaderValueObject=''
 				String lStrDataFormatterObjectValue=''
 				try{
-					lStrDataFormatterObjectValue=ExcelKeywords.getCellValueByIndex(lTargetSheet,lTargetRow.getRowNum(),lTargetCellRangeAddress.getFirstColumn()+lIndex)
-					lHeaderValueObject=ExcelKeywords.getCellValueByIndex(lTargetSheet,lCurrentRow.getRowNum(),lTargetCellRangeAddress.getFirstColumn()+lIndex)
-					if(lHeaderValueObject=='StartDayOffset'){
+					lStrDataFormatterObjectValue=ExcelKeywords.getCellValueByIndex(lSheetTarget,lTargetRow.getRowNum(),lTargetCellRangeAddress.getFirstColumn()+lIndex)
+					lStrHeaderValueObject=ExcelKeywords.getCellValueByIndex(lSheetTarget,lRowCurrent.getRowNum(),lTargetCellRangeAddress.getFirstColumn()+lIndex)
+					if(lStrHeaderValueObject=='QuoteStartDayOffset'){
 						if(!(IGNUemaHelper.checkObjectEmptyOfString(lStrDataFormatterObjectValue))){
-							lPolicyStartDateOffset=lStrDataFormatterObjectValue
+							lStrPolicyStartDateOffset=lStrDataFormatterObjectValue
 						}
 					}
-					else if(lHeaderValueObject=='StartDate'){
-						lStrDataFormatterObjectValue=lPolicyStartDateOffset
+					else if(lStrHeaderValueObject=='StartDate'){
+						lStrDataFormatterObjectValue=lStrPolicyStartDateOffset
 					}
-					else if(lHeaderValueObject=='EffectiveDayOffset'){
+					else if(lStrHeaderValueObject=='QuoteEffectiveDayOffset'){
 						if(!(IGNUemaHelper.checkObjectEmptyOfString(lStrDataFormatterObjectValue))){
-							lPolicyEffectiveDateOffset=lStrDataFormatterObjectValue
+							lStrPolicyEffectiveDateOffset=lStrDataFormatterObjectValue
 						}
 					}
-					else if(lHeaderValueObject=='EffectiveDate'){
-						lStrDataFormatterObjectValue=lPolicyEffectiveDateOffset
+					else if(lStrHeaderValueObject=='EffectiveDate'){
+						lStrDataFormatterObjectValue=lStrPolicyEffectiveDateOffset
 					}
-					else if(lHeaderValueObject=='FirstQuote'){
-						lStrDataFormatterObjectValue=lPolicyStartDateOffset
+					else if(lStrHeaderValueObject=='QuoteFirstQuote'){
+						lStrDataFormatterObjectValue=lStrPolicyStartDateOffset
 					}else{
 						if(!IGNUemaHelper.checkObjectNullOfObject(lCell)){
 							CellType lCellType=lCell.getCellTypeEnum()
 							if((lCellType==CellType.NUMERIC)){
-								Double lValue=lCell.getNumericCellValue()
 								if(DateUtil.isCellDateFormatted(lCell)){
 									Date lDate=lCell.getDateCellValue()
-									String lDateFormat='yyyy-MM-dd'
-									String lDateString=lDate.format(lDateFormat)
-									lStrDataFormatterObjectValue=lDateString
+									String lStrDateFormat='yyyy-MM-dd'
+									String lStrDateText=lDate.format(lStrDateFormat)
+									lStrDataFormatterObjectValue=lStrDateText
 								}else{
 									lStrDataFormatterObjectValue=IGNUemaHelper.getStrDataFormatterOfExcelCell(lCell)
 								}
@@ -1780,18 +2115,24 @@ public class IDNPricingApiPrepareGenericDataInputUtil{
 						lStrCellValue=lStrDataFormatterObjectValue.trim()
 					}
 					if(lIsRecordCellTable){
-						Integer lRowIndex=lTargetRow.getRowNum()
-						Integer lColumnIndex=lTargetCellRangeAddress.getFirstColumn()+lIndex
-						lTableExcelSheetSrc.put(lRowIndex,lColumnIndex,lStrCellValue)
+						Integer lNumRowIndex=lTargetRow.getRowNum()
+						Integer lNumColumnIndex=lTargetCellRangeAddress.getFirstColumn()+lIndex
+						lTableExcelSheetSrc.put(lNumRowIndex,lNumColumnIndex,lStrCellValue)
 					}
-					lCellValueList.add(lStrCellValue)
-					lResult=lCellValueList.size()>=0
+					lListCellValue.add(lStrCellValue)
+					lResult=lListCellValue.size()>=0
 				}catch(Exception ex){
 					//ex.printStackTrace()
 				}
 			}
+			if(lIsCheckEmptyRowValue){
+				Boolean lIsCheckQuotationInputListContainString=IGNUemaHelper.checkAllValueInListContainSameString(lListCellValue,'None')
+				if(lIsCheckQuotationInputListContainString){
+					lListCellValue=[]
+				}
+			}
 			if(lResult){
-				lreturn.put('CellValueList',lCellValueList)
+				lreturn.put('CellValueList',lListCellValue)
 				lreturn.put('CellTable',lTableExcelSheetSrc)
 				lreturn.put('Result',lResult)
 			}
@@ -1814,34 +2155,29 @@ public class IDNPricingApiPrepareGenericDataInputUtil{
 			if(IGNUemaHelper.checkObjectEmptyOfString(strParameter)){
 				return lreturn
 			}
-			String lTargetParameter=strParameter
-			Integer lGenericTestDataCellMergeList=sheetMasterDataMappingSheet.getNumMergedRegions()
+			String lStrTargetParameter=strParameter
+			Integer lNumGenericTestDataCellMerge=sheetMasterDataMappingSheet.getNumMergedRegions()
 			CellRangeAddress[] lCellRangeAddressMergedList=new CellRangeAddress[sheetMasterDataMappingSheet.getNumMergedRegions()]
 			for(Integer lIndex=0;lIndex<lCellRangeAddressMergedList.size();lIndex++){
 				lCellRangeAddressMergedList[lIndex]=sheetMasterDataMappingSheet.getMergedRegion(lIndex)
 			}
-			Integer lLastRowNumber=sheetMasterDataMappingSheet.getLastRowNum()
-			CellRangeAddress lRangeAddressRedBook
-			for(Integer lIndex=0;lIndex<lGenericTestDataCellMergeList;lIndex++){
-				Row lInputCurrentRow=sheetMasterDataMappingSheet.getRow(lCellRangeAddressMergedList[lIndex].getFirstRow())
-				Cell lCell=lInputCurrentRow.getCell(lCellRangeAddressMergedList[lIndex].getFirstColumn())
-				String lCellRangeAddressHeading=lCell.getStringCellValue()
-				IGNUemaHelper.printLog('MasterDatalCellRangeAddressHeading')
-				IGNUemaHelper.printLog(lCellRangeAddressHeading)
-				if(IGNUemaHelper.checkStringContainString(lCellRangeAddressHeading,lTargetParameter)){
-					lRangeAddressRedBook=lCellRangeAddressMergedList[lIndex]
+			Integer lNumLastRow=sheetMasterDataMappingSheet.getLastRowNum()
+			CellRangeAddress lCellRangeAddressRedBook=null
+			for(Integer lIndex=0;lIndex<lNumGenericTestDataCellMerge;lIndex++){
+				Row lRowCurrent=sheetMasterDataMappingSheet.getRow(lCellRangeAddressMergedList[lIndex].getFirstRow())
+				Cell lCell=lRowCurrent.getCell(lCellRangeAddressMergedList[lIndex].getFirstColumn())
+				String lStrCellRangeAddressHeading=lCell.getStringCellValue()
+				if(IGNUemaHelper.checkStringContainString(lStrCellRangeAddressHeading,lStrTargetParameter)){
+					lCellRangeAddressRedBook=lCellRangeAddressMergedList[lIndex]
 				}
 			}
-			Integer lRedBookVehicleDataRowNumber=lRangeAddressRedBook.getLastRow()
-			Map lMappingTargetParameterWithMasterDataParameterResult=this.getMasterDataParameterMapping(lRangeAddressRedBook,sheetMasterDataMappingSheet,lLastRowNumber)
-			IGNUemaHelper.printLog(lMapTargetParameterWithMasterParameter)
-			if(lMappingTargetParameterWithMasterDataParameterResult.Result){
-				lMapTargetParameterWithMasterParameter=lMappingTargetParameterWithMasterDataParameterResult.MasterDataMappingParameter
+			Integer lNumRedBookVehicleDataRow=lCellRangeAddressRedBook.getLastRow()
+			Map lMapTargetParameterWithMasterDataParameterResult=this.getMasterDataParameterMapping(lCellRangeAddressRedBook,sheetMasterDataMappingSheet,lNumLastRow)
+			if(lMapTargetParameterWithMasterDataParameterResult.Result){
+				lMapTargetParameterWithMasterParameter=lMapTargetParameterWithMasterDataParameterResult.MasterDataMappingParameter
 			}else{
 				lIsMappingWithMasterParameterDone=false
 			}
-			IGNUemaHelper.printLog('lMapTargetParameterWithMasterParameter')
-			IGNUemaHelper.printLog(lMapTargetParameterWithMasterParameter)
 			lResult=lIsMappingWithMasterParameterDone
 			if(lResult){
 				lreturn.put('MasterDataParameter',lMapTargetParameterWithMasterParameter)

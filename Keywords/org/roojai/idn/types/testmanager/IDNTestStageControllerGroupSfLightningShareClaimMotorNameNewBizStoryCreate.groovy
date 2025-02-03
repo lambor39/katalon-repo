@@ -246,10 +246,19 @@ public class IDNTestStageControllerGroupSfLightningShareClaimMotorNameNewBizStor
 				String lStrStrSfSwitchModeValue=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfSwitchMode)
 				Boolean lIsSfModeLightningOK=IDNSalesforceLightningCoreHelperUI.checkTargetSalesforceModeIsLightning(lStrStrSfSwitchModeValue)
 				Boolean lIsSfSwitchToModeOK=IDNSalesforceLightningCoreHelperUI.inputSalesforceSwitchUIMode(lDriver,lIsSfModeLightningOK)
+				String lStrSfCreateClaimDetailToDo=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailToDo
+				IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle02=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_To_Do')
+				lStrSfCreateClaimDetailToDo=lIGNTestMasterFieldTypeSingle02.getMasterPairValueByKey(lStrSfCreateClaimDetailToDo)
 				if(IGNUemaHelper.checkObjectNullOfObject(this.Stage01MainUtil)){
 					this.Stage01MainUtil=new IDNSalesforceLightningClaimMotorCarNewbizCreateUtil(this)
-					Boolean lIsCreateNewBizQuoteOK=this.Stage01MainUtil.inputClaimCreate(lMapCaseDataCurrentInput,lMapCaseDataCurrentOutput)
-					lIsProceedTestMainOK=true
+					/*
+					Map lMapInputCreateClaimDetailToDo=this.Stage01MainUtil.inputCreateClaimDetailToDo(lStrSfCreateClaimDetailToDo)
+					lStrSfCreateClaimDetailToDo=lMapInputCreateClaimDetailToDo.CreateClaimDetailToDo
+					*/
+					Boolean lIsSfCreateClaimDetailToDo=IGNUemaHelper.convertStringToBoolean(lStrSfCreateClaimDetailToDo)
+					if(lIsSfCreateClaimDetailToDo){
+						lIsProceedTestMainOK=this.Stage01MainUtil.inputClaimCreate(lMapCaseDataCurrentInput,lMapCaseDataCurrentOutput)
+					}
 				}
 			}
 			//YOUR CODE HERE END

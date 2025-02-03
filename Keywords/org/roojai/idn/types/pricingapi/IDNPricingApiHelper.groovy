@@ -12,6 +12,7 @@ import org.openqa.selenium.*
 import org.json.*
 import org.apache.poi.ss.util.*
 import org.apache.poi.ss.usermodel.*
+import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.sl.usermodel.*
 import org.apache.commons.text.WordUtils
 import org.apache.commons.lang3.StringUtils
@@ -137,10 +138,160 @@ public class IDNPricingApiHelper{
 		}
 		return lreturn
 	}
-	public static Map getDependencyTable(String strPolicyProductVersion,String strProductType,String strCoverName){
+	public static Map getMapPricingApiSourceFileList(List<String> listPricingApiSourceFile){
+		Map lreturn=[:]
+		Boolean lResult=false
+		List<String> lListExcelGenericFile=new ArrayList<String>()
+		List<String> lListMacroGenericFile=new ArrayList<String>()
+		try{
+			lreturn.put('Result',lResult)
+			lreturn.put('ListExcelGenericFile',lListExcelGenericFile)
+			lreturn.put('ListMacroGenericFile',lListMacroGenericFile)
+			if(IGNUemaHelper.checkObjectEmptyOfList(listPricingApiSourceFile)){
+				return lreturn
+			}
+			List<String> lListPricingApiSourceFile=listPricingApiSourceFile
+			for(Integer lTargetFileIndex=0;lTargetFileIndex<=lListPricingApiSourceFile.size()-1;lTargetFileIndex++){
+				String lFileName=lListPricingApiSourceFile.get(lTargetFileIndex)
+				if(lFileName.contains('IGNGenericTemplatePricingAPI')){
+					if(lFileName.contains('.xlsx')){
+						lListExcelGenericFile.add(lFileName)
+					}
+					else{
+						lListMacroGenericFile.add(lFileName)
+					}
+				}
+			}
+			lResult=lListExcelGenericFile.size()>0
+			if(lResult){
+				lreturn.put('ListExcelGenericFile',lListExcelGenericFile)
+				lreturn.put('ListMacroGenericFile',lListMacroGenericFile)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static String getValueFromExcelSheetForValidation(Sheet targetSheet,Integer integerRowNumber,Integer integerColumnNumber){
+		String lreturn=''
+		Boolean lResult=false
+		Integer lRowNumber=integerRowNumber
+		Integer lColumnNumber=integerColumnNumber
+		try{
+			if(IGNUemaHelper.checkObjectNullOfObject(targetSheet)){
+				IGNUemaHelper.printLog('PricingApi Generic  Sheet not valid')
+				return lreturn
+			}
+			String lCellValue=''
+			Sheet lSheetPricingApi=targetSheet
+			Row lCurrentRow=lSheetPricingApi.getRow(lRowNumber)
+			Cell lCell=lCurrentRow.getCell(lColumnNumber)
+			CellType lCellType=lCell.getCellTypeEnum()
+			Object lCellValueObject=null
+			String lStrDataFormatterObjectValue=''
+			try{
+				lCellValueObject=ExcelKeywords.getCellByIndex(lSheetPricingApi,lRowNumber,lColumnNumber)
+				lStrDataFormatterObjectValue=lCellValueObject.toString()
+			}catch(Exception ex){
+				//ex.printStackTrace()
+			}
+			if(!IGNUemaHelper.checkObjectNullOfObject(lCell)){
+				if((lCellType==CellType.NUMERIC)){
+					Double lValue=lCell.getNumericCellValue()
+					if(DateUtil.isCellDateFormatted(lCell)){
+						lCellValue=lCell.getDateCellValue().format('yyyy-MM-dd')
+					}else{
+						lCellValue=ExcelKeywords.getCellByIndex(lSheetPricingApi,lRowNumber,lColumnNumber)
+					}
+				}else{
+					lCellValue=ExcelKeywords.getCellByIndex(lSheetPricingApi,lRowNumber,lColumnNumber)
+				}
+			}
+			lResult=lCellValue.length()>1
+			if(lResult){
+				lreturn=lCellValue
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map getMapPricingApiSourceFileInformation(String strPricingApiProductType){
+		Map lreturn=[:]
+		Boolean lResult=false
+		String lStrExcelGenericFilename=''
+		String lStrMacroGenericFileName=''
+		try{
+			lreturn.put('StrExcelGenericFileName',lStrExcelGenericFilename)
+			lreturn.put('StrMacroGenericFileName',lStrMacroGenericFileName)
+			lreturn.put('Result',lResult)
+			if(IGNUemaHelper.checkObjectEmptyOfString(strPricingApiProductType)){
+				return lreturn
+			}
+			String lStrPricingApiProductType=strPricingApiProductType.trim()
+			String lStrFileSourcePath='Data Files/Release_UAT/Roojai/IDN/'
+			List<String> lListPricingApiExcelFile=IDNPricingApiHelper.getPricingApiFileList(lStrFileSourcePath)
+			List<String> lListPricingApiExcelFilePath=[]
+			List<String> lListPricingApiMacroFilePath=[]
+			if(lListPricingApiExcelFile.size()>0){
+				for(Integer lTargetFileIndex=0;lTargetFileIndex<=lListPricingApiExcelFile.size()-1;lTargetFileIndex++){
+					String lStrFileName=lListPricingApiExcelFile.get(lTargetFileIndex)
+					if(lStrFileName.contains('IGNGenericTemplatePricingAPI')){
+						if(lStrFileName.contains('.xlsx')){
+							lListPricingApiExcelFilePath.add(lStrFileName)
+						}
+						else{
+							lListPricingApiMacroFilePath.add(lStrFileName)
+						}
+					}
+				}
+				for(Integer lMainIndex=0;lMainIndex<=lListPricingApiExcelFilePath.size()-1;lMainIndex++){
+					String lStrExcelFilename=lListPricingApiExcelFilePath.get(lMainIndex)
+					String lStrMacroFileName=lListPricingApiMacroFilePath.get(lMainIndex)
+					if(lStrExcelFilename.contains(lStrPricingApiProductType)){
+						lStrExcelGenericFilename=lStrExcelFilename
+					}
+					if(lStrMacroFileName.contains(lStrPricingApiProductType)){
+						lStrMacroGenericFileName=lStrMacroFileName
+					}
+				}
+			}
+			lResult=(lStrExcelGenericFilename.length()>0)&&(lStrMacroGenericFileName.length()>0)
+			if(lResult){
+				lreturn.put('StrExcelGenericFileName',lStrExcelGenericFilename)
+				lreturn.put('StrMacroGenericFileName',lStrMacroGenericFileName)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Boolean inputPricingApiResultToExcelSheetForValidation(Sheet targetSheet,Integer integerRowNumber,Integer integerColumnNumber,String strOutputResult){
+		Boolean lreturn=false
+		Integer lRowNumber=integerRowNumber
+		Integer lColumnNumber=integerColumnNumber
+		String lOutputResult=strOutputResult
+		if(IGNUemaHelper.checkObjectNullOfObject(targetSheet)){
+			return lreturn
+		}
+		Sheet lSheetPricingApi=targetSheet
+		try{
+			lOutputResult=IGNUemaHelper.copyStringFitForExcelCell(lOutputResult)
+			lOutputResult=lOutputResult.trim()
+			ExcelKeywords.setValueToCellByIndex(lSheetPricingApi,lRowNumber,lColumnNumber,lOutputResult)
+			lreturn=true
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
+	public static Map getDependencyTable(String strPricingModelVersion,String strProductType,String strCoverName){
 		Boolean lResult=false
 		Map lreturn=[:]
-		String lPolicyProductVersion=strPolicyProductVersion
+		String lPricingModelVersion=strPricingModelVersion
 		String lProductType=strProductType
 		String lCoverName=strCoverName
 		List<GroovyRowResult> lDependencyCodeMappingResultSet=[]
@@ -157,7 +308,7 @@ public class IDNPricingApiHelper{
 			}
 			if(lIsInitConnectionOK){
 				lSql=IDNPricingApiGetPriceListDatabaseHandling.lPricingApiSql
-				lDependencyCodeMappingResultSet=lSql.rows('select * from pricing.dependency_code_mapping where product=\''+lProductType+'\'and product_version_no= \''+lPolicyProductVersion+'\' and code=\''+lCoverName+'\'order by  option_sequence ASC')
+				lDependencyCodeMappingResultSet=lSql.rows('select * from pricing.dependency_code_mapping where product=\''+lProductType+'\'and pricing_model_version= \''+lPricingModelVersion+'\' and code=\''+lCoverName+'\'order by  option_sequence ASC')
 				lResult=(lDependencyCodeMappingResultSet.size()>=1)
 			}
 			if(lResult){
@@ -191,7 +342,7 @@ public class IDNPricingApiHelper{
 			if(lIsInitConnectionOK){
 				lSql=IDNPricingApiGetPriceListDatabaseHandling.lPricingApiSql
 				IGNUemaHelper.printLog('Start Query')
-				lVehicleDataResultSet=lSql.rows('SELECT sfid,yeargroup,gear_location_description,uw_group,fuel_type_description,goodkm,vehicle_type_code,engine_description,new_active_veh_key,engine_size,cylinders,avg_whole_sale,uw_class,makecode,model_family,to_deactivate,name,premium_group,gear_num,door_num,wheel_base,seat_capacity,body_style,good_whole_sale,familycode,premium_class,compulsory_type,avg_retail,make,kerb_weight,vehicle_key,new_price,product_type,price,height,drive_description,width,model_description,length,power,good_retail,tariff_group,transmission,id FROM policy.st_redbook where UPPER(make)=\''+llVehicleMake+'\'and UPPER(model_family)= \''+lVehicleModel+'\' and yeargroup=\''+lVehicleYearOfManufacture+'\'and UPPER(model_description)=\''+lSubModel+'\'')
+				lVehicleDataResultSet=lSql.rows('SELECT sfid,yearofmfg,voluntary_type,gear_location_description,uw_group,fuel_type_description,goodkm,vehicle_type_code,engine_description,new_active_veh_key,engine_size,cylinders,avg_whole_sale,uw_class,makecode,model_family,to_deactivate,name,premium_group,gear_num,door_num,wheel_base,seat_capacity,body_style,good_whole_sale,familycode,premium_class,compulsory_type,avg_retail,make,kerb_weight,vehicle_key,new_price,product_type,price,height,drive_description,width,model_description,length,power,good_retail,tariff_group,transmission,id FROM policy.st_redbook where UPPER(make)=\''+llVehicleMake+'\'and UPPER(model_family)= \''+lVehicleModel+'\' and yearofmfg=\''+lVehicleYearOfManufacture+'\'and UPPER(model_description)=\''+lSubModel+'\'')
 				lResult=lVehicleDataResultSet.size()>=1
 			}
 			if(lResult){
@@ -283,7 +434,6 @@ public class IDNPricingApiHelper{
 			}
 			if(lIsInitConnectionOK){
 				lSql=IDNPricingApiGetPriceListDatabaseHandling.lPricingApiSql
-				IGNUemaHelper.printLog('Start Query')
 				def lFirstRow=lSql.firstRow('select ppf.* from pricing.pricing_calculator_model_data pcmd join pricing.product_payment_frequency ppf on ppf.pricing_model_version = pcmd.pricing_model_version where pcmd.pricing_model_id =\''+lMasterSetId+'\' and payment_frequency =\''+lPaymentFrquency+'\'')
 				lreturn=lFirstRow?lFirstRow.sequence:lreturn
 			}

@@ -54,9 +54,9 @@ public class IDNPricingApiGetPriceListDatabaseHandling{
 			String dbUsername=''
 			String dbPassword=''
 			String dbDriver=''
-			dbConnString="jdbc:postgresql://devEhlFgPe.uat-roojai.co.id:5432/d38m42cpfa05fk?sslmode=require"
+			dbConnString="jdbc:postgresql://uatnfdDmvd.uat-roojai.co.id:5432/d90n51k6seh5oc?sslmode=require"
 			dbUsername="testautomation"
-			dbPassword="pdc2f53a08dcce50d9d86eded3e773c52ef90ae96feaac44ec3fbb6648161b12e"
+			dbPassword="pfe12f44ac6e90d675e1b5abc3e6d6f900a0c186c42556ea131b427b5b9e48315"
 			dbDriver="org.postgresql.Driver"
 			Sql lSql=Sql.newInstance(dbConnString,dbUsername,dbPassword,dbDriver)
 			if(!IGNUemaHelper.checkObjectNullOfObject(lSql)){
@@ -71,7 +71,7 @@ public class IDNPricingApiGetPriceListDatabaseHandling{
 		}
 		return lreturn
 	}
-	public Boolean getIsIDNPricingApiDatabaseConnectionTestReady(){
+	public static Boolean getIsIDNPricingApiDatabaseConnectionTestReady(){
 		try{
 			return this.isIDNPricingApiDatabaseConnectionTestReady
 		}catch(Exception e){

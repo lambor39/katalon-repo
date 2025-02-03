@@ -394,8 +394,8 @@ public class IDNSalesforceLightningCoreHelperUI{
 			String lLocatorUsername='input#username'
 			String lLocatorPassword='input#password'
 			String lLocatorLogin='input#Login'
-			IGNUemaHelper.delayWebUISecond(5)
-			if(IGNUemaHelper.checkElementPresentByLocator(webDriver,lLocatorUsername,15)){
+			IGNUemaHelper.delayThreadSecond(3)
+			if(IGNUemaHelper.waitElementVisibleByLocator(webDriver,lLocatorUsername)){
 				WebElement lElementUsernameInput=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lLocatorUsername)
 				if(lElementUsernameInput){
 					lStrUsername=IGNUemaHelper.typeSetTextByWebElement(webDriver,lElementUsernameInput,lStrUsername)
@@ -532,6 +532,861 @@ public class IDNSalesforceLightningCoreHelperUI{
 			if(lResult){
 				lResult=lreturn
 			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map getListSalesforceQuoteElementPolicyFlowButton(WebDriver webDriver){
+		Map lreturn=[:]
+		List<WebElement> lListElementSalesforceQuoteElementPolicyFlowButton=null
+		WebElement lElementDropDownSalesforceQuoteElementPolicyFlowButton=null
+		Boolean lResult=false
+		try{
+			lreturn.put('ListElementSalesforceQuoteElementPolicyFlowButton',lListElementSalesforceQuoteElementPolicyFlowButton)
+			lreturn.put('ElementDropDownSalesforceQuoteElementPolicyFlowButton',lElementDropDownSalesforceQuoteElementPolicyFlowButton)
+			lreturn.put('Result',lResult)
+			if(!webDriver){
+				return lreturn
+			}
+			Boolean lIsOK=true
+			String lLocatorSearch01InputLevel01SearchHomeFlexipageParent='div.recordHomeFlexipage2'
+			String lLocatorSearch01InputLevel01SearchHomeFlexipageChild01='div.actionsContainer'
+			String lLocatorSearch01InputLevel01SearchHomeFlexipageChild02='runtime_platform_actions-actions-ribbon'
+			List<WebElement> lListElementSearch03InputLevel01PolicyFlowButton=null
+			WebElement lElementSearch01InputLevel01SearchHomeFlexipageChild02=null
+			if(IGNUemaHelper.checkElementPresentByLocator(webDriver,lLocatorSearch01InputLevel01SearchHomeFlexipageParent)){
+				WebElement lElementSearch01InputLevel01SearchHomeFlexipageParent=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lLocatorSearch01InputLevel01SearchHomeFlexipageParent)
+				if(lElementSearch01InputLevel01SearchHomeFlexipageParent){
+					WebElement lElementSearch01InputLevel01SearchHomeFlexipageChild01=IGNUemaHelper.getChildWebElementOfWebElement(webDriver,lElementSearch01InputLevel01SearchHomeFlexipageParent,lLocatorSearch01InputLevel01SearchHomeFlexipageChild01,true)
+					if(lElementSearch01InputLevel01SearchHomeFlexipageChild01){
+						lElementSearch01InputLevel01SearchHomeFlexipageChild02=IGNUemaHelper.getChildWebElementOfWebElement(webDriver,lElementSearch01InputLevel01SearchHomeFlexipageChild01,lLocatorSearch01InputLevel01SearchHomeFlexipageChild02,true)
+					}
+				}
+			}
+			String lLocatorSearch02InputLevel01LightningButtonMenuParent='ul'
+			String lLocatorSearch02InputLevel01LightningButtonMenuChild01='li'
+			String lLocatorSearch02InputLevel01LightningButtonMenuChild02='li.slds-dropdown-trigger'
+			List<WebElement> lListElementSearch02InputLevel01LightningButtonMenuChild01=null
+			WebElement lElementSearch02InputLevel01LightningButtonMenuChild02=null
+			if(lElementSearch01InputLevel01SearchHomeFlexipageChild02){
+				WebElement lElementSearch02InputLevel01LightningButtonMenuParent=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01SearchHomeFlexipageChild02,lLocatorSearch02InputLevel01LightningButtonMenuParent,true)
+				if(lElementSearch02InputLevel01LightningButtonMenuParent){
+					lListElementSearch02InputLevel01LightningButtonMenuChild01=IGNUemaHelper.getChildWebElementListOfWebElement(webDriver,lElementSearch02InputLevel01LightningButtonMenuParent,lLocatorSearch02InputLevel01LightningButtonMenuChild01)
+					lElementSearch02InputLevel01LightningButtonMenuChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch02InputLevel01LightningButtonMenuParent,lLocatorSearch02InputLevel01LightningButtonMenuChild02,true)
+				}
+			}
+			if(lElementSearch02InputLevel01LightningButtonMenuChild02){
+				lElementDropDownSalesforceQuoteElementPolicyFlowButton=lElementSearch02InputLevel01LightningButtonMenuChild02
+				lListElementSalesforceQuoteElementPolicyFlowButton=lListElementSearch02InputLevel01LightningButtonMenuChild01
+				lIsOK=true
+			}
+			lIsOK=(lListElementSalesforceQuoteElementPolicyFlowButton.size()>0&&lIsOK)
+			lResult=lIsOK
+			if(lResult){
+				lreturn.put('ListElementSalesforceQuoteElementPolicyFlowButton',lListElementSalesforceQuoteElementPolicyFlowButton)
+				lreturn.put('ElementDropDownSalesforceQuoteElementPolicyFlowButton',lElementDropDownSalesforceQuoteElementPolicyFlowButton)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputSalesforceQuotePolicyFlowButton(WebDriver webDriver,List<WebElement> listElementPolicyFlowButton,WebElement elementDropDownPolicyFlowButton ,String strOpenPolicyFlowButtonName){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectEmptyOfList(listElementPolicyFlowButton)){
+			return lreturn
+		}
+		List<WebElement> lListElementPolicyFlowButton=listElementPolicyFlowButton
+		if(IGNUemaHelper.checkObjectNullOfObject(elementDropDownPolicyFlowButton)){
+			return lreturn
+		}
+		WebElement lElementDropDownPolicyFlowButton=elementDropDownPolicyFlowButton
+		if(IGNUemaHelper.checkObjectNullOfObject(strOpenPolicyFlowButtonName)){
+			return lreturn
+		}
+		String lStrOpenPolicyFlowButtonName=strOpenPolicyFlowButtonName
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrOpenPolicyFlowButtonName)){
+			return lreturn
+		}
+		try{
+			String lLocatorSearch01InputLevel01LightningButtonParent='runtime_platform_actions-action-renderer'
+			String lLocatorSearch01InputLevel01LightningButtonChild01='lightning-button'
+			String lLocatorSearch01InputLevel01LightningButtonChild02='button'
+			WebElement lElementPolicyFlowButtonMain=null
+			Boolean lIsFindSalesforceQuoteFindPolicyFlowButtonOK=this.findSalesforceQuoteFindPolicyFlowButtonByDirectLabel(webDriver,lListElementPolicyFlowButton,lStrOpenPolicyFlowButtonName)
+			if(!lIsFindSalesforceQuoteFindPolicyFlowButtonOK){
+				String lLocatorSearch02InputLevel01DropDownBoxChild01='lightning-button-menu'
+				String lLocatorSearch02InputLevel01DropDownBoxChild02='lightning-primitive-icon'
+				if(lElementDropDownPolicyFlowButton){
+					WebElement lElementSearch02InputLevel01DropDownBoxChild01=IGNUemaHelper.getChildWebElementOfWebElement(webDriver,lElementDropDownPolicyFlowButton,lLocatorSearch02InputLevel01DropDownBoxChild01,true)
+					if(lElementSearch02InputLevel01DropDownBoxChild01){
+						WebElement lElementSearch02InputLevel01DropDownBoxChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch02InputLevel01DropDownBoxChild01,lLocatorSearch02InputLevel01DropDownBoxChild02,true)
+						if(lElementSearch02InputLevel01DropDownBoxChild02){
+							IGNUemaHelper.clickByWebElementNoScroll(webDriver,lElementSearch02InputLevel01DropDownBoxChild02)
+							List<WebElement> lListElementDropDownPolicyFlowButton=IGNUemaHelper.getChildWebElementListOfWebElement(webDriver,lElementSearch02InputLevel01DropDownBoxChild01,lLocatorSearch01InputLevel01LightningButtonParent)
+							if(lListElementDropDownPolicyFlowButton.size()>0){
+								lIsFindSalesforceQuoteFindPolicyFlowButtonOK=this.findSalesforceQuoteFindPolicyFlowButtonByDropdownLabel(webDriver,lListElementDropDownPolicyFlowButton,lStrOpenPolicyFlowButtonName)
+							}
+						}
+					}
+				}
+			}
+			lResult=lIsFindSalesforceQuoteFindPolicyFlowButtonOK
+			if(lResult){
+				lreturn=lResult
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean findSalesforceQuoteFindPolicyFlowButtonByDirectLabel(WebDriver webDriver,List<WebElement> listElementPolicyFlowButton,String strOpenPolicyFlowButtonName){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectEmptyOfList(listElementPolicyFlowButton)){
+			return lreturn
+		}
+		List<WebElement> lListElementPolicyFlowButton=listElementPolicyFlowButton
+		if(IGNUemaHelper.checkObjectNullOfObject(strOpenPolicyFlowButtonName)){
+			return lreturn
+		}
+		String lStrOpenPolicyFlowButtonName=strOpenPolicyFlowButtonName
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrOpenPolicyFlowButtonName)){
+			return lreturn
+		}
+		try{
+			String lLocatorSearch01InputLevel01LightningButtonParent='runtime_platform_actions-action-renderer'
+			String lLocatorSearch01InputLevel01LightningButtonChild01='lightning-button'
+			String lLocatorSearch01InputLevel01LightningButtonChild02='button'
+			WebElement lElementPolicyFlowButtonMain=null
+			for(Integer lIndex=0;lIndex<=lListElementPolicyFlowButton.size()-1;lIndex++){
+				WebElement lElementPolicyFlowButton=lListElementPolicyFlowButton.get(lIndex)
+				WebElement lElementSearch01InputLevel01LightningButtonParent=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementPolicyFlowButton,lLocatorSearch01InputLevel01LightningButtonParent,true)
+				String lStrPolicyFlowButtonValue=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01LightningButtonParent,'title')
+				if(lStrPolicyFlowButtonValue==lStrOpenPolicyFlowButtonName){
+					lElementPolicyFlowButtonMain=lElementSearch01InputLevel01LightningButtonParent
+					WebElement lElementSearch01InputLevel01LightningButtonChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01LightningButtonParent,lLocatorSearch01InputLevel01LightningButtonChild01,true)
+					if(lElementSearch01InputLevel01LightningButtonChild01){
+						WebElement lElementSearch01InputLevel01LightningButtonChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01LightningButtonChild01,lLocatorSearch01InputLevel01LightningButtonChild02,true)
+						if(lElementSearch01InputLevel01LightningButtonChild02){
+							IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01LightningButtonChild02)
+							lResult=true
+						}
+					}
+				}
+			}
+			if(lResult){
+				lreturn=true
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean findSalesforceQuoteFindPolicyFlowButtonByDropdownLabel(WebDriver webDriver,List<WebElement> listElementPolicyFlowButton,String strOpenPolicyFlowButtonName){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectEmptyOfList(listElementPolicyFlowButton)){
+			return lreturn
+		}
+		List<WebElement> lListElementPolicyFlowButton=listElementPolicyFlowButton
+		if(IGNUemaHelper.checkObjectNullOfObject(strOpenPolicyFlowButtonName)){
+			return lreturn
+		}
+		String lStrOpenPolicyFlowButtonName=strOpenPolicyFlowButtonName
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrOpenPolicyFlowButtonName)){
+			return lreturn
+		}
+		try{
+			String lLocatorSearch01InputLevel01LightningButtonParent='lightning-menu-item'
+			String lLocatorSearch01InputLevel01LightningButtonChild01='span'
+			String lLocatorSearch01InputLevel01LightningButtonChild02='button'
+			WebElement lElementPolicyFlowButtonMain=null
+			IGNUemaHelper.printLog('lListElementPolicyFlowButton')
+			IGNUemaHelper.printLog(lListElementPolicyFlowButton.size())
+			for(Integer lIndex=0;lIndex<=lListElementPolicyFlowButton.size()-1;lIndex++){
+				WebElement lElementPolicyFlowButton=lListElementPolicyFlowButton.get(lIndex)
+				WebElement lElementSearch01InputLevel01LightningButtonParent=IGNUemaHelper.getChildWebElementOfWebElement(webDriver,lElementPolicyFlowButton,lLocatorSearch01InputLevel01LightningButtonParent,true)
+				if(lElementSearch01InputLevel01LightningButtonParent){
+					WebElement lElementSearch01InputLevel01LightningButtonChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01LightningButtonParent,lLocatorSearch01InputLevel01LightningButtonChild01,true)
+					String lStrPolicyFlowButtonValue=lElementSearch01InputLevel01LightningButtonChild01.getText()
+					if(lStrPolicyFlowButtonValue==lStrOpenPolicyFlowButtonName){
+						IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01LightningButtonChild01)
+						lResult=true
+					}
+				}
+			}
+			if(lResult){
+				lreturn=true
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static WebElement getElementSalesforceQuoteIgnitePolicyFlowRoot(WebDriver webDriver){
+		WebElement lreturn=null
+		if(!webDriver){
+			return lreturn
+		}
+		Boolean lResult=false
+		try{
+			String lLocatorSearch01InputLevel01IgnitePolicyFlowParent='c-ignite-policy-flow'
+			String lLocatorSearch01InputLevel01IgnitePolicyFlowChild01='div.slds-grid'
+			String lLocatorSearch01InputLevel01IgnitePolicyFlowChild02='c-ign-quotation-flow'
+			WebElement lElementSearch01InputLevel01IgnitePolicyFlowChild02=null
+			if(IGNUemaHelper.checkElementPresentByLocator(webDriver,lLocatorSearch01InputLevel01IgnitePolicyFlowParent)){
+				WebElement lElementSearch01InputLevel01IgnitePolicyFlowParent=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lLocatorSearch01InputLevel01IgnitePolicyFlowParent)
+				if(lElementSearch01InputLevel01IgnitePolicyFlowParent){
+					WebElement lElementSearch01InputLevel01IgnitePolicyFlowChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgnitePolicyFlowParent,lLocatorSearch01InputLevel01IgnitePolicyFlowChild01,true)
+					if(lElementSearch01InputLevel01IgnitePolicyFlowChild01){
+						lElementSearch01InputLevel01IgnitePolicyFlowChild02=IGNUemaHelper.getChildWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgnitePolicyFlowChild01,lLocatorSearch01InputLevel01IgnitePolicyFlowChild02,true)
+					}
+				}
+			}
+			if(lElementSearch01InputLevel01IgnitePolicyFlowChild02){
+				lResult=true
+			}
+			if(lResult){
+				lreturn=lElementSearch01InputLevel01IgnitePolicyFlowChild02
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputSalesforceQuoteProductType(WebDriver webDriver,WebElement elementSearch01InputLevel01QuotationFlowFormParent,String strSfQuoteProductType){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01QuotationFlowFormParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01QuotationFlowFormParent=elementSearch01InputLevel01QuotationFlowFormParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strSfQuoteProductType)){
+			return lreturn
+		}
+		String lStrSfQuoteProductType=strSfQuoteProductType.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrSfQuoteProductType)){
+			return lreturn
+		}
+		try{
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild01='div.slds-form-element__control'
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild02='lightning-combobox'
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild03='lightning-base-combobox.slds-combobox_container'
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild04='button'
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild05='lightning-base-combobox-item'
+			Boolean lIsProductTypeDropDownClickOK=false
+			WebElement lElementIgnitePolicyFlowInput=null
+			WebElement lElementSearch01InputLevel01QuotationFlowFormChild03=null
+			if(lElementSearch01InputLevel01QuotationFlowFormParent){
+				WebElement lElementSearch01InputLevel01QuotationFlowFormChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormParent,lLocatorSearch01InputLevel01QuotationFlowFormChild01,true)
+				if(lElementSearch01InputLevel01QuotationFlowFormChild01){
+					WebElement lElementSearch01InputLevel01QuotationFlowFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild01,lLocatorSearch01InputLevel01QuotationFlowFormChild02,true)
+					if(lElementSearch01InputLevel01QuotationFlowFormChild02){
+						String lStrProductTypeValue=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild02,'id')
+						if(IGNUemaHelper.checkStringContainString(lStrProductTypeValue,'ProductType')){
+							lElementSearch01InputLevel01QuotationFlowFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild02,lLocatorSearch01InputLevel01QuotationFlowFormChild03,true)
+						}
+					}
+				}
+			}
+			if(lElementSearch01InputLevel01QuotationFlowFormChild03){
+				WebElement lElemenSearch01InputLevel01QuotationFlowFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild03,lLocatorSearch01InputLevel01QuotationFlowFormChild04,true)
+				if(lElemenSearch01InputLevel01QuotationFlowFormChild03){
+					IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElemenSearch01InputLevel01QuotationFlowFormChild03)
+					IGNUemaHelper.delayThreadSecond(3)
+				}
+			}
+			if(lElementSearch01InputLevel01QuotationFlowFormChild03){
+				List<WebElement> lListElementSearch01InputLevel01QuotationFlowFormChild04=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild03,lLocatorSearch01InputLevel01QuotationFlowFormChild05)
+				if(lListElementSearch01InputLevel01QuotationFlowFormChild04.size()>0){
+					for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01QuotationFlowFormChild04.size()-1;lIndex++){
+						WebElement lElementSearch01InputLevel01QuotationFlowFormChild04=lListElementSearch01InputLevel01QuotationFlowFormChild04.get(lIndex)
+						String lStrProductTypeValue=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild04,'data-value')
+						lStrProductTypeValue=lStrProductTypeValue.toLowerCase()
+						lStrSfQuoteProductType=lStrSfQuoteProductType.toLowerCase()
+						if(IGNUemaHelper.checkStringContainStringRemoveWhitespace(lStrProductTypeValue,lStrSfQuoteProductType)){
+							IGNUemaHelper.printLog('Check')
+							IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild04)
+							lIsProductTypeDropDownClickOK=true
+						}
+					}
+				}
+			}
+			if(lIsProductTypeDropDownClickOK){
+				if(lElementSearch01InputLevel01QuotationFlowFormParent){
+					Boolean lIsInputNextPageNavigationActionDoneOK=this.inputSalesforceQuoteNextPageNavigationAction(webDriver,lElementSearch01InputLevel01QuotationFlowFormParent,'Next')
+					if(lIsInputNextPageNavigationActionDoneOK){
+						lResult=true
+					}
+				}
+			}
+			lreturn=lResult
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputSalesforceQuoteNextPageNavigationAction(WebDriver webDriver,WebElement elementIgnitePolicyFlowRoot,String strNavigationButtonName){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementIgnitePolicyFlowRoot)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01TargetFlowFormFooterNavigationParent=elementIgnitePolicyFlowRoot
+		if(IGNUemaHelper.checkObjectNullOfObject(strNavigationButtonName)){
+			return lreturn
+		}
+		String lStrNavigationButtonName=strNavigationButtonName.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrNavigationButtonName)){
+			return lreturn
+		}
+		try{
+			WebElement lElementQuotationFlowFormFooterNavigationLightningButtonMain=null
+			String lLocatorSearch01InputLevel01TargetFlowFormFooterNavigationChild01='div.slds-card__footer.navigationBar'
+			String lLocatorSearch01InputLevel01TargetFlowFormFooterNavigationChild02='lightning-button'
+			String lLocatorSearch01InputLevel01TargetFlowFormFooterNavigationChild03='button'
+			WebElement lElementSearch01InputLevel01TargetFlowFormFooterNavigationChild03=null
+			WebElement lElementSearch01InputLevel01TargetFlowFormFooterNavigationChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01TargetFlowFormFooterNavigationParent,lLocatorSearch01InputLevel01TargetFlowFormFooterNavigationChild01,true)
+			if(lElementSearch01InputLevel01TargetFlowFormFooterNavigationChild01){
+				List<WebElement> lListElementSearch01InputLevel01TargetFlowFormFooterNavigationChild02=IGNUemaHelper.getChildWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01TargetFlowFormFooterNavigationChild01,lLocatorSearch01InputLevel01TargetFlowFormFooterNavigationChild02)
+				if(lListElementSearch01InputLevel01TargetFlowFormFooterNavigationChild02.size()>0){
+					for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01TargetFlowFormFooterNavigationChild02.size()-1;lIndex++){
+						WebElement lElementSearch01InputLevel01TargetFlowFormFooterNavigationChild02=lListElementSearch01InputLevel01TargetFlowFormFooterNavigationChild02.get(lIndex)
+						String lStrElementSearch01InputLevel01TargetFlowFormFooterNavigationChild02Text=lElementSearch01InputLevel01TargetFlowFormFooterNavigationChild02.getText()
+						if((lStrElementSearch01InputLevel01TargetFlowFormFooterNavigationChild02Text==lStrNavigationButtonName)||(IGNUemaHelper.checkStringContainString(lStrElementSearch01InputLevel01TargetFlowFormFooterNavigationChild02Text,lStrNavigationButtonName))){
+							lElementSearch01InputLevel01TargetFlowFormFooterNavigationChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01TargetFlowFormFooterNavigationChild02,lLocatorSearch01InputLevel01TargetFlowFormFooterNavigationChild03,true)
+						}
+					}
+				}
+			}
+			if(lElementSearch01InputLevel01TargetFlowFormFooterNavigationChild03){
+				IGNUemaHelper.webJsScrollToElement(webDriver,lElementSearch01InputLevel01TargetFlowFormFooterNavigationChild03)
+				IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01TargetFlowFormFooterNavigationChild03)
+				lResult=true
+			}
+			if(lResult){
+				lreturn=lResult
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static  WebElement getElementSaleforceQuoteTargetFlowDetailRoot(WebDriver webDriver,WebElement elementSearch01InputLevel01TargetFlowDetailParent,String strLocatorSearch01InputLevel01TargetFlowDetailChild01){
+		WebElement lreturn=null
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01TargetFlowDetailParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01TargetFlowDetailParent=elementSearch01InputLevel01TargetFlowDetailParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strLocatorSearch01InputLevel01TargetFlowDetailChild01)){
+			return lreturn
+		}
+		String lLocatorSearch01InputLevel01TargetDetailFlowFormChild01=strLocatorSearch01InputLevel01TargetFlowDetailChild01.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lLocatorSearch01InputLevel01TargetDetailFlowFormChild01)){
+			return lreturn
+		}
+		try{
+			WebElement lElementSearch01InputLevel01TargetFlowDetailChild01=null
+			lElementSearch01InputLevel01TargetFlowDetailChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01TargetFlowDetailParent,lLocatorSearch01InputLevel01TargetDetailFlowFormChild01,false)
+			if(lElementSearch01InputLevel01TargetFlowDetailChild01){
+				lResult=true
+			}
+			if(lResult){
+				lreturn=lElementSearch01InputLevel01TargetFlowDetailChild01
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputSalesforceQuoteMainInsuredDetail(WebDriver webDriver,WebElement elementSearch01InputLevel01MainInsuredParent,String strSfQuoteInsuredDateOfBirth,String strSfQuoteInsuredGender,String strSfQuoteInsuredMaritalStatus,String strSfQuoteInsuredOccupation) {
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01MainInsuredParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01MainInsuredParent=elementSearch01InputLevel01MainInsuredParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strSfQuoteInsuredDateOfBirth)){
+			return lreturn
+		}
+		String lStrSfQuoteInsuredDateOfBirth=strSfQuoteInsuredDateOfBirth
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrSfQuoteInsuredDateOfBirth)){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(strSfQuoteInsuredGender)){
+			return lreturn
+		}
+		String lStrSfQuoteInsuredGender=strSfQuoteInsuredGender
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrSfQuoteInsuredGender)){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(strSfQuoteInsuredMaritalStatus)){
+			return lreturn
+		}
+		String lStrSfQuoteInsuredMaritalStatus=strSfQuoteInsuredMaritalStatus
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrSfQuoteInsuredMaritalStatus)){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(strSfQuoteInsuredOccupation)){
+			return lreturn
+		}
+		String lStrSfQuoteInsuredOccupation=strSfQuoteInsuredOccupation
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrSfQuoteInsuredOccupation)){
+			return lreturn
+		}
+		try {
+			String lStrInputMainInsuredDobName='insured_dob'
+			Boolean lIsInputMainInsuredDobOK=this.inputSalesforceQuoteMainInsuredDob(webDriver,lElementSearch01InputLevel01MainInsuredParent,lStrInputMainInsuredDobName,lStrSfQuoteInsuredDateOfBirth)
+			if(!lIsInputMainInsuredDobOK){
+				return lreturn
+			}
+			String lStrMainInsuredGender='insured_gender'
+			Boolean lIsInputMainInsuredGenderOK=this.inputSalesforceQuoteTargetDetailByRadioButton(webDriver,lElementSearch01InputLevel01MainInsuredParent,lStrMainInsuredGender,lStrSfQuoteInsuredGender,true)
+			if(!lIsInputMainInsuredGenderOK){
+				return lreturn
+			}
+			String lStrMainInsuredMaritalStatus='insured_maritialStatus'
+			Boolean lIsInputMainInsuredMaritalStatusOK=this.inputSalesforceQuoteTargetDetailByRadioButton(webDriver,lElementSearch01InputLevel01MainInsuredParent,lStrMainInsuredMaritalStatus,lStrSfQuoteInsuredMaritalStatus,true)
+			if(!lIsInputMainInsuredMaritalStatusOK){
+				return lreturn
+			}
+			String lStrInputMainInsuredOccupationName='insured_occupation'
+			Boolean lIsInputMainInsuredOccupationOK=this.inputSalesforceQuoteTargetDetailByComboBox(webDriver,lElementSearch01InputLevel01MainInsuredParent,lStrInputMainInsuredOccupationName,lStrSfQuoteInsuredOccupation,true)
+			if(!lIsInputMainInsuredOccupationOK){
+				return lreturn
+			}
+			lreturn=lIsInputMainInsuredOccupationOK
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputSalesforceQuoteMainInsuredDob(WebDriver webDriver,WebElement elementSearch01InputLevel01MainInsuredParent,String strMainInsuredName,String strMainInsuredValue){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01MainInsuredParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01MainInsuredParent=elementSearch01InputLevel01MainInsuredParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strMainInsuredName)){
+			return lreturn
+		}
+		String lStrMainInsuredName=strMainInsuredName
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrMainInsuredName)){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(strMainInsuredValue)){
+			return lreturn
+		}
+		String lStrMainInsuredValue=strMainInsuredValue
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrMainInsuredValue)){
+			return lreturn
+		}
+		try{
+			WebElement lElementMainInsuredInput=null
+			String lLocatorSearch01InputLevel01MainInsuredChild01='lightning-datepicker'
+			String lLocatorSearch01InputLevel01MainInsuredChild02='input'
+			WebElement lElementSearch01InputLevel01MainInsuredByNameParent=this.getWebElementSalesforceQuoteTargetDetailFlowFormInputByName(webDriver,lElementSearch01InputLevel01MainInsuredParent,lStrMainInsuredName)
+			if(lElementSearch01InputLevel01MainInsuredByNameParent){
+				IGNUemaHelper.webJsScrollToElement(webDriver,lElementSearch01InputLevel01MainInsuredByNameParent)
+				WebElement lElementSearch01InputLevel01MainInsuredChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01MainInsuredByNameParent,lLocatorSearch01InputLevel01MainInsuredChild01,false)
+				if(lElementSearch01InputLevel01MainInsuredChild01){
+					WebElement lElementSearch01InputLevel01MainInsuredChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01MainInsuredChild01,lLocatorSearch01InputLevel01MainInsuredChild02,false)
+					if(lElementSearch01InputLevel01MainInsuredChild02){
+						IGNUemaHelper.typeSetTextByWebElement(webDriver,lElementSearch01InputLevel01MainInsuredChild02,lStrMainInsuredValue)
+						lResult=true
+					}
+				}
+			}
+			lreturn=lResult
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputSalesforceQuoteTargetDetailByComboBox(WebDriver webDriver,WebElement elementSearch01InputLevel01TargetFlowDetailParent,String strTargetFlowDetailName,String strTargetFlowDetailValue,Boolean boolIsSelectComboboxByValue){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01TargetFlowDetailParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01TargetFlowDetailParent=elementSearch01InputLevel01TargetFlowDetailParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strTargetFlowDetailName)){
+			return lreturn
+		}
+		String lStrTargetFlowDetailName=strTargetFlowDetailName
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrTargetFlowDetailName)){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(strTargetFlowDetailValue)){
+			return lreturn
+		}
+		String lStrTargetFlowDetailValue=strTargetFlowDetailValue
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrTargetFlowDetailValue)){
+			return lreturn
+		}
+		Boolean lIsSelectComboboxByValue=boolIsSelectComboboxByValue
+		try{
+			WebElement lElementTargetDetailInput=null
+			Boolean lIsInputSfTargetFlowDetailMainComboxOK=false
+			WebElement lElementSearch01InputLevel01TargetFlowDetailByNameParent=this.getWebElementSalesforceQuoteTargetDetailFlowFormInputByName(webDriver,lElementSearch01InputLevel01TargetFlowDetailParent,lStrTargetFlowDetailName)
+			if(lElementSearch01InputLevel01TargetFlowDetailByNameParent){
+				IGNUemaHelper.webJsScrollToElement(webDriver,lElementSearch01InputLevel01TargetFlowDetailByNameParent)
+				if(lIsSelectComboboxByValue){
+					lIsInputSfTargetFlowDetailMainComboxOK=this.selectTargetDetailFormComboboxItemByValue(webDriver,lElementSearch01InputLevel01TargetFlowDetailByNameParent,lStrTargetFlowDetailValue)
+				}else{
+					lIsInputSfTargetFlowDetailMainComboxOK=this.selectTargetDetailFormComboboxItemByTitle(webDriver,lElementSearch01InputLevel01TargetFlowDetailByNameParent,lStrTargetFlowDetailValue)
+				}
+
+				lResult=lIsInputSfTargetFlowDetailMainComboxOK
+			}
+			lreturn=lResult
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static WebElement getWebElementSalesforceQuoteTargetDetailFlowFormInputByName(WebDriver webDriver,WebElement elementSearch01InputLevel01TargetPolicyDetailParent,String strTargetDetailInputName){
+		WebElement lreturn=null
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01TargetPolicyDetailParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01TargetPolicyDetailParent=elementSearch01InputLevel01TargetPolicyDetailParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strTargetDetailInputName)){
+			return lreturn
+		}
+		String lStrTargetDetailInputName=strTargetDetailInputName.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrTargetDetailInputName)){
+			return lreturn
+		}
+		try{
+			WebElement lElementSearch01InputLevel01TargetPolicyDetailByName=null
+			IGNUemaHelper.delayThreadSecond(5)
+			List<WebElement> lListElementSearch01InputLevel01TargetPolicyDetailParent=IGNUemaHelper.getChildShadowWebElementListAll(webDriver,lElementSearch01InputLevel01TargetPolicyDetailParent)
+			if(lListElementSearch01InputLevel01TargetPolicyDetailParent.size()>0){
+				for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01TargetPolicyDetailParent.size()-1;lIndex++){
+					WebElement lElementSearch01InputLevel01TargetPolicyDetailCurrent=lListElementSearch01InputLevel01TargetPolicyDetailParent.get(lIndex)
+					String lStrElementSearch01InputLevel01TargetPolicyDetailCurrentName=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01TargetPolicyDetailCurrent,'name')
+					if(lStrElementSearch01InputLevel01TargetPolicyDetailCurrentName==lStrTargetDetailInputName){
+						lElementSearch01InputLevel01TargetPolicyDetailByName=lElementSearch01InputLevel01TargetPolicyDetailCurrent
+					}
+				}
+				lResult=true
+			}
+			if(lResult){
+				lreturn=lElementSearch01InputLevel01TargetPolicyDetailByName
+			}
+			lResult=lreturn
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputSalesforceQuoteTargetDetailByRadioButton(WebDriver webDriver,WebElement elementSearch01InputLevel01TargetFlowDetailParent,String strTargetDetailName,String strTargetDetailValue,Boolean booIsSearchByInput){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01TargetFlowDetailParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01TargetFlowDetailParent=elementSearch01InputLevel01TargetFlowDetailParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strTargetDetailName)){
+			return lreturn
+		}
+		String lStrTargetDetailName=strTargetDetailName
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrTargetDetailName)){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(strTargetDetailValue)){
+			return lreturn
+		}
+		String lStrTargetDetailValue=strTargetDetailValue
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrTargetDetailValue)){
+			return lreturn
+		}
+		Boolean lIsSearchByInput=booIsSearchByInput
+		try{
+			WebElement lElementSearch01InputLevel01TargetFlowDetailRadioButton=null
+			WebElement lElementSearch01InputLevel01TargetFlowDetailByNameParent=this.getWebElementSalesforceQuoteTargetDetailFlowFormInputByName(webDriver,lElementSearch01InputLevel01TargetFlowDetailParent,lStrTargetDetailName)
+			if(lElementSearch01InputLevel01TargetFlowDetailByNameParent){
+				IGNUemaHelper.webJsScrollToElement(webDriver,lElementSearch01InputLevel01TargetFlowDetailByNameParent)
+				if(lIsSearchByInput){
+					lElementSearch01InputLevel01TargetFlowDetailRadioButton=this.getElementSalesforceQuoteTargetRadioButtonByValue(webDriver,lElementSearch01InputLevel01TargetFlowDetailByNameParent,lStrTargetDetailValue)
+				}else{
+					lElementSearch01InputLevel01TargetFlowDetailRadioButton=this.getElementSalesforceQuoteTargetRadioButtonByLabel(webDriver,lElementSearch01InputLevel01TargetFlowDetailByNameParent,lStrTargetDetailValue)
+				}
+				if(lElementSearch01InputLevel01TargetFlowDetailRadioButton){
+					IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01TargetFlowDetailRadioButton)
+					lResult=true
+				}
+			}
+			lreturn=lResult
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static  WebElement getElementSalesforceQuoteTargetRadioButtonByValue(WebDriver webDriver,WebElement elementSearch01InputLevel01TargetFlowDetailParent,String strRadioValue){
+		WebElement lreturn=null
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01TargetFlowDetailParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01TargetFlowDetailParent=elementSearch01InputLevel01TargetFlowDetailParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strRadioValue)){
+			return lreturn
+		}
+		String lStrRadioValue=strRadioValue.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrRadioValue)){
+			return lreturn
+		}
+		try{
+			String lLocatorSearch01InputLevel01TargetFlowDetailChild01='input'
+			WebElement lElementSearch01InputLevel01TargetFlowDetailChild01=null
+			List<WebElement> lListElementSearch01InputLevel01TargetFlowDetailChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01TargetFlowDetailParent,lLocatorSearch01InputLevel01TargetFlowDetailChild01)
+			if(lListElementSearch01InputLevel01TargetFlowDetailChild01.size()>0){
+				for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01TargetFlowDetailChild01.size()-1;lIndex++){
+					WebElement lElementSearch01InputLevel01TargetFlowDetailCurrentChild01=lListElementSearch01InputLevel01TargetFlowDetailChild01.get(lIndex)
+					String lStrSearch01InputLevel01TargetFlowDetailChild01Value=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01TargetFlowDetailCurrentChild01,'value')
+					if(lStrSearch01InputLevel01TargetFlowDetailChild01Value==lStrRadioValue){
+						lElementSearch01InputLevel01TargetFlowDetailChild01=lElementSearch01InputLevel01TargetFlowDetailCurrentChild01
+						lResult=true
+					}
+				}
+			}
+			if(lResult){
+				lreturn=lElementSearch01InputLevel01TargetFlowDetailChild01
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static WebElement getElementSalesforceQuoteTargetRadioButtonByLabel(WebDriver webDriver,WebElement elementSearch01InputLevel01TargetFlowDetailRadioButtonParent,String strRadioValue){
+		WebElement lreturn=null
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01TargetFlowDetailRadioButtonParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01TargetFlowDetailRadioButtonParent=elementSearch01InputLevel01TargetFlowDetailRadioButtonParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strRadioValue)){
+			return lreturn
+		}
+		String lStrRadioValue=strRadioValue.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrRadioValue)){
+			return lreturn
+		}
+		try{
+			String lLocatorSearch01InputLevel01TargetFlowDetailRadioButtonInputChild01='input'
+			String lLocatorSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01='label'
+			WebElement lElementSearch01InputLevel01TargetFlowDetailRadioButtonInputChild01=null
+			List<WebElement> lListSearch01InputLevel01TargetFlowDetailRadioButtonInputChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(this.webDriver,lElementSearch01InputLevel01TargetFlowDetailRadioButtonParent,lLocatorSearch01InputLevel01TargetFlowDetailRadioButtonInputChild01)
+			List<WebElement> lListSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(this.webDriver,lElementSearch01InputLevel01TargetFlowDetailRadioButtonParent,lLocatorSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01)
+			if(lListSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01.size()>0){
+				for(Integer lIndex=0;lIndex<=lListSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01.size()-1;lIndex++){
+					WebElement lElementSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01=lListSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01.get(lIndex)
+					String lStrSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01Value=lElementSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01.getText()
+					lStrSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01Value=lStrSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01Value.toLowerCase()
+					lStrRadioValue=lStrRadioValue.toLowerCase()
+					if(lStrSearch01InputLevel01TargetFlowDetailRadioButtonLabelChild01Value==lStrRadioValue){
+						lElementSearch01InputLevel01TargetFlowDetailRadioButtonInputChild01=lListSearch01InputLevel01TargetFlowDetailRadioButtonInputChild01.get(lIndex)
+						lResult=true
+					}
+				}
+			}
+			if(lResult){
+				lreturn=lElementSearch01InputLevel01TargetFlowDetailRadioButtonInputChild01
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static  Boolean selectTargetDetailFormComboboxItemByValue(WebDriver webDriver,WebElement elementSearch01InputLevel01QuotationFlowFormParent,String strSfQuoteMotorComboboxItem){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01QuotationFlowFormParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01QuotationFlowFormParent=elementSearch01InputLevel01QuotationFlowFormParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strSfQuoteMotorComboboxItem)){
+			return lreturn
+		}
+		String lStrSfQuoteMotorComboboxItem=strSfQuoteMotorComboboxItem.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrSfQuoteMotorComboboxItem)){
+			return lreturn
+		}
+		try{
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild01='div.slds-form-element__control'
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild02='lightning-base-combobox.slds-combobox_container'
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild03='button'
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild04='lightning-base-combobox-item'
+			Boolean lIsComboboxItemDropDownClickOK=false
+			WebElement lElementIgnitePolicyFlowInput=null
+			WebElement lElementSearch01InputLevel01QuotationFlowFormChild02=null
+			if(lElementSearch01InputLevel01QuotationFlowFormParent){
+				WebElement lElementSearch01InputLevel01QuotationFlowFormChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormParent,lLocatorSearch01InputLevel01QuotationFlowFormChild01,true)
+				if(lElementSearch01InputLevel01QuotationFlowFormChild01){
+					lElementSearch01InputLevel01QuotationFlowFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild01,lLocatorSearch01InputLevel01QuotationFlowFormChild02,true)
+				}
+			}
+			if(lElementSearch01InputLevel01QuotationFlowFormChild02){
+				WebElement lElementSearch01InputLevel01QuotationFlowFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild02,lLocatorSearch01InputLevel01QuotationFlowFormChild03,true)
+				if(lElementSearch01InputLevel01QuotationFlowFormChild03){
+					IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild03)
+					IGNUemaHelper.delayThreadSecond(3)
+				}
+			}
+			if(lElementSearch01InputLevel01QuotationFlowFormChild02){
+				List<WebElement> lListElementSearch01InputLevel01QuotationFlowFormChild04=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild02,lLocatorSearch01InputLevel01QuotationFlowFormChild04)
+				for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01QuotationFlowFormChild04.size()-1;lIndex++){
+					WebElement lElementSearch01InputLevel01QuotationFlowFormChild04=lListElementSearch01InputLevel01QuotationFlowFormChild04.get(lIndex)
+					String lStrSearch01InputLevel01QuotationFlowFormChild04Value=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild04,'data-value')
+					lStrSearch01InputLevel01QuotationFlowFormChild04Value=lStrSearch01InputLevel01QuotationFlowFormChild04Value.toLowerCase()
+					lStrSfQuoteMotorComboboxItem=lStrSfQuoteMotorComboboxItem.toLowerCase()
+					if((lStrSearch01InputLevel01QuotationFlowFormChild04Value==lStrSfQuoteMotorComboboxItem)||(IGNUemaHelper.checkStringContainString(lStrSearch01InputLevel01QuotationFlowFormChild04Value, lStrSfQuoteMotorComboboxItem))){
+						IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild04)
+						lResult=true
+					}
+				}
+			}
+			if(lResult){
+				lreturn=lResult
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean selectTargetDetailFormComboboxItemByTitle(WebDriver webDriver,WebElement elementSearch01InputLevel01QuotationFlowFormParent,String strSfQuoteMotorComboboxItem){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01QuotationFlowFormParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01QuotationFlowFormParent=elementSearch01InputLevel01QuotationFlowFormParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strSfQuoteMotorComboboxItem)){
+			return lreturn
+		}
+		String lStrSfQuoteMotorComboboxItem=strSfQuoteMotorComboboxItem.trim()
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrSfQuoteMotorComboboxItem)){
+			return lreturn
+		}
+		try{
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild01='div.slds-form-element__control'
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild02='lightning-base-combobox.slds-combobox_container'
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild03='button'
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild04='lightning-base-combobox-item'
+			String lLocatorSearch01InputLevel01QuotationFlowFormChild05='span.slds-truncate'
+			Boolean lIsComboboxItemDropDownClickOK=false
+			WebElement lElementIgnitePolicyFlowInput=null
+			WebElement lElementSearch01InputLevel01QuotationFlowFormChild02=null
+			if(lElementSearch01InputLevel01QuotationFlowFormParent){
+				WebElement lElementSearch01InputLevel01QuotationFlowFormChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormParent,lLocatorSearch01InputLevel01QuotationFlowFormChild01,true)
+				if(lElementSearch01InputLevel01QuotationFlowFormChild01){
+					lElementSearch01InputLevel01QuotationFlowFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild01,lLocatorSearch01InputLevel01QuotationFlowFormChild02,true)
+				}
+			}
+			if(lElementSearch01InputLevel01QuotationFlowFormChild02){
+				WebElement lElementSearch01InputLevel01QuotationFlowFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild02,lLocatorSearch01InputLevel01QuotationFlowFormChild03,true)
+				if(lElementSearch01InputLevel01QuotationFlowFormChild03){
+					IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild03)
+					IGNUemaHelper.delayThreadSecond(3)
+				}
+			}
+			if(lElementSearch01InputLevel01QuotationFlowFormChild02){
+				List<WebElement> lListElementSearch01InputLevel01QuotationFlowFormChild04=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild02,lLocatorSearch01InputLevel01QuotationFlowFormChild04)
+				for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01QuotationFlowFormChild04.size()-1;lIndex++){
+					WebElement lElementSearch01InputLevel01QuotationFlowFormChild04=lListElementSearch01InputLevel01QuotationFlowFormChild04.get(lIndex)
+					WebElement lElementSearch01InputLevel01QuotationFlowFormChild05=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild04,lLocatorSearch01InputLevel01QuotationFlowFormChild05,true)
+					if(lElementSearch01InputLevel01QuotationFlowFormChild05){
+						String lStrSearch01InputLevel01QuotationFlowFormChild05Value=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild05,'title')
+						lStrSearch01InputLevel01QuotationFlowFormChild05Value=lStrSearch01InputLevel01QuotationFlowFormChild05Value.toLowerCase()
+						lStrSfQuoteMotorComboboxItem=lStrSfQuoteMotorComboboxItem.toLowerCase()
+						if((lStrSearch01InputLevel01QuotationFlowFormChild05Value==lStrSfQuoteMotorComboboxItem)||(IGNUemaHelper.checkStringContainString(lStrSearch01InputLevel01QuotationFlowFormChild05Value, lStrSfQuoteMotorComboboxItem))){
+							IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01QuotationFlowFormChild04)
+							lResult=true
+						}
+					}
+				}
+			}
+			if(lResult){
+				lreturn=lResult
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputSalesforceQuoteTargetDetailByValue(WebDriver webDriver,WebElement elementSearch01InputLevel01TargetFlowDetailParent,String strTargetDetailName,String strTargetDetailValue){
+		Boolean lreturn=false
+		Boolean lResult=false
+		if(!webDriver){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(elementSearch01InputLevel01TargetFlowDetailParent)){
+			return lreturn
+		}
+		WebElement lElementSearch01InputLevel01TargetFlowDetailParent=elementSearch01InputLevel01TargetFlowDetailParent
+		if(IGNUemaHelper.checkObjectNullOfObject(strTargetDetailName)){
+			return lreturn
+		}
+		String lStrTargetDetailName=strTargetDetailName
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrTargetDetailName)){
+			return lreturn
+		}
+		if(IGNUemaHelper.checkObjectNullOfObject(strTargetDetailValue)){
+			return lreturn
+		}
+		String lStrTargetDetailValue=strTargetDetailValue
+		if(IGNUemaHelper.checkObjectEmptyOfString(lStrTargetDetailValue)){
+			return lreturn
+		}
+		try{
+			String lLocatorSearch01InputLevel01TargetFlowDetailChild01='lightning-primitive-input-simple'
+			String lLocatorSearch01InputLevel01TargetFlowDetailChild02='input'
+			WebElement lElementSearch01InputLevel01TargetFlowDetailChild02=null
+			WebElement lElementSearch01InputLevel01TargetFlowDetailByNameParent=this.getWebElementSalesforceQuoteTargetDetailFlowFormInputByName(webDriver,lElementSearch01InputLevel01TargetFlowDetailParent,lStrTargetDetailName)
+			if(lElementSearch01InputLevel01TargetFlowDetailByNameParent){
+				WebElement lElementSearch01InputLevel01TargetFlowDetailChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01TargetFlowDetailByNameParent,lLocatorSearch01InputLevel01TargetFlowDetailChild01,true)
+				if(lElementSearch01InputLevel01TargetFlowDetailChild01){
+					lElementSearch01InputLevel01TargetFlowDetailChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01TargetFlowDetailChild01,lLocatorSearch01InputLevel01TargetFlowDetailChild02,true)
+				}
+			}
+			if(lElementSearch01InputLevel01TargetFlowDetailChild02){
+				IGNUemaHelper.typeSetTextByWebElement(webDriver,lElementSearch01InputLevel01TargetFlowDetailChild02,lStrTargetDetailValue)
+				lResult=true
+			}
+			lreturn=lResult
 		}catch(Exception e){
 		}
 		return lreturn

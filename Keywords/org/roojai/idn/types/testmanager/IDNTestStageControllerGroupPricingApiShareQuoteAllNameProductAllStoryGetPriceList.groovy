@@ -57,7 +57,7 @@ import org.roojai.idn.types.pricingapi.IDNPricingApiGetPriceListDatabaseHandling
 import org.roojai.idn.types.pricingapi.IDNPricingApiGetPriceListMainUtil
 import org.roojai.idn.types.pricingapi.IDNPricingApiGetPriceListVerifyUtil
 import org.roojai.idn.types.pricingapi.IDNPricingApiHelper
-import org.roojai.idn.types.pricingapi.IDNPricingApiRestAPIHelper
+import org.roojai.idn.types.pricingapi.IDNPricingApiLibraryGetPriceListMainUtil
 public class IDNTestStageControllerGroupPricingApiShareQuoteAllNameProductAllStoryGetPriceList extends IGNTestLibUtilitySuper{
 	public IDNPricingApiGetPriceListVerifyUtil Stage00VerifyUtil
 	public IDNPricingApiGetPriceListMainUtil Stage01MainUtil
@@ -326,26 +326,17 @@ public class IDNTestStageControllerGroupPricingApiShareQuoteAllNameProductAllSto
 			String lStrTestCaseDataCurrentStoreTestStoryAfterBatchDetail='Sample TestStoryDetailAfterBatch'
 			lIGNTestExecutorTypeItem.strTestCaseDataCurrentStoreTestStoryAfterBatchDetail=IGNUemaHelper.concatMessageLeftRightByEnter(lIGNTestExecutorTypeItem.strTestCaseDataCurrentStoreTestStoryAfterBatchDetail,lStrTestCaseDataCurrentStoreTestStoryAfterBatchDetail)
 			lIsProceedTestAfterBatchTestCollectionOK=true
-			IGNUemaHelper.printLog('Close Connection')
 			this.lIDNPricingApiGetPriceListDatabaseHandlingInstance=IDNPricingApiGetPriceListDatabaseHandlingHelper.getIDNPricingApiGetPriceListDatabaseHandlingInstance(lIGNTestManager)
 			if(!IGNUemaHelper.checkObjectNullOfObject(this.lIDNPricingApiGetPriceListDatabaseHandlingInstance)){
 				if(lIDNPricingApiGetPriceListDatabaseHandlingInstance.isIDNPricingApiDatabaseConnectionTestReady){
 					lIDNPricingApiGetPriceListDatabaseHandlingInstance.closeDataBaseConnection()
-					IGNUemaHelper.printLog('Close DB Connection')
 					IGNUemaHelper.printLog(lIDNPricingApiGetPriceListDatabaseHandlingInstance.isIDNPricingApiDatabaseConnectionTestReady)
 				}
 			}
-			String lstrDatetime=IGNUemaHelper.convertLocalDateTimeToString('yyyy/MM/dd HH:mm')
-			String lSubject='Pricing API'+' '+'('+IDNPricingApiGetPriceListCoreType.CURRENT_PRICING_API_PRODUCT_TYPE+')'+': Automation report ['+lstrDatetime+'].'
-			String lEmailBodyStr=IDNUemaHelper.getEmailBodyForReport(lSubject,IGNUemaHelper.getStringCurrentDateTimeSlashDDMMYYYYColonHHMMSS(),IDNPricingApiGetPriceListCoreType.CURRENT_PRICING_API_TEST_CASE_ALL,IDNPricingApiGetPriceListCoreType.CURRENT_PRICING_API_TEST_CASE_PASSED,IDNPricingApiGetPriceListCoreType.CURRENT_PRICING_API_TEST_CASE_FAILED,IDNPricingApiGetPriceListCoreType.CURRENT_PRICING_API_TEST_CASE_ERROR)
-			String[] lEmailAttachFileList=new String[1]
-			lEmailAttachFileList[0]=IDNPricingApiGetPriceListCoreType.CURRENT_PRICING_API_GENERIC_DATA_FILE_NAME
-			if(IGNSendEmail.sendRoojaiReportIDN(IDNGlobalConst.DEFAULT_EMAIL_TO_ME,lSubject,lEmailBodyStr,lEmailAttachFileList)){
-				IGNUemaHelper.printLog('Email Sent')
+			if(IGNUemaHelper.checkObjectNullOfObject(this.Stage01MainUtil)){
+				this.Stage01MainUtil=new IDNPricingApiGetPriceListMainUtil(this)
 			}
-			else{
-				IGNUemaHelper.printLog('Email Not Sent')
-			}
+			Boolean lIsPricingApiGetPriceListMainUtilSendReportOK=this.Stage01MainUtil.sendPricingApiReport()
 			//YOUR CODE HERE END
 			lreturn=lIsProceedTestAfterBatchTestCollectionOK
 		}catch(Exception e){
