@@ -41,6 +41,92 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 	public void setParentStageController(IDNTestStageControllerGroupSfLightningShareClaimMotorNameNewBizStoryCreate newParentStageController){
 		//Do Nothing
 	}
+	public Boolean inputClaimCreateTest(Map<String,String> caseInput,Map<String,String> caseOutput){
+		Boolean lreturn=false
+		String lErrorMessage=''
+		try{
+			String lStrSalesforceRecordID=''
+			String lStrSalesforceSearchByDefaultObjectValue=''
+			String lStrCssLocator=''
+			Boolean lIsVisible=false
+			List<WebElement> lListElementMainButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getListElementMainButton(this.parentStageController.getWebDriver())
+			if(lListElementMainButton.size()==0){
+				return lreturn
+			}
+			String lStrMainTargetButtonName='Create Damage'
+			Map lMapInputMainTargetButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputMainTargetButton(this.parentStageController.getWebDriver(),lListElementMainButton,lStrMainTargetButtonName)
+			if(lMapInputMainTargetButton.Result){
+				lErrorMessage=''
+			}else{
+				lErrorMessage=lMapInputMainTargetButton.ErrorMessage
+			}
+			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			if(lErrorMessage.length()>0){
+				return lreturn
+			}
+			String lStrSfAdditionalDetailWhichMode=''
+			Integer lNumAdditionalDetailWhichMode=0
+			Map lMapInputSfAdditionalDetailWhichMode=this.inputSfAdditionalDetailWhichMode()
+			if(lMapInputSfAdditionalDetailWhichMode.Result){
+				lStrSfAdditionalDetailWhichMode=lMapInputSfAdditionalDetailWhichMode.AdditionalDetailWhichMode
+				lNumAdditionalDetailWhichMode=lMapInputSfAdditionalDetailWhichMode.NumAdditionalDetailWhichMode
+				lErrorMessage=''
+			}else{
+				lErrorMessage=lMapInputSfAdditionalDetailWhichMode.ErrorMessage
+			}
+			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			if(!lMapInputSfAdditionalDetailWhichMode.Result){
+				return lreturn
+			}
+			Integer lNumCreateOrEditAdditionalDetailHowManyItem=0
+			Map lMapInputSfCreateOrEditAdditionalDetailHowManyItem=this.inputSfCreateOrEditAdditionalDetailHowManyItem()
+			if(lMapInputSfCreateOrEditAdditionalDetailHowManyItem.Result){
+				lNumCreateOrEditAdditionalDetailHowManyItem=lMapInputSfCreateOrEditAdditionalDetailHowManyItem.CreateOrEditAdditionalDetailHowManyItem
+				lErrorMessage=''
+			}else{
+				lErrorMessage=lMapInputSfCreateOrEditAdditionalDetailHowManyItem.ErrorMessage
+			}
+			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			if(!lMapInputSfCreateOrEditAdditionalDetailHowManyItem.Result){
+				return lreturn
+			}
+			if(lNumCreateOrEditAdditionalDetailHowManyItem==0){
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage='CreateOrEditAdditionalDetailHowManyItem field is 0 so this case will not proceed'
+				return lreturn
+			}
+			switch(lNumAdditionalDetailWhichMode){
+				case 1:
+					Map lMapInputSfAutoCreateAdditionalObjectDetail=this.inputSfAutoCreateAdditionalObjectDetail(lNumCreateOrEditAdditionalDetailHowManyItem,caseOutput)
+					if(lMapInputSfAutoCreateAdditionalObjectDetail.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfAutoCreateAdditionalObjectDetail.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(!lMapInputSfAutoCreateAdditionalObjectDetail.Result){
+						return lreturn
+					}
+					break
+				case 2:
+					Map lMapInputSfManualCreateAdditionalObjectDetail=this.inputSfManualCreateAdditionalObjectDetail(lNumCreateOrEditAdditionalDetailHowManyItem)
+					if(lMapInputSfManualCreateAdditionalObjectDetail.Result){
+						lErrorMessage=''
+					}else{
+						lErrorMessage=lMapInputSfManualCreateAdditionalObjectDetail.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+					if(!lMapInputSfManualCreateAdditionalObjectDetail.Result){
+						return lreturn
+					}
+					break
+				default:
+					return lreturn
+			}
+		}catch(Exception e){
+			e.printStackTrace()
+		}
+		return lreturn
+	}
 	public Boolean inputClaimCreate(Map<String,String> caseInput,Map<String,String> caseOutput){
 		Boolean lreturn=false
 		String lErrorMessage=''
@@ -56,16 +142,16 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				lStrSalesforceRecordID=lMapSearchDefaultObject.StrSalesforceRecordId
 				lStrSalesforceSearchByDefaultObjectValue=lMapSearchDefaultObject.StrSalesforceSearchByDefaultObjectValue
 			}
-			List<WebElement> lListElementCreateClaimFlowButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getListElementCreateClaimFlowButton(this.parentStageController.getWebDriver())
-			if(lListElementCreateClaimFlowButton.size()==0){
+			List<WebElement> lListElementMainButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getListElementMainButton(this.parentStageController.getWebDriver())
+			if(lListElementMainButton.size()==0){
 				return lreturn
 			}
-			String lStrCreateClaimFlowButtonName='Create Claim'
-			Map lMapInputCreateClaimFlowButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputCreateClaimFlowButton(this.parentStageController.getWebDriver(),lListElementCreateClaimFlowButton,lStrCreateClaimFlowButtonName)
-			if(!lMapInputCreateClaimFlowButton.Result){
+			String lStrMainTargetButtonName='Create Claim'
+			Map lMapInputMainTargetButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputMainTargetButton(this.parentStageController.getWebDriver(),lListElementMainButton,lStrMainTargetButtonName)
+			if(lMapInputMainTargetButton.Result){
 				lErrorMessage=''
 			}else{
-				lErrorMessage=lMapInputCreateClaimFlowButton.ErrorMessage
+				lErrorMessage=lMapInputMainTargetButton.ErrorMessage
 			}
 			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
 			if(lErrorMessage.length()>0){
@@ -1209,10 +1295,10 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimQuotationReceivedFromGarageTime=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailClaimProgressInfoQuotationReceivedFromGarageTimeValue
 			/*
-			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
-			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Received_From_Garage_Time_Value')
-			lStrSfClaimQuotationReceivedFromGarageTime=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfClaimQuotationReceivedFromGarageTime)
-			*/
+			 IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
+			 IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Received_From_Garage_Time_Value')
+			 lStrSfClaimQuotationReceivedFromGarageTime=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfClaimQuotationReceivedFromGarageTime)
+			 */
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Received_From_Garage_Time_Value')
 			lStrSfClaimQuotationReceivedFromGarageTime=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimQuotationReceivedFromGarageTime)
 			if(lStrSfClaimQuotationReceivedFromGarageTime.length()>0){
@@ -1255,10 +1341,10 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimQuotationApprovalTime=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailClaimProgressInfoQuotationApprovalTimeValue
 			/*
-			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
-			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Approval_Time_Value')
-			lStrSfClaimQuotationReceivedFromGarageTime=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfClaimQuotationReceivedFromGarageTime)
-			*/
+			 IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
+			 IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Approval_Time_Value')
+			 lStrSfClaimQuotationReceivedFromGarageTime=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfClaimQuotationReceivedFromGarageTime)
+			 */
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Approval_Time_Value')
 			lStrSfClaimQuotationApprovalTime=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimQuotationApprovalTime)
 			if(lStrSfClaimQuotationApprovalTime.length()>0){
@@ -2227,31 +2313,136 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 		}
 		return lreturn
 	}
-	/*
-	 public Map inputCreateClaimDetailToDo(strCreateClaimDetailToDo){
-	 Map lreturn=[:]
-	 String lStrCreateClaimDetailToDo=strCreateClaimDetailToDo.trim()
-	 if(IGNUemaHelper.checkObjectEmptyOfString(lStrCreateClaimDetailToDo)){
-	 return lreturn
-	 }
-	 try{
-	 Boolean lResult=false
-	 lreturn.put('CreateClaimDetailToDo','')
-	 lreturn.put('Result',lResult)
-	 Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
-	 IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
-	 IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_To_Do')
-	 lStrCreateClaimDetailToDo=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrCreateClaimDetailToDo)
-	 lResult=lStrCreateClaimDetailToDo.length()>0
-	 if(lResult){
-	 lreturn.put('CreateClaimDetailToDo',lStrCreateClaimDetailToDo)
-	 lreturn.put('Result',lResult)
-	 }
-	 }catch(Exception e){
-	 e.printStackTrace()
-	 return lreturn
-	 }
-	 return lreturn
-	 }
-	 */
+	public Map inputSfAdditionalDetailWhichMode(){
+		Map lreturn=[:]
+		try{
+			Boolean lResult=false
+			lreturn.put('StrAdditionalDetailWhichMode','')
+			lreturn.put('NumAdditionalDetailWhichMode',0)
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			Integer lNumAdditionalDetailWhichMode=0
+			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
+			String lStrAdditionalDetailWhichMode=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenAdditionalDetailWhichMode
+			lNumAdditionalDetailWhichMode=IGNUemaHelper.convertStringToInteger(lStrAdditionalDetailWhichMode,0)
+			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
+			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Additional_Detail_Which_Mode')
+			lStrAdditionalDetailWhichMode=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrAdditionalDetailWhichMode)
+			lResult=lStrAdditionalDetailWhichMode.length()>0
+			lreturn.put('AdditionalDetailWhichMode',lStrAdditionalDetailWhichMode)
+			lreturn.put('NumAdditionalDetailWhichMode',lNumAdditionalDetailWhichMode)
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public Map inputSfCreateOrEditAdditionalDetailHowManyItem(){
+		Map lreturn=[:]
+		try{
+			Boolean lResult=false
+			lreturn.put('CreateOrEditAdditionalDetailHowManyItem',0)
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			Integer lNumCreateOrEditAdditionalDetailHowManyItem=0
+			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
+			String lStrCreateOrEditAdditionalDetailHowManyItem=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateOrEditAdditionalDetailHowManyItem
+			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
+			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Or_Edit_Additional_Detail_How_Many_Item')
+			lStrCreateOrEditAdditionalDetailHowManyItem=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrCreateOrEditAdditionalDetailHowManyItem)
+			lResult=lStrCreateOrEditAdditionalDetailHowManyItem.length()>0
+			lNumCreateOrEditAdditionalDetailHowManyItem=IGNUemaHelper.convertStringToInteger(lStrCreateOrEditAdditionalDetailHowManyItem,0)
+			lreturn.put('CreateOrEditAdditionalDetailHowManyItem',lNumCreateOrEditAdditionalDetailHowManyItem)
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public Map inputSfAutoCreateAdditionalObjectDetail(Integer numCreateOrEditAdditionalDetailHowManyItem,Map<String,String> caseOutput){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(numCreateOrEditAdditionalDetailHowManyItem)){
+			return lreturn
+		}
+		Integer lNumCreateOrEditAdditionalDetailHowManyItem=numCreateOrEditAdditionalDetailHowManyItem
+		if(IGNUemaHelper.checkObjectNullOfObject(caseOutput)){
+			return lreturn
+		}
+		try{
+			Boolean lResult=true
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			String lStrCssLocator=''
+			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
+			IGNTestManager lIGNTestManager=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
+			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle=null
+			for(Integer lCreateOrEditAdditionalDetailItem=1;lCreateOrEditAdditionalDetailItem<=lNumCreateOrEditAdditionalDetailHowManyItem;lCreateOrEditAdditionalDetailItem++){
+				WebElement lElementIgniteClaimDamageFormRoot=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getElementIgniteClaimDamageFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
+				if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimDamageFormRoot)){
+					return lreturn
+				}
+				String lStrCreateAdditionalDetail01DamageToDo='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'DamageToDo'
+				lStrCreateAdditionalDetail01DamageToDo=lMapCaseDataCurrentInput.get(lStrCreateAdditionalDetail01DamageToDo)
+				lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Additional_Detail_'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'_Damage_To_Do')
+				lStrCreateAdditionalDetail01DamageToDo=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrCreateAdditionalDetail01DamageToDo)
+				Boolean lIsCreateAdditionalDetail01DamageToDo=false
+				Map lMapInputSfCreateOrEditDamageToDo=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfCreateOrEditDamageToDo(lStrCreateAdditionalDetail01DamageToDo)
+				if(lMapInputSfCreateOrEditDamageToDo.Result){
+					lIsCreateAdditionalDetail01DamageToDo=lMapInputSfCreateOrEditDamageToDo.BoolCreateOrEditAdditionalDetail01DamageToDo
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfCreateOrEditDamageToDo.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lStrErrorMessage
+				if(!lMapInputSfCreateOrEditDamageToDo.Result){
+					return lreturn
+				}
+				if(lIsCreateAdditionalDetail01DamageToDo){
+					String lStrDamageTypeMapWithClaimIncidentType='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'DamageTypeMapWithClaimIncidentType'
+					lStrDamageTypeMapWithClaimIncidentType=lMapCaseDataCurrentInput.get(lStrDamageTypeMapWithClaimIncidentType)
+					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Additional_Detail_'+String.format('%02d',1)+'_Damage_Type_Map_With_Claim_Incident_Type')
+					lStrDamageTypeMapWithClaimIncidentType=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrDamageTypeMapWithClaimIncidentType)
+					String lStrReserveTypeAndReservePaymentOption='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'ReserveTypeAndReservePaymentOption'
+					lStrReserveTypeAndReservePaymentOption=lMapCaseDataCurrentInput.get(lStrReserveTypeAndReservePaymentOption)
+					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Additional_Detail_'+String.format('%02d',1)+'_Reserve_Type_And_Reserve_Payment_Option')
+					lStrReserveTypeAndReservePaymentOption=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrReserveTypeAndReservePaymentOption)
+					String lStrDamageAssessorName='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'DamageAssessorName'
+					lStrDamageAssessorName=lMapCaseDataCurrentInput.get(lStrDamageAssessorName)
+					String lStrDamageRecoveryAgentName='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'DamageRecoveryAgentName'
+					lStrDamageRecoveryAgentName=lMapCaseDataCurrentInput.get(lStrDamageRecoveryAgentName)
+					String lStrDamageServiceProviderName='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'DamageServiceProviderName'
+					lStrDamageServiceProviderName=lMapCaseDataCurrentInput.get(lStrDamageServiceProviderName)
+					String lStrDamageQuotationApprovalStatus='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'DamageQuotationApprovalStatus'
+					lStrDamageQuotationApprovalStatus=lMapCaseDataCurrentInput.get(lStrDamageQuotationApprovalStatus)
+					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Additional_Detail_'+String.format('%02d',1)+'_Damage_Quotation_Approval_Status')
+					lStrDamageQuotationApprovalStatus=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrDamageQuotationApprovalStatus)
+					Map lMapInitSfClaimDamageInput=[:]
+					IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputInitSfClaimDamageInput(lMapInitSfClaimDamageInput)
+					lMapInitSfClaimDamageInput.DamageTypeMapWithClaimIncidentType=lStrDamageTypeMapWithClaimIncidentType
+					lMapInitSfClaimDamageInput.ReserveTypeAndReservePaymentOption=lStrReserveTypeAndReservePaymentOption
+					lMapInitSfClaimDamageInput.DamageAssessorName=lStrDamageAssessorName
+					lMapInitSfClaimDamageInput.DamageRecoveryAgentName=lStrDamageRecoveryAgentName
+					lMapInitSfClaimDamageInput.DamageServiceProviderName=lStrDamageServiceProviderName
+					lMapInitSfClaimDamageInput.DamageQuotationApprovalStatus=lStrDamageQuotationApprovalStatus
+					Map lMapInputSfProceedAdditionalDetailDamage=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfProceedAdditionalDetailDamage(this.parentStageController.getWebDriver(),lElementIgniteClaimDamageFormRoot,lMapInitSfClaimDamageInput)
+					if(lMapInputSfProceedAdditionalDetailDamage.Result){
+						lStrErrorMessage=''
+					}else{
+						lStrErrorMessage=lMapInputSfProceedAdditionalDetailDamage.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lStrErrorMessage
+					if(!lMapInputSfProceedAdditionalDetailDamage.Result){
+						return lreturn
+					}
+				}
+			}
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
 }

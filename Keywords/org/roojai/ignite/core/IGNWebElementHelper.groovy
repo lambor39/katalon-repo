@@ -216,7 +216,7 @@ public class IGNWebElementHelper{
 				lIsIGNWebElementHelperValid=!IGNUemaHelper.checkObjectNullOfObject(this.currentIGNWebElementTargetItem)
 			}
 			if(lIsIGNWebElementHelperValid){
-				this.isIGNWebElementHelperChild=IGNUemaHelper.checkObjectNullOfObject(this.parentIGNWebElementHelper)
+				this.isIGNWebElementHelperChild=!IGNUemaHelper.checkObjectNullOfObject(this.parentIGNWebElementHelper)
 				if(!this.isIGNWebElementHelperChild){
 					this.parentIGNWebElementLevelIndex=0
 				}else{

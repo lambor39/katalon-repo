@@ -249,15 +249,23 @@ public class IDNTestStageControllerGroupSfLightningShareClaimMotorNameNewBizStor
 				String lStrSfCreateClaimDetailToDo=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailToDo
 				IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle02=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_To_Do')
 				lStrSfCreateClaimDetailToDo=lIGNTestMasterFieldTypeSingle02.getMasterPairValueByKey(lStrSfCreateClaimDetailToDo)
+				/*
+				 if(IGNUemaHelper.checkObjectNullOfObject(this.Stage01MainUtil)){
+				 this.Stage01MainUtil=new IDNSalesforceLightningClaimMotorCarNewbizCreateUtil(this)
+				 Map lMapInputCreateClaimDetailToDo=this.Stage01MainUtil.inputCreateClaimDetailToDo(lStrSfCreateClaimDetailToDo)
+				 lStrSfCreateClaimDetailToDo=lMapInputCreateClaimDetailToDo.CreateClaimDetailToDo
+				 Boolean lIsSfCreateClaimDetailToDo=IGNUemaHelper.convertStringToBoolean(lStrSfCreateClaimDetailToDo)
+				 if(lIsSfCreateClaimDetailToDo){
+				 lIsProceedTestMainOK=this.Stage01MainUtil.inputClaimCreate(lMapCaseDataCurrentInput,lMapCaseDataCurrentOutput)
+				 }
+				 }
+				 */
 				if(IGNUemaHelper.checkObjectNullOfObject(this.Stage01MainUtil)){
 					this.Stage01MainUtil=new IDNSalesforceLightningClaimMotorCarNewbizCreateUtil(this)
-					/*
-					Map lMapInputCreateClaimDetailToDo=this.Stage01MainUtil.inputCreateClaimDetailToDo(lStrSfCreateClaimDetailToDo)
-					lStrSfCreateClaimDetailToDo=lMapInputCreateClaimDetailToDo.CreateClaimDetailToDo
-					*/
+					lDriver.get('https://roojai-idn--uat.sandbox.lightning.force.com/lightning/r/Claim__c/a0nMS0000000BebYAE/view')
 					Boolean lIsSfCreateClaimDetailToDo=IGNUemaHelper.convertStringToBoolean(lStrSfCreateClaimDetailToDo)
 					if(lIsSfCreateClaimDetailToDo){
-						lIsProceedTestMainOK=this.Stage01MainUtil.inputClaimCreate(lMapCaseDataCurrentInput,lMapCaseDataCurrentOutput)
+						lIsProceedTestMainOK=this.Stage01MainUtil.inputClaimCreateTest(lMapCaseDataCurrentInput,lMapCaseDataCurrentOutput)
 					}
 				}
 			}

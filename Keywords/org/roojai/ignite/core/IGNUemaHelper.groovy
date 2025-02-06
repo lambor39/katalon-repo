@@ -7,14 +7,16 @@ import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
 import org.openqa.selenium.support.ui.Select
 import org.openqa.selenium.remote.*
 import org.openqa.selenium.interactions.*
-import org.openqa.selenium.Capabilities
 import org.openqa.selenium.*
 import org.json.*
 import org.apache.poi.ss.util.*
 import org.apache.poi.ss.usermodel.*
 import org.apache.poi.sl.usermodel.*
+import org.apache.johnzon.jsonb.JohnzonBuilder
 import org.apache.commons.text.WordUtils
 import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang3.builder.ToStringStyle
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder
 import org.apache.commons.lang.SystemUtils
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
@@ -52,6 +54,7 @@ import java.nio.charset.StandardCharsets
 import java.net.URLDecoder
 import java.net.URL
 import java.lang.StackTraceElement
+import java.lang.reflect.Modifier
 import java.io.StringWriter
 import java.io.StringReader
 import java.io.IOException
@@ -62,6 +65,8 @@ import java.awt.PointerInfo
 import java.awt.MouseInfo
 import java.awt.event.*
 import java.awt.datatransfer.*
+import jakarta.json.bind.*
+import jakarta.json.*
 import internal.GlobalVariable
 import groovy.sql.Sql
 import groovy.sql.GroovyRowResult
@@ -99,8 +104,12 @@ import com.github.wnameless.json.flattener.JsonFlattener
 import com.github.wnameless.json.flattener.*
 import com.github.kklisura.cdt.protocol.types.audits.GetEncodedResponseEncoding
 import com.fasterxml.jackson.dataformat.*
+import com.fasterxml.jackson.databind.ser.impl.*
+import com.fasterxml.jackson.databind.ser.*
 import com.fasterxml.jackson.databind.*
 import com.fasterxml.jackson.core.*
+import com.fasterxml.jackson.annotation.JsonAutoDetect.*
+import com.fasterxml.jackson.annotation.*
 import com.fasterxml.jackson.*
 import org.roojai.ignite.core.IGNGlobalEnum.IGNTestDataCompany
 import org.roojai.ignite.core.IGNGlobalEnum.IGNTestDataCountry
@@ -510,7 +519,7 @@ public class IGNUemaHelper{
 		String lreturn=''
 		try{
 			Capabilities lCapabilities=((RemoteWebDriver)driver).getCapabilities()
-			lreturn=lCapabilities.getVersion().trim()
+			lreturn=lCapabilities.getBrowserVersion().trim()
 		}catch(Exception e){
 			//e.printStackTrace()
 		}
@@ -520,7 +529,7 @@ public class IGNUemaHelper{
 		String lreturn=''
 		try{
 			Capabilities lCapabilities=((RemoteWebDriver)driver).getCapabilities()
-			lreturn=lCapabilities.getPlatform().toString().trim()
+			lreturn=lCapabilities.getPlatformName().toString().trim()
 		}catch(Exception e){
 			//e.printStackTrace()
 		}
@@ -1410,6 +1419,91 @@ public class IGNUemaHelper{
 		Boolean lreturn=false
 		try{
 			lreturn=(this.checkObjectNullOfObject(targetString)||this.checkObjectEmptyOfString(targetString))
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static String convertObjectToStringByReflectionBuilder(Object targetObject){
+		String lreturn=''
+		try{
+			lreturn=ReflectionToStringBuilder.toString(targetObject,ToStringStyle.MULTI_LINE_STYLE)
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static String convertObjectToStringByJohnzonBuilder(Object targetObject,Boolean isWithID){
+		String lreturn=''
+		try{
+			JsonbConfig lJsonbConfig=new JsonbConfig().withCreatorParametersRequired(true).withFormatting(true).withNullValues(true)
+			JohnzonBuilder lJohnzonBuilder=new JohnzonBuilder()
+			Jsonb lJsonb=lJohnzonBuilder.withConfig(lJsonbConfig).build()
+			if(!this.checkObjectNullOfObject(targetObject)){
+				if(isWithID){
+					lreturn=targetObject.toString()
+				}
+			}
+			lreturn=lreturn+lJsonb.toJson(targetObject)
+		}catch(Exception e){
+			//e.printStackTrace()
+		}
+		return lreturn
+	}
+	public static String convertObjectToStringByGsonBuilder(Object targetObject,Boolean isWithID,Boolean isIncludeStatic){
+		String lreturn=''
+		try{
+			Gson lGson=null
+			if(isIncludeStatic){
+				lGson=new GsonBuilder().serializeNulls().setPrettyPrinting().setExclusionStrategies(new IGNUemaGSonExclusionStrategy()).create()
+			}else{
+				lGson=new GsonBuilder().serializeNulls().setPrettyPrinting().setExclusionStrategies(new IGNUemaGSonExclusionStrategy()).excludeFieldsWithModifiers(Modifier.FINAL,Modifier.TRANSIENT,Modifier.STATIC).create()
+			}
+			if(!this.checkObjectNullOfObject(targetObject)){
+				if(isWithID){
+					lreturn=targetObject.toString()
+				}
+			}
+			try{
+				if(this.checkObjectNullOfObject(targetObject)){
+					lreturn=lreturn+lGson.toJson(targetObject)
+				}else{
+					lreturn=lreturn+lGson.toJson(targetObject,targetObject.getClass())
+				}
+			}catch(Exception ex){
+				//ex.printStackTrace()
+			}
+		}catch(Exception e){
+			//e.printStackTrace()
+			if(isIncludeStatic){
+				lreturn=this.convertObjectToStringByGsonBuilder(targetObject,isWithID,false)
+			}
+		}
+		return lreturn
+	}
+	public static String convertObjectToStringByJacksonBuilder(Object targetObject,Boolean isWithID){
+		String lreturn=''
+		try{
+			ObjectMapper lObjectMapper=new ObjectMapper()
+			lObjectMapper.setVisibility(PropertyAccessor.ALL,Visibility.NONE)
+			lObjectMapper.setVisibility(PropertyAccessor.FIELD,Visibility.DEFAULT)
+			lObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false)
+			lObjectMapper.configure(SerializationFeature.EAGER_SERIALIZER_FETCH,true)
+			lObjectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS,false)
+			lObjectMapper.configure(SerializationFeature.FAIL_ON_SELF_REFERENCES,false)
+			lObjectMapper.configure(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS,false)
+			lObjectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE,true)
+			lObjectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,false)
+			lObjectMapper.configure(SerializationFeature.WRITE_SELF_REFERENCES_AS_NULL,true)
+			lObjectMapper.findAndRegisterModules()
+			lObjectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
+			lObjectMapper.writerWithDefaultPrettyPrinter()
+			if(!this.checkObjectNullOfObject(targetObject)){
+				if(isWithID){
+					lreturn=targetObject.toString()
+				}
+			}
+			lreturn=lreturn+lObjectMapper.writeValueAsString(targetObject)
 		}catch(Exception e){
 			//e.printStackTrace()
 		}
@@ -4978,6 +5072,17 @@ public class IGNUemaHelper{
 		return lreturn
 	}
 	/*WEBBROWSER*/
+	public static WebDriver getWebDriver(){
+		WebDriver lreturn=null
+		try{
+			this.printLog('getWebDriver')
+			lreturn=DriverFactory.getWebDriver()
+		}catch(Exception e){
+			//e.printStackTrace()
+			return lreturn
+		}
+		return lreturn
+	}
 	public static Map getBrowserWindowPosition(WebDriver driver){
 		Map lreturn=[:]
 		Boolean lResult=false
@@ -6536,14 +6641,14 @@ public class IGNUemaHelper{
 		}
 		try{
 			if(webElement){
-				lreturn=this.webJsScrollToElement(driver,webElement)
-				/*try{
-				 WheelInput.ScrollOrigin lScrollOrigin=WheelInput.ScrollOrigin.fromViewport(numOffsetOrgX,numOffsetOrgY)
-				 Actions lActions=new Actions(driver)
-				 lActions.scrollFromOrigin(lScrollOrigin,0,numOffsetHeight).perform()
-				 lreturn=true
-				 }catch(WebDriverException ex){
-				 }*/
+				this.webJsScrollToElement(driver,webElement)
+				try{
+					WheelInput.ScrollOrigin lScrollOrigin=WheelInput.ScrollOrigin.fromViewport(numOffsetOrgX,numOffsetOrgY)
+					Actions lActions=new Actions(driver)
+					lActions.scrollFromOrigin(lScrollOrigin,0,numOffsetHeight).perform()
+					lreturn=true
+				}catch(WebDriverException ex){
+				}
 			}
 		}catch(Exception e){
 			//e.printStackTrace()

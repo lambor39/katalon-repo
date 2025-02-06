@@ -63,12 +63,12 @@ public class IGNTestLibConfigRegister{
 			this.mapTestStoryKeyStoryName=new TreeMap<Integer,String>()
 			switch(this.parentIGNTestManager.getEnumIGNTestForCountry()){
 				case IGNTestForCountry.Indonesia:
-					//this.mapTestStoryKeyStoryName.put(34,'Group_Pricing_Api_Share_Quote_All_Name_Product_All_Story_Get_Price_List')
+					this.mapTestStoryKeyStoryName.put(42,'Group_Pricing_Api_Share_Quote_All_Name_Product_All_Story_Get_Price_List')
 					this.mapTestStoryKeyStoryName.put(7,'Group_Sf_Lightning_Share_Quote_Motor_Name_New_Biz_Story_Create')
 					this.mapTestStoryKeyStoryName.put(12,'Group_Sf_Lightning_Share_Claim_Motor_Name_New_Biz_Story_Search')
 					break
 				case IGNTestForCountry.Thailand:
-					this.mapTestStoryKeyStoryName.put(34,'Group_Pricing_Api_Share_Quote_All_Name_Product_All_Story_Get_Price_List')
+					this.mapTestStoryKeyStoryName.put(42,'Group_Pricing_Api_Share_Quote_All_Name_Product_All_Story_Get_Price_List')
 					break
 				default:
 					break
@@ -95,7 +95,7 @@ public class IGNTestLibConfigRegister{
 			this.mapTestStoryKeyStoryAfterToDo=new TreeMap<Integer,IGNTestStoryAfterToDo>()
 			switch(this.parentIGNTestManager.getEnumIGNTestForCountry()){
 				case IGNTestForCountry.Indonesia:
-					//this.mapTestStoryKeyStoryAfterToDo.put(34,IGNTestStoryAfterToDo.DoAfterTestSuiteAndCollection)
+					this.mapTestStoryKeyStoryAfterToDo.put(42,IGNTestStoryAfterToDo.DoAfterTestSuiteAndCollection)
 					this.mapTestStoryKeyStoryAfterToDo.put(7,IGNTestStoryAfterToDo.DoAfterTestSuiteAndCollection)
 					this.mapTestStoryKeyStoryAfterToDo.put(12,IGNTestStoryAfterToDo.DoAfterTestSuiteAndCollection)
 					break
@@ -296,11 +296,9 @@ public class IGNTestLibConfigRegister{
 			switch(this.parentIGNTestManager.getEnumIGNTestForCountry()){
 				case IGNTestForCountry.Indonesia:
 					switch(numTestStoryKey){
-						/*
-						case 34:
+						case 42:
 						lIGNTestLibUtilitySuper=new IDNTestStageControllerGroupPricingApiShareQuoteAllNameProductAllStoryGetPriceList(ignTestExecutorTypeItem,numTestStoryKey,lStrInitTestStoryName,lEnumInitIGNTestStoryAfterToDo)
 						break
-						*/
 						case 7:
 						lIGNTestLibUtilitySuper=new IDNTestStageControllerGroupSfLightningShareQuoteMotorNameNewBizStoryCreate(ignTestExecutorTypeItem,numTestStoryKey,lStrInitTestStoryName,lEnumInitIGNTestStoryAfterToDo)
 						break

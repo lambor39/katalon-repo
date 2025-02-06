@@ -154,14 +154,14 @@ public class THARoojaiWebsite{
 				if(isUAT){
 					IGNUemaHelper.printLog('isUAT=true')
 					dbConnString="jdbc:postgresql://UATOYLNIK2BnFMGJxXuLJIp.uat-roojai.com:5432/deaf7m1lpl5rqq?sslmode=require"
-					dbUsername="automationtest"
-					dbPassword="pf95d5b8fe96541cd4c4701ffd0a4441441d564d93d6498375828b2537c998752"
+					dbUsername="u881bi3ee5jo7j"
+					dbPassword="pfe78a1af9057545774c8eee290fb19322e2a0ed65c8fe8c178c123bb476ded66"
 					dbDriver="org.postgresql.Driver"
 				}else{
 					IGNUemaHelper.printLog('isUAT=false')
 					dbConnString="jdbc:postgresql://UATOYLNIK2BnFMGJxXuLJIp.uat-roojai.com:5432/deaf7m1lpl5rqq?sslmode=require"
-					dbUsername="automationtest"
-					dbPassword="pf95d5b8fe96541cd4c4701ffd0a4441441d564d93d6498375828b2537c998752"
+					dbUsername="u881bi3ee5jo7j"
+					dbPassword="pfe78a1af9057545774c8eee290fb19322e2a0ed65c8fe8c178c123bb476ded66"
 					dbDriver="org.postgresql.Driver"
 				}
 				Sql sql=Sql.newInstance(dbConnString,dbUsername,dbPassword,dbDriver)

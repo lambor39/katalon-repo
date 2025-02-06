@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver as WebDriver
 import org.openqa.selenium.remote.RemoteWebDriver
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.remote.CapabilityType
-import org.openqa.selenium.remote.BrowserType
+import org.openqa.selenium.remote.Browser
 import org.openqa.selenium.Point as Point
 import org.openqa.selenium.logging.LogEntry as LogEntry
 import org.openqa.selenium.logging.LogEntries as LogEntries
@@ -162,7 +162,7 @@ public class IGNBrowserConfig{
 						chromeBinary='chrome.exe'
 					}
 					IGNUemaHelper.printLog('Chrome:'+chromeBinary)
-					System.setProperty('webdriver.chrome.driver',DriverFactory.getChromeDriverPath())
+					//System.setProperty('webdriver.chrome.driver',DriverFactory.getChromeDriverPath())
 					DesiredCapabilities chromeCapabilities=new DesiredCapabilities()
 					ChromeOptions chromeOptions=new ChromeOptions()
 					Map<String,Object> prefs=new HashMap<String,Object>()
@@ -234,7 +234,7 @@ public class IGNBrowserConfig{
 						chromeBinary='chrome.exe'
 					}
 					IGNUemaHelper.printLog('Chrome:'+chromeBinary)
-					System.setProperty('webdriver.chrome.driver',DriverFactory.getChromeDriverPath())
+					//System.setProperty('webdriver.chrome.driver',DriverFactory.getChromeDriverPath())
 					DesiredCapabilities chromeCapabilities=new DesiredCapabilities()
 					ChromeOptions chromeOptions=new ChromeOptions()
 					Map<String,Object> prefs=new HashMap<String,Object>()
@@ -292,7 +292,7 @@ public class IGNBrowserConfig{
 					FirefoxProfile firefoxProfile=new FirefoxProfile()
 					FirefoxOptions firefoxOptions=new FirefoxOptions().setProfile(firefoxProfile)
 					firefoxOptions.setBinary(firefoxBinary)
-					System.setProperty('webdriver.gecko.driver',DriverFactory.getGeckoDriverPath())
+					//System.setProperty('webdriver.gecko.driver',DriverFactory.getGeckoDriverPath())
 					WebDriver firefoxDriver=new FirefoxDriver(firefoxOptions)
 					DriverFactory.changeWebDriver(firefoxDriver)
 					lIsCustomWebDriverOK=true
@@ -305,8 +305,8 @@ public class IGNBrowserConfig{
 					FirefoxOptions firefoxOptions=new FirefoxOptions().setProfile(firefoxProfile)
 					firefoxOptions.setBinary(firefoxBinary)
 					firefoxOptions.addArguments('-headless')
-					firefoxOptions.setHeadless(true)
-					System.setProperty('webdriver.gecko.driver',DriverFactory.getGeckoDriverPath())
+					//firefoxOptions.setHeadless(true)
+					//System.setProperty('webdriver.gecko.driver',DriverFactory.getGeckoDriverPath())
 					WebDriver firefoxDriver=new FirefoxDriver(firefoxOptions)
 					DriverFactory.changeWebDriver(firefoxDriver)
 					lIsCustomWebDriverOK=true
@@ -387,7 +387,7 @@ public class IGNBrowserConfig{
 						}
 						edgeChromiumCapabilities.setCapability(edgeChromiumOptions.CAPABILITY,edgeChromiumOptions)
 						edgeChromiumOptions.merge(edgeChromiumCapabilities)
-						edgeChromiumOptions.setCapability(CapabilityType.BROWSER_NAME,BrowserType.EDGE)
+						edgeChromiumOptions.setCapability(CapabilityType.BROWSER_NAME,Browser.EDGE)
 						EdgeOptions edgeOptions=new EdgeOptions().merge(edgeChromiumOptions)
 						WebDriver edgeChromiumDriver=new ChromeDriver(edgeOptions)
 						DriverFactory.changeWebDriver(edgeChromiumDriver)

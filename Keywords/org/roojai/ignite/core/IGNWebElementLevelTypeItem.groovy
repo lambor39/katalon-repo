@@ -130,9 +130,7 @@ public class IGNWebElementLevelTypeItem{
 			this.currentIGNWebElementFindByMethod=initCurrentIGNWebElementFindByMethod
 			this.strWebElementFindItemKey=initStrWebElementFindItemKey
 			this.strWebElementFindItemValue=initStrWebElementFindItemValue
-			if(!IGNUemaHelper.checkObjectNullOfObject(this.parentIGNWebElementHelper)){
-				this.initIGNWebElementLevelTypeItem()
-			}
+			this.initIGNWebElementLevelTypeItem()
 		}catch(Exception e){
 			//e.printStackTrace()
 		}
@@ -253,7 +251,7 @@ public class IGNWebElementLevelTypeItem{
 			}
 			if(lIsIGNWebElementLevelTypeItemValid){
 				if(IGNUemaHelper.checkObjectNullOfObject(this.currentIGNWebElementLevelTypeItemPrev)){
-					lIsIGNWebElementLevelTypeItemValid=lIsIGNWebElementLevelTypeItemValid()&&(this.parentIGNWebElementHelper.checkIsIGNWebElementHelperAlone())
+					lIsIGNWebElementLevelTypeItemValid=lIsIGNWebElementLevelTypeItemValid&&(this.parentIGNWebElementHelper.checkIsIGNWebElementHelperAlone())
 					lIsIGNWebElementLevelTypeItemValid=lIsIGNWebElementLevelTypeItemValid&&(this.currentIGNWebElementLevelIndex==0)
 				}else{
 					if(this.parentIGNWebElementHelper.checkIsIGNWebElementHelperAlone()){

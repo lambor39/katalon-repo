@@ -3,8 +3,11 @@ import internal.GlobalVariable
 import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.ss.usermodel.Workbook
 import org.roojai.ignite.core.IGNBrowserConfig
+import org.roojai.ignite.core.IGNSendEmail
 import org.roojai.ignite.core.IGNUemaHelper as IGNUemaHelper
 import org.roojai.ignite.types.testmanager.IGNTestGlobalEnum.IGNTestForCountry
+import org.roojai.idn.core.IDNGlobalConst
+import org.roojai.tha.core.THAGlobalConst
 public final class IGNTestManager{
 	private static IGNTestManager INSTANCE
 	private String info='Initial Info Class Of IGNTestManager'
@@ -510,6 +513,11 @@ public final class IGNTestManager{
 				lIsProceedTestExecutionSingle=false
 			}
 			IGNBrowserConfig.killBrowserAll()
+			if(lIsProceedTestExecutionSingle){
+				this.sendEmailRaw()
+			}else{
+				this.sendEmailRaw()
+			}
 			lDateTimeNow=IGNUemaHelper.getStringCurrentStampDateTime()
 			GlobalVariable.CaseDateTimeEnd=lDateTimeNow
 			lreturn=lIsProceedTestExecutionSingle
@@ -544,6 +552,11 @@ public final class IGNTestManager{
 				lIsProceedTestExecutionBatch=false
 			}
 			IGNBrowserConfig.killBrowserAll()
+			if(lIsProceedTestExecutionBatch){
+				this.sendEmailRaw()
+			}else{
+				this.sendEmailRaw()
+			}
 			lDateTimeNow=IGNUemaHelper.getStringCurrentStampDateTime()
 			GlobalVariable.CaseDateTimeEnd=lDateTimeNow
 			lreturn=lIsProceedTestExecutionBatch
@@ -574,5 +587,32 @@ public final class IGNTestManager{
 	public void setIGNTestDelivery(IGNTestDelivery newIGNTestDelivery){
 		//Do Nothing
 		//this.ignTestDelivery=newIGNTestDelivery
+	}
+	public Boolean sendEmailRaw(){
+		Boolean lreturn=false
+		if(!this.isIGNTestManagerReady){
+			return lreturn
+		}
+		try{
+			String lStrDatetime=IGNUemaHelper.convertLocalDateTimeToString('yyyy/MM/dd HH:mm')
+			String lStrSubject='Test Manager Raw Result : Automation Report ['+lStrDatetime+'].'
+			String lStrEmailBody=IGNUemaHelper.getEmailBodyForReport(lStrSubject,IGNUemaHelper.getStringCurrentDateTimeSlashDDMMYYYYColonHHMMSS(),'1','1','0','0')
+			String[] lArrayEmailAttachFile=new String[1]
+			lArrayEmailAttachFile[0]=this.strConfigExcelFileName
+			if(this.enumIGNTestForCountry==IGNTestForCountry.Indonesia){
+				lreturn=IGNSendEmail.sendRoojaiReportIDN(IDNGlobalConst.DEFAULT_EMAIL_TO_ME,lStrSubject,lStrEmailBody,lArrayEmailAttachFile)
+			}else{
+				lreturn=IGNSendEmail.sendRoojaiReportTHA(THAGlobalConst.DEFAULT_EMAIL_TO_ME,lStrSubject,lStrEmailBody,lArrayEmailAttachFile)
+			}
+		}catch(Exception e){
+			//e.printStackTrace()
+			try{
+				this.strIGNTestManagerMessage=IGNUemaHelper.concatExceptionMessageLeftRight(this.strIGNTestManagerMessage,e.getStackTrace()[0].getMethodName(),e.getMessage())
+			}catch(Exception ex){
+				//ex.printStackTrace()
+				this.strIGNTestManagerMessage=IGNUemaHelper.concatExceptionMessageLeftRight(this.strIGNTestManagerMessage,'',e.getMessage())
+			}
+		}
+		return lreturn
 	}
 }
