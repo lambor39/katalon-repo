@@ -76,17 +76,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 					}
 				}
 			}
-			/*
-			 if(IGNUemaHelper.checkElementPresentByLocator(webDriver,lLocatorSearch01InputLevel01SearchHomeFlexipageParent)){
-			 WebElement lElementSearch01InputLevel01SearchHomeFlexipageParent=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lLocatorSearch01InputLevel01SearchHomeFlexipageParent)
-			 if(lElementSearch01InputLevel01SearchHomeFlexipageParent){
-			 WebElement lElementSearch01InputLevel01SearchHomeFlexipageChild01=IGNUemaHelper.getChildWebElementOfWebElement(webDriver,lElementSearch01InputLevel01SearchHomeFlexipageParent,lLocatorSearch01InputLevel01SearchHomeFlexipageChild01,true)
-			 if(lElementSearch01InputLevel01SearchHomeFlexipageChild01){
-			 lElementSearch01InputLevel01SearchHomeFlexipageChild02=IGNUemaHelper.getChildWebElementOfWebElement(webDriver,lElementSearch01InputLevel01SearchHomeFlexipageChild01,lLocatorSearch01InputLevel01SearchHomeFlexipageChild02,true)
-			 }
-			 }
-			 }
-			 */
 			String lLocatorSearch02InputLevel01LightningButtonMenuParent='ul'
 			String lLocatorSearch02InputLevel01LightningButtonMenuChild01='li'
 			String lLocatorSearch02InputLevel01LightningButtonMenuChild02='runtime_platform_actions-action-renderer'
@@ -2724,6 +2713,78 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 		}
 		return lreturn
 	}
+	public static Map inputSfDamageDetailNonMandatory(WebDriver webDriver,WebElement elementIgniteClaimDamageFormRoot,Map mapSfClaimDamageInput){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(elementIgniteClaimDamageFormRoot)){
+			return lreturn
+		}
+		WebElement lElementIgniteClaimDamageFormRoot=elementIgniteClaimDamageFormRoot
+		if(IGNUemaHelper.checkObjectNullOfObject(mapSfClaimDamageInput)){
+			return lreturn
+		}
+		try{
+			Boolean lResult=true
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			if(mapSfClaimDamageInput.DamageAssessorName.length()>0){
+				Map lMapInputSfDamageDetailAssessorName=this.inputSfDamageDetailAssessorName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageAssessorName)
+				if(lMapInputSfDamageDetailAssessorName.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfDamageDetailAssessorName.ErrorMessage
+				}
+				if(!lMapInputSfDamageDetailAssessorName.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfDamageDetailAssessorName.Result
+			}
+			if(mapSfClaimDamageInput.DamageRecoveryAgentName.length()>0){
+				Map lMapInputSfDamageDetailRecoveryAgentName=this.inputSfDamageDetailRecoveryAgentName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageRecoveryAgentName)
+				if(lMapInputSfDamageDetailRecoveryAgentName.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfDamageDetailRecoveryAgentName.ErrorMessage
+				}
+				if(!lMapInputSfDamageDetailRecoveryAgentName.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfDamageDetailRecoveryAgentName.Result
+			}
+			if(mapSfClaimDamageInput.DamageServiceProviderName.length()>0){
+				Map lMapInputSfDamageDetailServiceProviderName=this.inputSfDamageDetailServiceProviderName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageServiceProviderName)
+				if(lMapInputSfDamageDetailServiceProviderName.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfDamageDetailServiceProviderName.ErrorMessage
+				}
+				if(!lMapInputSfDamageDetailServiceProviderName.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfDamageDetailServiceProviderName.Result
+			}
+			if(mapSfClaimDamageInput.DamageQuotationApprovalStatus.length()>0){
+				Map lMapInputSfDamageDetailQuotationApprovalStatus=this.inputSfDamageDetailQuotationApprovalStatus(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageQuotationApprovalStatus)
+				if(lMapInputSfDamageDetailQuotationApprovalStatus.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfDamageDetailQuotationApprovalStatus.ErrorMessage
+				}
+				if(!lMapInputSfDamageDetailQuotationApprovalStatus.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfDamageDetailQuotationApprovalStatus.Result
+			}
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
 	public static Map inputSfDamageDetailDamageType(WebDriver webDriver,WebElement elementIgniteClaimDamageFormRoot,String strSfDamageTypeValue){
 		Map lreturn=[:]
 		if(IGNUemaHelper.checkObjectNullOfObject(elementIgniteClaimDamageFormRoot)){
@@ -2802,6 +2863,524 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 		}
 		return lreturn
 	}
+	public static Map inputSfDamageDetailAssessorName(WebDriver webDriver,WebElement elementIgniteClaimDamageFormRoot,String strSfDamageAssessorNameValue){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(elementIgniteClaimDamageFormRoot)){
+			return lreturn
+		}
+		WebElement lElementIgniteClaimDamageFormRoot=elementIgniteClaimDamageFormRoot
+		if(IGNUemaHelper.checkObjectNullOfObject(strSfDamageAssessorNameValue)){
+			return lreturn
+		}
+		String lStrSfDamageAssessorNameValue=strSfDamageAssessorNameValue.trim()
+		try{
+			Boolean lResult=false
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-input-field'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-lookup'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='lightning-lookup-desktop'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='lightning-grouped-combobox'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild05='lightning-base-combobox'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild06='input'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild07='lightning-base-combobox-item'
+			String lLocatorSearch01InputLevel01IgniteClaimAddressFormParent='div.DESKTOP.uiContainerManager'
+			String lLocatorSearch01InputLevel01IgniteClaimAddressFormChild01='div.forceSearchLookupAdvanced'
+			String lLocatorSearch01InputLevel01IgniteClaimAddressFormChild02='a.outputLookupLink'
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild05=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild06=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild07=null
+			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormParent=null
+			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormChild01=null
+			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormChild02=null
+			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild07=[]
+			List<WebElement> lListElementSearch01InputLevel01IgniteClaimAddressFormChild02=[]
+			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimDamageFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
+			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
+				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
+					return lreturn
+				}
+				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
+					String lStrSfDamageAssessorNameValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
+					lStrSfDamageAssessorNameValueFromElement=lStrSfDamageAssessorNameValueFromElement.toLowerCase()
+					if(IGNUemaHelper.checkStringContainString(lStrSfDamageAssessorNameValueFromElement,'assessor')){
+						break
+					}
+				}
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild03,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild05=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild05,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild05){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild05){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild06=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild05,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild06,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild06){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild06){
+				IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild06)
+				IGNUemaHelper.typeTextByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild06,lStrSfDamageAssessorNameValue)
+			}
+			IGNUemaHelper.delayWebUISecond(5)
+			lListElementSearch01InputLevel01IgniteClaimReportingFormChild07=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild05,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild07)
+			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild07.size()-1;lIndex++){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild07=lListElementSearch01InputLevel01IgniteClaimReportingFormChild07.get(lIndex)
+				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild07){
+					return lreturn
+				}
+				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild07){
+					String lStrSfDamageAssessorNameValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild07,'data-value')
+					lStrSfDamageAssessorNameValueFromElement=lStrSfDamageAssessorNameValueFromElement.toLowerCase()
+					if(IGNUemaHelper.checkStringContainString(lStrSfDamageAssessorNameValueFromElement,'actionAdvancedSearch')){
+						IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild07)
+						break
+					}
+				}
+			}
+			IGNUemaHelper.waitElementVisibleByLocator(webDriver,lLocatorSearch01InputLevel01IgniteClaimAddressFormParent)
+			lElementSearch01InputLevel01IgniteClaimAddressFormParent=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lLocatorSearch01InputLevel01IgniteClaimAddressFormParent)
+			if(!lElementSearch01InputLevel01IgniteClaimAddressFormParent){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimAddressFormParent){
+				lElementSearch01InputLevel01IgniteClaimAddressFormChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormParent,lLocatorSearch01InputLevel01IgniteClaimAddressFormChild01,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimAddressFormChild01){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimAddressFormChild01){
+				IGNUemaHelper.delayWebUISecond(5)
+				lListElementSearch01InputLevel01IgniteClaimAddressFormChild02=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormChild01,lLocatorSearch01InputLevel01IgniteClaimAddressFormChild02)
+			}
+			if(lListElementSearch01InputLevel01IgniteClaimAddressFormChild02.size()>0){
+				IGNUemaHelper.delayWebUISecond(5)
+				lElementSearch01InputLevel01IgniteClaimAddressFormChild02=IGNUemaHelper.getWebElementRandomFromWebElementList(webDriver,lListElementSearch01InputLevel01IgniteClaimAddressFormChild02)
+				lResult=IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormChild02)
+			}
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map inputSfDamageDetailRecoveryAgentName(WebDriver webDriver,WebElement elementIgniteClaimDamageFormRoot,String strSfDamageRecoveryAgentNameValue){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(elementIgniteClaimDamageFormRoot)){
+			return lreturn
+		}
+		WebElement lElementIgniteClaimDamageFormRoot=elementIgniteClaimDamageFormRoot
+		if(IGNUemaHelper.checkObjectNullOfObject(strSfDamageRecoveryAgentNameValue)){
+			return lreturn
+		}
+		String lStrSfDamageRecoveryAgentNameValue=strSfDamageRecoveryAgentNameValue.trim()
+		try{
+			Boolean lResult=false
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-input-field'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-lookup'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='lightning-lookup-desktop'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='lightning-grouped-combobox'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild05='lightning-base-combobox'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild06='input'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild07='lightning-base-combobox-item'
+			String lLocatorSearch01InputLevel01IgniteClaimAddressFormParent='div.DESKTOP.uiContainerManager'
+			String lLocatorSearch01InputLevel01IgniteClaimAddressFormChild01='div.forceSearchLookupAdvanced'
+			String lLocatorSearch01InputLevel01IgniteClaimAddressFormChild02='a.outputLookupLink'
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild05=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild06=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild07=null
+			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormParent=null
+			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormChild01=null
+			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormChild02=null
+			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild07=[]
+			List<WebElement> lListElementSearch01InputLevel01IgniteClaimAddressFormChild02=[]
+			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimDamageFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
+			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
+				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
+					return lreturn
+				}
+				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
+					String lStrSfDamageRecoveryAgentNameValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
+					lStrSfDamageRecoveryAgentNameValueFromElement=lStrSfDamageRecoveryAgentNameValueFromElement.toLowerCase()
+					if(IGNUemaHelper.checkStringContainString(lStrSfDamageRecoveryAgentNameValueFromElement,'recoveryAgent')){
+						break
+					}
+				}
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild03,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild05=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild05,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild05){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild05){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild06=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild05,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild06,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild06){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild06){
+				IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild06)
+				IGNUemaHelper.typeTextByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild06,lStrSfDamageRecoveryAgentNameValue)
+			}
+			IGNUemaHelper.delayWebUISecond(5)
+			lListElementSearch01InputLevel01IgniteClaimReportingFormChild07=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild05,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild07)
+			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild07.size()-1;lIndex++){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild07=lListElementSearch01InputLevel01IgniteClaimReportingFormChild07.get(lIndex)
+				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild07){
+					return lreturn
+				}
+				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild07){
+					String lStrSfDamageRecoveryAgentNameValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild07,'data-value')
+					lStrSfDamageRecoveryAgentNameValueFromElement=lStrSfDamageRecoveryAgentNameValueFromElement.toLowerCase()
+					if(IGNUemaHelper.checkStringContainString(lStrSfDamageRecoveryAgentNameValueFromElement,'actionAdvancedSearch')){
+						IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild07)
+						break
+					}
+				}
+			}
+			IGNUemaHelper.waitElementVisibleByLocator(webDriver,lLocatorSearch01InputLevel01IgniteClaimAddressFormParent)
+			lElementSearch01InputLevel01IgniteClaimAddressFormParent=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lLocatorSearch01InputLevel01IgniteClaimAddressFormParent)
+			if(!lElementSearch01InputLevel01IgniteClaimAddressFormParent){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimAddressFormParent){
+				lElementSearch01InputLevel01IgniteClaimAddressFormChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormParent,lLocatorSearch01InputLevel01IgniteClaimAddressFormChild01,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimAddressFormChild01){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimAddressFormChild01){
+				IGNUemaHelper.delayWebUISecond(5)
+				lListElementSearch01InputLevel01IgniteClaimAddressFormChild02=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormChild01,lLocatorSearch01InputLevel01IgniteClaimAddressFormChild02)
+			}
+			if(lListElementSearch01InputLevel01IgniteClaimAddressFormChild02.size()>0){
+				IGNUemaHelper.delayWebUISecond(5)
+				lElementSearch01InputLevel01IgniteClaimAddressFormChild02=IGNUemaHelper.getWebElementRandomFromWebElementList(webDriver,lListElementSearch01InputLevel01IgniteClaimAddressFormChild02)
+				lResult=IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormChild02)
+			}
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map inputSfDamageDetailServiceProviderName(WebDriver webDriver,WebElement elementIgniteClaimDamageFormRoot,String strSfDamageServiceProviderNameValue){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(elementIgniteClaimDamageFormRoot)){
+			return lreturn
+		}
+		WebElement lElementIgniteClaimDamageFormRoot=elementIgniteClaimDamageFormRoot
+		if(IGNUemaHelper.checkObjectNullOfObject(strSfDamageServiceProviderNameValue)){
+			return lreturn
+		}
+		String lStrSfDamageServiceProviderNameValue=strSfDamageServiceProviderNameValue.trim()
+		try{
+			Boolean lResult=false
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-input-field'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-lookup'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='lightning-lookup-desktop'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='lightning-grouped-combobox'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild05='lightning-base-combobox'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild06='input'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild07='lightning-base-combobox-item'
+			String lLocatorSearch01InputLevel01IgniteClaimAddressFormParent='div.DESKTOP.uiContainerManager'
+			String lLocatorSearch01InputLevel01IgniteClaimAddressFormChild01='div.forceSearchLookupAdvanced'
+			String lLocatorSearch01InputLevel01IgniteClaimAddressFormChild02='a.outputLookupLink'
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild05=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild06=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild07=null
+			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormParent=null
+			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormChild01=null
+			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormChild02=null
+			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild07=[]
+			List<WebElement> lListElementSearch01InputLevel01IgniteClaimAddressFormChild02=[]
+			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimDamageFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
+			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
+				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
+					return lreturn
+				}
+				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
+					String lStrSfDamageServiceProviderNameValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
+					lStrSfDamageServiceProviderNameValueFromElement=lStrSfDamageServiceProviderNameValueFromElement.toLowerCase()
+					if(IGNUemaHelper.checkStringContainString(lStrSfDamageServiceProviderNameValueFromElement,'serviceProvider')){
+						break
+					}
+				}
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild03,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild05=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild05,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild05){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild05){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild06=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild05,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild06,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild06){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild06){
+				IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild06)
+				IGNUemaHelper.typeTextByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild06,lStrSfDamageServiceProviderNameValue)
+			}
+			IGNUemaHelper.delayWebUISecond(5)
+			lListElementSearch01InputLevel01IgniteClaimReportingFormChild07=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild05,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild07)
+			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild07.size()-1;lIndex++){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild07=lListElementSearch01InputLevel01IgniteClaimReportingFormChild07.get(lIndex)
+				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild07){
+					return lreturn
+				}
+				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild07){
+					String lStrSfDamageServiceProviderNameValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild07,'data-value')
+					lStrSfDamageServiceProviderNameValueFromElement=lStrSfDamageServiceProviderNameValueFromElement.toLowerCase()
+					if(IGNUemaHelper.checkStringContainString(lStrSfDamageServiceProviderNameValueFromElement,'actionAdvancedSearch')){
+						IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild07)
+						break
+					}
+				}
+			}
+			IGNUemaHelper.waitElementVisibleByLocator(webDriver,lLocatorSearch01InputLevel01IgniteClaimAddressFormParent)
+			lElementSearch01InputLevel01IgniteClaimAddressFormParent=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lLocatorSearch01InputLevel01IgniteClaimAddressFormParent)
+			if(!lElementSearch01InputLevel01IgniteClaimAddressFormParent){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimAddressFormParent){
+				lElementSearch01InputLevel01IgniteClaimAddressFormChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormParent,lLocatorSearch01InputLevel01IgniteClaimAddressFormChild01,true)
+			}
+			if(!lElementSearch01InputLevel01IgniteClaimAddressFormChild01){
+				return lreturn
+			}
+			if(lElementSearch01InputLevel01IgniteClaimAddressFormChild01){
+				IGNUemaHelper.delayWebUISecond(5)
+				lListElementSearch01InputLevel01IgniteClaimAddressFormChild02=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormChild01,lLocatorSearch01InputLevel01IgniteClaimAddressFormChild02)
+			}
+			if(lListElementSearch01InputLevel01IgniteClaimAddressFormChild02.size()>0){
+				IGNUemaHelper.delayWebUISecond(5)
+				lElementSearch01InputLevel01IgniteClaimAddressFormChild02=IGNUemaHelper.getWebElementRandomFromWebElementList(webDriver,lListElementSearch01InputLevel01IgniteClaimAddressFormChild02)
+				lResult=IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormChild02)
+			}
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map inputSfDamageDetailQuotationApprovalStatus(WebDriver webDriver,WebElement elementIgniteClaimDamageFormRoot,String strSfDamageDetailQuotationApprovalStatusValue){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(elementIgniteClaimDamageFormRoot)){
+			return lreturn
+		}
+		WebElement lElementIgniteClaimDamageFormRoot=elementIgniteClaimDamageFormRoot
+		if(IGNUemaHelper.checkObjectNullOfObject(strSfDamageDetailQuotationApprovalStatusValue)){
+			return lreturn
+		}
+		String lStrSfDamageDetailQuotationApprovalStatusValue=strSfDamageDetailQuotationApprovalStatusValue
+		try{
+			Boolean lResult=false
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-combobox'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-base-combobox'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='button'
+			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='lightning-base-combobox-item'
+			Boolean lIsDamageTypeClickOK=false
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
+			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
+			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild04=[]
+			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimDamageFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
+			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
+				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
+				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
+					return lreturn
+				}
+				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
+					String lStrSfDamageDetailQuotationApprovalStatusValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
+					lStrSfDamageDetailQuotationApprovalStatusValueFromElement=lStrSfDamageDetailQuotationApprovalStatusValueFromElement.toLowerCase()
+					if(IGNUemaHelper.checkStringContainString(lStrSfDamageDetailQuotationApprovalStatusValueFromElement,'quotationApprovalStatus')){
+						lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
+						if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+							return lreturn
+						}
+						if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+							lIsDamageTypeClickOK=IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02)
+						}
+					}
+					if(lIsDamageTypeClickOK){
+						lIsDamageTypeClickOK=false
+						break
+					}
+				}
+			}
+			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+				lListElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04)
+			}
+			if(lListElementSearch01InputLevel01IgniteClaimReportingFormChild04.size()>0){
+				for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild04.size()-1;lIndex++){
+					lElementSearch01InputLevel01IgniteClaimReportingFormChild04=lListElementSearch01InputLevel01IgniteClaimReportingFormChild04.get(lIndex)
+					if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
+						return lreturn
+					}
+					if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
+						String lStrSfDamageDetailQuotationApprovalStatusValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,'data-value')
+						lStrSfDamageDetailQuotationApprovalStatusValueFromElement=lStrSfDamageDetailQuotationApprovalStatusValueFromElement.toLowerCase()
+						lStrSfDamageDetailQuotationApprovalStatusValue=lStrSfDamageDetailQuotationApprovalStatusValue.toLowerCase()
+						if(IGNUemaHelper.checkStringContainString(lStrSfDamageDetailQuotationApprovalStatusValueFromElement,lStrSfDamageDetailQuotationApprovalStatusValue)){
+							lIsDamageTypeClickOK=IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04)
+							lResult=lIsDamageTypeClickOK
+						}
+						if(lIsDamageTypeClickOK){
+							break
+						}
+					}
+				}
+			}
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map inputSfReserveDetailNonMandatory(WebDriver webDriver,WebElement elementIgniteClaimReserveDetailFormRoot,Map mapSfClaimReserveDetailInput){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(elementIgniteClaimReserveDetailFormRoot)){
+			return lreturn
+		}
+		WebElement lElementIgniteClaimReserveDetailFormRoot=elementIgniteClaimReserveDetailFormRoot
+		if(IGNUemaHelper.checkObjectNullOfObject(mapSfClaimReserveDetailInput)){
+			return lreturn
+		}
+		try{
+			Boolean lResult=true
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			if(mapSfClaimReserveDetailInput.ThirdPartyName.length()>0){
+				Map lMapInputSfReserveDetailThirdPartyName=this.inputSfReserveDetailThirdPartyName(webDriver,lElementIgniteClaimReserveDetailFormRoot,mapSfClaimReserveDetailInput.ThirdPartyName)
+				if(lMapInputSfReserveDetailThirdPartyName.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReserveDetailThirdPartyName.ErrorMessage
+				}
+				if(!lMapInputSfReserveDetailThirdPartyName.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReserveDetailThirdPartyName.Result
+			}
+			if(mapSfClaimReserveDetailInput.ThirdPartySequence.length()>0){
+				Map lMapInputSfReserveDetailThirdPartySequence=this.inputSfReserveDetailThirdPartySequence(webDriver,lElementIgniteClaimReserveDetailFormRoot,mapSfClaimReserveDetailInput.ThirdPartySequence)
+				if(lMapInputSfReserveDetailThirdPartySequence.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReserveDetailThirdPartySequence.ErrorMessage
+				}
+				if(!lMapInputSfReserveDetailThirdPartySequence.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReserveDetailThirdPartySequence.Result
+			}
+			if(mapSfClaimReserveDetailInput.OutstandingReserve.length()>0){
+				Map lMapInputSfReserveDetailOutstandingReserve=this.inputSfReserveDetailOutstandingReserve(webDriver,lElementIgniteClaimReserveDetailFormRoot,mapSfClaimReserveDetailInput.OutstandingReserve)
+				if(lMapInputSfReserveDetailOutstandingReserve.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReserveDetailOutstandingReserve.ErrorMessage
+				}
+				if(!lMapInputSfReserveDetailOutstandingReserve.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReserveDetailOutstandingReserve.Result
+			}
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
 	public static Map inputSfReserveDetailReserveType(WebDriver webDriver,WebElement elementIgniteClaimReserveDetailFormRoot,String strSfReserveTypeValue){
 		Map lreturn=[:]
 		if(IGNUemaHelper.checkObjectNullOfObject(elementIgniteClaimReserveDetailFormRoot)){
@@ -2873,6 +3452,263 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 						}
 					}
 				}
+			}
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map inputSfReservePaymentNonMandatory(WebDriver webDriver,WebElement elementIgniteClaimReservePaymentDetailFormRoot,Map mapSfClaimReservePaymentInput){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(elementIgniteClaimReservePaymentDetailFormRoot)){
+			return lreturn
+		}
+		WebElement lElementIgniteClaimReservePaymentDetailFormRoot=elementIgniteClaimReservePaymentDetailFormRoot
+		if(IGNUemaHelper.checkObjectNullOfObject(mapSfClaimReservePaymentInput)){
+			return lreturn
+		}
+		try{
+			Boolean lResult=true
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			String lStrSfDateValue=''
+			Map lMapInputAdjustDate=[:]
+			if(mapSfClaimReservePaymentInput.NetAmount.length()>0){
+				Map lMapInputSfReservePaymentNetAmount=this.inputSfReservePaymentNetAmount(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput.NetAmount)
+				if(lMapInputSfReservePaymentNetAmount.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentNetAmount.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentNetAmount.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentNetAmount.Result
+			}
+			if(mapSfClaimReservePaymentInput.VATRate.length()>0){
+				Map lMapInputSfReservePaymentVATRate=this.inputSfReservePaymentVATRate(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput.VATRate)
+				if(lMapInputSfReservePaymentVATRate.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentVATRate.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentVATRate.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentVATRate.Result
+			}
+			if(mapSfClaimReservePaymentInput.WHTRate.length()>0){
+				Map lMapInputSfReservePaymentWHTRate=this.inputSfReservePaymentWHTRate(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput.WHTRate)
+				if(lMapInputSfReservePaymentWHTRate.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentWHTRate.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentWHTRate.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentWHTRate.Result
+			}
+			if(mapSfClaimReservePaymentInput.StampDuty.length()>0){
+				Map lMapInputSfReservePaymentStampDuty=this.inputSfReservePaymentStampDuty(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput.StampDuty)
+				if(lMapInputSfReservePaymentStampDuty.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentStampDuty.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentStampDuty.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentStampDuty.Result
+			}
+			if(mapSfClaimReservePaymentInput.SalvageRate.length()>0){
+				Map lMapInputSfReservePaymentSalvageRate=this.inputSfReservePaymentSalvageRate(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput.SalvageRate)
+				if(lMapInputSfReservePaymentSalvageRate.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentSalvageRate.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentSalvageRate.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentSalvageRate.Result
+			}
+			if(mapSfClaimReservePaymentInput.RecoveryAmount.length()>0){
+				Map lMapInputSfReservePaymentRecoveryAmount=this.inputSfReservePaymentRecoveryAmount(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput.RecoveryAmount)
+				if(lMapInputSfReservePaymentRecoveryAmount.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentRecoveryAmount.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentRecoveryAmount.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentRecoveryAmount.Result
+			}
+			if(mapSfClaimReservePaymentInput.InvoiceNo.length()>0){
+				Map lMapInputSfReservePaymentInvoiceNo=this.inputSfReservePaymentInvoiceNo(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput.InvoiceNo)
+				if(lMapInputSfReservePaymentInvoiceNo.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentInvoiceNo.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentInvoiceNo.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentInvoiceNo.Result
+			}
+			if(mapSfClaimReservePaymentInput.PaymentDateOffset.length()>0&&mapSfClaimReservePaymentInput.PaymentDateValue.length()>0){
+				lMapInputAdjustDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputAdjustDate(mapSfClaimReservePaymentInput.PaymentDateOffset,mapSfClaimReservePaymentInput.PaymentDateValue)
+				if(lMapInputAdjustDate.Result){
+					lStrSfDateValue=lMapInputAdjustDate.DateValue
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputAdjustDate.ErrorMessage
+				}
+				if(!lMapInputAdjustDate.Result){
+					return lreturn
+				}
+				Map lMapInputSfReservePaymentPaymentDate=this.inputSfReservePaymentPaymentDate(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,lStrSfDateValue)
+				if(lMapInputSfReservePaymentPaymentDate.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentPaymentDate.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentPaymentDate.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentPaymentDate.Result
+			}
+			if(mapSfClaimReservePaymentInput.PaymentMethod.length()>0){
+				Map lMapInputSfReservePaymentPaymentMethod=this.inputSfReservePaymentPaymentMethod(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput.PaymentMethod)
+				if(lMapInputSfReservePaymentPaymentMethod.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentPaymentMethod.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentPaymentMethod.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentPaymentMethod.Result
+			}
+			if(mapSfClaimReservePaymentInput.BankName.length()>0){
+				Map lMapInputSfReservePaymentBankName=this.inputSfReservePaymentBankName(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput.BankName)
+				if(lMapInputSfReservePaymentBankName.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentBankName.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentBankName.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentBankName.Result
+			}
+			if(mapSfClaimReservePaymentInput.FinalPayment.length()>0){
+				Map lMapInputSfReservePaymentFinalPayment=this.inputSfReservePaymentFinalPayment(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput.FinalPayment)
+				if(lMapInputSfReservePaymentFinalPayment.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentFinalPayment.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentFinalPayment.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentFinalPayment.Result
+			}
+			if(mapSfClaimReservePaymentInput.InvoiceDateOffset.length()>0&&mapSfClaimReservePaymentInput.InvoiceDateValue.length()>0){
+				lMapInputAdjustDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputAdjustDate(mapSfClaimReservePaymentInput.InvoiceDateOffset,mapSfClaimReservePaymentInput.InvoiceDateValue)
+				if(lMapInputAdjustDate.Result){
+					lStrSfDateValue=lMapInputAdjustDate.DateValue
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputAdjustDate.ErrorMessage
+				}
+				if(!lMapInputAdjustDate.Result){
+					return lreturn
+				}
+				Map lMapInputSfReservePaymentInvoiceDate=this.inputSfReservePaymentInvoiceDate(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,lStrSfDateValue)
+				if(lMapInputSfReservePaymentInvoiceDate.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentInvoiceDate.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentInvoiceDate.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentInvoiceDate.Result
+			}
+			if(mapSfClaimReservePaymentInput.PaymentDueDateOffset.length()>0&&mapSfClaimReservePaymentInput.PaymentDueDateValue.length()>0){
+				lMapInputAdjustDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputAdjustDate(mapSfClaimReservePaymentInput.PaymentDueDateOffset,mapSfClaimReservePaymentInput.PaymentDueDateValue)
+				if(lMapInputAdjustDate.Result){
+					lStrSfDateValue=lMapInputAdjustDate.DateValue
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputAdjustDate.ErrorMessage
+				}
+				if(!lMapInputAdjustDate.Result){
+					return lreturn
+				}
+				Map lMapInputSfReservePaymentPaymentDueDate=this.inputSfReservePaymentPaymentDueDate(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,lStrSfDateValue)
+				if(lMapInputSfReservePaymentPaymentDueDate.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentPaymentDueDate.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentPaymentDueDate.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentPaymentDueDate.Result
+			}
+			if(mapSfClaimReservePaymentInput.InvoiceSubmittedDateOffset.length()>0&&mapSfClaimReservePaymentInput.InvoiceSubmittedDateValue.length()>0){
+				lMapInputAdjustDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputAdjustDate(mapSfClaimReservePaymentInput.InvoiceSubmittedDateOffset,mapSfClaimReservePaymentInput.InvoiceSubmittedDateValue)
+				if(lMapInputAdjustDate.Result){
+					lStrSfDateValue=lMapInputAdjustDate.DateValue
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputAdjustDate.ErrorMessage
+				}
+				if(!lMapInputAdjustDate.Result){
+					return lreturn
+				}
+				Map lMapInputSfReservePaymentInvoiceSubmittedDate=this.inputSfReservePaymentInvoiceSubmittedDate(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,lStrSfDateValue)
+				if(lMapInputSfReservePaymentInvoiceSubmittedDate.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentInvoiceSubmittedDate.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentInvoiceSubmittedDate.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentInvoiceSubmittedDate.Result
+			}
+			if(mapSfClaimReservePaymentInput.ChequeNo.length()>0){
+				Map lMapInputSfReservePaymentChequeNo=this.inputSfReservePaymentChequeNo(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput.ChequeNo)
+				if(lMapInputSfReservePaymentChequeNo.Result){
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfReservePaymentChequeNo.ErrorMessage
+				}
+				if(!lMapInputSfReservePaymentChequeNo.Result){
+					lreturn.put('ErrorMessage',lStrErrorMessage)
+					return lreturn
+				}
+				lResult=lMapInputSfReservePaymentChequeNo.Result
 			}
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
@@ -3007,7 +3843,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
 					String lStrSfReservePaymentPayeeNameValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
 					lStrSfReservePaymentPayeeNameValueFromElement=lStrSfReservePaymentPayeeNameValueFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfReservePaymentPayeeNameValueFromElement,'Payee')){
+					if(IGNUemaHelper.checkStringContainString(lStrSfReservePaymentPayeeNameValueFromElement,'payee')){
 						break
 					}
 				}
@@ -3104,31 +3940,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 			String lStrErrorMessage=''
 			String lStrCssLocator=''
 			Boolean lIsInputSfSaveButtonOK=false
-			/*
-			String lStrDamageType=''
-			String lStrReserveType=''
-			String[] lStrArrayDamageTypeMapWithClaimIncidentType=mapSfClaimDamageInput.DamageTypeMapWithClaimIncidentType.split('@')
-			List<String> lListDamageTypeAndReserveTypeOption=[]
-			Boolean lIsInputSfSaveButtonOK=false
-			if(!IGNUemaHelper.checkObjectNullOfObject(lStrArrayDamageTypeMapWithClaimIncidentType[1])){
-				lStrArrayDamageTypeMapWithClaimIncidentType[1]=lStrArrayDamageTypeMapWithClaimIncidentType[1].replaceAll("[\\[\\]\\(\\)\\'\\'\"\\\n]",'')
-				lListDamageTypeAndReserveTypeOption=Arrays.asList(lStrArrayDamageTypeMapWithClaimIncidentType[1].split(','))
-			}
-			Map<String,String> lMapDamageTypeAndReserveTypeOption=[:]
-			for(String strDamageTypeAndReserveTypeOption:lListDamageTypeAndReserveTypeOption){
-				List<String> lListDamageTypeAndReserveTypeDetail=Arrays.asList(strDamageTypeAndReserveTypeOption.split(':'))
-				lMapDamageTypeAndReserveTypeOption.put(lListDamageTypeAndReserveTypeDetail.get(0),lListDamageTypeAndReserveTypeDetail.get(1))
-			}
-			Integer lIndexDamageTypeLocation=0
-			Integer lIndexReserveTypeLocation=1
-			if(!IGNUemaHelper.checkObjectNullOfObject(lMapDamageTypeAndReserveTypeOption)){
-				String[] lStrArraySplitDamageTypeAndReserveType=lMapDamageTypeAndReserveTypeOption.get(mapSfClaimDamageInput.ReserveTypeAndReservePaymentOption).split('\\|')
-				if(lListDamageTypeAndReserveTypeOption.size()>0){
-					lStrDamageType=lStrArraySplitDamageTypeAndReserveType[lIndexDamageTypeLocation]
-					lStrReserveType=lStrArraySplitDamageTypeAndReserveType[lIndexReserveTypeLocation]
-				}
-			}
-			*/
 			Map lMapInputSfDamageDetailDamageType=this.inputSfDamageDetailDamageType(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageType)
 			if(lMapInputSfDamageDetailDamageType.Result){
 				lStrErrorMessage=''
@@ -3140,42 +3951,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 				return lreturn
 			}
 			lResult=lMapInputSfDamageDetailDamageType.Result
-			/*
-			 * Move to this.inputSfDamageDetailNonMandatory
-			Map lMapInputSfDamageAssessorName=this.inputSfDamageAssessorName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageAssessorName)
-			if(lMapInputSfDamageAssessorName.Result){
+			Map lMapInputSfDamageDetailNonMandatory=this.inputSfDamageDetailNonMandatory(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput)
+			if(lMapInputSfDamageDetailNonMandatory.Result){
 				lStrErrorMessage=''
 			}else{
-				lStrErrorMessage=lMapInputSfDamageAssessorName.ErrorMessage
+				lStrErrorMessage=lMapInputSfDamageDetailNonMandatory.ErrorMessage
 			}
-			if(!lMapInputSfDamageAssessorName.Result){
+			if(!lMapInputSfDamageDetailNonMandatory.Result){
 				lreturn.put('ErrorMessage',lStrErrorMessage)
 				return lreturn
 			}
-			lResult=lMapInputSfDamageAssessorName.Result
-			Map lMapInputSfDamageRecoveryAgentName=this.inputSfDamageRecoveryAgentName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageRecoveryAgentName)
-			if(lMapInputSfDamageRecoveryAgentName.Result){
-				lStrErrorMessage=''
-			}else{
-				lStrErrorMessage=lMapInputSfDamageRecoveryAgentName.ErrorMessage
-			}
-			if(!lMapInputSfDamageRecoveryAgentName.Result){
-				lreturn.put('ErrorMessage',lStrErrorMessage)
-				return lreturn
-			}
-			lResult=lMapInputSfDamageRecoveryAgentName.Result
-			Map lMapInputSfDamageServiceProviderName=this.inputSfDamageServiceProviderName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageServiceProviderName)
-			if(lMapInputSfDamageServiceProviderName.Result){
-				lStrErrorMessage=''
-			}else{
-				lStrErrorMessage=lMapInputSfDamageServiceProviderName.ErrorMessage
-			}
-			if(!lMapInputSfDamageServiceProviderName.Result){
-				lreturn.put('ErrorMessage',lStrErrorMessage)
-				return lreturn
-			}
-			lResult=lMapInputSfDamageServiceProviderName.Result
-			*/
+			lResult=lMapInputSfDamageDetailNonMandatory.Result
 			lStrCssLocator='c-ign-damage-details-app'
 			lElementIgniteClaimDamageFormRoot=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lStrCssLocator)
 			if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimDamageFormRoot)){
@@ -3189,6 +3975,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 			if(!lIsInputSfSaveButtonOK){
 				return lreturn
 			}
+			lResult=lIsInputSfSaveButtonOK
 			if(lResult){
 				lreturn.put('ErrorMessage',lStrErrorMessage)
 				lreturn.put('Result',lResult)
@@ -3225,42 +4012,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 				return lreturn
 			}
 			lResult=lMapInputSfReserveDetailReserveType.Result
-			/*
-			 * Move to this.inputSfDamageDetailNonMandatory
-			Map lMapInputSfDamageAssessorName=this.inputSfDamageAssessorName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageAssessorName)
-			if(lMapInputSfDamageAssessorName.Result){
+			Map lMapInputSfReserveDetailNonMandatory=this.inputSfReserveDetailNonMandatory(webDriver,lElementIgniteClaimReserveDetailFormRoot,mapSfClaimReserveDetailInput)
+			if(lMapInputSfReserveDetailNonMandatory.Result){
 				lStrErrorMessage=''
 			}else{
-				lStrErrorMessage=lMapInputSfDamageAssessorName.ErrorMessage
+				lStrErrorMessage=lMapInputSfReserveDetailNonMandatory.ErrorMessage
 			}
-			if(!lMapInputSfDamageAssessorName.Result){
+			if(!lMapInputSfReserveDetailNonMandatory.Result){
 				lreturn.put('ErrorMessage',lStrErrorMessage)
 				return lreturn
 			}
-			lResult=lMapInputSfDamageAssessorName.Result
-			Map lMapInputSfDamageRecoveryAgentName=this.inputSfDamageRecoveryAgentName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageRecoveryAgentName)
-			if(lMapInputSfDamageRecoveryAgentName.Result){
-				lStrErrorMessage=''
-			}else{
-				lStrErrorMessage=lMapInputSfDamageRecoveryAgentName.ErrorMessage
-			}
-			if(!lMapInputSfDamageRecoveryAgentName.Result){
-				lreturn.put('ErrorMessage',lStrErrorMessage)
-				return lreturn
-			}
-			lResult=lMapInputSfDamageRecoveryAgentName.Result
-			Map lMapInputSfDamageServiceProviderName=this.inputSfDamageServiceProviderName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageServiceProviderName)
-			if(lMapInputSfDamageServiceProviderName.Result){
-				lStrErrorMessage=''
-			}else{
-				lStrErrorMessage=lMapInputSfDamageServiceProviderName.ErrorMessage
-			}
-			if(!lMapInputSfDamageServiceProviderName.Result){
-				lreturn.put('ErrorMessage',lStrErrorMessage)
-				return lreturn
-			}
-			lResult=lMapInputSfDamageServiceProviderName.Result
-			*/
+			lResult=lMapInputSfReserveDetailNonMandatory.Result
 			lStrCssLocator='c-ign-reserve-details-app'
 			lElementIgniteClaimReserveDetailFormRoot=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lStrCssLocator)
 			if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimReserveDetailFormRoot)){
@@ -3274,6 +4036,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 			if(!lIsInputSfSaveButtonOK){
 				return lreturn
 			}
+			lResult=lIsInputSfSaveButtonOK
 			if(lResult){
 				lreturn.put('ErrorMessage',lStrErrorMessage)
 				lreturn.put('Result',lResult)
@@ -3321,46 +4084,22 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 				return lreturn
 			}
 			lResult=lMapInputSfReservePaymentPayeeName.Result
-			/*
-			 * Move to this.inputSfDamageDetailNonMandatory
-			Map lMapInputSfDamageAssessorName=this.inputSfDamageAssessorName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageAssessorName)
-			if(lMapInputSfDamageAssessorName.Result){
+			Map lMapInputSfReservePaymentNonMandatory=this.inputSfReservePaymentNonMandatory(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,mapSfClaimReservePaymentInput)
+			if(lMapInputSfReservePaymentNonMandatory.Result){
 				lStrErrorMessage=''
 			}else{
-				lStrErrorMessage=lMapInputSfDamageAssessorName.ErrorMessage
+				lStrErrorMessage=lMapInputSfReservePaymentNonMandatory.ErrorMessage
 			}
-			if(!lMapInputSfDamageAssessorName.Result){
+			if(!lMapInputSfReservePaymentNonMandatory.Result){
 				lreturn.put('ErrorMessage',lStrErrorMessage)
 				return lreturn
 			}
-			lResult=lMapInputSfDamageAssessorName.Result
-			Map lMapInputSfDamageRecoveryAgentName=this.inputSfDamageRecoveryAgentName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageRecoveryAgentName)
-			if(lMapInputSfDamageRecoveryAgentName.Result){
-				lStrErrorMessage=''
-			}else{
-				lStrErrorMessage=lMapInputSfDamageRecoveryAgentName.ErrorMessage
-			}
-			if(!lMapInputSfDamageRecoveryAgentName.Result){
-				lreturn.put('ErrorMessage',lStrErrorMessage)
-				return lreturn
-			}
-			lResult=lMapInputSfDamageRecoveryAgentName.Result
-			Map lMapInputSfDamageServiceProviderName=this.inputSfDamageServiceProviderName(webDriver,lElementIgniteClaimDamageFormRoot,mapSfClaimDamageInput.DamageServiceProviderName)
-			if(lMapInputSfDamageServiceProviderName.Result){
-				lStrErrorMessage=''
-			}else{
-				lStrErrorMessage=lMapInputSfDamageServiceProviderName.ErrorMessage
-			}
-			if(!lMapInputSfDamageServiceProviderName.Result){
-				lreturn.put('ErrorMessage',lStrErrorMessage)
-				return lreturn
-			}
-			lResult=lMapInputSfDamageServiceProviderName.Result
-			*/
+			lResult=lMapInputSfReservePaymentNonMandatory.Result
 			lIsInputSfSaveButtonOK=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfNextButton(webDriver,lElementIgniteClaimReservePaymentDetailFormRoot,'save')
 			if(!lIsInputSfSaveButtonOK){
 				return lreturn
 			}
+			lResult=lIsInputSfSaveButtonOK
 			if(lResult){
 				lreturn.put('ErrorMessage',lStrErrorMessage)
 				lreturn.put('Result',lResult)
@@ -3377,10 +4116,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCoreHelper{
 		}
 		try{
 			targetMap.clear()
-			/*
-			targetMap.put('DamageTypeMapWithClaimIncidentType','')
-			targetMap.put('ReserveTypeAndReservePaymentOption','')
-			*/
 			targetMap.put('DamageType','')
 			targetMap.put('DamageAssessorName','')
 			targetMap.put('DamageRecoveryAgentName','')
