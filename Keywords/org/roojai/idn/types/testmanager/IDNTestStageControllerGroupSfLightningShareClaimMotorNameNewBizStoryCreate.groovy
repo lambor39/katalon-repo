@@ -262,7 +262,9 @@ public class IDNTestStageControllerGroupSfLightningShareClaimMotorNameNewBizStor
 				 */
 				if(IGNUemaHelper.checkObjectNullOfObject(this.Stage01MainUtil)){
 					this.Stage01MainUtil=new IDNSalesforceLightningClaimMotorCarNewbizCreateUtil(this)
-					lDriver.get('https://roojai-idn--uat.sandbox.lightning.force.com/lightning/r/Claim__c/a0nMS0000000BebYAE/view')
+					//lDriver.get('https://roojai-idn--uat.sandbox.lightning.force.com/lightning/r/Claim__c/a0nMS0000000BebYAE/view')
+					//lDriver.get('https://roojai-idn--uat.sandbox.lightning.force.com/lightning/r/Damage__c/a0xMS0000001QlFYAU/view')
+					lDriver.get('https://roojai-idn--uat.sandbox.lightning.force.com/lightning/r/Reserve_Details__c/a29MS0000000bvdYAA/view')
 					Boolean lIsSfCreateClaimDetailToDo=IGNUemaHelper.convertStringToBoolean(lStrSfCreateClaimDetailToDo)
 					if(lIsSfCreateClaimDetailToDo){
 						lIsProceedTestMainOK=this.Stage01MainUtil.inputClaimCreateTest(lMapCaseDataCurrentInput,lMapCaseDataCurrentOutput)
