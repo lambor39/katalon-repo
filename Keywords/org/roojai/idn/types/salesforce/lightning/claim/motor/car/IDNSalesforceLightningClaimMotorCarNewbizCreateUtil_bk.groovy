@@ -23,9 +23,9 @@ import org.roojai.idn.types.testmanager.IDNTestStageControllerGroupSfLightningSh
 import org.roojai.idn.types.salesforce.lightning.claim.motor.car.IDNSalesforceLightningClaimMotorCarNewbizCoreHelper
 import org.roojai.idn.types.salesforce.lightning.core.IDNSalesforceLightningCoreEnum.IDNEnumSalesforceObjectDriverType
 import org.roojai.idn.types.salesforce.lightning.core.IDNSalesforceLightningCoreHelperUI
-public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
+public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil_bk{
 	private IDNTestStageControllerGroupSfLightningShareClaimMotorNameNewBizStoryCreate parentStageController=null
-	public IDNSalesforceLightningClaimMotorCarNewbizCreateUtil(IDNTestStageControllerGroupSfLightningShareClaimMotorNameNewBizStoryCreate initStageController){
+	public IDNSalesforceLightningClaimMotorCarNewbizCreateUtil_bk(IDNTestStageControllerGroupSfLightningShareClaimMotorNameNewBizStoryCreate initStageController){
 		super()
 		try{
 			this.parentStageController=initStageController
@@ -161,7 +161,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			lStrCssLocator='c-ign-claim-reporting-form'
 			IGNUemaHelper.waitElementVisibleByLocator(this.parentStageController.getWebDriver(),lStrCssLocator,10)
-			WebElement lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator,false)
+			WebElement lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator,false)
 			if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimReportingFormRoot)){
 				return lreturn
 			}
@@ -214,7 +214,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				default:
 					return lreturn
 			}
-			lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
+			lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
 			if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimReportingFormRoot)){
 				return lreturn
 			}
@@ -228,7 +228,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			if(lIsInputSfNextButtonOK){
 				lStrCssLocator='c-ign-open-claim-form'
 				IGNUemaHelper.waitElementVisibleByLocator(this.parentStageController.getWebDriver(),lStrCssLocator,10)
-				lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator,false)
+				lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator,false)
 				if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimReportingFormRoot)){
 					return lreturn
 				}
@@ -415,7 +415,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 					}
 				}
 			}
-			lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
+			lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
 			if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimReportingFormRoot)){
 				return lreturn
 			}
@@ -425,7 +425,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			lStrCssLocator='c-ign-claim-additional-info-form'
 			IGNUemaHelper.waitElementVisibleByLocator(this.parentStageController.getWebDriver(),lStrCssLocator,10)
-			lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator,false)
+			lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator,false)
 			if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimReportingFormRoot)){
 				return lreturn
 			}
@@ -539,7 +539,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			if(!lMapInputSfClaimIrregularitiesDetailNonMandatory.Result){
 				return lreturn
 			}
-			lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
+			lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
 			if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimReportingFormRoot)){
 				return lreturn
 			}
@@ -547,7 +547,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			if(!lIsInputSfNextButtonOK){
 				return lreturn
 			}
-			lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
+			lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
 			if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimReportingFormRoot)){
 				return lreturn
 			}
@@ -573,7 +573,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_First_Form_Product_Type')
 			lStrSfClaimMotorProductType=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfClaimMotorProductType)
-			Map lMapInputSfClaimMotorProductType=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimMotorProductType(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimMotorProductType)
+			Map lMapInputSfClaimMotorProductType=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimMotorProductType(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimMotorProductType)
 			if(!lMapInputSfClaimMotorProductType.Result){
 				lStrErrorMessage=lMapInputSfClaimMotorProductType.ErrorMessage
 			}
@@ -597,7 +597,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrErrorMessage=''
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimMotorOpportunityNo=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailFirstFormOpportunityNo
-			Map lMapInputSfClaimMotorOpportunityNo=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimMotorOpportunityNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimMotorOpportunityNo)
+			Map lMapInputSfClaimMotorOpportunityNo=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimMotorOpportunityNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimMotorOpportunityNo)
 			if(!lMapInputSfClaimMotorOpportunityNo.Result){
 				lStrErrorMessage=lMapInputSfClaimMotorOpportunityNo.ErrorMessage
 			}
@@ -636,13 +636,13 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_First_Form_Claim_Loss_Date_Time_Value')
 			String lStrSfClaimMotorLossTimeValue=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfClaimMotorLossTime)
-			Map lMapInputSfClaimLossDate=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimLossDate(this.parentStageController.getWebDriver(),elementIgniteClaimReportingFormRoot,lStrSfClaimMotorLossDateValue)
+			Map lMapInputSfClaimLossDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimLossDate(this.parentStageController.getWebDriver(),elementIgniteClaimReportingFormRoot,lStrSfClaimMotorLossDateValue)
 			if(!lMapInputSfClaimLossDate.Result){
 				lStrErrorMessage=lMapInputSfClaimLossDate.ErrorMessage
 			}
 			lResult=lMapInputSfClaimLossDate.Result
 			if(lResult){
-				Map lMapInputSfClaimLossTime=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimLossTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimMotorLossTimeValue)
+				Map lMapInputSfClaimLossTime=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimLossTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimMotorLossTimeValue)
 				if(!lMapInputSfClaimLossTime.Result){
 					lStrErrorMessage=lMapInputSfClaimLossTime.ErrorMessage
 				}
@@ -667,7 +667,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrErrorMessage=''
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimMotorIncidentDriver=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentPersonInfoIncidentDriverName
-			Map lMapInputSfClaimIncidentDriver=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimIncidentDriver(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimMotorIncidentDriver)
+			Map lMapInputSfClaimIncidentDriver=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimIncidentDriver(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimMotorIncidentDriver)
 			if(!lMapInputSfClaimIncidentDriver.Result){
 				lStrErrorMessage=lMapInputSfClaimIncidentDriver.ErrorMessage
 			}
@@ -691,7 +691,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrErrorMessage=''
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimAddress=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentLocationInfoAddress
-			Map lMapInputSfClaimAddress=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimAddress(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAddress)
+			Map lMapInputSfClaimAddress=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimAddress(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAddress)
 			if(!lMapInputSfClaimAddress.Result){
 				lStrErrorMessage=lMapInputSfClaimAddress.ErrorMessage
 			}
@@ -723,7 +723,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			List<String>lListSfClaimCauseAndIncidentType=lStrSfClaimCauseAndIncidentTypeValue.split('[|]')
 			String lStrSfClaimCauseTypeValue=lListSfClaimCauseAndIncidentType.get(lNumSfClaimCauseTypeIndex)
 			String lStrSfClaimIncidentTypeValue=lListSfClaimCauseAndIncidentType.get(lNumSfClaimIncidentTypeIndex)
-			Map lMapInputSfClaimCauseType=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimCauseType(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCauseTypeValue)
+			Map lMapInputSfClaimCauseType=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimCauseType(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCauseTypeValue)
 			if(!lMapInputSfClaimCauseType.Result){
 				lStrErrorMessage=''
 			}else{
@@ -731,7 +731,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			lResult=lMapInputSfClaimCauseType.Result
 			if(lResult){
-				Map lMapInputSfClaimIncidentType=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimIncidentType(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIncidentTypeValue)
+				Map lMapInputSfClaimIncidentType=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimIncidentType(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIncidentTypeValue)
 				if(!lMapInputSfClaimIncidentType.Result){
 					lStrErrorMessage=lMapInputSfClaimIncidentType.ErrorMessage
 				}
@@ -759,7 +759,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Incident_Info_Liability')
 			String lStrSfClaimLiabilityValue=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfLiability)
-			Map lMapInputSfClaimLiability=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimLiability(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimLiabilityValue)
+			Map lMapInputSfClaimLiability=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimLiability(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimLiabilityValue)
 			if(!lMapInputSfClaimLiability.Result){
 				lStrErrorMessage=lMapInputSfClaimLiability.ErrorMessage
 			}
@@ -786,7 +786,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Incident_Info_Were_You_Travelling_To_Or_From_Work')
 			String lStrSfClaimWereYouTravellingOrWorkValue=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfWereYouTravellingOrWork)
-			Map lMapInputSfClaimWereYouTravellingOrWork=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimWereYouTravellingOrWork(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimWereYouTravellingOrWorkValue)
+			Map lMapInputSfClaimWereYouTravellingOrWork=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimWereYouTravellingOrWork(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimWereYouTravellingOrWorkValue)
 			if(!lMapInputSfClaimWereYouTravellingOrWork.Result){
 				lStrErrorMessage=lMapInputSfClaimWereYouTravellingOrWork.ErrorMessage
 			}
@@ -810,7 +810,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrErrorMessage=''
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimAppointmentPlaceValue=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailSurveyorInfoAppointmentPlace
-			Map lMapInputSfClaimAppointmentPlace=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimAppointmentPlace(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAppointmentPlaceValue)
+			Map lMapInputSfClaimAppointmentPlace=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimAppointmentPlace(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAppointmentPlaceValue)
 			if(!lMapInputSfClaimAppointmentPlace.Result){
 				lStrErrorMessage=lMapInputSfClaimAppointmentPlace.ErrorMessage
 			}
@@ -837,7 +837,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Incident_Info_Were_You_Travelling_To_Or_From_Work')
 			String lStrSfClaimIndependentWitnessValue=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfIndependentWitness)
-			Map lMapInputSfClaimIndependentWitness=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimIndependentWitness(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIndependentWitnessValue)
+			Map lMapInputSfClaimIndependentWitness=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimIndependentWitness(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIndependentWitnessValue)
 			if(!lMapInputSfClaimIndependentWitness.Result){
 				lStrErrorMessage=lMapInputSfClaimIndependentWitness.ErrorMessage
 			}
@@ -864,7 +864,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Surveyor_Info_Car_Is_Drivable')
 			String lStrSfClaimCarIsDrivableValue=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfCarIsDrivable)
-			Map lMapInputSfClaimCarIsDrivable=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimCarIsDrivable(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCarIsDrivableValue)
+			Map lMapInputSfClaimCarIsDrivable=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimCarIsDrivable(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCarIsDrivableValue)
 			if(!lMapInputSfClaimCarIsDrivable.Result){
 				lStrErrorMessage=lMapInputSfClaimCarIsDrivable.ErrorMessage
 			}
@@ -888,7 +888,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrErrorMessage=''
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimDescriptionValue=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentInfoClaimDescription
-			Map lMapInputSfClaimClaimDescription=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimClaimDescription(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimDescriptionValue)
+			Map lMapInputSfClaimClaimDescription=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimClaimDescription(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimDescriptionValue)
 			if(!lMapInputSfClaimClaimDescription.Result){
 				lStrErrorMessage=lMapInputSfClaimClaimDescription.ErrorMessage
 			}
@@ -915,7 +915,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Incident_Info_Any_Injury')
 			String lStrSfClaimAnyInjuryValue=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfAnyInjury)
-			Map lMapInputSfClaimAnyInjury=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimAnyInjury(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAnyInjuryValue)
+			Map lMapInputSfClaimAnyInjury=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimAnyInjury(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAnyInjuryValue)
 			if(!lMapInputSfClaimAnyInjury.Result){
 				lStrErrorMessage=lMapInputSfClaimAnyInjury.ErrorMessage
 			}
@@ -950,7 +950,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			if(!lMapInputAdjustDate.Result){
 				return lreturn
 			}
-			Map lMapInputSfClaimClaimReportDate=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimClaimReportDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimReportDateValue)
+			Map lMapInputSfClaimClaimReportDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimClaimReportDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimReportDateValue)
 			if(!lMapInputSfClaimClaimReportDate.Result){
 				lStrErrorMessage=lMapInputSfClaimClaimReportDate.ErrorMessage
 			}
@@ -980,7 +980,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Surveyor_Info_Surveyor_Required_To_Do')
 			String lStrSfClaimSurveyorRequiredValue=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfSurveyorRequired)
 			lIsSurveyorRequired=IGNUemaHelper.convertStringToBoolean(lStrSfClaimSurveyorRequiredValue)
-			Map lMapInputSfClaimSurveyorRequired=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyorRequired(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorRequiredValue)
+			Map lMapInputSfClaimSurveyorRequired=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyorRequired(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorRequiredValue)
 			if(!lMapInputSfClaimSurveyorRequired.Result){
 				lStrErrorMessage=lMapInputSfClaimSurveyorRequired.ErrorMessage
 			}
@@ -1005,7 +1005,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrErrorMessage=''
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimSurveyCompany=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailSurveyorInfoSurveyCompany
-			Map lMapInputSfClaimSurveyCompany=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyCompany(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyCompany)
+			Map lMapInputSfClaimSurveyCompany=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyCompany(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyCompany)
 			if(!lMapInputSfClaimSurveyCompany.Result){
 				lStrErrorMessage=lMapInputSfClaimSurveyCompany.ErrorMessage
 			}
@@ -1029,7 +1029,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrErrorMessage=''
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimSurveyorName=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailSurveyorInfoSurveyorName
-			Map lMapInputSfClaimSurveyorName=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyorName(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorName)
+			Map lMapInputSfClaimSurveyorName=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyorName(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorName)
 			if(!lMapInputSfClaimSurveyorName.Result){
 				lStrErrorMessage=lMapInputSfClaimSurveyorName.ErrorMessage
 			}
@@ -1053,7 +1053,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrErrorMessage=''
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimSurveyorMobileNo=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailSurveyorInfoSurveyorMobileNo
-			Map lMapInputSfClaimSurveyorMobileNo=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyorMobileNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorMobileNo)
+			Map lMapInputSfClaimSurveyorMobileNo=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyorMobileNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorMobileNo)
 			if(!lMapInputSfClaimSurveyorMobileNo.Result){
 				lStrErrorMessage=lMapInputSfClaimSurveyorMobileNo.ErrorMessage
 			}
@@ -1080,7 +1080,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Surveyor_Info_Survey_Type')
 			String lStrSfClaimSurveyTypeValue=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfSurveyType)
-			Map lMapInputSfClaimSurveyType=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyType(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyTypeValue)
+			Map lMapInputSfClaimSurveyType=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyType(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyTypeValue)
 			if(!lMapInputSfClaimSurveyType.Result){
 				lStrErrorMessage=lMapInputSfClaimSurveyType.ErrorMessage
 			}
@@ -1107,7 +1107,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Surveyor_Info_Reason_For_Survey_Type')
 			String lStrSfClaimReasonForSurveyTypeValue=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfReasonForSurveyType)
-			Map lMapInputSfClaimReasonForSurveyType=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimReasonForSurveyType(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimReasonForSurveyTypeValue)
+			Map lMapInputSfClaimReasonForSurveyType=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimReasonForSurveyType(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimReasonForSurveyTypeValue)
 			if(!lMapInputSfClaimReasonForSurveyType.Result){
 				lStrErrorMessage=lMapInputSfClaimReasonForSurveyType.ErrorMessage
 			}
@@ -1146,13 +1146,13 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Surveyor_Info_Surveyor_Appointed_Time_Value')
 			String lStrSfClaimSurveyorAppointedTimeValue=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfClaimSurveyorAppointedTime)
-			Map lMapInputSfClaimSurveyorAppointedDate=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyorAppointedDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorAppointedDateValue)
+			Map lMapInputSfClaimSurveyorAppointedDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyorAppointedDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorAppointedDateValue)
 			if(!lMapInputSfClaimSurveyorAppointedDate.Result){
 				lStrErrorMessage=lMapInputSfClaimSurveyorAppointedDate.ErrorMessage
 			}
 			lResult=lMapInputSfClaimSurveyorAppointedDate.Result
 			if(lResult){
-				Map lMapInputSfClaimSurveyorAppointedTime=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyorAppointedTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorAppointedTimeValue)
+				Map lMapInputSfClaimSurveyorAppointedTime=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyorAppointedTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorAppointedTimeValue)
 				if(!lMapInputSfClaimSurveyorAppointedTime.Result){
 					lStrErrorMessage=lMapInputSfClaimSurveyorAppointedTime.ErrorMessage
 				}
@@ -1177,7 +1177,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrErrorMessage=''
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimReportedByValue=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentPersonInfoReportedByName
-			Map lMapInputSfClaimReportedBy=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimReportedBy(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimReportedByValue)
+			Map lMapInputSfClaimReportedBy=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimReportedBy(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimReportedByValue)
 			if(!lMapInputSfClaimReportedBy.Result){
 				lStrErrorMessage=lMapInputSfClaimReportedBy.ErrorMessage
 			}
@@ -1201,7 +1201,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrErrorMessage=''
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfChronologyAccidentValue=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentInfoChronologyAccident
-			Map lMapInputSfClaimChronologyAccident=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimChronologyAccident(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfChronologyAccidentValue)
+			Map lMapInputSfClaimChronologyAccident=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimChronologyAccident(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfChronologyAccidentValue)
 			if(!lMapInputSfClaimChronologyAccident.Result){
 				lStrErrorMessage=lMapInputSfClaimChronologyAccident.ErrorMessage
 			}
@@ -1225,7 +1225,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrErrorMessage=''
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimAccidentVillageValue=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentLocationInfoClaimAccidentVillage
-			Map lMapInputSfClaimClaimAccidentVillage=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimClaimAccidentVillage(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentVillageValue)
+			Map lMapInputSfClaimClaimAccidentVillage=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimClaimAccidentVillage(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentVillageValue)
 			if(!lMapInputSfClaimClaimAccidentVillage.Result){
 				lStrErrorMessage=lMapInputSfClaimClaimAccidentVillage.ErrorMessage
 			}
@@ -1258,7 +1258,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Touchpoint_Stage')
 			lStrSfClaimTouchPointStage=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimTouchPointStage)
 			if(lStrSfClaimTouchPointStage.length()>0){
-				Map lMapInputSfTouchPointStage=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimTouchPointStage(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimTouchPointStage)
+				Map lMapInputSfTouchPointStage=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimTouchPointStage(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimTouchPointStage)
 				if(lMapInputSfTouchPointStage.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1283,7 +1283,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				return lreturn
 			}
 			if(lStrSfClaimQuotationReceivedFromGarageDate.length()>0){
-				Map lMapInputSfClaimQuotationReceivedFromGarageDate=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimQuotationReceivedFromGarageDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimQuotationReceivedFromGarageDate)
+				Map lMapInputSfClaimQuotationReceivedFromGarageDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimQuotationReceivedFromGarageDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimQuotationReceivedFromGarageDate)
 				if(lMapInputSfClaimQuotationReceivedFromGarageDate.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1304,7 +1304,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Received_From_Garage_Time_Value')
 			lStrSfClaimQuotationReceivedFromGarageTime=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimQuotationReceivedFromGarageTime)
 			if(lStrSfClaimQuotationReceivedFromGarageTime.length()>0){
-				Map lMapInputSfClaimQuotationReceivedFromGarageTime=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimQuotationReceivedFromGarageTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimQuotationReceivedFromGarageTime)
+				Map lMapInputSfClaimQuotationReceivedFromGarageTime=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimQuotationReceivedFromGarageTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimQuotationReceivedFromGarageTime)
 				if(lMapInputSfClaimQuotationReceivedFromGarageTime.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1329,7 +1329,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				return lreturn
 			}
 			if(lStrSfClaimQuotationApprovalDate.length()>0){
-				Map lMapInputSfClaimQuotationApprovalDate=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimQuotationApprovalDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimQuotationApprovalDate)
+				Map lMapInputSfClaimQuotationApprovalDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimQuotationApprovalDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimQuotationApprovalDate)
 				if(lMapInputSfClaimQuotationApprovalDate.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1350,7 +1350,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Approval_Time_Value')
 			lStrSfClaimQuotationApprovalTime=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimQuotationApprovalTime)
 			if(lStrSfClaimQuotationApprovalTime.length()>0){
-				Map lMapInputSfClaimQuotationApprovalTime=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimQuotationApprovalTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimQuotationApprovalTime)
+				Map lMapInputSfClaimQuotationApprovalTime=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimQuotationApprovalTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimQuotationApprovalTime)
 				if(lMapInputSfClaimQuotationApprovalTime.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1375,7 +1375,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				return lreturn
 			}
 			if(lStrSfClaimBeginRepairDate.length()>0){
-				Map lMapInputSfClaimBeginRepairDate=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimBeginRepairDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimBeginRepairDate)
+				Map lMapInputSfClaimBeginRepairDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimBeginRepairDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimBeginRepairDate)
 				if(lMapInputSfClaimBeginRepairDate.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1391,7 +1391,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Begin_Repair_Time_Value')
 			lStrSfClaimBeginRepairTime=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimBeginRepairTime)
 			if(lStrSfClaimBeginRepairTime.length()>0){
-				Map lMapInputSfClaimBeginRepairTime=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimBeginRepairTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimBeginRepairTime)
+				Map lMapInputSfClaimBeginRepairTime=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimBeginRepairTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimBeginRepairTime)
 				if(lMapInputSfClaimBeginRepairTime.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1416,7 +1416,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				return lreturn
 			}
 			if(lStrSfClaimFinishRepairDate.length()>0){
-				Map lMapInputSfClaimFinishRepairDate=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimFinishRepairDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimFinishRepairDate)
+				Map lMapInputSfClaimFinishRepairDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimFinishRepairDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimFinishRepairDate)
 				if(lMapInputSfClaimFinishRepairDate.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1432,7 +1432,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Finish_Repair_Time_Value')
 			lStrSfClaimFinishRepairTime=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimFinishRepairTime)
 			if(lStrSfClaimFinishRepairTime.length()>0){
-				Map lMapInputSfClaimFinishRepairTime=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimFinishRepairTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimFinishRepairTime)
+				Map lMapInputSfClaimFinishRepairTime=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimFinishRepairTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimFinishRepairTime)
 				if(lMapInputSfClaimFinishRepairTime.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1448,7 +1448,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Insurer_Approval_Status')
 			lStrSfClaimInsurerApprovalStatus=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimInsurerApprovalStatus)
 			if(lStrSfClaimInsurerApprovalStatus.length()>0){
-				Map lMapInputSfClaimInsurerApprovalStatus=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimInsurerApprovalStatus(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimInsurerApprovalStatus)
+				Map lMapInputSfClaimInsurerApprovalStatus=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimInsurerApprovalStatus(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimInsurerApprovalStatus)
 				if(lMapInputSfClaimInsurerApprovalStatus.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1462,7 +1462,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimInsurerClaimNo=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailClaimProgressInfoInsurerClaimNo
 			if(lStrSfClaimInsurerClaimNo.length()>0){
-				Map lMapInputSfClaimInsurerClaimNo=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.lStrSfClaimInsurerClaimNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimInsurerClaimNo)
+				Map lMapInputSfClaimInsurerClaimNo=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.lStrSfClaimInsurerClaimNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimInsurerClaimNo)
 				if(lMapInputSfClaimInsurerClaimNo.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1487,7 +1487,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				return lreturn
 			}
 			if(lStrSfClaimApprovalDateValue.length()>0){
-				Map lMapInputSfClaimApprovalDate=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimApprovalDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimApprovalDateValue)
+				Map lMapInputSfClaimApprovalDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimApprovalDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimApprovalDateValue)
 				if(lMapInputSfClaimApprovalDate.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1501,7 +1501,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimCancellationAndRejectionRemarks=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailClaimProgressInfoInsurerClaimNo
 			if(lStrSfClaimCancellationAndRejectionRemarks.length()>0){
-				Map lMapInputSfClaimCancellationAndRejectionRemarks=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimCancellationAndRejectionRemarks(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCancellationAndRejectionRemarks)
+				Map lMapInputSfClaimCancellationAndRejectionRemarks=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimCancellationAndRejectionRemarks(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCancellationAndRejectionRemarks)
 				if(lMapInputSfClaimCancellationAndRejectionRemarks.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1536,7 +1536,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimIncidentDriverMobileNo=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentPersonInfoIncidentDriverMobileNo
 			if(lStrSfClaimIncidentDriverMobileNo.length()>0){
-				Map lMapInputSfClaimIncidentDriverMobileNo=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimIncidentDriverMobileNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIncidentDriverMobileNo)
+				Map lMapInputSfClaimIncidentDriverMobileNo=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimIncidentDriverMobileNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIncidentDriverMobileNo)
 				if(lMapInputSfClaimIncidentDriverMobileNo.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1550,7 +1550,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimClaimantName=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentPersonInfoClaimantName
 			if(lStrSfClaimClaimantName.length()>0){
-				Map lMapInputSfClaimClaimantName=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimClaimantName(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimClaimantName)
+				Map lMapInputSfClaimClaimantName=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimClaimantName(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimClaimantName)
 				if(lMapInputSfClaimClaimantName.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1564,7 +1564,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimClaimantMobileNo=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentPersonInfoClaimantMobileNo
 			if(lStrSfClaimClaimantMobileNo.length()>0){
-				Map lMapInputSfClaimClaimantMobileNo=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimClaimantMobileNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimClaimantMobileNo)
+				Map lMapInputSfClaimClaimantMobileNo=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimClaimantMobileNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimClaimantMobileNo)
 				if(lMapInputSfClaimClaimantMobileNo.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1578,7 +1578,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimReportedByName=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentPersonInfoReportedByName
 			if(lStrSfClaimReportedByName.length()>0){
-				Map lMapInputSfClaimantMobileNo=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimReportedByName(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimReportedByName)
+				Map lMapInputSfClaimantMobileNo=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimReportedByName(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimReportedByName)
 				if(lMapInputSfClaimantMobileNo.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1592,7 +1592,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimReportedByMobileNo=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentPersonInfoReportedByMobileNo
 			if(lStrSfClaimReportedByMobileNo.length()>0){
-				Map lMapInputSfClaimReportedByMobileNo=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimReportedByMobileNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimReportedByMobileNo)
+				Map lMapInputSfClaimReportedByMobileNo=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimReportedByMobileNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimReportedByMobileNo)
 				if(lMapInputSfClaimReportedByMobileNo.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1630,7 +1630,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle=null
 			String lStrSfClaimDriverOnScene=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailSurveyorInfoDriverOnScene
 			if(lStrSfClaimDriverOnScene.length()>0){
-				Map lMapInputSfClaimDriverOnScene=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimDriverOnScene(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimDriverOnScene)
+				Map lMapInputSfClaimDriverOnScene=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimDriverOnScene(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimDriverOnScene)
 				if(lMapInputSfClaimDriverOnScene.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1646,7 +1646,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Surveyor_Info_Car_Is_At_Workshop')
 			lStrSfClaimCarIsAtWorkshop=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimCarIsAtWorkshop)
 			if(lStrSfClaimCarIsAtWorkshop.length()>0){
-				Map lMapInputSfClaimCarIsAtWorkshop=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimCarIsAtWorkshop(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCarIsAtWorkshop)
+				Map lMapInputSfClaimCarIsAtWorkshop=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimCarIsAtWorkshop(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCarIsAtWorkshop)
 				if(lMapInputSfClaimCarIsAtWorkshop.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1671,7 +1671,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				return lreturn
 			}
 			if(lStrSfClaimSurveyorArrivedDate.length()>0){
-				Map lMapInputSfClaimSurveyorArrivedDate=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyorArrivedDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorArrivedDate)
+				Map lMapInputSfClaimSurveyorArrivedDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyorArrivedDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorArrivedDate)
 				if(lMapInputSfClaimSurveyorArrivedDate.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1687,7 +1687,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Surveyor_Info_Surveyor_Arrived_Time_Value')
 			lStrSfClaimSurveyorArrivedTime=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimSurveyorArrivedTime)
 			if(lStrSfClaimSurveyorArrivedTime.length()>0){
-				Map lMapInputSfClaimSurveyorArrivedTime=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyorArrivedTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorArrivedTime)
+				Map lMapInputSfClaimSurveyorArrivedTime=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyorArrivedTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorArrivedTime)
 				if(lMapInputSfClaimSurveyorArrivedTime.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1712,7 +1712,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				return lreturn
 			}
 			if(lStrSfClaimSurveyorFinishedDate.length()>0){
-				Map lMapInputSfClaimSurveyorFinishedDate=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyorFinishedDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorFinishedDate)
+				Map lMapInputSfClaimSurveyorFinishedDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyorFinishedDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorFinishedDate)
 				if(lMapInputSfClaimSurveyorFinishedDate.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1728,7 +1728,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Surveyor_Info_Surveyor_Finished_Time_Value')
 			lStrSfClaimSurveyorArrivedTime=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimSurveyorArrivedTime)
 			if(lStrSfClaimSurveyorFinishedTime.length()>0){
-				Map lMapInputSfClaimSurveyorFinishedTime=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyorFinishedTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorFinishedTime)
+				Map lMapInputSfClaimSurveyorFinishedTime=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyorFinishedTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorFinishedTime)
 				if(lMapInputSfClaimSurveyorFinishedTime.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1742,7 +1742,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimSurveyorReportAttached=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailSurveyorInfoSurveyorReportAttached
 			if(lStrSfClaimSurveyorReportAttached.length()>0){
-				Map lMapInputSfClaimSurveyorReportAttached=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSurveyorReportAttached(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorReportAttached)
+				Map lMapInputSfClaimSurveyorReportAttached=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSurveyorReportAttached(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSurveyorReportAttached)
 				if(lMapInputSfClaimSurveyorReportAttached.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1781,7 +1781,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Incident_Info_Vehicle_Damaged')
 			lStrSfClaimVehicleDamaged=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimVehicleDamaged)
 			if(lStrSfClaimVehicleDamaged.length()>0){
-				Map lMapInputSfClaimVehicleDamaged=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimVehicleDamaged(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimVehicleDamaged)
+				Map lMapInputSfClaimVehicleDamaged=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimVehicleDamaged(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimVehicleDamaged)
 				if(lMapInputSfClaimVehicleDamaged.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1797,7 +1797,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Incident_Info_KFK')
 			lStrSfClaimKFK=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimKFK)
 			if(lStrSfClaimKFK.length()>0){
-				Map lMapInputSfClaimKFK=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimKFK(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimKFK)
+				Map lMapInputSfClaimKFK=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimKFK(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimKFK)
 				if(lMapInputSfClaimKFK.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1811,7 +1811,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimIsDryClaim=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentInfoIsDryClaim
 			if(lStrSfClaimIsDryClaim.length()>0){
-				Map lMapInputSfClaimIsDryClaim=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimIsDryClaim(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIsDryClaim)
+				Map lMapInputSfClaimIsDryClaim=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimIsDryClaim(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIsDryClaim)
 				if(lMapInputSfClaimIsDryClaim.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1825,7 +1825,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimCollisionCountByVehicle=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentInfoCollisionCountByVehicle
 			if(lStrSfClaimCollisionCountByVehicle.length()>0){
-				Map lMapInputSfClaimCollisionCountByVehicle=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimCollisionCountByVehicle(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCollisionCountByVehicle)
+				Map lMapInputSfClaimCollisionCountByVehicle=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimCollisionCountByVehicle(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCollisionCountByVehicle)
 				if(lMapInputSfClaimCollisionCountByVehicle.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1839,7 +1839,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimIncidentInfoTotalRejectAmount=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentInfoTotalRejectAmount
 			if(lStrSfClaimIncidentInfoTotalRejectAmount.length()>0){
-				Map lMapInputSfClaimIncidentInfoTotalRejectAmount=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimIncidentInfoTotalRejectAmount(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIncidentInfoTotalRejectAmount)
+				Map lMapInputSfClaimIncidentInfoTotalRejectAmount=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimIncidentInfoTotalRejectAmount(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIncidentInfoTotalRejectAmount)
 				if(lMapInputSfClaimIncidentInfoTotalRejectAmount.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1876,7 +1876,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle=null
 			String lStrSfClaimAccidentHouseNumber=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentLocationInfoClaimAccidentHouseNumber
 			if(lStrSfClaimAccidentHouseNumber.length()>0){
-				Map lMapInputSfClaimAccidentHouseNumber=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimAccidentHouseNumber(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentHouseNumber)
+				Map lMapInputSfClaimAccidentHouseNumber=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimAccidentHouseNumber(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentHouseNumber)
 				if(lMapInputSfClaimAccidentHouseNumber.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1890,7 +1890,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimAccidentRoad=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentLocationInfoClaimAccidentRoad
 			if(lStrSfClaimAccidentRoad.length()>0){
-				Map lMapInputSfClaimAccidentRoad=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimAccidentRoad(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentRoad)
+				Map lMapInputSfClaimAccidentRoad=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimAccidentRoad(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentRoad)
 				if(lMapInputSfClaimAccidentRoad.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1906,7 +1906,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Incident_Location_Info_Claim_Accident_Country')
 			lStrSfClaimAccidentCountry=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimAccidentCountry)
 			if(lStrSfClaimAccidentCountry.length()>0){
-				Map lMapInputSfClaimAccidentCountry=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimAccidentCountry(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentCountry)
+				Map lMapInputSfClaimAccidentCountry=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimAccidentCountry(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentCountry)
 				if(lMapInputSfClaimAccidentCountry.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1920,7 +1920,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimAccidentGeoLocationLongitude=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentLocationInfoAccidentGeoLocationLongitude
 			if(lStrSfClaimAccidentGeoLocationLongitude.length()>0){
-				Map lMapInputSfClaimAccidentGeoLocationLongitude=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimAccidentGeoLocationLongitude(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentGeoLocationLongitude)
+				Map lMapInputSfClaimAccidentGeoLocationLongitude=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimAccidentGeoLocationLongitude(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentGeoLocationLongitude)
 				if(lMapInputSfClaimAccidentGeoLocationLongitude.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1934,7 +1934,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimAccidentGeoLocationLatitude=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailIncidentLocationInfoAccidentGeoLocationLatitude
 			if(lStrSfClaimAccidentGeoLocationLatitude.length()>0){
-				Map lMapInputSfClaimAccidentGeoLocationLatitude=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimAccidentGeoLocationLatitude(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentGeoLocationLatitude)
+				Map lMapInputSfClaimAccidentGeoLocationLatitude=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimAccidentGeoLocationLatitude(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimAccidentGeoLocationLatitude)
 				if(lMapInputSfClaimAccidentGeoLocationLatitude.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1974,7 +1974,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_At_The_Scene_Info_Photos_Taken')
 			lStrSfClaimPhotosTaken=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimPhotosTaken)
 			if(lStrSfClaimPhotosTaken.length()>0){
-				Map lMapInputSfClaimPhotosTaken=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimPhotosTaken(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPhotosTaken)
+				Map lMapInputSfClaimPhotosTaken=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimPhotosTaken(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPhotosTaken)
 				if(lMapInputSfClaimPhotosTaken.Result){
 					lStrErrorMessage=''
 				}else{
@@ -1990,7 +1990,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_At_The_Scene_Info_Towing_Required')
 			lStrSfClaimTowingRequired=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimTowingRequired)
 			if(lStrSfClaimTowingRequired.length()>0){
-				Map lMapInputSfClaimTowingRequired=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimTowingRequired(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimTowingRequired)
+				Map lMapInputSfClaimTowingRequired=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimTowingRequired(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimTowingRequired)
 				if(lMapInputSfClaimTowingRequired.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2004,7 +2004,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimTowingCompany=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailAtTheSceneInfoTowingCompany
 			if(lStrSfClaimTowingCompany.length()>0){
-				Map lMapInputSfClaimTowingCompany=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimTowingCompany(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimTowingCompany)
+				Map lMapInputSfClaimTowingCompany=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimTowingCompany(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimTowingCompany)
 				if(lMapInputSfClaimTowingCompany.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2020,7 +2020,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_At_The_Scene_Info_Did_Anyone_Call_An_Ambulance')
 			lStrSfClaimDidAnyoneCallAnAmbulance=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimDidAnyoneCallAnAmbulance)
 			if(lStrSfClaimDidAnyoneCallAnAmbulance.length()>0){
-				Map lMapInputSfClaimDidAnyoneCallAnAmbulance=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimDidAnyoneCallAnAmbulance(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimDidAnyoneCallAnAmbulance)
+				Map lMapInputSfClaimDidAnyoneCallAnAmbulance=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimDidAnyoneCallAnAmbulance(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimDidAnyoneCallAnAmbulance)
 				if(lMapInputSfClaimDidAnyoneCallAnAmbulance.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2035,7 +2035,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			//If Independent witness? is true will do below
 			String lStrSfClaimWitnessName=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailAtTheSceneInfoWitnessName
 			if(lStrSfClaimWitnessName.length()>0){
-				Map lMapInputSfClaimWitnessName=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimWitnessName(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimWitnessName)
+				Map lMapInputSfClaimWitnessName=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimWitnessName(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimWitnessName)
 				if(lMapInputSfClaimWitnessName.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2049,7 +2049,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimWitnessPhone=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailAtTheSceneInfoWitnessPhone
 			if(lStrSfClaimWitnessPhone.length()>0){
-				Map lMapInputSfClaimWitnessPhone=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimWitnessPhone(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimWitnessPhone)
+				Map lMapInputSfClaimWitnessPhone=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimWitnessPhone(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimWitnessPhone)
 				if(lMapInputSfClaimWitnessPhone.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2063,7 +2063,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimWitnessRelation=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailAtTheSceneInfoWitnessRelation
 			if(lStrSfClaimWitnessRelation.length()>0){
-				Map lMapInputSfClaimWitnessRelation=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimWitnessRelation(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimWitnessRelation)
+				Map lMapInputSfClaimWitnessRelation=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimWitnessRelation(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimWitnessRelation)
 				if(lMapInputSfClaimWitnessRelation.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2080,7 +2080,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_At_The_Scene_Info_Was_The_Incident_Reported_To_The_Police')
 			lStrSfClaimWasTheIncidentReportedToThePolice=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimWasTheIncidentReportedToThePolice)
 			if(lStrSfClaimDidAnyoneCallAnAmbulance.length()>0){
-				Map lMapInputSfClaimWasTheIncidentReportedToThePolice=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimWasTheIncidentReportedToThePolice(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimWasTheIncidentReportedToThePolice)
+				Map lMapInputSfClaimWasTheIncidentReportedToThePolice=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimWasTheIncidentReportedToThePolice(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimWasTheIncidentReportedToThePolice)
 				if(lMapInputSfClaimWasTheIncidentReportedToThePolice.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2094,7 +2094,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimPoliceStation=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailAtTheSceneInfoPoliceStation
 			if(lStrSfClaimPoliceStation.length()>0){
-				Map lMapInputSfClaimPoliceStation=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimPoliceStation(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceStation)
+				Map lMapInputSfClaimPoliceStation=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimPoliceStation(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceStation)
 				if(lMapInputSfClaimPoliceStation.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2108,7 +2108,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimPoliceOfficerName=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailAtTheSceneInfoPoliceOfficerName
 			if(lStrSfClaimPoliceOfficerName.length()>0){
-				Map lMapInputSfClaimPoliceOfficerName=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimPoliceOfficerName(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceOfficerName)
+				Map lMapInputSfClaimPoliceOfficerName=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimPoliceOfficerName(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceOfficerName)
 				if(lMapInputSfClaimPoliceOfficerName.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2122,7 +2122,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimPoliceMobileNo=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailAtTheSceneInfoPoliceMobileNo
 			if(lStrSfClaimPoliceMobileNo.length()>0){
-				Map lMapInputSfClaimPoliceMobileNo=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimPoliceMobileNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceMobileNo)
+				Map lMapInputSfClaimPoliceMobileNo=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimPoliceMobileNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceMobileNo)
 				if(lMapInputSfClaimPoliceMobileNo.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2136,7 +2136,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimPoliceReportNo=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailAtTheSceneInfoPoliceReportNo
 			if(lStrSfClaimPoliceReportNo.length()>0){
-				Map lMapInputSfClaimPoliceReportNo=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimPoliceReportNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceReportNo)
+				Map lMapInputSfClaimPoliceReportNo=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimPoliceReportNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceReportNo)
 				if(lMapInputSfClaimPoliceReportNo.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2161,7 +2161,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				return lreturn
 			}
 			if(lStrSfClaimPoliceReportDate.length()>0){
-				Map lMapInputSfClaimPoliceReportDate=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimPoliceReportDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceReportDate)
+				Map lMapInputSfClaimPoliceReportDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimPoliceReportDate(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceReportDate)
 				if(lMapInputSfClaimPoliceReportDate.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2177,7 +2177,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_At_The_Scene_Info_Police_Report_Time_Value')
 			lStrSfClaimPoliceReportTime=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimPoliceReportTime)
 			if(lStrSfClaimPoliceReportTime.length()>0){
-				Map lMapInputSfClaimPoliceReportTime=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimPoliceReportTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceReportTime)
+				Map lMapInputSfClaimPoliceReportTime=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimPoliceReportTime(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimPoliceReportTime)
 				if(lMapInputSfClaimPoliceReportTime.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2216,7 +2216,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Fraud_Verification_Info_Suspected_Fraud')
 			lStrSfClaimSuspectedFraud=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimSuspectedFraud)
 			if(lStrSfClaimSuspectedFraud.length()>0){
-				Map lMapInputSfClaimSuspectedFraud=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimSuspectedFraud(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSuspectedFraud)
+				Map lMapInputSfClaimSuspectedFraud=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimSuspectedFraud(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimSuspectedFraud)
 				if(lMapInputSfClaimSuspectedFraud.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2232,7 +2232,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Fraud_Verification_Info_Confirmed_Fraud')
 			lStrSfClaimConfirmedFraud=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimConfirmedFraud)
 			if(lStrSfClaimConfirmedFraud.length()>0){
-				Map lMapInputSfClaimConfirmedFraud=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimConfirmedFraud(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimConfirmedFraud)
+				Map lMapInputSfClaimConfirmedFraud=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimConfirmedFraud(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimConfirmedFraud)
 				if(lMapInputSfClaimConfirmedFraud.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2248,7 +2248,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Fraud_Verification_Info_Proven_Fraud')
 			lStrSfClaimProvenFraud=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimProvenFraud)
 			if(lStrSfClaimProvenFraud.length()>0){
-				Map lMapInputSfClaimProvenFraud=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimProvenFraud(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimProvenFraud)
+				Map lMapInputSfClaimProvenFraud=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimProvenFraud(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimProvenFraud)
 				if(lMapInputSfClaimProvenFraud.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2262,7 +2262,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimCommentBox=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailFraudVerificationInfoCommentBox
 			if(lStrSfClaimCommentBox.length()>0){
-				Map lMapInputSfClaimCommentBox=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimCommentBox(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCommentBox)
+				Map lMapInputSfClaimCommentBox=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimCommentBox(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimCommentBox)
 				if(lMapInputSfClaimCommentBox.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2297,7 +2297,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
 			String lStrSfClaimIrregularitiesObserved=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailCreateIrregularitiesInfoIrregularitiesObserved
 			if(lStrSfClaimIrregularitiesObserved.length()>0){
-				Map lMapInputSfClaimIrregularitiesObserved=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimIrregularitiesObserved(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIrregularitiesObserved)
+				Map lMapInputSfClaimIrregularitiesObserved=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSfClaimIrregularitiesObserved(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimIrregularitiesObserved)
 				if(lMapInputSfClaimIrregularitiesObserved.Result){
 					lStrErrorMessage=''
 				}else{
