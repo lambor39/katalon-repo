@@ -136,6 +136,10 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrSalesforceRecordID=''
 			String lStrSalesforceSearchByDefaultObjectValue=''
 			String lStrCssLocator=''
+			String lStrSfAdditionalDetailWhichMode=''
+			Integer lNumAdditionalDetailWhichMode=0
+			Integer lNumCreateOrEditAdditionalDetailHowManyItem=0
+			Integer lNumCreateOrEditThirdPartyDetailHowManyItem=0
 			Boolean lIsVisible=false
 			Map lMapSearchDefaultObject=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputSearchBySfObject(this.parentStageController.getWebDriver(),caseInput,caseOutput)
 			if(!lMapSearchDefaultObject.Result){
@@ -550,6 +554,82 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lElementIgniteClaimReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.getElementIgniteClaimReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
 			if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimReportingFormRoot)){
 				return lreturn
+			}
+			Map lMapInputSfCreateOrEditThirdPartyDetailHowManyItem=this.inputSfCreateOrEditThirdPartyDetailHowManyItem()
+			if(lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.Result){
+				lNumCreateOrEditThirdPartyDetailHowManyItem=lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.CreateOrEditThirdPartyDetailHowManyItem
+				lErrorMessage=''
+			}else{
+				lErrorMessage=lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.ErrorMessage
+			}
+			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			if(!lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.Result){
+				return lreturn
+			}
+			if(lNumCreateOrEditThirdPartyDetailHowManyItem>0){
+				Map lMapInputSfCreateOrEditThirdPartyObjectDetail=this.inputSfCreateOrEditThirdPartyObjectDetail(lNumCreateOrEditThirdPartyDetailHowManyItem,caseOutput)
+				if(lMapInputSfCreateOrEditThirdPartyObjectDetail.Result){
+					lErrorMessage=''
+				}else{
+					lErrorMessage=lMapInputSfCreateOrEditThirdPartyObjectDetail.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+				if(!lMapInputSfCreateOrEditThirdPartyObjectDetail.Result){
+					return lreturn
+				}
+			}
+			Map lMapInputSfAdditionalDetailWhichMode=this.inputSfAdditionalDetailWhichMode()
+			if(lMapInputSfAdditionalDetailWhichMode.Result){
+				lStrSfAdditionalDetailWhichMode=lMapInputSfAdditionalDetailWhichMode.AdditionalDetailWhichMode
+				lNumAdditionalDetailWhichMode=lMapInputSfAdditionalDetailWhichMode.NumAdditionalDetailWhichMode
+				lErrorMessage=''
+			}else{
+				lErrorMessage=lMapInputSfAdditionalDetailWhichMode.ErrorMessage
+			}
+			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			if(!lMapInputSfAdditionalDetailWhichMode.Result){
+				return lreturn
+			}
+			Map lMapInputSfCreateOrEditAdditionalDetailHowManyItem=this.inputSfCreateOrEditAdditionalDetailHowManyItem()
+			if(lMapInputSfCreateOrEditAdditionalDetailHowManyItem.Result){
+				lNumCreateOrEditThirdPartyDetailHowManyItem=lMapInputSfCreateOrEditAdditionalDetailHowManyItem.CreateOrEditAdditionalDetailHowManyItem
+				lErrorMessage=''
+			}else{
+				lErrorMessage=lMapInputSfCreateOrEditAdditionalDetailHowManyItem.ErrorMessage
+			}
+			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			if(!lMapInputSfCreateOrEditAdditionalDetailHowManyItem.Result){
+				return lreturn
+			}
+			if(lNumCreateOrEditAdditionalDetailHowManyItem>0){
+				switch(lNumAdditionalDetailWhichMode){
+					case 1:
+						Map lMapInputSfAutoCreateAdditionalObjectDetail=this.inputSfAutoCreateAdditionalObjectDetail(lNumCreateOrEditAdditionalDetailHowManyItem,caseOutput)
+						if(lMapInputSfAutoCreateAdditionalObjectDetail.Result){
+							lErrorMessage=''
+						}else{
+							lErrorMessage=lMapInputSfAutoCreateAdditionalObjectDetail.ErrorMessage
+						}
+						caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+						if(!lMapInputSfAutoCreateAdditionalObjectDetail.Result){
+							return lreturn
+						}
+						break
+					case 2:
+						Map lMapInputSfManualCreateAdditionalObjectDetail=this.inputSfManualCreateAdditionalObjectDetail(lNumCreateOrEditAdditionalDetailHowManyItem)
+						if(lMapInputSfManualCreateAdditionalObjectDetail.Result){
+							lErrorMessage=''
+						}else{
+							lErrorMessage=lMapInputSfManualCreateAdditionalObjectDetail.ErrorMessage
+						}
+						caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+						if(!lMapInputSfManualCreateAdditionalObjectDetail.Result){
+							return lreturn
+						}
+						break
+					default:
+						return lreturn
+				}
 			}
 			lreturn=lMapSearchDefaultObject.Result
 		}catch(Exception e){
@@ -1296,11 +1376,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				lResult=lMapInputSfClaimQuotationReceivedFromGarageDate.Result
 			}
 			String lStrSfClaimQuotationReceivedFromGarageTime=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailClaimProgressInfoQuotationReceivedFromGarageTimeValue
-			/*
-			 IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
-			 IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Received_From_Garage_Time_Value')
-			 lStrSfClaimQuotationReceivedFromGarageTime=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfClaimQuotationReceivedFromGarageTime)
-			 */
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Received_From_Garage_Time_Value')
 			lStrSfClaimQuotationReceivedFromGarageTime=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimQuotationReceivedFromGarageTime)
 			if(lStrSfClaimQuotationReceivedFromGarageTime.length()>0){
@@ -1342,11 +1417,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				lResult=lMapInputSfClaimQuotationApprovalDate.Result
 			}
 			String lStrSfClaimQuotationApprovalTime=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailClaimProgressInfoQuotationApprovalTimeValue
-			/*
-			 IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
-			 IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Approval_Time_Value')
-			 lStrSfClaimQuotationReceivedFromGarageTime=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrSfClaimQuotationReceivedFromGarageTime)
-			 */
 			lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Claim_Detail_Claim_Progress_Info_Quotation_Approval_Time_Value')
 			lStrSfClaimQuotationApprovalTime=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrSfClaimQuotationApprovalTime)
 			if(lStrSfClaimQuotationApprovalTime.length()>0){
@@ -1462,7 +1532,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			}
 			String lStrSfClaimInsurerClaimNo=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateClaimDetailClaimProgressInfoInsurerClaimNo
 			if(lStrSfClaimInsurerClaimNo.length()>0){
-				Map lMapInputSfClaimInsurerClaimNo=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.lStrSfClaimInsurerClaimNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimInsurerClaimNo)
+				Map lMapInputSfClaimInsurerClaimNo=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.inputSfClaimInsurerClaimNo(this.parentStageController.getWebDriver(),lElementIgniteClaimReportingFormRoot,lStrSfClaimInsurerClaimNo)
 				if(lMapInputSfClaimInsurerClaimNo.Result){
 					lStrErrorMessage=''
 				}else{
@@ -2357,6 +2427,188 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			lResult=lStrCreateOrEditAdditionalDetailHowManyItem.length()>0
 			lNumCreateOrEditAdditionalDetailHowManyItem=IGNUemaHelper.convertStringToInteger(lStrCreateOrEditAdditionalDetailHowManyItem,0)
 			lreturn.put('CreateOrEditAdditionalDetailHowManyItem',lNumCreateOrEditAdditionalDetailHowManyItem)
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public Map inputSfCreateOrEditThirdPartyDetailHowManyItem(){
+		Map lreturn=[:]
+		try{
+			Boolean lResult=false
+			lreturn.put('CreateOrEditThirdPartyDetailHowManyItem',0)
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			Integer lNumCreateOrEditThirdPartyDetailHowManyItem=0
+			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
+			String lStrCreateOrEditThirdPartyDetailHowManyItem=lMapCaseDataCurrentInput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateOrEditThirdPartyDetailHowManyItem
+			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
+			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Or_Edit_Third_Party_Detail_How_Many_Item')
+			lStrCreateOrEditThirdPartyDetailHowManyItem=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrCreateOrEditThirdPartyDetailHowManyItem)
+			lResult=lStrCreateOrEditThirdPartyDetailHowManyItem.length()>0
+			lNumCreateOrEditThirdPartyDetailHowManyItem=IGNUemaHelper.convertStringToInteger(lStrCreateOrEditThirdPartyDetailHowManyItem,0)
+			lreturn.put('CreateOrEditThirdPartyDetailHowManyItem',lNumCreateOrEditThirdPartyDetailHowManyItem)
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public Map inputSfCreateOrEditThirdPartyObjectDetail(Integer numCreateOrEditThirdPartyDetailHowManyItem,Map<String,String> caseOutput){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(numCreateOrEditThirdPartyDetailHowManyItem)){
+			return lreturn
+		}
+		Integer lNumCreateOrEditThirdPartyDetailHowManyItem=numCreateOrEditThirdPartyDetailHowManyItem
+		if(IGNUemaHelper.checkObjectNullOfObject(caseOutput)){
+			return lreturn
+		}
+		try{
+			Boolean lResult=true
+			lreturn.put('ErrorMessage','')
+			lreturn.put('Result',lResult)
+			String lStrErrorMessage=''
+			String lStrCssLocator=''
+			String lStrMainTargetButtonName=''
+			Boolean lIsCreateThirdPartyToDo=false
+			Map lMapInputMainTargetButton=[:]
+			List<WebElement> lListElementMainButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getListElementMainButton(this.parentStageController.getWebDriver())
+			if(lListElementMainButton.size()==0){
+				return lreturn
+			}
+			Map<String,String> lMapCaseDataCurrentInput=this.parentStageController.getParentIGNTestExecutorTypeItem().getIGNTestMasterCaseTypeMain().MapCaseDataCurrentInput
+			IGNTestManager lIGNTestManager=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
+			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle=null
+			for(Integer lCreateOrEditThirdPartyDetailHowManyItem=1;lCreateOrEditThirdPartyDetailHowManyItem<=lNumCreateOrEditThirdPartyDetailHowManyItem;lCreateOrEditThirdPartyDetailHowManyItem++){
+				String lStrCreateOrEditThirdPartyDetailToDo='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'ToDo'
+				lStrCreateOrEditThirdPartyDetailToDo=lMapCaseDataCurrentInput.get(lStrCreateOrEditThirdPartyDetailToDo)
+				lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Claim_Third_Party_Detail_'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'_To_Do')
+				lStrCreateOrEditThirdPartyDetailToDo=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrCreateOrEditThirdPartyDetailToDo)
+				Map lMapInputSfCreateOrEditThirdPartyToDo=IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty.inputSfCreateOrEditThirdPartyToDo(lStrCreateOrEditThirdPartyDetailToDo)
+				if(lMapInputSfCreateOrEditThirdPartyToDo.Result){
+					lIsCreateThirdPartyToDo=lMapInputSfCreateOrEditThirdPartyToDo.BoolCreateOrEditThirdPartyToDo
+					lStrErrorMessage=''
+				}else{
+					lStrErrorMessage=lMapInputSfCreateOrEditThirdPartyToDo.ErrorMessage
+				}
+				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lStrErrorMessage
+				if(!lMapInputSfCreateOrEditThirdPartyToDo.Result){
+					return lreturn
+				}
+				if(lIsCreateThirdPartyToDo){
+					lStrMainTargetButtonName='Create Third Party'
+					lMapInputMainTargetButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputMainTargetButton(this.parentStageController.getWebDriver(),lListElementMainButton,lStrMainTargetButtonName)
+					if(lMapInputMainTargetButton.Result){
+						lStrErrorMessage=''
+					}else{
+						lStrErrorMessage=lMapInputMainTargetButton.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lStrErrorMessage
+					if(lStrErrorMessage.length()>0){
+						return lreturn
+					}
+					WebElement lElementIgnitThirdPartyReportingFormRoot=IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty.getElementIgnitThirdPartyReportingFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
+					if(IGNUemaHelper.checkObjectNullOfObject(lElementIgnitThirdPartyReportingFormRoot)){
+						return lreturn
+					}
+					String lStrThirdPartyIsTPVehicleDamage='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'IsTPVehicleDamage'
+					lStrThirdPartyIsTPVehicleDamage=lMapCaseDataCurrentInput.get(lStrThirdPartyIsTPVehicleDamage)
+					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Claim_Third_Party_Detail_'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'_Is_TP_Vehicle_Damage')
+					lStrThirdPartyIsTPVehicleDamage=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrThirdPartyIsTPVehicleDamage)
+					String lStrThirdPartyTPDriverName='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPDriverName'
+					lStrThirdPartyTPDriverName=lMapCaseDataCurrentInput.get(lStrThirdPartyTPDriverName)
+					String lStrThirdPartyTPClaimNumber='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPClaimNumber'
+					lStrThirdPartyTPClaimNumber=lMapCaseDataCurrentInput.get(lStrThirdPartyTPClaimNumber)
+					String lStrThirdPartyIsTPDriverInjured='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'IsTPDriverInjured'
+					lStrThirdPartyIsTPDriverInjured=lMapCaseDataCurrentInput.get(lStrThirdPartyIsTPDriverInjured)
+					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Claim_Third_Party_Detail_'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'_Is_TP_Driver_Injured')
+					lStrThirdPartyIsTPDriverInjured=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrThirdPartyIsTPDriverInjured)
+					String lStrThirdPartyRelationship='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'Relationship'
+					lStrThirdPartyRelationship=lMapCaseDataCurrentInput.get(lStrThirdPartyRelationship)
+					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Claim_Third_Party_Detail_'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'_Relationship')
+					lStrThirdPartyRelationship=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrThirdPartyRelationship)
+					String lStrThirdPartyTPCarPlateNo='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPCarPlateNo'
+					lStrThirdPartyTPCarPlateNo=lMapCaseDataCurrentInput.get(lStrThirdPartyTPCarPlateNo)
+					String lStrThirdPartyTPCarPlateProvince='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPCarPlateProvince'
+					lStrThirdPartyTPCarPlateProvince=lMapCaseDataCurrentInput.get(lStrThirdPartyTPCarPlateProvince)
+					String lStrThirdPartyTPChassisNo='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPChassisNo'
+					lStrThirdPartyTPChassisNo=lMapCaseDataCurrentInput.get(lStrThirdPartyTPChassisNo)
+					String lStrThirdPartyTPCarMake='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPCarMake'
+					lStrThirdPartyTPCarMake=lMapCaseDataCurrentInput.get(lStrThirdPartyTPCarMake)
+					String lStrThirdPartyTPPropertyDamage='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPPropertyDamage'
+					lStrThirdPartyTPPropertyDamage=lMapCaseDataCurrentInput.get(lStrThirdPartyTPPropertyDamage)
+					String lStrThirdPartyTPPropertyDescription='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPPropertyDescription'
+					lStrThirdPartyTPPropertyDescription=lMapCaseDataCurrentInput.get(lStrThirdPartyTPPropertyDescription)
+					String lStrThirdPartyIsTPInsured='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'IsTPInsured'
+					lStrThirdPartyIsTPInsured=lMapCaseDataCurrentInput.get(lStrThirdPartyIsTPInsured)
+					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Claim_Third_Party_Detail_'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'_Is_TP_Insured')
+					lStrThirdPartyIsTPInsured=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrThirdPartyIsTPInsured)
+					String lStrThirdPartyLiability='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'Liability'
+					lStrThirdPartyLiability=lMapCaseDataCurrentInput.get(lStrThirdPartyLiability)
+					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Claim_Third_Party_Detail_'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'Liability')
+					lStrThirdPartyLiability=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrThirdPartyLiability)
+					String lStrThirdPartyTPInjuryDescription='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPInjuryDescription'
+					lStrThirdPartyTPInjuryDescription=lMapCaseDataCurrentInput.get(lStrThirdPartyTPInjuryDescription)
+					String lStrThirdPartyNotifyRelatedPeople='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'NotifyRelatedPeople'
+					lStrThirdPartyNotifyRelatedPeople=lMapCaseDataCurrentInput.get(lStrThirdPartyNotifyRelatedPeople)
+					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Claim_Third_Party_Detail_'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'_Notify_Related_People')
+					lStrThirdPartyNotifyRelatedPeople=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrThirdPartyNotifyRelatedPeople)
+					String lStrThirdPartyTPPolicyExpiryDateOffset='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPPolicyExpiryDateOffset'
+					lStrThirdPartyTPPolicyExpiryDateOffset=lMapCaseDataCurrentInput.get(lStrThirdPartyTPPolicyExpiryDateOffset)
+					String lStrThirdPartyTPPolicyExpiryDateValue='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPPolicyExpiryDateValue'
+					lStrThirdPartyTPPolicyExpiryDateValue=lMapCaseDataCurrentInput.get(lStrThirdPartyTPPolicyExpiryDateValue)
+					String lStrThirdPartyTPInsuranceCompany='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPInsuranceCompany'
+					lStrThirdPartyTPInsuranceCompany=lMapCaseDataCurrentInput.get(lStrThirdPartyTPInsuranceCompany)
+					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Claim_Third_Party_Detail_'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'_TP_Insurance_Company')
+					lStrThirdPartyTPInsuranceCompany=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrThirdPartyTPInsuranceCompany)
+					String lStrThirdPartyTPPolicyNo='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPPolicyNo'
+					lStrThirdPartyTPPolicyNo=lMapCaseDataCurrentInput.get(lStrThirdPartyTPPolicyNo)
+					String lStrThirdPartyTPPolicyType='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPPolicyType'
+					lStrThirdPartyTPPolicyType=lMapCaseDataCurrentInput.get(lStrThirdPartyTPPolicyType)
+					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Claim_Third_Party_Detail_'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'_TP_Policy_Type')
+					lStrThirdPartyTPPolicyType=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrThirdPartyTPPolicyType)
+					String lStrThirdPartyTPCarModel='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPCarModel'
+					lStrThirdPartyTPCarModel=lMapCaseDataCurrentInput.get(lStrThirdPartyTPCarModel)
+					String lStrThirdPartyTPPropertyInsuranceCompany='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPPropertyInsuranceCompany'
+					lStrThirdPartyTPPropertyInsuranceCompany=lMapCaseDataCurrentInput.get(lStrThirdPartyTPPropertyInsuranceCompany)
+					Map lMapInitSfClaimThirdPartyInput=[:]
+					IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty.inputInitSfClaimThirdPartyInput(lMapInitSfClaimThirdPartyInput)
+					lMapInitSfClaimThirdPartyInput.IsTPVehicleDamage=lStrThirdPartyIsTPVehicleDamage
+					lMapInitSfClaimThirdPartyInput.TPDriverName=lStrThirdPartyTPDriverName
+					lMapInitSfClaimThirdPartyInput.TPClaimNumber=lStrThirdPartyTPClaimNumber
+					lMapInitSfClaimThirdPartyInput.IsTPDriverInjured=lStrThirdPartyIsTPDriverInjured
+					lMapInitSfClaimThirdPartyInput.Relationship=lStrThirdPartyRelationship
+					lMapInitSfClaimThirdPartyInput.TPCarPlateNo=lStrThirdPartyTPCarPlateNo
+					lMapInitSfClaimThirdPartyInput.TPCarPlateProvince=lStrThirdPartyTPCarPlateProvince
+					lMapInitSfClaimThirdPartyInput.TPChassisNo=lStrThirdPartyTPChassisNo
+					lMapInitSfClaimThirdPartyInput.TPCarMake=lStrThirdPartyTPCarMake
+					lMapInitSfClaimThirdPartyInput.TPPropertyDamage=lStrThirdPartyTPPropertyDamage
+					lMapInitSfClaimThirdPartyInput.TPPropertyDescription=lStrThirdPartyTPPropertyDescription
+					lMapInitSfClaimThirdPartyInput.IsTPInsured=lStrThirdPartyIsTPInsured
+					lMapInitSfClaimThirdPartyInput.Liability=lStrThirdPartyLiability
+					lMapInitSfClaimThirdPartyInput.TPInjuryDescription=lStrThirdPartyTPInjuryDescription
+					lMapInitSfClaimThirdPartyInput.NotifyRelatedPeople=lStrThirdPartyNotifyRelatedPeople
+					lMapInitSfClaimThirdPartyInput.TPPolicyExpiryDateOffset=lStrThirdPartyTPPolicyExpiryDateOffset
+					lMapInitSfClaimThirdPartyInput.TPPolicyExpiryDateValue=lStrThirdPartyTPPolicyExpiryDateValue
+					lMapInitSfClaimThirdPartyInput.TPInsuranceCompany=lStrThirdPartyTPInsuranceCompany
+					lMapInitSfClaimThirdPartyInput.TPPolicyNo=lStrThirdPartyTPPolicyNo
+					lMapInitSfClaimThirdPartyInput.TPPolicyType=lStrThirdPartyTPPolicyType
+					lMapInitSfClaimThirdPartyInput.TPCarModel=lStrThirdPartyTPCarModel
+					lMapInitSfClaimThirdPartyInput.TPPropertyInsuranceCompany=lStrThirdPartyTPPropertyInsuranceCompany
+					Map lMapInputSfThirdPartyNonMandatory=IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty.inputSfThirdPartyNonMandatory(this.parentStageController.getWebDriver(),lElementIgnitThirdPartyReportingFormRoot,lMapInitSfClaimThirdPartyInput)
+					if(lMapInputSfThirdPartyNonMandatory.Result){
+						lStrErrorMessage=''
+					}else{
+						lStrErrorMessage=lMapInputSfThirdPartyNonMandatory.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lStrErrorMessage
+					if(!lMapInputSfThirdPartyNonMandatory.Result){
+						return lreturn
+					}
+				}
+			}
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){

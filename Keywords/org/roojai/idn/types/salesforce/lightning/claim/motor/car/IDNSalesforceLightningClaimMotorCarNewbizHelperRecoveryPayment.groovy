@@ -270,20 +270,20 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 				lResult=lMapInputSfRecoveryPaymentDescription.Result
 			}
 			/*
-			if(mapSfClaimRecoveryPaymentInput.FinalRecovery.length()>0){
-				Map lMapInputSfRecoveryPaymentFinalRecovery=this.inputSfRecoveryPaymentFinalRecovery(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,mapSfClaimRecoveryPaymentInput.FinalRecovery)
-				if(lMapInputSfRecoveryPaymentFinalRecovery.Result){
-					lStrErrorMessage=''
-				}else{
-					lStrErrorMessage=lMapInputSfRecoveryPaymentFinalRecovery.ErrorMessage
-				}
-				if(!lMapInputSfRecoveryPaymentFinalRecovery.Result){
-					lreturn.put('ErrorMessage',lStrErrorMessage)
-					return lreturn
-				}
-				lResult=lMapInputSfRecoveryPaymentFinalRecovery.Result
-			}
-			*/
+			 if(mapSfClaimRecoveryPaymentInput.FinalRecovery.length()>0){
+			 Map lMapInputSfRecoveryPaymentFinalRecovery=this.inputSfRecoveryPaymentFinalRecovery(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,mapSfClaimRecoveryPaymentInput.FinalRecovery)
+			 if(lMapInputSfRecoveryPaymentFinalRecovery.Result){
+			 lStrErrorMessage=''
+			 }else{
+			 lStrErrorMessage=lMapInputSfRecoveryPaymentFinalRecovery.ErrorMessage
+			 }
+			 if(!lMapInputSfRecoveryPaymentFinalRecovery.Result){
+			 lreturn.put('ErrorMessage',lStrErrorMessage)
+			 return lreturn
+			 }
+			 lResult=lMapInputSfRecoveryPaymentFinalRecovery.Result
+			 }
+			 */
 			if(mapSfClaimRecoveryPaymentInput.PayeeIdentificationCardNo.length()>0){
 				Map lMapInputSfRecoveryPaymentPayeeIdentificationCardNo=this.inputSfRecoveryPaymentPayeeIdentificationCardNo(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,mapSfClaimRecoveryPaymentInput.PayeeIdentificationCardNo)
 				if(lMapInputSfRecoveryPaymentPayeeIdentificationCardNo.Result){
