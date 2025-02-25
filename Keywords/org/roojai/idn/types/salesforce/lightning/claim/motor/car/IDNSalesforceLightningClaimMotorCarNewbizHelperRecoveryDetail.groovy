@@ -19,6 +19,7 @@ import internal.GlobalVariable
 import org.roojai.ignite.core.IGNUemaHelper as IGNUemaHelper
 import org.openqa.selenium.*
 import org.roojai.idn.types.salesforce.lightning.claim.motor.car.IDNSalesforceLightningClaimMotorCarNewbizCoreSearchUtil
+import org.roojai.ignite.core.IGNSalesforceRestAPIHelper
 public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryDetail{
 	public static WebElement getElementIgniteClaimRecoveryDetailFormRoot(WebDriver webDriver,String cssLocator,Boolean isIgnoreCssLocator=true){
 		WebElement lreturn=null
@@ -705,13 +706,116 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryDetail{
 		}
 		return lreturn
 	}
-	public static Boolean inputInitSfClaimRecoveryDetailInput(Map targetMap){
+	public static Map writeRecoveryDetailObjectOutput(List<String> listStrTargetId){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(listStrTargetId)){
+			return lreturn
+		}
+		List<String> lListStrTargetId=listStrTargetId
+		try{
+			Boolean lResult=false
+			Map lMapSfRecoveryDetailOutput=[:]
+			lreturn.put('MapSfRecoveryDetailOutput',lMapSfRecoveryDetailOutput)
+			lreturn.put('Result',lResult)
+			String lStrTargetId=''
+			String lStrTargetSfField='Id,Name,Claim_Name__c,Damage_no__c,Reserve_Catagory__c,Payment_Category__c,Net_Amount__c,VAT_Rate__c,WHT_Rate__c,Stamp_Duty__c,Salvage__c,Recovery__c,Invoice_No__c,Payment_Date__c,Payment_Method__c,Bank_Account__c,Final_Payment__c,Payee__c,Invoice_Date__c,KPI_Payment_Date__c,Invoice_Submitted_Date__c,Cheque_No__c'
+			String lStrTargetSalesforceObjectName='Recovery_Details__c'
+			Boolean lIsToPreferSelectedFieldName=false
+			List<String> lListFieldNameAll=new ArrayList<String>()
+			List<String> lListFieldNameSelected=new ArrayList<String>()
+			Boolean lIsWhereJoinOperatorAnd=true
+			String lStrClauseCustomText=''
+			Map lMapClauseEqualAnd=[:]
+			Map lMapClauseEqualOr=[:]
+			Map lMapClauseInAnd=[:]
+			Map lMapClauseInOr=[:]
+			Map lMapClauseLikeAnd=[:]
+			Map lMapClauseLikeOr=[:]
+			Map lMapClauseNotEqualAnd=[:]
+			Map lMapClauseNotEqualOr=[:]
+			Map lMapClauseNotInAnd=[:]
+			Map lMapClauseNotInOr=[:]
+			Map lMapClauseNotLikeAnd=[:]
+			Map lMapClauseNotLikeOr=[:]
+			String lStrWhereClause=''
+			String lStrSuffixQuery=''
+			lIsToPreferSelectedFieldName=false
+			lListFieldNameAll.clear()
+			lListFieldNameSelected.clear()
+			lIsWhereJoinOperatorAnd=true
+			lStrClauseCustomText=''
+			lMapClauseEqualAnd.clear()
+			lMapClauseEqualOr.clear()
+			lMapClauseInAnd.clear()
+			lMapClauseInOr.clear()
+			lMapClauseLikeAnd.clear()
+			lMapClauseLikeOr.clear()
+			lMapClauseNotEqualAnd.clear()
+			lMapClauseNotEqualOr.clear()
+			lMapClauseNotInAnd.clear()
+			lMapClauseNotInOr.clear()
+			lMapClauseNotLikeAnd.clear()
+			lMapClauseNotLikeOr.clear()
+			lListFieldNameSelected=lStrTargetSfField.split(',')
+			for(Integer lIndex=0;lIndex<=lListStrTargetId.size()-1;lIndex++){
+				if(lIndex>0){
+					lStrTargetId=lStrTargetId+','+IGNUemaHelper.getAddedSingleQuoteBeginEnd(lListStrTargetId[lIndex])
+				}else{
+					lStrTargetId=IGNUemaHelper.getAddedSingleQuoteBeginEnd(lListStrTargetId[lIndex])
+				}
+			}
+			lMapClauseInAnd.put('Damage_no__c',lStrTargetId)
+			lStrWhereClause=IGNUemaHelper.getStringQueryForWhereClauseBuilder(lIsWhereJoinOperatorAnd,lStrClauseCustomText,lMapClauseEqualAnd,lMapClauseEqualOr,lMapClauseInAnd,lMapClauseInOr,lMapClauseLikeAnd,lMapClauseLikeOr,lMapClauseNotEqualAnd,lMapClauseNotEqualOr,lMapClauseNotInAnd,lMapClauseNotInOr,lMapClauseNotLikeAnd,lMapClauseNotLikeOr)
+			lStrSuffixQuery=''
+			Map lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			if(!lMapGetSalesforceObjectTarget.Result){
+				lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			}
+			if(!lMapGetSalesforceObjectTarget.Result){
+				return lreturn
+			}
+			List<Map> lListMapGetSalesforceObjectTargetRecord=lMapGetSalesforceObjectTarget.ListMapSalesforceObjectRecord
+			if(lListMapGetSalesforceObjectTargetRecord.size()>0){
+				List<Map> lListMapSalesforceObjectRecordID=[]
+				for(Integer lIndex=0;lIndex<=lListMapGetSalesforceObjectTargetRecord.size()-1;lIndex++){
+					Map<String,String> lMapSalesforceObjectRecordID=lListMapGetSalesforceObjectTargetRecord.get(lIndex)
+					lMapSalesforceObjectRecordID.remove('attributes')
+					Map lMapInputInitSfRecoveryDetailOutput=[:]
+					this.inputInitSfClaimRecoveryDetailInputOutput(lMapInputInitSfRecoveryDetailOutput)
+					lMapInputInitSfRecoveryDetailOutput.DamageSfId=lMapSalesforceObjectRecordID.Damage_no__c
+					lMapInputInitSfRecoveryDetailOutput.RecoveryDetailSfId=lMapSalesforceObjectRecordID.Id
+					lMapInputInitSfRecoveryDetailOutput.RecoveryDetailName=lMapSalesforceObjectRecordID.Name
+					lMapInputInitSfRecoveryDetailOutput.RecoveryType=lMapSalesforceObjectRecordID.Recovery_Type__c
+					lMapInputInitSfRecoveryDetailOutput.RecoverFrom=lMapSalesforceObjectRecordID.Recovery_from__c
+					lMapInputInitSfRecoveryDetailOutput.ThirdPartyName=lMapSalesforceObjectRecordID.Third_Party__c
+					lMapInputInitSfRecoveryDetailOutput.OutstandingRecovery=lMapSalesforceObjectRecordID.Outstanding_Recovery__c
+					lMapInputInitSfRecoveryDetailOutput.AmountSubjectToRecovery=lMapSalesforceObjectRecordID.Amount_subject_to_recovery__c
+					lMapInputInitSfRecoveryDetailOutput.RecoveryStatus=lMapSalesforceObjectRecordID.Recovery_Status__c
+					lMapInputInitSfRecoveryDetailOutput.RecoveryStage=lMapSalesforceObjectRecordID.Recovery_Stage__c
+					lMapInputInitSfRecoveryDetailOutput.Description=lMapSalesforceObjectRecordID.Recovery_Description__c
+					lMapInputInitSfRecoveryDetailOutput.RecoveredAmount=lMapSalesforceObjectRecordID.Recovered_Amount_Calc__c
+					lMapInputInitSfRecoveryDetailOutput.TotalRecoveryAmount=lMapSalesforceObjectRecordID.Total_Recovery_Amount__c
+					lListMapSalesforceObjectRecordID.add(lMapInputInitSfRecoveryDetailOutput)
+				}
+				lMapSfRecoveryDetailOutput.put('recoveryDetailList',lListMapSalesforceObjectRecordID)
+			}
+			lResult=true
+			lreturn.put('MapSfRecoveryDetailOutput',lMapSfRecoveryDetailOutput)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputInitSfClaimRecoveryDetailInputOutput(Map targetMap){
 		Boolean lreturn=false
 		if(IGNUemaHelper.checkObjectNullOfObject(targetMap)){
 			return lreturn
 		}
 		try{
 			targetMap.clear()
+			targetMap.put('DamageSfId','')
+			targetMap.put('RecoveryDetailSfId','')
+			targetMap.put('RecoveryDetailName','')
 			targetMap.put('RecoveryType','')
 			targetMap.put('RecoverFrom','')
 			targetMap.put('ThirdPartyName','')

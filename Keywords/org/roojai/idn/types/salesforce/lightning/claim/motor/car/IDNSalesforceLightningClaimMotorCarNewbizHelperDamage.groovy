@@ -19,6 +19,7 @@ import internal.GlobalVariable
 import org.roojai.ignite.core.IGNUemaHelper as IGNUemaHelper
 import org.openqa.selenium.*
 import org.roojai.idn.types.salesforce.lightning.claim.motor.car.IDNSalesforceLightningClaimMotorCarNewbizCoreSearchUtil
+import org.roojai.ignite.core.IGNSalesforceRestAPIHelper
 public class IDNSalesforceLightningClaimMotorCarNewbizHelperDamage{
 	public static WebElement getElementIgniteClaimDamageFormRoot(WebDriver webDriver,String cssLocator,Boolean isIgnoreCssLocator=true){
 		WebElement lreturn=null
@@ -762,13 +763,115 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperDamage{
 		}
 		return lreturn
 	}
-	public static Boolean inputInitSfClaimDamageInput(Map targetMap){
+	public static Map writeDamageObjectOutput(String strTargetId){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(strTargetId)){
+			return lreturn
+		}
+		String lStrTargetId=strTargetId
+		try{
+			Boolean lResult=false
+			Map lMapSfDamageOutput=[:]
+			lreturn.put('MapSfDamageOutput',lMapSfDamageOutput)
+			lreturn.put('Result',lResult)
+			String lStrTargetSfField='Id,Claim_Number__c,Name,Claim_Damage_Type__c,Assessor__c,Recovery_Agent__c,Service_Provider__c,Quotation_Approval_Status__c'
+			String lStrTargetSalesforceObjectName='Damage__c'
+			Boolean lIsToPreferSelectedFieldName=false
+			List<String> lListFieldNameAll=new ArrayList<String>()
+			List<String> lListFieldNameSelected=new ArrayList<String>()
+			Boolean lIsWhereJoinOperatorAnd=true
+			String lStrClauseCustomText=''
+			Map lMapClauseEqualAnd=[:]
+			Map lMapClauseEqualOr=[:]
+			Map lMapClauseInAnd=[:]
+			Map lMapClauseInOr=[:]
+			Map lMapClauseLikeAnd=[:]
+			Map lMapClauseLikeOr=[:]
+			Map lMapClauseNotEqualAnd=[:]
+			Map lMapClauseNotEqualOr=[:]
+			Map lMapClauseNotInAnd=[:]
+			Map lMapClauseNotInOr=[:]
+			Map lMapClauseNotLikeAnd=[:]
+			Map lMapClauseNotLikeOr=[:]
+			String lStrWhereClause=''
+			String lStrSuffixQuery=''
+			lIsToPreferSelectedFieldName=false
+			lListFieldNameAll.clear()
+			lListFieldNameSelected.clear()
+			lIsWhereJoinOperatorAnd=true
+			lStrClauseCustomText=''
+			lMapClauseEqualAnd.clear()
+			lMapClauseEqualOr.clear()
+			lMapClauseInAnd.clear()
+			lMapClauseInOr.clear()
+			lMapClauseLikeAnd.clear()
+			lMapClauseLikeOr.clear()
+			lMapClauseNotEqualAnd.clear()
+			lMapClauseNotEqualOr.clear()
+			lMapClauseNotInAnd.clear()
+			lMapClauseNotInOr.clear()
+			lMapClauseNotLikeAnd.clear()
+			lMapClauseNotLikeOr.clear()
+			lListFieldNameSelected=lStrTargetSfField.split(',')
+			lMapClauseEqualAnd.put('Claim_Number__c',IGNUemaHelper.getAddedSingleQuoteBeginEnd(lStrTargetId))
+			lStrWhereClause=IGNUemaHelper.getStringQueryForWhereClauseBuilder(lIsWhereJoinOperatorAnd,lStrClauseCustomText,lMapClauseEqualAnd,lMapClauseEqualOr,lMapClauseInAnd,lMapClauseInOr,lMapClauseLikeAnd,lMapClauseLikeOr,lMapClauseNotEqualAnd,lMapClauseNotEqualOr,lMapClauseNotInAnd,lMapClauseNotInOr,lMapClauseNotLikeAnd,lMapClauseNotLikeOr)
+			lStrSuffixQuery=''
+			Map lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			if(!lMapGetSalesforceObjectTarget.Result){
+				lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			}
+			if(!lMapGetSalesforceObjectTarget.Result){
+				return lreturn
+			}
+			List<Map> lListMapJsonGetSalesforceObjectTarget=lMapGetSalesforceObjectTarget.ListMapJsonResponseObject
+			if(lListMapJsonGetSalesforceObjectTarget.size()<=0){
+				return lreturn
+			}
+			Map lMapJsonTarget=lListMapJsonGetSalesforceObjectTarget[0]
+			if(!lMapJsonTarget){
+				return lreturn
+			}
+			Integer lNumberOfObjectTargetNum=lMapJsonTarget.records.size()
+			if(lNumberOfObjectTargetNum<=0){
+				return lreturn
+			}
+			List<Map> lListMapGetSalesforceObjectTargetRecord=lMapGetSalesforceObjectTarget.ListMapSalesforceObjectRecord
+			if(lListMapGetSalesforceObjectTargetRecord.size()>0){
+				List<Map> lListMapSalesforceObjectRecordID=[]
+				for(Integer lIndex=0;lIndex<=lListMapGetSalesforceObjectTargetRecord.size()-1;lIndex++){
+					Map<String,String> lMapSalesforceObjectRecordID=lListMapGetSalesforceObjectTargetRecord.get(lIndex)
+					lMapSalesforceObjectRecordID.remove('attributes')
+					Map lMapInputInitSfDamageOutput=[:]
+					this.inputInitSfClaimDamageInputOutput(lMapInputInitSfDamageOutput)
+					lMapInputInitSfDamageOutput.ClaimSfId=lMapSalesforceObjectRecordID.Claim_Number__c
+					lMapInputInitSfDamageOutput.DamageSfId=lMapSalesforceObjectRecordID.Id
+					lMapInputInitSfDamageOutput.DamageName=lMapSalesforceObjectRecordID.Name
+					lMapInputInitSfDamageOutput.DamageType=lMapSalesforceObjectRecordID.Claim_Damage_Type__c
+					lMapInputInitSfDamageOutput.DamageAssessorName=lMapSalesforceObjectRecordID.Assessor__c
+					lMapInputInitSfDamageOutput.DamageRecoveryAgentName=lMapSalesforceObjectRecordID.Recovery_Agent__c
+					lMapInputInitSfDamageOutput.DamageServiceProviderName=lMapSalesforceObjectRecordID.Service_Provider__c
+					lMapInputInitSfDamageOutput.DamageQuotationApprovalStatus=lMapSalesforceObjectRecordID.Quotation_Approval_Status__c
+					lListMapSalesforceObjectRecordID.add(lMapInputInitSfDamageOutput)
+				}
+				lMapSfDamageOutput.put('damageList',lListMapSalesforceObjectRecordID)
+			}
+			lResult=true
+			lreturn.put('MapSfDamageOutput',lMapSfDamageOutput)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputInitSfClaimDamageInputOutput(Map targetMap){
 		Boolean lreturn=false
 		if(IGNUemaHelper.checkObjectNullOfObject(targetMap)){
 			return lreturn
 		}
 		try{
 			targetMap.clear()
+			targetMap.put('ClaimSfId','')
+			targetMap.put('DamageSfId','')
+			targetMap.put('DamageName','')
 			targetMap.put('DamageType','')
 			targetMap.put('DamageAssessorName','')
 			targetMap.put('DamageRecoveryAgentName','')

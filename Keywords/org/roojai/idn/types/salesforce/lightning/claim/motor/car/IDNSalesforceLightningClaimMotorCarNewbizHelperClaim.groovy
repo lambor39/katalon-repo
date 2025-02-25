@@ -19,6 +19,7 @@ import internal.GlobalVariable
 import org.roojai.ignite.core.IGNUemaHelper as IGNUemaHelper
 import org.openqa.selenium.*
 import org.roojai.idn.types.salesforce.lightning.claim.motor.car.IDNSalesforceLightningClaimMotorCarNewbizCoreSearchUtil
+import org.roojai.idn.types.salesforce.lightning.core.IDNSalesforceLightningCoreHelperAPI
 public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 	public static WebElement getElementIgniteClaimReportingFormRoot(WebDriver webDriver,String cssLocator,Boolean isIgnoreCssLocator=true){
 		WebElement lreturn=null
@@ -5722,6 +5723,203 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map writeClaimObjectOutput(String strTargetId){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(strTargetId)){
+			return lreturn
+		}
+		String lStrTargetId=strTargetId
+		try{
+			Boolean lResult=false
+			Map lMapInputInitSfClaimOutput=[:]
+			lreturn.put('MapSfClaimOutput',lMapInputInitSfClaimOutput)
+			lreturn.put('Result',lResult)
+			String lStrTargetSfField='Id,Name,Policy_Holder_name__c,Product_Type__c,Opportunity_No__c ,Claim_Loss_Date__c,Customer_Touchpoint__c,Estimated_Damage_Assessment_Date__c,Actual_Damage_Assessment_Date__c,Estimated_Vehicle_Delivery_Date__c,Actual_Vehicle_Delivery_Date__c,KPI_Approval_Status__c,KPI_Claim_No__c,Claim_Opened_Date__c,Cancellation_Rejection_Remarks__c,Incident_Driver__r.name,Driver_mobile_no__c,Contact_Number__r.name,Claimant_Mobile_no__c,Reported_by__c,Reported_By_Mobile_number__c,Claim_Cause_Type__c,Claim_Incident_Type__c,Purpose__c,Injury__c,Claim_Description__c,Chronology_Accident__c,Is_the_vehicle_damage__c,Is_KFK__c,At_fault__c,Is_Dry_Claim__c,Collision_Count_By_Vehicle__c,Total_Reject_Amount__c,Claim_Report_Date__c,Claim_Accident_House_Number__c,Claim_Accident_Road__c,Claim_Accident_Village__c,Address__r.name,Claim_Accident_Country__c,Accident_Geo_Location__c,Are_you_at_scene__c,Accident_Found__c,Do_you_require_a_surveyor_at_the_scene__c,Appointed_Surveyor__r.name,Surveyor_name__c,Surveyor_Mobile_No__c,Survey_Type__c,Reason_for_Survey_Type__c,Other_Reason__c,Car_is_drivable__c,Car_is_at_Wrokshop__c,Surveyor_Appointed_Date_Time__c,Surveyor_Arrived_Date_Time__c,Surveyor_Finished_Date_Time__c,Surveyor_report_attached__c,Were_photos_taken_at_the_scene__c,Do_you_require_towing__c,Towing_Company__r.name,Did_anyone_call_an_ambulance__c,Independent_witness__c,Witness_Name__c,Witness_Phone__c,Witness_Relation__c,Was_the_incident_reported_to_the_police__c,Police_Station__r.name,Police_Officer_name__c,Police_Mobile_no__c,Police_Report_no__c,KPI_claim_police_report_date__c,Suspected_fraud__c,Confirmed_fraud__c,Proven_fraud__c,Comment_box__c,Irregularities_Observed__c'
+			List<Map> lMapSalesforceObjectRecordByQueryParamList=[]
+			Map lMapGetSalesforceAnyRecordIdListFromRestAPIObject=IDNSalesforceLightningCoreHelperAPI.mapGetSalesforceAnyRecordIdListFromRestAPIObject('Claim__c',lStrTargetId,lStrTargetSfField)
+			if(!lMapGetSalesforceAnyRecordIdListFromRestAPIObject.Result){
+				return lreturn
+			}else{
+				lMapSalesforceObjectRecordByQueryParamList=lMapGetSalesforceAnyRecordIdListFromRestAPIObject.ListMapSalesforceObjectRecordByQueryParamList
+			}
+			if(lMapSalesforceObjectRecordByQueryParamList.size()>0){
+				Map<String,String> lMapSalesforceObjectRecordID=[:]
+				for(Integer lIndex=0;lIndex<=lMapSalesforceObjectRecordByQueryParamList.size()-1;lIndex++){
+					lMapSalesforceObjectRecordID=lMapSalesforceObjectRecordByQueryParamList.get(lIndex)
+				}
+				this.inputInitSfClaimOutput(lMapInputInitSfClaimOutput)
+				lMapInputInitSfClaimOutput.claimSfId=lMapSalesforceObjectRecordID.Id
+				lMapInputInitSfClaimOutput.claimName=lMapSalesforceObjectRecordID.Name
+				lMapInputInitSfClaimOutput.firstFormPolicyHolder=lMapSalesforceObjectRecordID.Policy_Holder_name__c
+				lMapInputInitSfClaimOutput.firstFormProductType=lMapSalesforceObjectRecordID.Product_Type__c
+				lMapInputInitSfClaimOutput.firstFormOpportunityNo=lMapSalesforceObjectRecordID.Opportunity_No__c
+				lMapInputInitSfClaimOutput.firstFormClaimRequiredLossDateTime=lMapSalesforceObjectRecordID.Claim_Loss_Date__c
+				lMapInputInitSfClaimOutput.claimProgressInfoTouchpointStage=lMapSalesforceObjectRecordID.Customer_Touchpoint__c
+				lMapInputInitSfClaimOutput.claimProgressInfoQuotationReceivedFromGarageDateTime=lMapSalesforceObjectRecordID.Estimated_Damage_Assessment_Date__c
+				lMapInputInitSfClaimOutput.claimProgressInfoQuotationApprovalDateTime=lMapSalesforceObjectRecordID.Actual_Damage_Assessment_Date__c
+				lMapInputInitSfClaimOutput.claimProgressInfoBeginRepairDateTime=lMapSalesforceObjectRecordID.Estimated_Vehicle_Delivery_Date__c
+				lMapInputInitSfClaimOutput.claimProgressInfoFinishRepairDateTime=lMapSalesforceObjectRecordID.Actual_Vehicle_Delivery_Date__c
+				lMapInputInitSfClaimOutput.claimProgressInfoInsurerApprovalStatus=lMapSalesforceObjectRecordID.KPI_Approval_Status__c
+				lMapInputInitSfClaimOutput.claimProgressInfoInsurerClaimNo=lMapSalesforceObjectRecordID.KPI_Claim_No__c
+				lMapInputInitSfClaimOutput.claimProgressInfoApprovalDate=lMapSalesforceObjectRecordID.Claim_Opened_Date__c
+				lMapInputInitSfClaimOutput.claimProgressInfoCancellationAndRejectionRemarks=lMapSalesforceObjectRecordID.Cancellation_Rejection_Remarks__c
+				lMapInputInitSfClaimOutput.incidentPersonInfoIncidentDriverName=lMapSalesforceObjectRecordID.Incident_Driver__c
+				lMapInputInitSfClaimOutput.incidentPersonInfoIncidentDriverMobileNo=lMapSalesforceObjectRecordID.Driver_mobile_no__c
+				lMapInputInitSfClaimOutput.incidentPersonInfoClaimantName=lMapSalesforceObjectRecordID.Contact_Number__c
+				lMapInputInitSfClaimOutput.incidentPersonInfoClaimantMobileNo=lMapSalesforceObjectRecordID.Claimant_Mobile_no__c
+				lMapInputInitSfClaimOutput.incidentPersonInfoReportedByName=lMapSalesforceObjectRecordID.Reported_by__c
+				lMapInputInitSfClaimOutput.incidentPersonInfoReportedByMobileNo=lMapSalesforceObjectRecordID.Reported_By_Mobile_number__c
+				lMapInputInitSfClaimOutput.incidentInfoClaimCause=lMapSalesforceObjectRecordID.Claim_Cause_Type__c
+				lMapInputInitSfClaimOutput.incidentInfoClaimIncidentType=lMapSalesforceObjectRecordID.Claim_Incident_Type__c
+				lMapInputInitSfClaimOutput.incidentInfoWereYouTravellingToOrFromWork=lMapSalesforceObjectRecordID.Purpose__c
+				lMapInputInitSfClaimOutput.incidentInfoAnyInjury=lMapSalesforceObjectRecordID.Injury__c
+				lMapInputInitSfClaimOutput.incidentInfoClaimDescription=lMapSalesforceObjectRecordID.Claim_Description__c
+				lMapInputInitSfClaimOutput.incidentInfoChronologyAccident=lMapSalesforceObjectRecordID.Chronology_Accident__c
+				lMapInputInitSfClaimOutput.incidentInfoVehicleDamaged=lMapSalesforceObjectRecordID.Is_the_vehicle_damage__c
+				lMapInputInitSfClaimOutput.incidentInfoKFK=lMapSalesforceObjectRecordID.Is_KFK__c
+				lMapInputInitSfClaimOutput.incidentInfoLiability=lMapSalesforceObjectRecordID.At_fault__c
+				lMapInputInitSfClaimOutput.incidentInfoIsDryClaim=lMapSalesforceObjectRecordID.Is_Dry_Claim__c
+				lMapInputInitSfClaimOutput.incidentInfoCollisionCountByVehicle=lMapSalesforceObjectRecordID.Collision_Count_By_Vehicle__c
+				lMapInputInitSfClaimOutput.incidentInfoTotalRejectAmount=lMapSalesforceObjectRecordID.Total_Reject_Amount__c
+				lMapInputInitSfClaimOutput.incidentInfoClaimReportDate=lMapSalesforceObjectRecordID.Claim_Report_Date__c
+				lMapInputInitSfClaimOutput.incidentLocationInfoClaimAccidentHouseNumber=lMapSalesforceObjectRecordID.Claim_Accident_House_Number__c
+				lMapInputInitSfClaimOutput.incidentLocationInfoClaimAccidentRoad=lMapSalesforceObjectRecordID.Claim_Accident_Road__c
+				lMapInputInitSfClaimOutput.incidentLocationInfoClaimAccidentVillage=lMapSalesforceObjectRecordID.Claim_Accident_Village__c
+				lMapInputInitSfClaimOutput.incidentLocationInfoAddress=lMapSalesforceObjectRecordID.Address__c
+				lMapInputInitSfClaimOutput.incidentLocationInfoClaimAccidentCountry=lMapSalesforceObjectRecordID.Claim_Accident_Country__c
+				lMapInputInitSfClaimOutput.incidentLocationInfoAccidentGeoLocationLongitude=lMapSalesforceObjectRecordID.Accident_Geo_Location__c
+				lMapInputInitSfClaimOutput.surveyorInfoDriverOnScene=lMapSalesforceObjectRecordID.Are_you_at_scene__c
+				lMapInputInitSfClaimOutput.surveyorInfoAppointmentPlace=lMapSalesforceObjectRecordID.Accident_Found__c
+				lMapInputInitSfClaimOutput.surveyorInfoSurveyorRequiredToDo=lMapSalesforceObjectRecordID.Do_you_require_a_surveyor_at_the_scene__c
+				lMapInputInitSfClaimOutput.surveyorInfoSurveyCompany=lMapSalesforceObjectRecordID.Appointed_Surveyor__c
+				lMapInputInitSfClaimOutput.surveyorInfoSurveyorName=lMapSalesforceObjectRecordID.Surveyor_name__c
+				lMapInputInitSfClaimOutput.surveyorInfoSurveyorMobileNo=lMapSalesforceObjectRecordID.Surveyor_Mobile_No__c
+				lMapInputInitSfClaimOutput.surveyorInfoSurveyType=lMapSalesforceObjectRecordID.Survey_Type__c
+				lMapInputInitSfClaimOutput.surveyorInfoReasonForSurveyType=lMapSalesforceObjectRecordID.Reason_for_Survey_Type__c
+				lMapInputInitSfClaimOutput.surveyorInfoOtherReason=lMapSalesforceObjectRecordID.Other_Reason__c
+				lMapInputInitSfClaimOutput.surveyorInfoCarIsDrivable=lMapSalesforceObjectRecordID.Car_is_drivable__c
+				lMapInputInitSfClaimOutput.surveyorInfoCarIsAtWorkshop=lMapSalesforceObjectRecordID.Car_is_at_Wrokshop__c
+				lMapInputInitSfClaimOutput.surveyorInfoSurveyorAppointedDateTime=lMapSalesforceObjectRecordID.Surveyor_Appointed_Date_Time__c
+				lMapInputInitSfClaimOutput.surveyorInfoSurveyorArrivedDateTime=lMapSalesforceObjectRecordID.Surveyor_Arrived_Date_Time__c
+				lMapInputInitSfClaimOutput.surveyorInfoSurveyorFinishedDateTime=lMapSalesforceObjectRecordID.Surveyor_Finished_Date_Time__c
+				lMapInputInitSfClaimOutput.surveyorInfoSurveyorReportAttached=lMapSalesforceObjectRecordID.Surveyor_report_attached__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoPhotosTaken=lMapSalesforceObjectRecordID.Were_photos_taken_at_the_scene__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoTowingRequired=lMapSalesforceObjectRecordID.Do_you_require_towing__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoTowingCompany=lMapSalesforceObjectRecordID.Towing_Company__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoDidAnyoneCallAnAmbulance=lMapSalesforceObjectRecordID.Did_anyone_call_an_ambulance__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoIndependentWitness=lMapSalesforceObjectRecordID.Independent_witness__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoWitnessName=lMapSalesforceObjectRecordID.Witness_Name__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoWitnessPhone=lMapSalesforceObjectRecordID.Witness_Phone__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoWitnessRelation=lMapSalesforceObjectRecordID.Witness_Relation__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoWasTheIncidentReportedToThePolice=lMapSalesforceObjectRecordID.Was_the_incident_reported_to_the_police__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoPoliceStation=lMapSalesforceObjectRecordID.Police_Station__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoPoliceOfficerName=lMapSalesforceObjectRecordID.Police_Officer_name__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoPoliceMobileNo=lMapSalesforceObjectRecordID.Police_Mobile_no__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoPoliceReportNo=lMapSalesforceObjectRecordID.Police_Report_no__c
+				lMapInputInitSfClaimOutput.atTheSceneInfoPoliceReportDateTime=lMapSalesforceObjectRecordID.KPI_claim_police_report_date__c
+				lMapInputInitSfClaimOutput.fraudVerificationInfoSuspectedFraud=lMapSalesforceObjectRecordID.Suspected_fraud__c
+				lMapInputInitSfClaimOutput.fraudVerificationInfoConfirmedFraud=lMapSalesforceObjectRecordID.Confirmed_fraud__c
+				lMapInputInitSfClaimOutput.fraudVerificationInfoProvenFraud=lMapSalesforceObjectRecordID.Proven_fraud__c
+				lMapInputInitSfClaimOutput.fraudVerificationInfoCommentBox=lMapSalesforceObjectRecordID.Comment_box__c
+				lMapInputInitSfClaimOutput.createIrregularitiesInfoIrregularitiesObserved =lMapSalesforceObjectRecordID.Irregularities_Observed__c
+				lResult=true
+			}
+			if(lResult){
+				lreturn.put('MapSfClaimOutput',lMapInputInitSfClaimOutput)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputInitSfClaimOutput(Map targetMap){
+		Boolean lreturn=false
+		if(IGNUemaHelper.checkObjectNullOfObject(targetMap)){
+			return lreturn
+		}
+		try{
+			targetMap.clear()
+			targetMap.put('claimSfId','')
+			targetMap.put('claimName','')
+			targetMap.put('firstFormPolicyHolder','')
+			targetMap.put('firstFormProductType','')
+			targetMap.put('firstFormOpportunityNo','')
+			targetMap.put('firstFormClaimRequiredLossDateTime','')
+			targetMap.put('claimProgressInfoTouchpointStage','')
+			targetMap.put('claimProgressInfoQuotationReceivedFromGarageDateTime','')
+			targetMap.put('claimProgressInfoQuotationApprovalDateTime','')
+			targetMap.put('claimProgressInfoBeginRepairDateTime','')
+			targetMap.put('claimProgressInfoFinishRepairDateTime','')
+			targetMap.put('claimProgressInfoInsurerApprovalStatus','')
+			targetMap.put('claimProgressInfoInsurerClaimNo','')
+			targetMap.put('claimProgressInfoApprovalDate','')
+			targetMap.put('claimProgressInfoCancellationAndRejectionRemarks','')
+			targetMap.put('incidentPersonInfoIncidentDriverName','')
+			targetMap.put('incidentPersonInfoIncidentDriverMobileNo','')
+			targetMap.put('incidentPersonInfoClaimantName','')
+			targetMap.put('incidentPersonInfoClaimantMobileNo','')
+			targetMap.put('incidentPersonInfoReportedByName','')
+			targetMap.put('incidentPersonInfoReportedByMobileNo','')
+			targetMap.put('incidentInfoClaimCause','')
+			targetMap.put('incidentInfoClaimIncidentType','')
+			targetMap.put('incidentInfoWereYouTravellingToOrFromWork','')
+			targetMap.put('incidentInfoAnyInjury','')
+			targetMap.put('incidentInfoClaimDescription','')
+			targetMap.put('incidentInfoChronologyAccident','')
+			targetMap.put('incidentInfoVehicleDamaged','')
+			targetMap.put('incidentInfoKFK','')
+			targetMap.put('incidentInfoLiability','')
+			targetMap.put('incidentInfoIsDryClaim','')
+			targetMap.put('incidentInfoCollisionCountByVehicle','')
+			targetMap.put('incidentInfoTotalRejectAmount','')
+			targetMap.put('incidentInfoClaimReportDate','')
+			targetMap.put('incidentLocationInfoClaimAccidentHouseNumber','')
+			targetMap.put('incidentLocationInfoClaimAccidentRoad','')
+			targetMap.put('incidentLocationInfoClaimAccidentVillage','')
+			targetMap.put('incidentLocationInfoAddress','')
+			targetMap.put('incidentLocationInfoClaimAccidentCountry','')
+			targetMap.put('incidentLocationInfoAccidentGeoLocationLongitude','')
+			targetMap.put('surveyorInfoDriverOnScene','')
+			targetMap.put('surveyorInfoAppointmentPlace','')
+			targetMap.put('surveyorInfoSurveyorRequiredToDo','')
+			targetMap.put('surveyorInfoSurveyCompany','')
+			targetMap.put('surveyorInfoSurveyorName','')
+			targetMap.put('surveyorInfoSurveyorMobileNo','')
+			targetMap.put('surveyorInfoSurveyType','')
+			targetMap.put('surveyorInfoReasonForSurveyType','')
+			targetMap.put('surveyorInfoOtherReason','')
+			targetMap.put('surveyorInfoCarIsDrivable','')
+			targetMap.put('surveyorInfoCarIsAtWorkshop','')
+			targetMap.put('surveyorInfoSurveyorAppointedDateTime','')
+			targetMap.put('surveyorInfoSurveyorArrivedDateTime','')
+			targetMap.put('surveyorInfoSurveyorFinishedDateTime','')
+			targetMap.put('surveyorInfoSurveyorReportAttached','')
+			targetMap.put('atTheSceneInfoPhotosTaken','')
+			targetMap.put('atTheSceneInfoTowingRequired','')
+			targetMap.put('atTheSceneInfoTowingCompany','')
+			targetMap.put('atTheSceneInfoDidAnyoneCallAnAmbulance','')
+			targetMap.put('atTheSceneInfoIndependentWitness','')
+			targetMap.put('atTheSceneInfoWitnessName','')
+			targetMap.put('atTheSceneInfoWitnessPhone','')
+			targetMap.put('atTheSceneInfoWitnessRelation','')
+			targetMap.put('atTheSceneInfoWasTheIncidentReportedToThePolice','')
+			targetMap.put('atTheSceneInfoPoliceStation','')
+			targetMap.put('atTheSceneInfoPoliceOfficerName','')
+			targetMap.put('atTheSceneInfoPoliceMobileNo','')
+			targetMap.put('atTheSceneInfoPoliceReportNo','')
+			targetMap.put('atTheSceneInfoPoliceReportDateTime','')
+			targetMap.put('fraudVerificationInfoSuspectedFraud','')
+			targetMap.put('fraudVerificationInfoConfirmedFraud','')
+			targetMap.put('fraudVerificationInfoProvenFraud','')
+			targetMap.put('fraudVerificationInfoCommentBox','')
+			targetMap.put('createIrregularitiesInfoIrregularitiesObserved','')
+			lreturn=true
+		}catch(Exception e){
+			e.printStackTrace()
+			return lreturn
 		}
 		return lreturn
 	}

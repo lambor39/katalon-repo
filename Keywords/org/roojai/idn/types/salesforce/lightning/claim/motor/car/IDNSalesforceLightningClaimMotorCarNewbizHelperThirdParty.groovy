@@ -19,6 +19,7 @@ import internal.GlobalVariable
 import org.roojai.ignite.core.IGNUemaHelper as IGNUemaHelper
 import org.openqa.selenium.*
 import org.roojai.idn.types.salesforce.lightning.claim.motor.car.IDNSalesforceLightningClaimMotorCarNewbizCoreSearchUtil
+import org.roojai.ignite.core.IGNSalesforceRestAPIHelper
 public class IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty{
 	public static WebElement getElementIgnitThirdPartyReportingFormRoot(WebDriver webDriver,String cssLocator,Boolean isIgnoreCssLocator=true){
 		WebElement lreturn=null
@@ -287,18 +288,18 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty{
 			}
 			if(mapSfClaimThirdPartyInput.NotifyRelatedPeople.length()>0){
 				/*
-				Map lMapInputSfClaimTPNotifyRelatedPeople=this.inputSfClaimTPNotifyRelatedPeople(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,mapSfClaimThirdPartyInput.NotifyRelatedPeople)
-				if(lMapInputSfClaimTPNotifyRelatedPeople.Result){
-					lStrErrorMessage=''
-				}else{
-					lStrErrorMessage=lMapInputSfClaimTPNotifyRelatedPeople.ErrorMessage
-				}
-				if(!lMapInputSfClaimTPNotifyRelatedPeople.Result){
-					lreturn.put('ErrorMessage',lStrErrorMessage)
-					return lreturn
-				}
-				lResult=lMapInputSfClaimTPNotifyRelatedPeople.Result
-				*/
+				 Map lMapInputSfClaimTPNotifyRelatedPeople=this.inputSfClaimTPNotifyRelatedPeople(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,mapSfClaimThirdPartyInput.NotifyRelatedPeople)
+				 if(lMapInputSfClaimTPNotifyRelatedPeople.Result){
+				 lStrErrorMessage=''
+				 }else{
+				 lStrErrorMessage=lMapInputSfClaimTPNotifyRelatedPeople.ErrorMessage
+				 }
+				 if(!lMapInputSfClaimTPNotifyRelatedPeople.Result){
+				 lreturn.put('ErrorMessage',lStrErrorMessage)
+				 return lreturn
+				 }
+				 lResult=lMapInputSfClaimTPNotifyRelatedPeople.Result
+				 */
 			}
 			if(mapSfClaimThirdPartyInput.TPPolicyExpiryDateOffset.length()>0&&mapSfClaimThirdPartyInput.TPPolicyExpiryDateValue.length()>0){
 				lMapInputAdjustDate=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputAdjustDate(mapSfClaimThirdPartyInput.TPPolicyExpiryDateOffset,mapSfClaimThirdPartyInput.TPPolicyExpiryDateValue)
@@ -1777,13 +1778,127 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty{
 		}
 		return lreturn
 	}
-	public static Boolean inputInitSfClaimThirdPartyInput(Map targetMap){
+	public static Map writeThirdPartyObjectOutput(List<String> listStrTargetId){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(listStrTargetId)){
+			return lreturn
+		}
+		List<String> lListStrTargetId=listStrTargetId
+		try{
+			Boolean lResult=false
+			Map lMapSfThirdPartyOutput=[:]
+			lreturn.put('MapSfThirdPartyOutput',lMapSfThirdPartyOutput)
+			lreturn.put('Result',lResult)
+			String lStrTargetId=''
+			String lStrTargetSfField='Id,Name,Claim__c,Is_TP_vehicle_damage__c,TP_Driver_name__c,TP_Claim_Number__c,Is_TP_Driver_injured__c,Relationship__c,TP_Vehicle__c,TP_Car_Plate_Province__c,TP_Chassis_No__c,TP_Car_Make__c,TP_Property_Damage__c,TP_Property_Descriptioin__c,Is_TP_insured__c,Liability__c,TP_Injury_Description__c,Notify_Related_People__c,TP_Policy_expiry_date__c,TP_Insurance_company__c,TP_Policy_no__c,TP_Policy_type__c,TP_Car_Model__c,TP_Property_Insurance_company__c'
+			String lStrTargetSalesforceObjectName='Third_Party__c'
+			Boolean lIsToPreferSelectedFieldName=false
+			List<String> lListFieldNameAll=new ArrayList<String>()
+			List<String> lListFieldNameSelected=new ArrayList<String>()
+			Boolean lIsWhereJoinOperatorAnd=true
+			String lStrClauseCustomText=''
+			Map lMapClauseEqualAnd=[:]
+			Map lMapClauseEqualOr=[:]
+			Map lMapClauseInAnd=[:]
+			Map lMapClauseInOr=[:]
+			Map lMapClauseLikeAnd=[:]
+			Map lMapClauseLikeOr=[:]
+			Map lMapClauseNotEqualAnd=[:]
+			Map lMapClauseNotEqualOr=[:]
+			Map lMapClauseNotInAnd=[:]
+			Map lMapClauseNotInOr=[:]
+			Map lMapClauseNotLikeAnd=[:]
+			Map lMapClauseNotLikeOr=[:]
+			String lStrWhereClause=''
+			String lStrSuffixQuery=''
+			lIsToPreferSelectedFieldName=false
+			lListFieldNameAll.clear()
+			lListFieldNameSelected.clear()
+			lIsWhereJoinOperatorAnd=true
+			lStrClauseCustomText=''
+			lMapClauseEqualAnd.clear()
+			lMapClauseEqualOr.clear()
+			lMapClauseInAnd.clear()
+			lMapClauseInOr.clear()
+			lMapClauseLikeAnd.clear()
+			lMapClauseLikeOr.clear()
+			lMapClauseNotEqualAnd.clear()
+			lMapClauseNotEqualOr.clear()
+			lMapClauseNotInAnd.clear()
+			lMapClauseNotInOr.clear()
+			lMapClauseNotLikeAnd.clear()
+			lMapClauseNotLikeOr.clear()
+			lListFieldNameSelected=lStrTargetSfField.split(',')
+			for(Integer lIndex=0;lIndex<=lListStrTargetId.size()-1;lIndex++){
+				if(lIndex>0){
+					lStrTargetId=lStrTargetId+','+IGNUemaHelper.getAddedSingleQuoteBeginEnd(lListStrTargetId[lIndex])
+				}else{
+					lStrTargetId=IGNUemaHelper.getAddedSingleQuoteBeginEnd(lListStrTargetId[lIndex])
+				}
+			}
+			lMapClauseInAnd.put('Claim__c',lStrTargetId)
+			lStrWhereClause=IGNUemaHelper.getStringQueryForWhereClauseBuilder(lIsWhereJoinOperatorAnd,lStrClauseCustomText,lMapClauseEqualAnd,lMapClauseEqualOr,lMapClauseInAnd,lMapClauseInOr,lMapClauseLikeAnd,lMapClauseLikeOr,lMapClauseNotEqualAnd,lMapClauseNotEqualOr,lMapClauseNotInAnd,lMapClauseNotInOr,lMapClauseNotLikeAnd,lMapClauseNotLikeOr)
+			lStrSuffixQuery=''
+			Map lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			if(!lMapGetSalesforceObjectTarget.Result){
+				lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			}
+			if(!lMapGetSalesforceObjectTarget.Result){
+				return lreturn
+			}
+			List<Map> lListMapGetSalesforceObjectTargetRecord=lMapGetSalesforceObjectTarget.ListMapSalesforceObjectRecord
+			if(lListMapGetSalesforceObjectTargetRecord.size()>0){
+				List<Map> lListMapSalesforceObjectRecordID=[]
+				for(Integer lIndex=0;lIndex<=lListMapGetSalesforceObjectTargetRecord.size()-1;lIndex++){
+					Map<String,String> lMapSalesforceObjectRecordID=lListMapGetSalesforceObjectTargetRecord.get(lIndex)
+					lMapSalesforceObjectRecordID.remove('attributes')
+					Map lMapInputInitSfThirdPartyOutput=[:]
+					this.inputInitSfClaimThirdPartyInputOutput(lMapInputInitSfThirdPartyOutput)
+					lMapInputInitSfThirdPartyOutput.ClaimSfId=lMapSalesforceObjectRecordID.Claim__c
+					lMapInputInitSfThirdPartyOutput.ThirdPartySfId=lMapSalesforceObjectRecordID.Id
+					lMapInputInitSfThirdPartyOutput.ThirdPartyName=lMapSalesforceObjectRecordID.Name
+					lMapInputInitSfThirdPartyOutput.IsTPVehicleDamage=lMapSalesforceObjectRecordID.Is_TP_vehicle_damage__c
+					lMapInputInitSfThirdPartyOutput.TPDriverName=lMapSalesforceObjectRecordID.TP_Driver_name__c
+					lMapInputInitSfThirdPartyOutput.TPClaimNumber=lMapSalesforceObjectRecordID.TP_Claim_Number__c
+					lMapInputInitSfThirdPartyOutput.IsTPDriverInjured=lMapSalesforceObjectRecordID.Is_TP_Driver_injured__c
+					lMapInputInitSfThirdPartyOutput.Relationship=lMapSalesforceObjectRecordID.Relationship__c
+					lMapInputInitSfThirdPartyOutput.TPCarPlateNo=lMapSalesforceObjectRecordID.TP_Vehicle__c
+					lMapInputInitSfThirdPartyOutput.TPCarPlateProvince=lMapSalesforceObjectRecordID.TP_Car_Plate_Province__c
+					lMapInputInitSfThirdPartyOutput.TPChassisNo=lMapSalesforceObjectRecordID.TP_Chassis_No__c
+					lMapInputInitSfThirdPartyOutput.TPCarMake=lMapSalesforceObjectRecordID.TP_Car_Make__c
+					lMapInputInitSfThirdPartyOutput.TPPropertyDamage=lMapSalesforceObjectRecordID.TP_Property_Damage__c
+					lMapInputInitSfThirdPartyOutput.TPPropertyDescription=lMapSalesforceObjectRecordID.TP_Property_Descriptioin__c
+					lMapInputInitSfThirdPartyOutput.IsTPInsured=lMapSalesforceObjectRecordID.Is_TP_insured__c
+					lMapInputInitSfThirdPartyOutput.Liability=lMapSalesforceObjectRecordID.Liability__c
+					lMapInputInitSfThirdPartyOutput.TPInjuryDescription=lMapSalesforceObjectRecordID.TP_Injury_Description__c
+					lMapInputInitSfThirdPartyOutput.NotifyRelatedPeople=lMapSalesforceObjectRecordID.Notify_Related_People__c
+					lMapInputInitSfThirdPartyOutput.TPPolicyExpiryDateValue=lMapSalesforceObjectRecordID.TP_Policy_expiry_date__c
+					lMapInputInitSfThirdPartyOutput.TPInsuranceCompany=lMapSalesforceObjectRecordID.TP_Insurance_company__c
+					lMapInputInitSfThirdPartyOutput.TPPolicyNo=lMapSalesforceObjectRecordID.TP_Policy_no__c
+					lMapInputInitSfThirdPartyOutput.TPPolicyType=lMapSalesforceObjectRecordID.TP_Policy_type__c
+					lMapInputInitSfThirdPartyOutput.TPCarModel=lMapSalesforceObjectRecordID.TP_Car_Model__c
+					lMapInputInitSfThirdPartyOutput.TPPropertyInsuranceCompany=lMapSalesforceObjectRecordID.TP_Property_Insurance_company__c
+					lListMapSalesforceObjectRecordID.add(lMapInputInitSfThirdPartyOutput)
+				}
+				lMapSfThirdPartyOutput.put('thirdPartyList',lListMapSalesforceObjectRecordID)
+			}
+			lResult=true
+			lreturn.put('MapSfThirdPartyOutput',lMapSfThirdPartyOutput)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputInitSfClaimThirdPartyInputOutput(Map targetMap){
 		Boolean lreturn=false
 		if(IGNUemaHelper.checkObjectNullOfObject(targetMap)){
 			return lreturn
 		}
 		try{
 			targetMap.clear()
+			targetMap.put('ClaimSfId','')
+			targetMap.put('ThirdPartySfId','')
+			targetMap.put('ThirdPartyName','')
 			targetMap.put('IsTPVehicleDamage','')
 			targetMap.put('TPDriverName','')
 			targetMap.put('TPClaimNumber','')

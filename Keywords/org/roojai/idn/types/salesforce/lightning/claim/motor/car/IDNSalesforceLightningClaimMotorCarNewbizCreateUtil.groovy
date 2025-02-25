@@ -23,6 +23,7 @@ import org.roojai.idn.types.testmanager.IDNTestStageControllerGroupSfLightningSh
 import org.roojai.idn.types.salesforce.lightning.claim.motor.car.IDNSalesforceLightningClaimMotorCarNewbizCoreHelper
 import org.roojai.idn.types.salesforce.lightning.core.IDNSalesforceLightningCoreEnum.IDNEnumSalesforceObjectDriverType
 import org.roojai.idn.types.salesforce.lightning.core.IDNSalesforceLightningCoreHelperUI
+import org.roojai.idn.types.salesforce.lightning.core.IDNSalesforceLightningCoreHelperAPI
 public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 	private IDNTestStageControllerGroupSfLightningShareClaimMotorNameNewBizStoryCreate parentStageController=null
 	public IDNSalesforceLightningClaimMotorCarNewbizCreateUtil(IDNTestStageControllerGroupSfLightningShareClaimMotorNameNewBizStoryCreate initStageController){
@@ -49,6 +50,54 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			String lStrSalesforceSearchByDefaultObjectValue=''
 			String lStrCssLocator=''
 			Boolean lIsVisible=false
+			String lMessage=''
+			Map lMapWriteClaimObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.writeClaimObjectOutput('a0nMS0000000BrVYAU')
+			if(!lMapWriteClaimObjectOutput.Result){
+				return lreturn
+			}
+			lMessage=IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteClaimObjectOutput.MapSfClaimOutput,false,true)
+			List<String> listClaimId=[]
+			listClaimId.add('a0nMS0000000BZlYAM')
+			Map lMapWriteThirdPartyObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty.writeThirdPartyObjectOutput(listClaimId)
+			if(!lMapWriteThirdPartyObjectOutput.Result){
+				return lreturn
+			}
+			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteThirdPartyObjectOutput.MapSfThirdPartyOutput,false,true)
+			Map lMapWriteDamageObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperDamage.writeDamageObjectOutput('a0nMS0000000BrVYAU')
+			if(!lMapWriteDamageObjectOutput.Result){
+				return lreturn
+			}
+			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteDamageObjectOutput.MapSfDamageOutput,false,true)
+			List<String> listDamageId=[]
+			listDamageId.add('a0xMS0000001JTdYAM')
+			listDamageId.add('a0xMS0000002C9xYAE')
+			Map lMapWriteReserveDetailObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperReserveDetail.writeReserveDetailObjectOutput(listDamageId)
+			if(!lMapWriteReserveDetailObjectOutput.Result){
+				return lreturn
+			}
+			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteReserveDetailObjectOutput.MapSfReserveDetailOutput,false,true)
+			List<String> listReserveId=[]
+			listReserveId.add('a29MS0000000UEDYA2')
+			listReserveId.add('a29MS0000000ojBYAQ')
+			Map lMapWritePaymentDetailObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperReservePayment.writePaymentDetailObjectOutput(listReserveId)
+			if(!lMapWritePaymentDetailObjectOutput.Result){
+				return lreturn
+			}
+			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWritePaymentDetailObjectOutput.MapSfPaymentDetailOutput,false,true)
+			Map lMapWriteRecoveryDetailObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryDetail.writeRecoveryDetailObjectOutput(listDamageId)
+			if(!lMapWriteRecoveryDetailObjectOutput.Result){
+				return lreturn
+			}
+			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteRecoveryDetailObjectOutput.MapSfRecoveryDetailOutput,false,true)
+			List<String> listRecoveryDetailId=[]
+			listRecoveryDetailId.add('a22MS0000000LFlYAM')
+			Map lMapWriteRecoveryPaymentObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment.writeRecoveryPaymentObjectOutput(listRecoveryDetailId)
+			if(!lMapWriteRecoveryPaymentObjectOutput.Result){
+				return lreturn
+			}
+			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteRecoveryPaymentObjectOutput.MapSfRecoveryPaymentOutput,false,true)
+			caseOutput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenGenerateClaimDetails=lMessage
+			return lreturn
 			/*
 			 List<WebElement> lListElementMainButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getListElementMainButton(this.parentStageController.getWebDriver())
 			 if(lListElementMainButton.size()==0){
@@ -2573,31 +2622,31 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 					lStrThirdPartyTPCarModel=lMapCaseDataCurrentInput.get(lStrThirdPartyTPCarModel)
 					String lStrThirdPartyTPPropertyInsuranceCompany='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenCreateThirdPartyDetail'+String.format('%02d',lCreateOrEditThirdPartyDetailHowManyItem)+'TPPropertyInsuranceCompany'
 					lStrThirdPartyTPPropertyInsuranceCompany=lMapCaseDataCurrentInput.get(lStrThirdPartyTPPropertyInsuranceCompany)
-					Map lMapInitSfClaimThirdPartyInput=[:]
-					IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty.inputInitSfClaimThirdPartyInput(lMapInitSfClaimThirdPartyInput)
-					lMapInitSfClaimThirdPartyInput.IsTPVehicleDamage=lStrThirdPartyIsTPVehicleDamage
-					lMapInitSfClaimThirdPartyInput.TPDriverName=lStrThirdPartyTPDriverName
-					lMapInitSfClaimThirdPartyInput.TPClaimNumber=lStrThirdPartyTPClaimNumber
-					lMapInitSfClaimThirdPartyInput.IsTPDriverInjured=lStrThirdPartyIsTPDriverInjured
-					lMapInitSfClaimThirdPartyInput.Relationship=lStrThirdPartyRelationship
-					lMapInitSfClaimThirdPartyInput.TPCarPlateNo=lStrThirdPartyTPCarPlateNo
-					lMapInitSfClaimThirdPartyInput.TPCarPlateProvince=lStrThirdPartyTPCarPlateProvince
-					lMapInitSfClaimThirdPartyInput.TPChassisNo=lStrThirdPartyTPChassisNo
-					lMapInitSfClaimThirdPartyInput.TPCarMake=lStrThirdPartyTPCarMake
-					lMapInitSfClaimThirdPartyInput.TPPropertyDamage=lStrThirdPartyTPPropertyDamage
-					lMapInitSfClaimThirdPartyInput.TPPropertyDescription=lStrThirdPartyTPPropertyDescription
-					lMapInitSfClaimThirdPartyInput.IsTPInsured=lStrThirdPartyIsTPInsured
-					lMapInitSfClaimThirdPartyInput.Liability=lStrThirdPartyLiability
-					lMapInitSfClaimThirdPartyInput.TPInjuryDescription=lStrThirdPartyTPInjuryDescription
-					lMapInitSfClaimThirdPartyInput.NotifyRelatedPeople=lStrThirdPartyNotifyRelatedPeople
-					lMapInitSfClaimThirdPartyInput.TPPolicyExpiryDateOffset=lStrThirdPartyTPPolicyExpiryDateOffset
-					lMapInitSfClaimThirdPartyInput.TPPolicyExpiryDateValue=lStrThirdPartyTPPolicyExpiryDateValue
-					lMapInitSfClaimThirdPartyInput.TPInsuranceCompany=lStrThirdPartyTPInsuranceCompany
-					lMapInitSfClaimThirdPartyInput.TPPolicyNo=lStrThirdPartyTPPolicyNo
-					lMapInitSfClaimThirdPartyInput.TPPolicyType=lStrThirdPartyTPPolicyType
-					lMapInitSfClaimThirdPartyInput.TPCarModel=lStrThirdPartyTPCarModel
-					lMapInitSfClaimThirdPartyInput.TPPropertyInsuranceCompany=lStrThirdPartyTPPropertyInsuranceCompany
-					Map lMapInputSfThirdPartyNonMandatory=IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty.inputSfThirdPartyNonMandatory(this.parentStageController.getWebDriver(),lElementIgnitThirdPartyReportingFormRoot,lMapInitSfClaimThirdPartyInput)
+					Map lMapInitSfClaimThirdPartyInputOutput=[:]
+					IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty.inputInitSfClaimThirdPartyInputOutput(lMapInitSfClaimThirdPartyInputOutput)
+					lMapInitSfClaimThirdPartyInputOutput.IsTPVehicleDamage=lStrThirdPartyIsTPVehicleDamage
+					lMapInitSfClaimThirdPartyInputOutput.TPDriverName=lStrThirdPartyTPDriverName
+					lMapInitSfClaimThirdPartyInputOutput.TPClaimNumber=lStrThirdPartyTPClaimNumber
+					lMapInitSfClaimThirdPartyInputOutput.IsTPDriverInjured=lStrThirdPartyIsTPDriverInjured
+					lMapInitSfClaimThirdPartyInputOutput.Relationship=lStrThirdPartyRelationship
+					lMapInitSfClaimThirdPartyInputOutput.TPCarPlateNo=lStrThirdPartyTPCarPlateNo
+					lMapInitSfClaimThirdPartyInputOutput.TPCarPlateProvince=lStrThirdPartyTPCarPlateProvince
+					lMapInitSfClaimThirdPartyInputOutput.TPChassisNo=lStrThirdPartyTPChassisNo
+					lMapInitSfClaimThirdPartyInputOutput.TPCarMake=lStrThirdPartyTPCarMake
+					lMapInitSfClaimThirdPartyInputOutput.TPPropertyDamage=lStrThirdPartyTPPropertyDamage
+					lMapInitSfClaimThirdPartyInputOutput.TPPropertyDescription=lStrThirdPartyTPPropertyDescription
+					lMapInitSfClaimThirdPartyInputOutput.IsTPInsured=lStrThirdPartyIsTPInsured
+					lMapInitSfClaimThirdPartyInputOutput.Liability=lStrThirdPartyLiability
+					lMapInitSfClaimThirdPartyInputOutput.TPInjuryDescription=lStrThirdPartyTPInjuryDescription
+					lMapInitSfClaimThirdPartyInputOutput.NotifyRelatedPeople=lStrThirdPartyNotifyRelatedPeople
+					lMapInitSfClaimThirdPartyInputOutput.TPPolicyExpiryDateOffset=lStrThirdPartyTPPolicyExpiryDateOffset
+					lMapInitSfClaimThirdPartyInputOutput.TPPolicyExpiryDateValue=lStrThirdPartyTPPolicyExpiryDateValue
+					lMapInitSfClaimThirdPartyInputOutput.TPInsuranceCompany=lStrThirdPartyTPInsuranceCompany
+					lMapInitSfClaimThirdPartyInputOutput.TPPolicyNo=lStrThirdPartyTPPolicyNo
+					lMapInitSfClaimThirdPartyInputOutput.TPPolicyType=lStrThirdPartyTPPolicyType
+					lMapInitSfClaimThirdPartyInputOutput.TPCarModel=lStrThirdPartyTPCarModel
+					lMapInitSfClaimThirdPartyInputOutput.TPPropertyInsuranceCompany=lStrThirdPartyTPPropertyInsuranceCompany
+					Map lMapInputSfThirdPartyNonMandatory=IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty.inputSfThirdPartyNonMandatory(this.parentStageController.getWebDriver(),lElementIgnitThirdPartyReportingFormRoot,lMapInitSfClaimThirdPartyInputOutput)
 					if(lMapInputSfThirdPartyNonMandatory.Result){
 						lStrErrorMessage=''
 					}else{
@@ -2706,14 +2755,14 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 					lStrDamageQuotationApprovalStatus=lMapCaseDataCurrentInput.get(lStrDamageQuotationApprovalStatus)
 					lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Additional_Detail_'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'_Damage_Quotation_Approval_Status')
 					lStrDamageQuotationApprovalStatus=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrDamageQuotationApprovalStatus)
-					Map lMapInitSfClaimDamageInput=[:]
-					IDNSalesforceLightningClaimMotorCarNewbizHelperDamage.inputInitSfClaimDamageInput(lMapInitSfClaimDamageInput)
-					lMapInitSfClaimDamageInput.DamageType=lStrDamageType
-					lMapInitSfClaimDamageInput.DamageAssessorName=lStrDamageAssessorName
-					lMapInitSfClaimDamageInput.DamageRecoveryAgentName=lStrDamageRecoveryAgentName
-					lMapInitSfClaimDamageInput.DamageServiceProviderName=lStrDamageServiceProviderName
-					lMapInitSfClaimDamageInput.DamageQuotationApprovalStatus=lStrDamageQuotationApprovalStatus
-					Map lMapInputSfProceedAdditionalDetailDamage=IDNSalesforceLightningClaimMotorCarNewbizHelperDamage.inputSfProceedAdditionalDetailDamage(this.parentStageController.getWebDriver(),lElementIgniteClaimDamageFormRoot,lMapInitSfClaimDamageInput)
+					Map lMapInitSfClaimDamageInputOutput=[:]
+					IDNSalesforceLightningClaimMotorCarNewbizHelperDamage.inputInitSfClaimDamageInputOutput(lMapInitSfClaimDamageInputOutput)
+					lMapInitSfClaimDamageInputOutput.DamageType=lStrDamageType
+					lMapInitSfClaimDamageInputOutput.DamageAssessorName=lStrDamageAssessorName
+					lMapInitSfClaimDamageInputOutput.DamageRecoveryAgentName=lStrDamageRecoveryAgentName
+					lMapInitSfClaimDamageInputOutput.DamageServiceProviderName=lStrDamageServiceProviderName
+					lMapInitSfClaimDamageInputOutput.DamageQuotationApprovalStatus=lStrDamageQuotationApprovalStatus
+					Map lMapInputSfProceedAdditionalDetailDamage=IDNSalesforceLightningClaimMotorCarNewbizHelperDamage.inputSfProceedAdditionalDetailDamage(this.parentStageController.getWebDriver(),lElementIgniteClaimDamageFormRoot,lMapInitSfClaimDamageInputOutput)
 					if(lMapInputSfProceedAdditionalDetailDamage.Result){
 						lStrErrorMessage=''
 					}else{
@@ -2764,13 +2813,13 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 					lStrReserveDetailThirdPartySequence=lMapCaseDataCurrentInput.get(lStrReserveDetailThirdPartySequence)
 					String lStrReserveDetailOutstandingReserve='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'ReserveDetailOutstandingReserve'
 					lStrReserveDetailOutstandingReserve=lMapCaseDataCurrentInput.get(lStrReserveDetailOutstandingReserve)
-					Map lMapInitSfClaimReserveDetailInput=[:]
-					IDNSalesforceLightningClaimMotorCarNewbizHelperReserveDetail.inputInitSfClaimReserveDetailInput(lMapInitSfClaimReserveDetailInput)
-					lMapInitSfClaimReserveDetailInput.ReserveType=lStrReserveType
-					lMapInitSfClaimReserveDetailInput.ThirdPartyName=lStrReserveDetailThirdPartyName
-					lMapInitSfClaimReserveDetailInput.ThirdPartySequence=lStrReserveDetailThirdPartySequence
-					lMapInitSfClaimReserveDetailInput.OutstandingReserve=lStrReserveDetailOutstandingReserve
-					Map lMapInputSfProceedAdditionalDetailReserveDetail=IDNSalesforceLightningClaimMotorCarNewbizHelperReserveDetail.inputSfProceedAdditionalDetailReserveDetail(this.parentStageController.getWebDriver(),lElementIgniteClaimReserveDetailFormRoot,lMapInitSfClaimReserveDetailInput)
+					Map lMapInitSfClaimReserveDetailInputOutput=[:]
+					IDNSalesforceLightningClaimMotorCarNewbizHelperReserveDetail.inputInitSfClaimReserveDetailInputOutput(lMapInitSfClaimReserveDetailInputOutput)
+					lMapInitSfClaimReserveDetailInputOutput.ReserveType=lStrReserveType
+					lMapInitSfClaimReserveDetailInputOutput.ThirdPartyName=lStrReserveDetailThirdPartyName
+					lMapInitSfClaimReserveDetailInputOutput.ThirdPartySequence=lStrReserveDetailThirdPartySequence
+					lMapInitSfClaimReserveDetailInputOutput.OutstandingReserve=lStrReserveDetailOutstandingReserve
+					Map lMapInputSfProceedAdditionalDetailReserveDetail=IDNSalesforceLightningClaimMotorCarNewbizHelperReserveDetail.inputSfProceedAdditionalDetailReserveDetail(this.parentStageController.getWebDriver(),lElementIgniteClaimReserveDetailFormRoot,lMapInitSfClaimReserveDetailInputOutput)
 					if(lMapInputSfProceedAdditionalDetailReserveDetail.Result){
 						lStrErrorMessage=''
 					}else{
@@ -2862,30 +2911,30 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 					lStrReservePaymentInvoiceSubmittedDateValue=lMapCaseDataCurrentInput.get(lStrReservePaymentInvoiceSubmittedDateValue)
 					String lStrReservePaymentChequeNo='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'ReservePaymentChequeNo'
 					lStrReservePaymentChequeNo=lMapCaseDataCurrentInput.get(lStrReservePaymentChequeNo)
-					Map lMapInitSfClaimReservePaymentDetailInput=[:]
-					IDNSalesforceLightningClaimMotorCarNewbizHelperReservePayment.inputInitSfClaimReservePaymentInput(lMapInitSfClaimReservePaymentDetailInput)
-					lMapInitSfClaimReservePaymentDetailInput.Category=lStrReservePaymentCategory
-					lMapInitSfClaimReservePaymentDetailInput.NetAmount=lStrReservePaymentNetAmount
-					lMapInitSfClaimReservePaymentDetailInput.VATRate=lStrReservePaymentVATRate
-					lMapInitSfClaimReservePaymentDetailInput.WHTRate=lStrReservePaymentWHTRate
-					lMapInitSfClaimReservePaymentDetailInput.StampDuty=lStrReservePaymentStampDuty
-					lMapInitSfClaimReservePaymentDetailInput.SalvageRate=lStrReservePaymentSalvageRate
-					lMapInitSfClaimReservePaymentDetailInput.RecoveryAmount=lStrReservePaymentRecoveryAmount
-					lMapInitSfClaimReservePaymentDetailInput.InvoiceNo=lStrReservePaymentInvoiceNo
-					lMapInitSfClaimReservePaymentDetailInput.PaymentDateOffset=lStrReservePaymentPaymentDateOffset
-					lMapInitSfClaimReservePaymentDetailInput.PaymentDateValue=lStrReservePaymentPaymentDateValue
-					lMapInitSfClaimReservePaymentDetailInput.PaymentMethod=lStrReservePaymentPaymentMethod
-					lMapInitSfClaimReservePaymentDetailInput.BankName=lStrReservePaymentBankName
-					lMapInitSfClaimReservePaymentDetailInput.FinalPayment=lStrReservePaymentFinalPayment
-					lMapInitSfClaimReservePaymentDetailInput.PayeeName=lStrReservePaymentPayeeName
-					lMapInitSfClaimReservePaymentDetailInput.InvoiceDateOffset=lStrReservePaymentInvoiceDateOffset
-					lMapInitSfClaimReservePaymentDetailInput.InvoiceDateValue=lStrReservePaymentInvoiceDateValue
-					lMapInitSfClaimReservePaymentDetailInput.PaymentDueDateOffset=lStrReservePaymentPaymentDueDateOffset
-					lMapInitSfClaimReservePaymentDetailInput.PaymentDueDateValue=lStrReservePaymentPaymentDueDateValue
-					lMapInitSfClaimReservePaymentDetailInput.InvoiceSubmittedDateOffset=lStrReservePaymentInvoiceSubmittedDateOffset
-					lMapInitSfClaimReservePaymentDetailInput.InvoiceSubmittedDateValue=lStrReservePaymentInvoiceSubmittedDateValue
-					lMapInitSfClaimReservePaymentDetailInput.ChequeNo=lStrReservePaymentChequeNo
-					Map lMapInputSfProceedAdditionalDetailReservePayment=IDNSalesforceLightningClaimMotorCarNewbizHelperReservePayment.inputSfProceedAdditionalDetailReservePayment(this.parentStageController.getWebDriver(),lElementIgniteClaimReservePaymentDetailFormRoot,lMapInitSfClaimReservePaymentDetailInput)
+					Map lMapInitSfClaimReservePaymentInputOutput=[:]
+					IDNSalesforceLightningClaimMotorCarNewbizHelperReservePayment.inputInitSfClaimReservePaymentInputOutput(lMapInitSfClaimReservePaymentInputOutput)
+					lMapInitSfClaimReservePaymentInputOutput.Category=lStrReservePaymentCategory
+					lMapInitSfClaimReservePaymentInputOutput.NetAmount=lStrReservePaymentNetAmount
+					lMapInitSfClaimReservePaymentInputOutput.VATRate=lStrReservePaymentVATRate
+					lMapInitSfClaimReservePaymentInputOutput.WHTRate=lStrReservePaymentWHTRate
+					lMapInitSfClaimReservePaymentInputOutput.StampDuty=lStrReservePaymentStampDuty
+					lMapInitSfClaimReservePaymentInputOutput.SalvageRate=lStrReservePaymentSalvageRate
+					lMapInitSfClaimReservePaymentInputOutput.RecoveryAmount=lStrReservePaymentRecoveryAmount
+					lMapInitSfClaimReservePaymentInputOutput.InvoiceNo=lStrReservePaymentInvoiceNo
+					lMapInitSfClaimReservePaymentInputOutput.PaymentDateOffset=lStrReservePaymentPaymentDateOffset
+					lMapInitSfClaimReservePaymentInputOutput.PaymentDateValue=lStrReservePaymentPaymentDateValue
+					lMapInitSfClaimReservePaymentInputOutput.PaymentMethod=lStrReservePaymentPaymentMethod
+					lMapInitSfClaimReservePaymentInputOutput.BankName=lStrReservePaymentBankName
+					lMapInitSfClaimReservePaymentInputOutput.FinalPayment=lStrReservePaymentFinalPayment
+					lMapInitSfClaimReservePaymentInputOutput.PayeeName=lStrReservePaymentPayeeName
+					lMapInitSfClaimReservePaymentInputOutput.InvoiceDateOffset=lStrReservePaymentInvoiceDateOffset
+					lMapInitSfClaimReservePaymentInputOutput.InvoiceDateValue=lStrReservePaymentInvoiceDateValue
+					lMapInitSfClaimReservePaymentInputOutput.PaymentDueDateOffset=lStrReservePaymentPaymentDueDateOffset
+					lMapInitSfClaimReservePaymentInputOutput.PaymentDueDateValue=lStrReservePaymentPaymentDueDateValue
+					lMapInitSfClaimReservePaymentInputOutput.InvoiceSubmittedDateOffset=lStrReservePaymentInvoiceSubmittedDateOffset
+					lMapInitSfClaimReservePaymentInputOutput.InvoiceSubmittedDateValue=lStrReservePaymentInvoiceSubmittedDateValue
+					lMapInitSfClaimReservePaymentInputOutput.ChequeNo=lStrReservePaymentChequeNo
+					Map lMapInputSfProceedAdditionalDetailReservePayment=IDNSalesforceLightningClaimMotorCarNewbizHelperReservePayment.inputSfProceedAdditionalDetailReservePayment(this.parentStageController.getWebDriver(),lElementIgniteClaimReservePaymentDetailFormRoot,lMapInitSfClaimReservePaymentInputOutput)
 					if(lMapInputSfProceedAdditionalDetailReservePayment.Result){
 						lStrErrorMessage=''
 					}else{
@@ -2956,19 +3005,19 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 					lStrRecoveryDetailRecoveredAmount=lMapCaseDataCurrentInput.get(lStrRecoveryDetailRecoveredAmount)
 					String lStrRecoveryDetailTotalRecoveryAmount='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'RecoveryDetailTotalRecoveryAmount'
 					lStrRecoveryDetailTotalRecoveryAmount=lMapCaseDataCurrentInput.get(lStrRecoveryDetailTotalRecoveryAmount)
-					Map lMapInitSfClaimRecoveryDetailInput=[:]
-					IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryDetail.inputInitSfClaimRecoveryDetailInput(lMapInitSfClaimRecoveryDetailInput)
-					lMapInitSfClaimRecoveryDetailInput.RecoveryType=lStrRecoveryDetailRecoveryType
-					lMapInitSfClaimRecoveryDetailInput.RecoverFrom=lStrRecoveryDetailRecoverFrom
-					lMapInitSfClaimRecoveryDetailInput.ThirdPartyName=lStrRecoveryDetailThirdPartyName
-					lMapInitSfClaimRecoveryDetailInput.OutstandingRecovery=lStrRecoveryDetailOutstandingRecovery
-					lMapInitSfClaimRecoveryDetailInput.AmountSubjectToRecovery=lStrRecoveryDetailAmountSubjectToRecovery
-					lMapInitSfClaimRecoveryDetailInput.RecoveryStatus=lStrRecoveryDetailRecoveryStatus
-					lMapInitSfClaimRecoveryDetailInput.RecoveryStage=lStrRecoveryDetailRecoveryStage
-					lMapInitSfClaimRecoveryDetailInput.Description=lStrRecoveryDetailDescription
-					lMapInitSfClaimRecoveryDetailInput.RecoveredAmount=lStrRecoveryDetailRecoveredAmount
-					lMapInitSfClaimRecoveryDetailInput.TotalRecoveryAmount=lStrRecoveryDetailTotalRecoveryAmount
-					Map lMapInputSfProceedAdditionalDetailReserveDetail=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryDetail.inputSfProceedAdditionalDetailRecoveryDetail(this.parentStageController.getWebDriver(),lElementIgniteClaimRecoveryDetailFormRoot,lMapInitSfClaimRecoveryDetailInput)
+					Map lMapInitSfClaimRecoveryDetailInputOutput=[:]
+					IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryDetail.inputInitSfClaimRecoveryDetailInputOutput(lMapInitSfClaimRecoveryDetailInputOutput)
+					lMapInitSfClaimRecoveryDetailInputOutput.RecoveryType=lStrRecoveryDetailRecoveryType
+					lMapInitSfClaimRecoveryDetailInputOutput.RecoverFrom=lStrRecoveryDetailRecoverFrom
+					lMapInitSfClaimRecoveryDetailInputOutput.ThirdPartyName=lStrRecoveryDetailThirdPartyName
+					lMapInitSfClaimRecoveryDetailInputOutput.OutstandingRecovery=lStrRecoveryDetailOutstandingRecovery
+					lMapInitSfClaimRecoveryDetailInputOutput.AmountSubjectToRecovery=lStrRecoveryDetailAmountSubjectToRecovery
+					lMapInitSfClaimRecoveryDetailInputOutput.RecoveryStatus=lStrRecoveryDetailRecoveryStatus
+					lMapInitSfClaimRecoveryDetailInputOutput.RecoveryStage=lStrRecoveryDetailRecoveryStage
+					lMapInitSfClaimRecoveryDetailInputOutput.Description=lStrRecoveryDetailDescription
+					lMapInitSfClaimRecoveryDetailInputOutput.RecoveredAmount=lStrRecoveryDetailRecoveredAmount
+					lMapInitSfClaimRecoveryDetailInputOutput.TotalRecoveryAmount=lStrRecoveryDetailTotalRecoveryAmount
+					Map lMapInputSfProceedAdditionalDetailReserveDetail=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryDetail.inputSfProceedAdditionalDetailRecoveryDetail(this.parentStageController.getWebDriver(),lElementIgniteClaimRecoveryDetailFormRoot,lMapInitSfClaimRecoveryDetailInputOutput)
 					if(lMapInputSfProceedAdditionalDetailReserveDetail.Result){
 						lStrErrorMessage=''
 					}else{
@@ -3051,25 +3100,25 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 					lStrRecoveryPaymentFinalRecovery=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrRecoveryPaymentFinalRecovery)
 					String lStrRecoveryPaymentPayeeIdentificationCardNo='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'RecoveryPaymentPayeeIdentificationCardNo'
 					lStrRecoveryPaymentPayeeIdentificationCardNo=lMapCaseDataCurrentInput.get(lStrRecoveryPaymentPayeeIdentificationCardNo)
-					Map lMapInitSfClaimRecoveryPaymentInput=[:]
-					IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment.inputInitSfClaimRecoveryPaymentInput(lMapInitSfClaimRecoveryPaymentInput)
-					lMapInitSfClaimRecoveryPaymentInput.PaymentCategory=lStrRecoveryPaymentPaymentCategory
-					lMapInitSfClaimRecoveryPaymentInput.RecoverFrom=lStrRecoveryPaymentRecoverFrom
-					lMapInitSfClaimRecoveryPaymentInput.RecoveredBy=lStrRecoveryPaymentRecoveredBy
-					lMapInitSfClaimRecoveryPaymentInput.PaymentDateOffset=lStrRecoveryPaymentPaymentDateOffset
-					lMapInitSfClaimRecoveryPaymentInput.PaymentDateValue=lStrRecoveryPaymentPaymentDateValue
-					lMapInitSfClaimRecoveryPaymentInput.NetAmount=lStrRecoveryPaymentNetAmount
-					lMapInitSfClaimRecoveryPaymentInput.VATRate=lStrRecoveryPaymentVATRate
-					lMapInitSfClaimRecoveryPaymentInput.VATAmount=lStrRecoveryPaymentVATAmount
-					lMapInitSfClaimRecoveryPaymentInput.WHTReferenceNo=lStrRecoveryPaymentWHTReferenceNo
-					lMapInitSfClaimRecoveryPaymentInput.WHTRate=lStrRecoveryPaymentWHTRate
-					lMapInitSfClaimRecoveryPaymentInput.WHTAmount=lStrRecoveryPaymentWHTAmount
-					lMapInitSfClaimRecoveryPaymentInput.NetAmountInclTax=lStrRecoveryPaymentNetAmountInclTax
-					lMapInitSfClaimRecoveryPaymentInput.Description=lStrRecoveryPaymentDescription
-					lMapInitSfClaimRecoveryPaymentInput.RecoveryPaymentStatus=lStrRecoveryPaymentRecoveryPaymentStatus
-					lMapInitSfClaimRecoveryPaymentInput.FinalRecovery=lStrRecoveryPaymentFinalRecovery
-					lMapInitSfClaimRecoveryPaymentInput.PayeeIdentificationCardNo=lStrRecoveryPaymentPayeeIdentificationCardNo
-					Map lMapInputSfProceedAdditionalDetailRecoveryPayment=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment.inputSfProceedAdditionalDetailRecoveryPayment(this.parentStageController.getWebDriver(),lElementIgniteClaimRecoveryPaymentFormRoot,lMapInitSfClaimRecoveryPaymentInput)
+					Map lMapInitSfClaimRecoveryPaymentInputOutput=[:]
+					IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment.inputInitSfClaimRecoveryPaymentInputOutput(lMapInitSfClaimRecoveryPaymentInputOutput)
+					lMapInitSfClaimRecoveryPaymentInputOutput.PaymentCategory=lStrRecoveryPaymentPaymentCategory
+					lMapInitSfClaimRecoveryPaymentInputOutput.RecoverFrom=lStrRecoveryPaymentRecoverFrom
+					lMapInitSfClaimRecoveryPaymentInputOutput.RecoveredBy=lStrRecoveryPaymentRecoveredBy
+					lMapInitSfClaimRecoveryPaymentInputOutput.PaymentDateOffset=lStrRecoveryPaymentPaymentDateOffset
+					lMapInitSfClaimRecoveryPaymentInputOutput.PaymentDateValue=lStrRecoveryPaymentPaymentDateValue
+					lMapInitSfClaimRecoveryPaymentInputOutput.NetAmount=lStrRecoveryPaymentNetAmount
+					lMapInitSfClaimRecoveryPaymentInputOutput.VATRate=lStrRecoveryPaymentVATRate
+					lMapInitSfClaimRecoveryPaymentInputOutput.VATAmount=lStrRecoveryPaymentVATAmount
+					lMapInitSfClaimRecoveryPaymentInputOutput.WHTReferenceNo=lStrRecoveryPaymentWHTReferenceNo
+					lMapInitSfClaimRecoveryPaymentInputOutput.WHTRate=lStrRecoveryPaymentWHTRate
+					lMapInitSfClaimRecoveryPaymentInputOutput.WHTAmount=lStrRecoveryPaymentWHTAmount
+					lMapInitSfClaimRecoveryPaymentInputOutput.NetAmountInclTax=lStrRecoveryPaymentNetAmountInclTax
+					lMapInitSfClaimRecoveryPaymentInputOutput.Description=lStrRecoveryPaymentDescription
+					lMapInitSfClaimRecoveryPaymentInputOutput.RecoveryPaymentStatus=lStrRecoveryPaymentRecoveryPaymentStatus
+					lMapInitSfClaimRecoveryPaymentInputOutput.FinalRecovery=lStrRecoveryPaymentFinalRecovery
+					lMapInitSfClaimRecoveryPaymentInputOutput.PayeeIdentificationCardNo=lStrRecoveryPaymentPayeeIdentificationCardNo
+					Map lMapInputSfProceedAdditionalDetailRecoveryPayment=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment.inputSfProceedAdditionalDetailRecoveryPayment(this.parentStageController.getWebDriver(),lElementIgniteClaimRecoveryPaymentFormRoot,lMapInitSfClaimRecoveryPaymentInputOutput)
 					if(lMapInputSfProceedAdditionalDetailRecoveryPayment.Result){
 						lStrErrorMessage=''
 					}else{

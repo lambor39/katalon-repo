@@ -19,6 +19,7 @@ import internal.GlobalVariable
 import org.roojai.ignite.core.IGNUemaHelper as IGNUemaHelper
 import org.openqa.selenium.*
 import org.roojai.idn.types.salesforce.lightning.claim.motor.car.IDNSalesforceLightningClaimMotorCarNewbizCoreSearchUtil
+import org.roojai.ignite.core.IGNSalesforceRestAPIHelper
 public class IDNSalesforceLightningClaimMotorCarNewbizHelperReservePayment{
 	public static WebElement getElementIgniteClaimReservePaymentDetailFormRoot(WebDriver webDriver,String cssLocator,Boolean isIgnoreCssLocator=true){
 		WebElement lreturn=null
@@ -1608,13 +1609,139 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperReservePayment{
 		}
 		return lreturn
 	}
-	public static Boolean inputInitSfClaimReservePaymentInput(Map targetMap){
+	public static Map writePaymentDetailObjectOutput(List<String> listStrTargetId){
+		Map lreturn=[:]
+		if(IGNUemaHelper.checkObjectNullOfObject(listStrTargetId)){
+			return lreturn
+		}
+		List<String> lListStrTargetId=listStrTargetId
+		try{
+			Boolean lResult=false
+			Map lMapSfPaymentDetailOutput=[:]
+			lreturn.put('MapSfPaymentDetailOutput',lMapSfPaymentDetailOutput)
+			lreturn.put('Result',lResult)
+			String lStrTargetId=''
+			String lStrTargetSfField='Id,Name,Claim_Name__c,Damage_no__c,Reserve_Catagory__c,Payment_Category__c,Net_Amount__c,VAT_Rate__c,WHT_Rate__c,Stamp_Duty__c,Salvage__c,Recovery__c,Invoice_No__c,Payment_Date__c,Payment_Method__c,Bank_Account__c,Final_Payment__c,Payee__c,Invoice_Date__c,KPI_Payment_Date__c,Invoice_Submitted_Date__c,Cheque_No__c'
+			String lStrTargetSalesforceObjectName='Payment_Details__c'
+			Boolean lIsToPreferSelectedFieldName=false
+			List<String> lListFieldNameAll=new ArrayList<String>()
+			List<String> lListFieldNameSelected=new ArrayList<String>()
+			Boolean lIsWhereJoinOperatorAnd=true
+			String lStrClauseCustomText=''
+			Map lMapClauseEqualAnd=[:]
+			Map lMapClauseEqualOr=[:]
+			Map lMapClauseInAnd=[:]
+			Map lMapClauseInOr=[:]
+			Map lMapClauseLikeAnd=[:]
+			Map lMapClauseLikeOr=[:]
+			Map lMapClauseNotEqualAnd=[:]
+			Map lMapClauseNotEqualOr=[:]
+			Map lMapClauseNotInAnd=[:]
+			Map lMapClauseNotInOr=[:]
+			Map lMapClauseNotLikeAnd=[:]
+			Map lMapClauseNotLikeOr=[:]
+			String lStrWhereClause=''
+			String lStrSuffixQuery=''
+			lIsToPreferSelectedFieldName=false
+			lListFieldNameAll.clear()
+			lListFieldNameSelected.clear()
+			lIsWhereJoinOperatorAnd=true
+			lStrClauseCustomText=''
+			lMapClauseEqualAnd.clear()
+			lMapClauseEqualOr.clear()
+			lMapClauseInAnd.clear()
+			lMapClauseInOr.clear()
+			lMapClauseLikeAnd.clear()
+			lMapClauseLikeOr.clear()
+			lMapClauseNotEqualAnd.clear()
+			lMapClauseNotEqualOr.clear()
+			lMapClauseNotInAnd.clear()
+			lMapClauseNotInOr.clear()
+			lMapClauseNotLikeAnd.clear()
+			lMapClauseNotLikeOr.clear()
+			lListFieldNameSelected=lStrTargetSfField.split(',')
+			for(Integer lIndex=0;lIndex<=lListStrTargetId.size()-1;lIndex++){
+				if(lIndex>0){
+					lStrTargetId=lStrTargetId+','+IGNUemaHelper.getAddedSingleQuoteBeginEnd(lListStrTargetId[lIndex])
+				}else{
+					lStrTargetId=IGNUemaHelper.getAddedSingleQuoteBeginEnd(lListStrTargetId[lIndex])
+				}
+			}
+			lMapClauseInAnd.put('Reserve_Catagory__c',lStrTargetId)
+			lStrWhereClause=IGNUemaHelper.getStringQueryForWhereClauseBuilder(lIsWhereJoinOperatorAnd,lStrClauseCustomText,lMapClauseEqualAnd,lMapClauseEqualOr,lMapClauseInAnd,lMapClauseInOr,lMapClauseLikeAnd,lMapClauseLikeOr,lMapClauseNotEqualAnd,lMapClauseNotEqualOr,lMapClauseNotInAnd,lMapClauseNotInOr,lMapClauseNotLikeAnd,lMapClauseNotLikeOr)
+			lStrSuffixQuery=''
+			Map lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			if(!lMapGetSalesforceObjectTarget.Result){
+				lMapGetSalesforceObjectTarget=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			}
+			if(!lMapGetSalesforceObjectTarget.Result){
+				return lreturn
+			}
+			List<Map> lListMapJsonGetSalesforceObjectTarget=lMapGetSalesforceObjectTarget.ListMapJsonResponseObject
+			if(lListMapJsonGetSalesforceObjectTarget.size()<=0){
+				return lreturn
+			}
+			Map lMapJsonTarget=lListMapJsonGetSalesforceObjectTarget[0]
+			if(!lMapJsonTarget){
+				return lreturn
+			}
+			Integer lNumberOfObjectTargetNum=lMapJsonTarget.records.size()
+			if(lNumberOfObjectTargetNum<=0){
+				return lreturn
+			}
+			List<Map> lListMapGetSalesforceObjectTargetRecord=lMapGetSalesforceObjectTarget.ListMapSalesforceObjectRecord
+			if(lListMapGetSalesforceObjectTargetRecord.size()>0){
+				List<Map> lListMapSalesforceObjectRecordID=[]
+				for(Integer lIndex=0;lIndex<=lListMapGetSalesforceObjectTargetRecord.size()-1;lIndex++){
+					Map<String,String> lMapSalesforceObjectRecordID=lListMapGetSalesforceObjectTargetRecord.get(lIndex)
+					lMapSalesforceObjectRecordID.remove('attributes')
+					Map lMapInputInitSfPaymentDetailOutput=[:]
+					this.inputInitSfClaimReservePaymentInputOutput(lMapInputInitSfPaymentDetailOutput)
+					lMapInputInitSfPaymentDetailOutput.ClaimName=lMapSalesforceObjectRecordID.Claim_Name__c
+					lMapInputInitSfPaymentDetailOutput.DamageSfId=lMapSalesforceObjectRecordID.Damage_no__c
+					lMapInputInitSfPaymentDetailOutput.ReserveDetailSfId=lMapSalesforceObjectRecordID.Reserve_Catagory__c
+					lMapInputInitSfPaymentDetailOutput.PaymentDetailSfId=lMapSalesforceObjectRecordID.Id
+					lMapInputInitSfPaymentDetailOutput.PaymentDetailName=lMapSalesforceObjectRecordID.Name
+					lMapInputInitSfPaymentDetailOutput.Category=lMapSalesforceObjectRecordID.Payment_Category__c
+					lMapInputInitSfPaymentDetailOutput.NetAmount=lMapSalesforceObjectRecordID.Net_Amount__c
+					lMapInputInitSfPaymentDetailOutput.VATRate=lMapSalesforceObjectRecordID.VAT_Rate__c
+					lMapInputInitSfPaymentDetailOutput.WHTRate=lMapSalesforceObjectRecordID.WHT_Rate__c
+					lMapInputInitSfPaymentDetailOutput.StampDuty=lMapSalesforceObjectRecordID.Stamp_Duty__c
+					lMapInputInitSfPaymentDetailOutput.SalvageRate=lMapSalesforceObjectRecordID.Salvage__c
+					lMapInputInitSfPaymentDetailOutput.RecoveryAmount=lMapSalesforceObjectRecordID.Recovery__c
+					lMapInputInitSfPaymentDetailOutput.InvoiceNo=lMapSalesforceObjectRecordID.Invoice_No__c
+					lMapInputInitSfPaymentDetailOutput.PaymentDateValue=lMapSalesforceObjectRecordID.Payment_Date__c
+					lMapInputInitSfPaymentDetailOutput.PaymentMethod=lMapSalesforceObjectRecordID.Payment_Method__c
+					lMapInputInitSfPaymentDetailOutput.BankSfId=lMapSalesforceObjectRecordID.Bank_Account__c
+					lMapInputInitSfPaymentDetailOutput.FinalPayment=lMapSalesforceObjectRecordID.Final_Payment__c
+					lMapInputInitSfPaymentDetailOutput.PayeeSfId=lMapSalesforceObjectRecordID.Payee__c
+					lMapInputInitSfPaymentDetailOutput.InvoiceDateValue=lMapSalesforceObjectRecordID.Invoice_Date__c
+					lMapInputInitSfPaymentDetailOutput.PaymentDueDateValue=lMapSalesforceObjectRecordID.KPI_Payment_Date__c
+					lMapInputInitSfPaymentDetailOutput.InvoiceSubmittedDateValue=lMapSalesforceObjectRecordID.Invoice_Submitted_Date__c
+					lMapInputInitSfPaymentDetailOutput.ChequeNo=lMapSalesforceObjectRecordID.Cheque_No__c
+					lListMapSalesforceObjectRecordID.add(lMapInputInitSfPaymentDetailOutput)
+				}
+				lMapSfPaymentDetailOutput.put('paymentDetailList',lListMapSalesforceObjectRecordID)
+			}
+			lResult=true
+			lreturn.put('MapSfPaymentDetailOutput',lMapSfPaymentDetailOutput)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Boolean inputInitSfClaimReservePaymentInputOutput(Map targetMap){
 		Boolean lreturn=false
 		if(IGNUemaHelper.checkObjectNullOfObject(targetMap)){
 			return lreturn
 		}
 		try{
 			targetMap.clear()
+			targetMap.put('ClaimName','')
+			targetMap.put('DamageSfId','')
+			targetMap.put('ReserveDetailSfId','')
+			targetMap.put('PaymentDetailSfId','')
+			targetMap.put('PaymentDetailName','')
 			targetMap.put('Category','')
 			targetMap.put('NetAmount','')
 			targetMap.put('VATRate','')
@@ -1626,8 +1753,10 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperReservePayment{
 			targetMap.put('PaymentDateOffset','')
 			targetMap.put('PaymentDateValue','')
 			targetMap.put('PaymentMethod','')
+			targetMap.put('BankSfId','')
 			targetMap.put('BankName','')
 			targetMap.put('FinalPayment','')
+			targetMap.put('PayeeSfId','')
 			targetMap.put('PayeeName','')
 			targetMap.put('InvoiceDateOffset','')
 			targetMap.put('InvoiceDateValue','')
