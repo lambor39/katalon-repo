@@ -18,8 +18,8 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable
 import org.roojai.ignite.core.IGNUemaHelper as IGNUemaHelper
 import org.openqa.selenium.*
-import org.roojai.idn.types.salesforce.lightning.claim.motor.car.IDNSalesforceLightningClaimMotorCarNewbizCoreSearchUtil
 import org.roojai.ignite.core.IGNSalesforceRestAPIHelper
+import org.roojai.idn.types.salesforce.lightning.core.IDNSalesforceLightningCoreHelperUI
 public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 	public static WebElement getElementIgniteClaimRecoveryPaymentFormRoot(WebDriver webDriver,String cssLocator,Boolean isIgnoreCssLocator=true){
 		WebElement lreturn=null
@@ -319,63 +319,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 			lreturn.put('ErrorMessage','')
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-combobox'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-base-combobox'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='button'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='lightning-base-combobox-item'
-			Boolean lIsRecoveryPaymentCategoryClickOK=false
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild04=[]
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
-			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
-				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					return lreturn
-				}
-				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					String lStrSfRecoveryPaymentPaymentCategoryValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
-					lStrSfRecoveryPaymentPaymentCategoryValueFromElement=lStrSfRecoveryPaymentPaymentCategoryValueFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentPaymentCategoryValueFromElement,'paymentCategory')){
-						lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
-						if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-							return lreturn
-						}
-						if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-							lIsRecoveryPaymentCategoryClickOK=IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02)
-						}
-					}
-					if(lIsRecoveryPaymentCategoryClickOK){
-						lIsRecoveryPaymentCategoryClickOK=false
-						break
-					}
-				}
+			String lStrTargetFieldName='paymentCategory'
+			Map lMapInputSfLightningComboBoxWithPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningComboBoxWithPicklist(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lStrTargetFieldName,lStrSfRecoveryPaymentPaymentCategoryValue)
+			if(lMapInputSfLightningComboBoxWithPicklist.Result){
+				lStrErrorMessage=''
+			}else{
+				lStrErrorMessage=lMapInputSfLightningComboBoxWithPicklist.ErrorMessage
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-				lListElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04)
+			if(!lMapInputSfLightningComboBoxWithPicklist.Result){
+				return lreturn
 			}
-			if(lListElementSearch01InputLevel01IgniteClaimReportingFormChild04.size()>0){
-				for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild04.size()-1;lIndex++){
-					lElementSearch01InputLevel01IgniteClaimReportingFormChild04=lListElementSearch01InputLevel01IgniteClaimReportingFormChild04.get(lIndex)
-					if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-						return lreturn
-					}
-					if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-						String lStrSfRecoveryPaymentPaymentCategoryValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,'data-value')
-						lStrSfRecoveryPaymentPaymentCategoryValueFromElement=lStrSfRecoveryPaymentPaymentCategoryValueFromElement.toLowerCase()
-						lStrSfRecoveryPaymentPaymentCategoryValue=lStrSfRecoveryPaymentPaymentCategoryValue.toLowerCase()
-						if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentPaymentCategoryValueFromElement,lStrSfRecoveryPaymentPaymentCategoryValue)){
-							lIsRecoveryPaymentCategoryClickOK=IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04)
-							lResult=lIsRecoveryPaymentCategoryClickOK
-						}
-						if(lIsRecoveryPaymentCategoryClickOK){
-							break
-						}
-					}
-				}
-			}
+			lResult=lMapInputSfLightningComboBoxWithPicklist.Result
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){
@@ -397,112 +351,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 			lreturn.put('ErrorMessage','')
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-input-field'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-lookup'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='lightning-lookup-desktop'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='lightning-grouped-combobox'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild05='lightning-base-combobox'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild06='input'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild07='lightning-base-combobox-item'
-			String lLocatorSearch01InputLevel01IgniteClaimAddressFormParent='div.DESKTOP.uiContainerManager'
-			String lLocatorSearch01InputLevel01IgniteClaimAddressFormChild01='div.forceSearchLookupAdvanced'
-			String lLocatorSearch01InputLevel01IgniteClaimAddressFormChild02='a.outputLookupLink'
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild05=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild06=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild07=null
-			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormParent=null
-			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormChild01=null
-			WebElement lElementSearch01InputLevel01IgniteClaimAddressFormChild02=null
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild07=[]
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimAddressFormChild02=[]
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimRecoveryDetailFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
-			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
-				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					return lreturn
-				}
-				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					String lStrSfRecoveryPaymentRecoverFromValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
-					lStrSfRecoveryPaymentRecoverFromValueFromElement=lStrSfRecoveryPaymentRecoverFromValueFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentRecoverFromValueFromElement,'recoveredFrom')){
-						break
-					}
-				}
+			String lStrTargetFieldName='recoveredFrom'
+			Map lMapInputValueWithOutButtonWithSearch=IDNSalesforceLightningCoreHelperUI.inputValueWithOutButtonWithSearch(webDriver,lElementIgniteClaimRecoveryDetailFormRoot,lStrTargetFieldName,lStrSfRecoveryPaymentRecoverFromValue)
+			if(lMapInputValueWithOutButtonWithSearch.Result){
+				lStrErrorMessage=''
+			}else{
+				lStrErrorMessage=lMapInputValueWithOutButtonWithSearch.ErrorMessage
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+			if(!lMapInputValueWithOutButtonWithSearch.Result){
 				return lreturn
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild03,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild05=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild05,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild05){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild05){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild06=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild05,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild06,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild06){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild06){
-				IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild06)
-				IGNUemaHelper.typeTextByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild06,lStrSfRecoveryPaymentRecoverFromValue)
-			}
-			IGNUemaHelper.delayWebUISecond(5)
-			lListElementSearch01InputLevel01IgniteClaimReportingFormChild07=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild05,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild07)
-			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild07.size()-1;lIndex++){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild07=lListElementSearch01InputLevel01IgniteClaimReportingFormChild07.get(lIndex)
-				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild07){
-					return lreturn
-				}
-				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild07){
-					String lStrSfRecoveryPaymentRecoverFromValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild07,'data-value')
-					lStrSfRecoveryPaymentRecoverFromValueFromElement=lStrSfRecoveryPaymentRecoverFromValueFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentRecoverFromValueFromElement,'actionAdvancedSearch')){
-						IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild07)
-						break
-					}
-				}
-			}
-			IGNUemaHelper.waitElementVisibleByLocator(webDriver,lLocatorSearch01InputLevel01IgniteClaimAddressFormParent)
-			lElementSearch01InputLevel01IgniteClaimAddressFormParent=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lLocatorSearch01InputLevel01IgniteClaimAddressFormParent)
-			if(!lElementSearch01InputLevel01IgniteClaimAddressFormParent){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimAddressFormParent){
-				lElementSearch01InputLevel01IgniteClaimAddressFormChild01=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormParent,lLocatorSearch01InputLevel01IgniteClaimAddressFormChild01,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimAddressFormChild01){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimAddressFormChild01){
-				IGNUemaHelper.delayWebUISecond(5)
-				lListElementSearch01InputLevel01IgniteClaimAddressFormChild02=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormChild01,lLocatorSearch01InputLevel01IgniteClaimAddressFormChild02)
-			}
-			if(lListElementSearch01InputLevel01IgniteClaimAddressFormChild02.size()>0){
-				IGNUemaHelper.delayWebUISecond(5)
-				lElementSearch01InputLevel01IgniteClaimAddressFormChild02=IGNUemaHelper.getWebElementRandomFromWebElementList(webDriver,lListElementSearch01InputLevel01IgniteClaimAddressFormChild02)
-				lResult=IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimAddressFormChild02)
-			}
+			lResult=lMapInputValueWithOutButtonWithSearch.Result
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){
@@ -524,63 +383,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 			lreturn.put('ErrorMessage','')
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-combobox'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-base-combobox'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='button'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='lightning-base-combobox-item'
-			Boolean lIsRecoveryPaymentRecoveredByClickOK=false
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild04=[]
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
-			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
-				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					return lreturn
-				}
-				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					String lStrSfRecoveryPaymentRecoveredByValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
-					lStrSfRecoveryPaymentRecoveredByValueFromElement=lStrSfRecoveryPaymentRecoveredByValueFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentRecoveredByValueFromElement,'recoveredBy')){
-						lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
-						if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-							return lreturn
-						}
-						if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-							lIsRecoveryPaymentRecoveredByClickOK=IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02)
-						}
-					}
-					if(lIsRecoveryPaymentRecoveredByClickOK){
-						lIsRecoveryPaymentRecoveredByClickOK=false
-						break
-					}
-				}
+			String lStrTargetFieldName='recoveredBy'
+			Map lMapInputSfLightningComboBoxWithPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningComboBoxWithPicklist(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lStrTargetFieldName,lStrSfRecoveryPaymentRecoveredByValue)
+			if(lMapInputSfLightningComboBoxWithPicklist.Result){
+				lStrErrorMessage=''
+			}else{
+				lStrErrorMessage=lMapInputSfLightningComboBoxWithPicklist.ErrorMessage
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-				lListElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04)
+			if(!lMapInputSfLightningComboBoxWithPicklist.Result){
+				return lreturn
 			}
-			if(lListElementSearch01InputLevel01IgniteClaimReportingFormChild04.size()>0){
-				for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild04.size()-1;lIndex++){
-					lElementSearch01InputLevel01IgniteClaimReportingFormChild04=lListElementSearch01InputLevel01IgniteClaimReportingFormChild04.get(lIndex)
-					if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-						return lreturn
-					}
-					if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-						String lStrSfRecoveryPaymentPaymentCategoryValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,'data-value')
-						lStrSfRecoveryPaymentPaymentCategoryValueFromElement=lStrSfRecoveryPaymentPaymentCategoryValueFromElement.toLowerCase()
-						lStrSfRecoveryPaymentRecoveredByValue=lStrSfRecoveryPaymentRecoveredByValue.toLowerCase()
-						if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentPaymentCategoryValueFromElement,lStrSfRecoveryPaymentRecoveredByValue)){
-							lIsRecoveryPaymentRecoveredByClickOK=IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04)
-							lResult=lIsRecoveryPaymentRecoveredByClickOK
-						}
-						if(lIsRecoveryPaymentRecoveredByClickOK){
-							break
-						}
-					}
-				}
-			}
+			lResult=lMapInputSfLightningComboBoxWithPicklist.Result
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){
@@ -602,50 +415,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 			lreturn.put('ErrorMessage','')
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-input-field'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-input'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='lightning-datepicker'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='input'
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
-			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
-				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					return lreturn
-				}
-				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					String lStrSfRecoveryPaymentPaymentDateValueFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
-					lStrSfRecoveryPaymentPaymentDateValueFromElement=lStrSfRecoveryPaymentPaymentDateValueFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentPaymentDateValueFromElement,'paymentDate')){
-						break
-					}
-				}
+			String lStrTargetFieldName='paymentDate'
+			Map lMapInputSfLightningDatePickerWithOutTime=IDNSalesforceLightningCoreHelperUI.inputSfLightningDatePickerWithOutTime(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lStrTargetFieldName,lStrSfRecoveryPaymentPaymentDateValue)
+			if(lMapInputSfLightningDatePickerWithOutTime.Result){
+				lStrErrorMessage=''
+			}else{
+				lStrErrorMessage=lMapInputSfLightningDatePickerWithOutTime.ErrorMessage
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+			if(!lMapInputSfLightningDatePickerWithOutTime.Result){
 				return lreturn
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild03,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04)
-				lResult=IGNUemaHelper.typeSetTextByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,lStrSfRecoveryPaymentPaymentDateValue)
-			}
+			lResult=lMapInputSfLightningDatePickerWithOutTime.Result
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){
@@ -667,50 +447,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 			lreturn.put('ErrorMessage','')
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-input-field'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-input'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='lightning-primitive-input-simple'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='input'
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
-			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
-				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					return lreturn
-				}
-				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					String lStrSfRecoveryPaymentNetAmountFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
-					lStrSfRecoveryPaymentNetAmountFromElement=lStrSfRecoveryPaymentNetAmountFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentNetAmountFromElement,'paymentData_netAmount')){
-						break
-					}
-				}
+			String lStrTargetFieldName='paymentData_netAmount'
+			Map lMapInputSfLightningPrimitiveInput=IDNSalesforceLightningCoreHelperUI.inputSfLightningPrimitiveInput(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lStrTargetFieldName,lStrSfRecoveryPaymentNetAmount)
+			if(lMapInputSfLightningPrimitiveInput.Result){
+				lStrErrorMessage=''
+			}else{
+				lStrErrorMessage=lMapInputSfLightningPrimitiveInput.ErrorMessage
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+			if(!lMapInputSfLightningPrimitiveInput.Result){
 				return lreturn
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild03,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04)
-				lResult=IGNUemaHelper.typeTextByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,lStrSfRecoveryPaymentNetAmount)
-			}
+			lResult=lMapInputSfLightningPrimitiveInput.Result
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){
@@ -732,50 +479,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 			lreturn.put('ErrorMessage','')
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-input-field'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-input'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='lightning-primitive-input-simple'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='input'
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
-			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
-				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					return lreturn
-				}
-				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					String lStrSfRecoveryPaymentVATRateFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
-					lStrSfRecoveryPaymentVATRateFromElement=lStrSfRecoveryPaymentVATRateFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentVATRateFromElement,'paymentData_vatRate')){
-						break
-					}
-				}
+			String lStrTargetFieldName='paymentData_vatRate'
+			Map lMapInputSfLightningPrimitiveInput=IDNSalesforceLightningCoreHelperUI.inputSfLightningPrimitiveInput(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lStrTargetFieldName,lStrSfRecoveryPaymentVATRate)
+			if(lMapInputSfLightningPrimitiveInput.Result){
+				lStrErrorMessage=''
+			}else{
+				lStrErrorMessage=lMapInputSfLightningPrimitiveInput.ErrorMessage
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+			if(!lMapInputSfLightningPrimitiveInput.Result){
 				return lreturn
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild03,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04)
-				lResult=IGNUemaHelper.typeTextByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,lStrSfRecoveryPaymentVATRate)
-			}
+			lResult=lMapInputSfLightningPrimitiveInput.Result
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){
@@ -797,50 +511,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 			lreturn.put('ErrorMessage','')
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-input-field'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-input'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='lightning-primitive-input-simple'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='input'
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
-			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
-				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					return lreturn
-				}
-				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					String lStrSfRecoveryPaymentWHTReferenceNoFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
-					lStrSfRecoveryPaymentWHTReferenceNoFromElement=lStrSfRecoveryPaymentWHTReferenceNoFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentWHTReferenceNoFromElement,'whtReferenceNumber')){
-						break
-					}
-				}
+			String lStrTargetFieldName='whtReferenceNumber'
+			Map lMapInputSfLightningPrimitiveInput=IDNSalesforceLightningCoreHelperUI.inputSfLightningPrimitiveInput(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lStrTargetFieldName,lStrSfRecoveryPaymentWHTReferenceNo)
+			if(lMapInputSfLightningPrimitiveInput.Result){
+				lStrErrorMessage=''
+			}else{
+				lStrErrorMessage=lMapInputSfLightningPrimitiveInput.ErrorMessage
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+			if(!lMapInputSfLightningPrimitiveInput.Result){
 				return lreturn
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild03,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04)
-				lResult=IGNUemaHelper.typeTextByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,lStrSfRecoveryPaymentWHTReferenceNo)
-			}
+			lResult=lMapInputSfLightningPrimitiveInput.Result
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){
@@ -862,50 +543,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 			lreturn.put('ErrorMessage','')
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-input-field'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-input'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='lightning-primitive-input-simple'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='input'
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
-			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
-				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					return lreturn
-				}
-				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					String lStrSfRecoveryPaymentWHTRateFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
-					lStrSfRecoveryPaymentWHTRateFromElement=lStrSfRecoveryPaymentWHTRateFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentWHTRateFromElement,'paymentData_whtRate')){
-						break
-					}
-				}
+			String lStrTargetFieldName='paymentData_whtRate'
+			Map lMapInputSfLightningPrimitiveInput=IDNSalesforceLightningCoreHelperUI.inputSfLightningPrimitiveInput(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lStrTargetFieldName,lStrSfRecoveryPaymentWHTRate)
+			if(lMapInputSfLightningPrimitiveInput.Result){
+				lStrErrorMessage=''
+			}else{
+				lStrErrorMessage=lMapInputSfLightningPrimitiveInput.ErrorMessage
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+			if(!lMapInputSfLightningPrimitiveInput.Result){
 				return lreturn
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild03,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04)
-				lResult=IGNUemaHelper.typeTextByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,lStrSfRecoveryPaymentWHTRate)
-			}
+			lResult=lMapInputSfLightningPrimitiveInput.Result
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){
@@ -927,26 +575,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 			lreturn.put('ErrorMessage','')
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-input-field'
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
-			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
-				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					return lreturn
-				}
-				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					String lStrSfRecoveryPaymentDescriptionFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
-					lStrSfRecoveryPaymentDescriptionFromElement=lStrSfRecoveryPaymentDescriptionFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentDescriptionFromElement,'description')){
-						break
-					}
-				}
+			String lStrTargetFieldName='description'
+			Map lMapInputSfLightningTextArea=IDNSalesforceLightningCoreHelperUI.inputSfLightningTextArea(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lStrTargetFieldName,lStrSfRecoveryPaymentDescription)
+			if(lMapInputSfLightningTextArea.Result){
+				lStrErrorMessage=''
+			}else{
+				lStrErrorMessage=lMapInputSfLightningTextArea.ErrorMessage
 			}
-			lResult=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputValueSfToTargetTextArea(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lStrSfRecoveryPaymentDescription)
-			if(!lResult){
-				lStrErrorMessage='Cannot input text in recovery payment description'
+			if(!lMapInputSfLightningTextArea.Result){
+				return lreturn
 			}
+			lResult=lMapInputSfLightningTextArea.Result
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){
@@ -968,50 +607,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment{
 			lreturn.put('ErrorMessage','')
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01='lightning-input-field'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02='lightning-input'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03='lightning-primitive-input-simple'
-			String lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04='input'
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild01=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild02=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild03=null
-			WebElement lElementSearch01InputLevel01IgniteClaimReportingFormChild04=null
-			List<WebElement> lListElementSearch01InputLevel01IgniteClaimReportingFormChild01=IGNUemaHelper.getChildShadowWebElementListOfWebElement(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild01)
-			for(Integer lIndex=0;lIndex<=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.size()-1;lIndex++){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild01=lListElementSearch01InputLevel01IgniteClaimReportingFormChild01.get(lIndex)
-				if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					return lreturn
-				}
-				if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-					String lStrSfRecoveryPaymentPayeeIdentificationCardNoFromElement=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,'id')
-					lStrSfRecoveryPaymentPayeeIdentificationCardNoFromElement=lStrSfRecoveryPaymentPayeeIdentificationCardNoFromElement.toLowerCase()
-					if(IGNUemaHelper.checkStringContainString(lStrSfRecoveryPaymentPayeeIdentificationCardNoFromElement,'payeeIdentificationCardNumber')){
-						break
-					}
-				}
+			String lStrTargetFieldName='payeeIdentificationCardNumber'
+			Map lMapInputSfLightningPrimitiveInput=IDNSalesforceLightningCoreHelperUI.inputSfLightningPrimitiveInput(webDriver,lElementIgniteClaimRecoveryPaymentDetailFormRoot,lStrTargetFieldName,lStrSfRecoveryPaymentPayeeIdentificationCardNo)
+			if(lMapInputSfLightningPrimitiveInput.Result){
+				lStrErrorMessage=''
+			}else{
+				lStrErrorMessage=lMapInputSfLightningPrimitiveInput.ErrorMessage
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild01){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild02=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild01,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild02,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
+			if(!lMapInputSfLightningPrimitiveInput.Result){
 				return lreturn
 			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild02){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild03=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild02,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild03,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild03){
-				lElementSearch01InputLevel01IgniteClaimReportingFormChild04=IGNUemaHelper.getChildShadowWebElementOfWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild03,lLocatorSearch01InputLevel01IgniteClaimReportingFormChild04,true)
-			}
-			if(!lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				return lreturn
-			}
-			if(lElementSearch01InputLevel01IgniteClaimReportingFormChild04){
-				IGNUemaHelper.clickByWebElementWithScroll(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04)
-				lResult=IGNUemaHelper.typeTextByWebElement(webDriver,lElementSearch01InputLevel01IgniteClaimReportingFormChild04,lStrSfRecoveryPaymentPayeeIdentificationCardNo)
-			}
+			lResult=lMapInputSfLightningPrimitiveInput.Result
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){

@@ -42,142 +42,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 	public void setParentStageController(IDNTestStageControllerGroupSfLightningShareClaimMotorNameNewBizStoryCreate newParentStageController){
 		//Do Nothing
 	}
-	public Boolean inputClaimCreateTest(Map<String,String> caseInput,Map<String,String> caseOutput){
-		Boolean lreturn=false
-		String lErrorMessage=''
-		try{
-			String lStrSalesforceRecordID=''
-			String lStrSalesforceSearchByDefaultObjectValue=''
-			String lStrCssLocator=''
-			Boolean lIsVisible=false
-			String lMessage=''
-			Map lMapWriteClaimObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.writeClaimObjectOutput('a0nMS0000000BrVYAU')
-			if(!lMapWriteClaimObjectOutput.Result){
-				return lreturn
-			}
-			lMessage=IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteClaimObjectOutput.MapSfClaimOutput,false,true)
-			List<String> listClaimId=[]
-			listClaimId.add('a0nMS0000000BZlYAM')
-			Map lMapWriteThirdPartyObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty.writeThirdPartyObjectOutput(listClaimId)
-			if(!lMapWriteThirdPartyObjectOutput.Result){
-				return lreturn
-			}
-			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteThirdPartyObjectOutput.MapSfThirdPartyOutput,false,true)
-			Map lMapWriteDamageObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperDamage.writeDamageObjectOutput('a0nMS0000000BrVYAU')
-			if(!lMapWriteDamageObjectOutput.Result){
-				return lreturn
-			}
-			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteDamageObjectOutput.MapSfDamageOutput,false,true)
-			List<String> listDamageId=[]
-			listDamageId.add('a0xMS0000001JTdYAM')
-			listDamageId.add('a0xMS0000002C9xYAE')
-			Map lMapWriteReserveDetailObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperReserveDetail.writeReserveDetailObjectOutput(listDamageId)
-			if(!lMapWriteReserveDetailObjectOutput.Result){
-				return lreturn
-			}
-			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteReserveDetailObjectOutput.MapSfReserveDetailOutput,false,true)
-			List<String> listReserveId=[]
-			listReserveId.add('a29MS0000000UEDYA2')
-			listReserveId.add('a29MS0000000ojBYAQ')
-			Map lMapWritePaymentDetailObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperReservePayment.writePaymentDetailObjectOutput(listReserveId)
-			if(!lMapWritePaymentDetailObjectOutput.Result){
-				return lreturn
-			}
-			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWritePaymentDetailObjectOutput.MapSfPaymentDetailOutput,false,true)
-			Map lMapWriteRecoveryDetailObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryDetail.writeRecoveryDetailObjectOutput(listDamageId)
-			if(!lMapWriteRecoveryDetailObjectOutput.Result){
-				return lreturn
-			}
-			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteRecoveryDetailObjectOutput.MapSfRecoveryDetailOutput,false,true)
-			List<String> listRecoveryDetailId=[]
-			listRecoveryDetailId.add('a22MS0000000LFlYAM')
-			Map lMapWriteRecoveryPaymentObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment.writeRecoveryPaymentObjectOutput(listRecoveryDetailId)
-			if(!lMapWriteRecoveryPaymentObjectOutput.Result){
-				return lreturn
-			}
-			lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteRecoveryPaymentObjectOutput.MapSfRecoveryPaymentOutput,false,true)
-			caseOutput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenGenerateClaimDetails=lMessage
-			return lreturn
-			/*
-			 List<WebElement> lListElementMainButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.getListElementMainButton(this.parentStageController.getWebDriver())
-			 if(lListElementMainButton.size()==0){
-			 return lreturn
-			 }
-			 String lStrMainTargetButtonName='Create Damage'
-			 Map lMapInputMainTargetButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputMainTargetButton(this.parentStageController.getWebDriver(),lListElementMainButton,lStrMainTargetButtonName)
-			 if(lMapInputMainTargetButton.Result){
-			 lErrorMessage=''
-			 }else{
-			 lErrorMessage=lMapInputMainTargetButton.ErrorMessage
-			 }
-			 caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
-			 if(lErrorMessage.length()>0){
-			 return lreturn
-			 }
-			 */
-			String lStrSfAdditionalDetailWhichMode=''
-			Integer lNumAdditionalDetailWhichMode=0
-			Map lMapInputSfAdditionalDetailWhichMode=this.inputSfAdditionalDetailWhichMode()
-			if(lMapInputSfAdditionalDetailWhichMode.Result){
-				lStrSfAdditionalDetailWhichMode=lMapInputSfAdditionalDetailWhichMode.AdditionalDetailWhichMode
-				lNumAdditionalDetailWhichMode=lMapInputSfAdditionalDetailWhichMode.NumAdditionalDetailWhichMode
-				lErrorMessage=''
-			}else{
-				lErrorMessage=lMapInputSfAdditionalDetailWhichMode.ErrorMessage
-			}
-			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
-			if(!lMapInputSfAdditionalDetailWhichMode.Result){
-				return lreturn
-			}
-			Integer lNumCreateOrEditAdditionalDetailHowManyItem=0
-			Map lMapInputSfCreateOrEditAdditionalDetailHowManyItem=this.inputSfCreateOrEditAdditionalDetailHowManyItem()
-			if(lMapInputSfCreateOrEditAdditionalDetailHowManyItem.Result){
-				lNumCreateOrEditAdditionalDetailHowManyItem=lMapInputSfCreateOrEditAdditionalDetailHowManyItem.CreateOrEditAdditionalDetailHowManyItem
-				lErrorMessage=''
-			}else{
-				lErrorMessage=lMapInputSfCreateOrEditAdditionalDetailHowManyItem.ErrorMessage
-			}
-			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
-			if(!lMapInputSfCreateOrEditAdditionalDetailHowManyItem.Result){
-				return lreturn
-			}
-			if(lNumCreateOrEditAdditionalDetailHowManyItem==0){
-				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage='CreateOrEditAdditionalDetailHowManyItem field is 0 so this case will not proceed'
-				return lreturn
-			}
-			switch(lNumAdditionalDetailWhichMode){
-				case 1:
-					Map lMapInputSfAutoCreateAdditionalObjectDetail=this.inputSfAutoCreateAdditionalObjectDetail(lNumCreateOrEditAdditionalDetailHowManyItem,caseOutput)
-					if(lMapInputSfAutoCreateAdditionalObjectDetail.Result){
-						lErrorMessage=''
-					}else{
-						lErrorMessage=lMapInputSfAutoCreateAdditionalObjectDetail.ErrorMessage
-					}
-					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
-					if(!lMapInputSfAutoCreateAdditionalObjectDetail.Result){
-						return lreturn
-					}
-					break
-				case 2:
-					Map lMapInputSfManualCreateAdditionalObjectDetail=this.inputSfManualCreateAdditionalObjectDetail(lNumCreateOrEditAdditionalDetailHowManyItem)
-					if(lMapInputSfManualCreateAdditionalObjectDetail.Result){
-						lErrorMessage=''
-					}else{
-						lErrorMessage=lMapInputSfManualCreateAdditionalObjectDetail.ErrorMessage
-					}
-					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
-					if(!lMapInputSfManualCreateAdditionalObjectDetail.Result){
-						return lreturn
-					}
-					break
-				default:
-					return lreturn
-			}
-		}catch(Exception e){
-			e.printStackTrace()
-		}
-		return lreturn
-	}
 	public Boolean inputClaimCreate(Map<String,String> caseInput,Map<String,String> caseOutput){
 		Boolean lreturn=false
 		String lErrorMessage=''
@@ -604,83 +468,122 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimReportingFormRoot)){
 				return lreturn
 			}
-			Map lMapInputSfCreateOrEditThirdPartyDetailHowManyItem=this.inputSfCreateOrEditThirdPartyDetailHowManyItem()
-			if(lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.Result){
-				lNumCreateOrEditThirdPartyDetailHowManyItem=lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.CreateOrEditThirdPartyDetailHowManyItem
-				lErrorMessage=''
-			}else{
-				lErrorMessage=lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.ErrorMessage
-			}
-			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
-			if(!lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.Result){
-				return lreturn
-			}
-			if(lNumCreateOrEditThirdPartyDetailHowManyItem>0){
-				Map lMapInputSfCreateOrEditThirdPartyObjectDetail=this.inputSfCreateOrEditThirdPartyObjectDetail(lNumCreateOrEditThirdPartyDetailHowManyItem,caseOutput)
-				if(lMapInputSfCreateOrEditThirdPartyObjectDetail.Result){
-					lErrorMessage=''
-				}else{
-					lErrorMessage=lMapInputSfCreateOrEditThirdPartyObjectDetail.ErrorMessage
-				}
-				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
-				if(!lMapInputSfCreateOrEditThirdPartyObjectDetail.Result){
-					return lreturn
-				}
-			}
-			Map lMapInputSfAdditionalDetailWhichMode=this.inputSfAdditionalDetailWhichMode()
-			if(lMapInputSfAdditionalDetailWhichMode.Result){
-				lStrSfAdditionalDetailWhichMode=lMapInputSfAdditionalDetailWhichMode.AdditionalDetailWhichMode
-				lNumAdditionalDetailWhichMode=lMapInputSfAdditionalDetailWhichMode.NumAdditionalDetailWhichMode
-				lErrorMessage=''
-			}else{
-				lErrorMessage=lMapInputSfAdditionalDetailWhichMode.ErrorMessage
-			}
-			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
-			if(!lMapInputSfAdditionalDetailWhichMode.Result){
-				return lreturn
-			}
-			Map lMapInputSfCreateOrEditAdditionalDetailHowManyItem=this.inputSfCreateOrEditAdditionalDetailHowManyItem()
-			if(lMapInputSfCreateOrEditAdditionalDetailHowManyItem.Result){
-				lNumCreateOrEditThirdPartyDetailHowManyItem=lMapInputSfCreateOrEditAdditionalDetailHowManyItem.CreateOrEditAdditionalDetailHowManyItem
-				lErrorMessage=''
-			}else{
-				lErrorMessage=lMapInputSfCreateOrEditAdditionalDetailHowManyItem.ErrorMessage
-			}
-			caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
-			if(!lMapInputSfCreateOrEditAdditionalDetailHowManyItem.Result){
-				return lreturn
-			}
-			if(lNumCreateOrEditAdditionalDetailHowManyItem>0){
-				switch(lNumAdditionalDetailWhichMode){
-					case 1:
-						Map lMapInputSfAutoCreateAdditionalObjectDetail=this.inputSfAutoCreateAdditionalObjectDetail(lNumCreateOrEditAdditionalDetailHowManyItem,caseOutput)
-						if(lMapInputSfAutoCreateAdditionalObjectDetail.Result){
-							lErrorMessage=''
-						}else{
-							lErrorMessage=lMapInputSfAutoCreateAdditionalObjectDetail.ErrorMessage
-						}
-						caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
-						if(!lMapInputSfAutoCreateAdditionalObjectDetail.Result){
-							return lreturn
-						}
-						break
-					case 2:
-						Map lMapInputSfManualCreateAdditionalObjectDetail=this.inputSfManualCreateAdditionalObjectDetail(lNumCreateOrEditAdditionalDetailHowManyItem)
-						if(lMapInputSfManualCreateAdditionalObjectDetail.Result){
-							lErrorMessage=''
-						}else{
-							lErrorMessage=lMapInputSfManualCreateAdditionalObjectDetail.ErrorMessage
-						}
-						caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
-						if(!lMapInputSfManualCreateAdditionalObjectDetail.Result){
-							return lreturn
-						}
-						break
-					default:
-						return lreturn
-				}
-			}
-			lreturn=lMapSearchDefaultObject.Result
+			/*
+			 Map lMapInputSfCreateOrEditThirdPartyDetailHowManyItem=this.inputSfCreateOrEditThirdPartyDetailHowManyItem()
+			 if(lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.Result){
+			 lNumCreateOrEditThirdPartyDetailHowManyItem=lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.CreateOrEditThirdPartyDetailHowManyItem
+			 lErrorMessage=''
+			 }else{
+			 lErrorMessage=lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.ErrorMessage
+			 }
+			 caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			 if(!lMapInputSfCreateOrEditThirdPartyDetailHowManyItem.Result){
+			 return lreturn
+			 }
+			 if(lNumCreateOrEditThirdPartyDetailHowManyItem>0){
+			 Map lMapInputSfCreateOrEditThirdPartyObjectDetail=this.inputSfCreateOrEditThirdPartyObjectDetail(lNumCreateOrEditThirdPartyDetailHowManyItem,caseOutput)
+			 if(lMapInputSfCreateOrEditThirdPartyObjectDetail.Result){
+			 lErrorMessage=''
+			 }else{
+			 lErrorMessage=lMapInputSfCreateOrEditThirdPartyObjectDetail.ErrorMessage
+			 }
+			 caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			 if(!lMapInputSfCreateOrEditThirdPartyObjectDetail.Result){
+			 return lreturn
+			 }
+			 }
+			 Map lMapInputSfAdditionalDetailWhichMode=this.inputSfAdditionalDetailWhichMode()
+			 if(lMapInputSfAdditionalDetailWhichMode.Result){
+			 lStrSfAdditionalDetailWhichMode=lMapInputSfAdditionalDetailWhichMode.AdditionalDetailWhichMode
+			 lNumAdditionalDetailWhichMode=lMapInputSfAdditionalDetailWhichMode.NumAdditionalDetailWhichMode
+			 lErrorMessage=''
+			 }else{
+			 lErrorMessage=lMapInputSfAdditionalDetailWhichMode.ErrorMessage
+			 }
+			 caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			 if(!lMapInputSfAdditionalDetailWhichMode.Result){
+			 return lreturn
+			 }
+			 Map lMapInputSfCreateOrEditAdditionalDetailHowManyItem=this.inputSfCreateOrEditAdditionalDetailHowManyItem()
+			 if(lMapInputSfCreateOrEditAdditionalDetailHowManyItem.Result){
+			 lNumCreateOrEditAdditionalDetailHowManyItem=lMapInputSfCreateOrEditAdditionalDetailHowManyItem.CreateOrEditAdditionalDetailHowManyItem
+			 lErrorMessage=''
+			 }else{
+			 lErrorMessage=lMapInputSfCreateOrEditAdditionalDetailHowManyItem.ErrorMessage
+			 }
+			 caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			 if(!lMapInputSfCreateOrEditAdditionalDetailHowManyItem.Result){
+			 return lreturn
+			 }
+			 if(lNumCreateOrEditAdditionalDetailHowManyItem>0){
+			 switch(lNumAdditionalDetailWhichMode){
+			 case 1:
+			 Map lMapInputSfAutoCreateAdditionalObjectDetail=this.inputSfAutoCreateAdditionalObjectDetail(lNumCreateOrEditAdditionalDetailHowManyItem,caseOutput)
+			 if(lMapInputSfAutoCreateAdditionalObjectDetail.Result){
+			 lErrorMessage=''
+			 }else{
+			 lErrorMessage=lMapInputSfAutoCreateAdditionalObjectDetail.ErrorMessage
+			 }
+			 caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lErrorMessage
+			 if(!lMapInputSfAutoCreateAdditionalObjectDetail.Result){
+			 return lreturn
+			 }
+			 break
+			 case 2:
+			 break
+			 default:
+			 return lreturn
+			 }
+			 }
+			 String lMessage=''
+			 Map lMapWriteClaimObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperClaim.writeClaimObjectOutput('a0nMS0000000BrVYAU')
+			 if(!lMapWriteClaimObjectOutput.Result){
+			 return lreturn
+			 }
+			 lMessage=IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteClaimObjectOutput.MapSfClaimOutput,false,true)
+			 List<String> listClaimId=[]
+			 listClaimId.add('a0nMS0000000BZlYAM')
+			 Map lMapWriteThirdPartyObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty.writeThirdPartyObjectOutput(listClaimId)
+			 if(!lMapWriteThirdPartyObjectOutput.Result){
+			 return lreturn
+			 }
+			 lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteThirdPartyObjectOutput.MapSfThirdPartyOutput,false,true)
+			 Map lMapWriteDamageObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperDamage.writeDamageObjectOutput('a0nMS0000000BrVYAU')
+			 if(!lMapWriteDamageObjectOutput.Result){
+			 return lreturn
+			 }
+			 lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteDamageObjectOutput.MapSfDamageOutput,false,true)
+			 List<String> listDamageId=[]
+			 listDamageId.add('a0xMS0000001JTdYAM')
+			 listDamageId.add('a0xMS0000002C9xYAE')
+			 Map lMapWriteReserveDetailObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperReserveDetail.writeReserveDetailObjectOutput(listDamageId)
+			 if(!lMapWriteReserveDetailObjectOutput.Result){
+			 return lreturn
+			 }
+			 lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteReserveDetailObjectOutput.MapSfReserveDetailOutput,false,true)
+			 List<String> listReserveId=[]
+			 listReserveId.add('a29MS0000000UEDYA2')
+			 listReserveId.add('a29MS0000000ojBYAQ')
+			 Map lMapWritePaymentDetailObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperReservePayment.writePaymentDetailObjectOutput(listReserveId)
+			 if(!lMapWritePaymentDetailObjectOutput.Result){
+			 return lreturn
+			 }
+			 lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWritePaymentDetailObjectOutput.MapSfPaymentDetailOutput,false,true)
+			 Map lMapWriteRecoveryDetailObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryDetail.writeRecoveryDetailObjectOutput(listDamageId)
+			 if(!lMapWriteRecoveryDetailObjectOutput.Result){
+			 return lreturn
+			 }
+			 lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteRecoveryDetailObjectOutput.MapSfRecoveryDetailOutput,false,true)
+			 List<String> listRecoveryDetailId=[]
+			 listRecoveryDetailId.add('a22MS0000000LFlYAM')
+			 Map lMapWriteRecoveryPaymentObjectOutput=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment.writeRecoveryPaymentObjectOutput(listRecoveryDetailId)
+			 if(!lMapWriteRecoveryPaymentObjectOutput.Result){
+			 return lreturn
+			 }
+			 lMessage=lMessage+IGNUemaHelper.convertObjectToStringByGsonBuilder(lMapWriteRecoveryPaymentObjectOutput.MapSfRecoveryPaymentOutput,false,true)
+			 caseOutput.GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenGenerateClaimDetails=lMessage
+			 lreturn=lMessage.length()>1
+			 */
 		}catch(Exception e){
 			e.printStackTrace()
 		}
@@ -2496,8 +2399,8 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 			IGNTestManager lIGNTestManager01=IGNTestManagerHelperIDN.getIGNTestManagerInstance()
 			IGNTestMasterFieldTypeSingle lIGNTestMasterFieldTypeSingle01=lIGNTestManager01.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Create_Or_Edit_Third_Party_Detail_How_Many_Item')
 			lStrCreateOrEditThirdPartyDetailHowManyItem=lIGNTestMasterFieldTypeSingle01.getMasterPairValueByKey(lStrCreateOrEditThirdPartyDetailHowManyItem)
-			lResult=lStrCreateOrEditThirdPartyDetailHowManyItem.length()>0
 			lNumCreateOrEditThirdPartyDetailHowManyItem=IGNUemaHelper.convertStringToInteger(lStrCreateOrEditThirdPartyDetailHowManyItem,0)
+			lResult=true
 			lreturn.put('CreateOrEditThirdPartyDetailHowManyItem',lNumCreateOrEditThirdPartyDetailHowManyItem)
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
@@ -2698,7 +2601,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				lStrCreateAdditionalDetailDamageToDo=lMapCaseDataCurrentInput.get(lStrCreateAdditionalDetailDamageToDo)
 				lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Additional_Detail_'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'_Damage_To_Do')
 				lStrCreateAdditionalDetailDamageToDo=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrCreateAdditionalDetailDamageToDo)
-				lStrCreateAdditionalDetailDamageToDo='Yes'
 				String lStrDamageTypeMapWithClaimIncidentType='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'DamageTypeMapWithClaimIncidentType'
 				lStrDamageTypeMapWithClaimIncidentType=lMapCaseDataCurrentInput.get(lStrDamageTypeMapWithClaimIncidentType)
 				lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Additional_Detail_'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'_Damage_Type_Map_With_Claim_Incident_Type')
@@ -2741,6 +2643,17 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 					return lreturn
 				}
 				if(lIsCreateAdditionalDetailDamageToDo){
+					lStrMainTargetButtonName='Create Damage'
+					lMapInputMainTargetButton=IDNSalesforceLightningClaimMotorCarNewbizCoreHelper.inputMainTargetButton(this.parentStageController.getWebDriver(),lListElementMainButton,lStrMainTargetButtonName)
+					if(lMapInputMainTargetButton.Result){
+						lStrErrorMessage=''
+					}else{
+						lStrErrorMessage=lMapInputMainTargetButton.ErrorMessage
+					}
+					caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lStrErrorMessage
+					if(lStrErrorMessage.length()>0){
+						return lreturn
+					}
 					WebElement lElementIgniteClaimDamageFormRoot=IDNSalesforceLightningClaimMotorCarNewbizHelperDamage.getElementIgniteClaimDamageFormRoot(this.parentStageController.getWebDriver(),lStrCssLocator)
 					if(IGNUemaHelper.checkObjectNullOfObject(lElementIgniteClaimDamageFormRoot)){
 						return lreturn
@@ -2777,7 +2690,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				lStrCreateAdditionalDetailReserveDetailToDo=lMapCaseDataCurrentInput.get(lStrCreateAdditionalDetailReserveDetailToDo)
 				lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Additional_Detail_'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'_Reserve_Detail_To_Do')
 				lStrCreateAdditionalDetailReserveDetailToDo=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrCreateAdditionalDetailReserveDetailToDo)
-				lStrCreateAdditionalDetailReserveDetailToDo='No'
 				Map lMapInputSfCreateOrEditReserveDetailToDo=IDNSalesforceLightningClaimMotorCarNewbizHelperReserveDetail.inputSfCreateOrEditReserveDetailToDo(lStrCreateAdditionalDetailReserveDetailToDo)
 				if(lMapInputSfCreateOrEditReserveDetailToDo.Result){
 					lIsCreateAdditionalDetailReserveToDo=lMapInputSfCreateOrEditReserveDetailToDo.BoolCreateOrEditAdditionalDetailReserveDetailToDo
@@ -2786,7 +2698,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 					lStrErrorMessage=lMapInputSfCreateOrEditReserveDetailToDo.ErrorMessage
 				}
 				caseOutput.GroupSfLightningShareClaimMotorStage01DoVerifyFieldStage01ManageResultMessage=lStrErrorMessage
-				if(!lMapInputSfCreateOrEditDamageToDo.Result){
+				if(!lMapInputSfCreateOrEditReserveDetailToDo.Result){
 					return lreturn
 				}
 				if(lIsCreateAdditionalDetailReserveToDo){
@@ -2834,7 +2746,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				lStrCreateAdditionalDetailReservePaymentToDo=lMapCaseDataCurrentInput.get(lStrCreateAdditionalDetailReservePaymentToDo)
 				lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Additional_Detail_'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'_Reserve_Payment_To_Do')
 				lStrCreateAdditionalDetailReservePaymentToDo=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrCreateAdditionalDetailReservePaymentToDo)
-				lStrCreateAdditionalDetailReservePaymentToDo='No'
 				Map lMapInputSfCreateOrEditReservePaymentToDo=IDNSalesforceLightningClaimMotorCarNewbizHelperReservePayment.inputSfCreateOrEditReservePaymentToDo(lStrCreateAdditionalDetailReservePaymentToDo)
 				if(lMapInputSfCreateOrEditReservePaymentToDo.Result){
 					lIsCreateAdditionalDetailReservePaymentToDo=lMapInputSfCreateOrEditReservePaymentToDo.BoolCreateOrEditAdditionalDetailReservePaymentToDo
@@ -2896,7 +2807,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 					lStrReservePaymentFinalPayment=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrReservePaymentFinalPayment)
 					String lStrReservePaymentPayeeName='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'ReservePaymentPayeeName'
 					lStrReservePaymentPayeeName=lMapCaseDataCurrentInput.get(lStrReservePaymentPayeeName)
-					lStrReservePaymentPayeeName='zxca adaf'
 					String lStrReservePaymentInvoiceDateOffset='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'ReservePaymentInvoiceDateOffset'
 					lStrReservePaymentInvoiceDateOffset=lMapCaseDataCurrentInput.get(lStrReservePaymentInvoiceDateOffset)
 					String lStrReservePaymentInvoiceDateValue='GroupSfLightningShareClaimMotorStage02DoManageFieldSfOpenMode01CreateAdditionalDetail'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'ReservePaymentInvoiceDateValue'
@@ -2949,7 +2859,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				lStrCreateAdditionalDetailRecoveryDetailToDo=lMapCaseDataCurrentInput.get(lStrCreateAdditionalDetailRecoveryDetailToDo)
 				lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Additional_Detail_'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'_Recovery_Detail_To_Do')
 				lStrCreateAdditionalDetailRecoveryDetailToDo=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrCreateAdditionalDetailRecoveryDetailToDo)
-				lStrCreateAdditionalDetailRecoveryDetailToDo='No'
 				Map lMapInputSfCreateOrEditRecoveryDetailToDo=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryDetail.inputSfCreateOrEditRecoveryDetailToDo(lStrCreateAdditionalDetailRecoveryDetailToDo)
 				if(lMapInputSfCreateOrEditRecoveryDetailToDo.Result){
 					lIsCreateAdditionalDetailRecoveryToDo=lMapInputSfCreateOrEditRecoveryDetailToDo.BoolCreateOrEditAdditionalDetailRecoveryDetailToDo
@@ -3032,7 +2941,6 @@ public class IDNSalesforceLightningClaimMotorCarNewbizCreateUtil{
 				lStrCreateAdditionalDetailRecoveryPaymentToDo=lMapCaseDataCurrentInput.get(lStrCreateAdditionalDetailRecoveryPaymentToDo)
 				lIGNTestMasterFieldTypeSingle=lIGNTestManager.getIGNTestDataAdapter().getIGNTestMasterFieldFactory().getIGNTestMasterFieldTypeSingleByProjectFieldListFieldName('Group_Sf_Lightning_Share_Claim_Motor_Stage_02_Do_Manage_Field_Sf_Open_Mode_01_Create_Additional_Detail_'+String.format('%02d',lCreateOrEditAdditionalDetailItem)+'_Recovery_Payment_To_Do')
 				lStrCreateAdditionalDetailRecoveryPaymentToDo=lIGNTestMasterFieldTypeSingle.getMasterPairValueByKey(lStrCreateAdditionalDetailRecoveryPaymentToDo)
-				lStrCreateAdditionalDetailRecoveryPaymentToDo='No'
 				Map lMapInputSfCreateOrEditRecoveryPaymentToDo=IDNSalesforceLightningClaimMotorCarNewbizHelperRecoveryPayment.inputSfCreateOrEditRecoveryPaymentToDo(lStrCreateAdditionalDetailRecoveryPaymentToDo)
 				if(lMapInputSfCreateOrEditRecoveryPaymentToDo.Result){
 					lIsCreateAdditionalDetailRecoveryPaymentToDo=lMapInputSfCreateOrEditRecoveryPaymentToDo.BoolCreateOrEditAdditionalDetailRecoveryPaymentToDo

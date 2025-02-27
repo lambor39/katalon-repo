@@ -309,8 +309,11 @@ public class IDNSalesforceLightningCoreHelperAPI{
 		Boolean lResult=false
 		String lStrSalesforceRecordId=''
 		List<String> lListSalesforceRecordID=null
+		List<Map> lListMapJsonSalesforceObjectResponseObject=null
+		List<Map> lListMapSalesforceObjectRecordByQueryParamList=null
 		try{
 			lreturn.put('ListSalesforceRecordId',lListSalesforceRecordID)
+			lreturn.put('ListMapSalesforceObjectRecordByQueryParamList',lListMapSalesforceObjectRecordByQueryParamList)
 			lreturn.put('Result',lResult)
 			if(IGNUemaHelper.checkObjectNullOfObject(strTargetSearchObjectName)){
 				return lreturn
@@ -385,8 +388,8 @@ public class IDNSalesforceLightningCoreHelperAPI{
 				lMapGetSalesforceObjectByQueryParamList=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause01,lStrSuffixQuery)
 			}
 			if(lMapGetSalesforceObjectByQueryParamList.Result){
-				List<Map> lListMapJsonSalesforceObjectResponseObject=lMapGetSalesforceObjectByQueryParamList.ListMapJsonResponseObject
-				List<Map> lListMapSalesforceObjectRecordByQueryParamList=lMapGetSalesforceObjectByQueryParamList.ListMapSalesforceObjectRecord
+				lListMapJsonSalesforceObjectResponseObject=lMapGetSalesforceObjectByQueryParamList.ListMapJsonResponseObject
+				lListMapSalesforceObjectRecordByQueryParamList=lMapGetSalesforceObjectByQueryParamList.ListMapSalesforceObjectRecord
 				if(lListMapSalesforceObjectRecordByQueryParamList.size()>0){
 					lListSalesforceRecordID=this.getListSalesforceRestAPIResponseRecordID(lListMapSalesforceObjectRecordByQueryParamList,lStrTargetSfRelationshipIdField)
 				}else{
@@ -396,6 +399,7 @@ public class IDNSalesforceLightningCoreHelperAPI{
 			lResult=lListSalesforceRecordID.size()>0
 			if(lResult){
 				lreturn.put('ListSalesforceRecordId',lListSalesforceRecordID)
+				lreturn.put('ListMapSalesforceObjectRecordByQueryParamList',lListMapSalesforceObjectRecordByQueryParamList)
 				lreturn.put('Result',lResult)
 			}
 		}catch(Exception e){
@@ -521,15 +525,22 @@ public class IDNSalesforceLightningCoreHelperAPI{
 		if(IGNUemaHelper.checkObjectEmptyOfString(strTargetField)){
 			return lreturn
 		}
-		String lStrTargetField=strTargetField
+		List<String> lListStrTargetField=strTargetField.split(',')
 		List<Map> lMapSalesforceObjectRecordByQueryParamList=listMapSalesforceObjectRecordByQueryParam
 		try{
 			List<String> lListSalesforceRecordID=[]
+			Map<String,String> lMapSalesforceObjectRecordID=[:]
 			if(lMapSalesforceObjectRecordByQueryParamList.size()>0){
 				for(Integer lIndex=0;lIndex<=lMapSalesforceObjectRecordByQueryParamList.size()-1;lIndex++){
-					Map<String,String> lMapSalesforceObjectRecordID=lMapSalesforceObjectRecordByQueryParamList.get(lIndex)
-					String lStrRecordId=lMapSalesforceObjectRecordID.get(lStrTargetField)
-					lListSalesforceRecordID.add(lStrRecordId)
+					lMapSalesforceObjectRecordID=lMapSalesforceObjectRecordByQueryParamList.get(lIndex)
+				}
+				if(!IGNUemaHelper.checkObjectEmptyOfMap(lMapSalesforceObjectRecordID)){
+					for(String strField:lListStrTargetField){
+						String lStrRecordId=lMapSalesforceObjectRecordID.get(strField)
+						if(!IGNUemaHelper.checkObjectEmptyOfString(lStrRecordId)){
+							lListSalesforceRecordID.add(lStrRecordId)
+						}
+					}
 				}
 			}
 			lreturn=lListSalesforceRecordID
@@ -555,6 +566,240 @@ public class IDNSalesforceLightningCoreHelperAPI{
 			lResult=lStrListSalesforceRecordID.length()>0
 			if(lResult){
 				lreturn=lStrListSalesforceRecordID
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map mapGetSalesforceOpportunityRecordIdFromRestAPIObject(String strTargetSearchObjectName,String strSalesforceOppNumberText){
+		Map lreturn=[:]
+		Boolean lResult=false
+		String lStrSalesforceRecordId=''
+		List<String> lListSalesforceRecordID=null
+		try{
+			lreturn.put('StrSalesforceRecordId',lStrSalesforceRecordId)
+			lreturn.put('Result',lResult)
+			if(IGNUemaHelper.checkObjectNullOfObject(strTargetSearchObjectName)){
+				return lreturn
+			}
+			String lStrTargetSearchObjectName=strTargetSearchObjectName.trim()
+			if(IGNUemaHelper.checkObjectEmptyOfString(lStrTargetSearchObjectName)){
+				return lreturn
+			}
+			if(IGNUemaHelper.checkObjectNullOfObject(strSalesforceOppNumberText)){
+				return lreturn
+			}
+			String lStrSalesforceOppNumberText=strSalesforceOppNumberText.trim()
+			if(IGNUemaHelper.checkObjectEmptyOfString(lStrSalesforceOppNumberText)){
+				return lreturn
+			}
+			Boolean lIsOK=IGNSalesforceRestAPIHelper.setIGNSalesforceRestAPICountry(IGNTestDataCountry.Indonesia)
+			String lSOQLQueryObject=''
+			String lStrTargetSalesforceObjectName=''
+			String lStrClauseCustomText=''
+			Boolean lIsToPreferSelectedFieldName=false
+			List<String> lListFieldNameAll=new ArrayList<String>()
+			List<String> lListFieldNameSelected=new ArrayList<String>()
+			Boolean lIsWhereJoinOperatorAnd=true
+			Map<String,String> lMapClauseEqualAnd=[:]
+			Map<String,String> lMapClauseEqualOr=[:]
+			Map<String,String> lMapClauseInAnd=[:]
+			Map<String,String> lMapClauseInOr=[:]
+			Map<String,String> lMapClauseLikeAnd=[:]
+			Map<String,String> lMapClauseLikeOr=[:]
+			Map<String,String> lMapClauseNotEqualAnd=[:]
+			Map<String,String> lMapClauseNotEqualOr=[:]
+			Map<String,String> lMapClauseNotInAnd=[:]
+			Map<String,String> lMapClauseNotInOr=[:]
+			Map<String,String> lMapClauseNotLikeAnd=[:]
+			Map<String,String> lMapClauseNotLikeOr=[:]
+			String lStrWhereClause=''
+			String lStrSuffixQuery=''
+			lStrTargetSalesforceObjectName=lStrTargetSearchObjectName
+			lIsToPreferSelectedFieldName=false
+			lListFieldNameAll.clear()
+			lListFieldNameSelected.clear()
+			lIsWhereJoinOperatorAnd=true
+			lStrClauseCustomText=''
+			lMapClauseEqualAnd.clear()
+			lMapClauseEqualOr.clear()
+			lMapClauseInAnd.clear()
+			lMapClauseInOr.clear()
+			lMapClauseLikeAnd.clear()
+			lMapClauseLikeOr.clear()
+			lMapClauseNotEqualAnd.clear()
+			lMapClauseNotEqualOr.clear()
+			lMapClauseNotInAnd.clear()
+			lMapClauseNotInOr.clear()
+			lMapClauseNotLikeAnd.clear()
+			lMapClauseNotLikeOr.clear()
+			lListFieldNameSelected.add('ID')
+			lListFieldNameSelected.add('Make__c')
+			lListFieldNameSelected.add('Model_Family__c')
+			lListFieldNameSelected.add('Mobile__c ')
+			lListFieldNameSelected.add('Name')
+			String lStrWhereClause01=''
+			String lStrWhereClause02=''
+			lMapClauseNotEqualAnd.clear()
+			lStrSuffixQuery=''
+			lStrSalesforceOppNumberText=IGNUemaHelper.getAddedSingleQuoteBeginEnd(lStrSalesforceOppNumberText)
+			lMapClauseEqualAnd.put('Name',lStrSalesforceOppNumberText)
+			String lStrTrueValue=IGNUemaHelper.convertBooleanToString(true)
+			lMapClauseEqualAnd.put('IsWon',lStrTrueValue)
+			lStrWhereClause=IGNUemaHelper.getStringQueryForWhereClauseBuilder(lIsWhereJoinOperatorAnd,lStrClauseCustomText,lMapClauseEqualAnd,lMapClauseEqualOr,lMapClauseInAnd,lMapClauseInOr,lMapClauseLikeAnd,lMapClauseLikeOr,lMapClauseNotEqualAnd,lMapClauseNotEqualOr,lMapClauseNotInAnd,lMapClauseNotInOr,lMapClauseNotLikeAnd,lMapClauseNotLikeOr)
+			Map<String,String> lMapGetSalesforceObjectByQueryParamList=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			if(!lMapGetSalesforceObjectByQueryParamList.Result){
+				lMapGetSalesforceObjectByQueryParamList=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			}
+			if(lMapGetSalesforceObjectByQueryParamList.Result){
+				List<Map> lListMapJsonSalesforceObjectResponseObject=lMapGetSalesforceObjectByQueryParamList.ListMapJsonResponseObject
+				List<Map> lListMapSalesforceObjectRecordByQueryParamList=lMapGetSalesforceObjectByQueryParamList.ListMapSalesforceObjectRecord
+				lListSalesforceRecordID=this.getListSalesforceRestAPIResponseRecordID(lListMapSalesforceObjectRecordByQueryParamList,"Id")
+			}
+			if(lListSalesforceRecordID.size()>0){
+				lStrSalesforceRecordId=lListSalesforceRecordID.get(0)
+			}
+			lResult=lStrSalesforceRecordId.length()>0
+			if(lResult){
+				lreturn.put('StrSalesforceRecordId',lStrSalesforceRecordId)
+				lreturn.put('Result',lResult)
+			}
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map mapGetSalesforceOpportunityRecordIdFromAdditionalDetailRestAPIObject(String strTargetSearchObjectName,Map mapOpportunityDetailFieldList){
+		Map lreturn=[:]
+		Boolean lResult=false
+		String lStrSalesforceRecordId=''
+		List<String> lListSalesforceRecordID=null
+		try{
+			lreturn.put('ListSalesforceRecordId',lListSalesforceRecordID)
+			lreturn.put('Result',lResult)
+			if(IGNUemaHelper.checkObjectNullOfObject(strTargetSearchObjectName)){
+				return lreturn
+			}
+			String lStrTargetSearchObjectName=strTargetSearchObjectName.trim()
+			if(IGNUemaHelper.checkObjectEmptyOfString(lStrTargetSearchObjectName)){
+				return lreturn
+			}
+			if(IGNUemaHelper.checkObjectEmptyOfMap(mapOpportunityDetailFieldList)){
+				return lreturn
+			}
+			Map lMapOpportunityDetailFieldList=mapOpportunityDetailFieldList
+			Boolean lIsOK=IGNSalesforceRestAPIHelper.setIGNSalesforceRestAPICountry(IGNTestDataCountry.Indonesia)
+			String lSOQLQueryObject=''
+			String lStrTargetSalesforceObjectName=''
+			String lStrClauseCustomText=''
+			Boolean lIsToPreferSelectedFieldName=false
+			List<String> lListFieldNameAll=new ArrayList<String>()
+			List<String> lListFieldNameSelected=new ArrayList<String>()
+			Boolean lIsWhereJoinOperatorAnd=true
+			Map<String,String> lMapClauseEqualAnd=[:]
+			Map<String,String> lMapClauseEqualOr=[:]
+			Map<String,String> lMapClauseInAnd=[:]
+			Map<String,String> lMapClauseInOr=[:]
+			Map<String,String> lMapClauseLikeAnd=[:]
+			Map<String,String> lMapClauseLikeOr=[:]
+			Map<String,String> lMapClauseNotEqualAnd=[:]
+			Map<String,String> lMapClauseNotEqualOr=[:]
+			Map<String,String> lMapClauseNotInAnd=[:]
+			Map<String,String> lMapClauseNotInOr=[:]
+			Map<String,String> lMapClauseNotLikeAnd=[:]
+			Map<String,String> lMapClauseNotLikeOr=[:]
+			String lStrWhereClause=''
+			String lStrSuffixQuery=''
+			lStrTargetSalesforceObjectName=lStrTargetSearchObjectName
+			lIsToPreferSelectedFieldName=false
+			lListFieldNameAll.clear()
+			lListFieldNameSelected.clear()
+			lIsWhereJoinOperatorAnd=true
+			lStrClauseCustomText=''
+			lMapClauseEqualAnd.clear()
+			lMapClauseEqualOr.clear()
+			lMapClauseInAnd.clear()
+			lMapClauseInOr.clear()
+			lMapClauseLikeAnd.clear()
+			lMapClauseLikeOr.clear()
+			lMapClauseNotEqualAnd.clear()
+			lMapClauseNotEqualOr.clear()
+			lMapClauseNotInAnd.clear()
+			lMapClauseNotInOr.clear()
+			lMapClauseNotLikeAnd.clear()
+			lMapClauseNotLikeOr.clear()
+			lListFieldNameSelected.add('ID')
+			lListFieldNameSelected.add('Make__c')
+			lListFieldNameSelected.add('Model_Family__c')
+			lListFieldNameSelected.add('Mobile__c ')
+			lListFieldNameSelected.add('Name')
+			String lStrWhereClause01=''
+			String lStrWhereClause02=''
+			lMapClauseNotEqualAnd.clear()
+			lStrSuffixQuery=''
+			for(Map.Entry lEntry in lMapOpportunityDetailFieldList){
+				String lStrMapKey=lEntry.getKey()
+				String lStrMapValue=lEntry.getValue()
+				lStrMapValue=IGNUemaHelper.getAddedStringBeginEnd(lStrMapValue,'%')
+				lStrMapValue=IGNUemaHelper.getAddedSingleQuoteBeginEnd(lStrMapValue)
+				lMapClauseLikeAnd.put(lStrMapKey,lStrMapValue)
+			}
+			String lStrTrueValue=IGNUemaHelper.convertBooleanToString(true)
+			lMapClauseEqualAnd.put('IsWon',lStrTrueValue)
+			lStrWhereClause=IGNUemaHelper.getStringQueryForWhereClauseBuilder(lIsWhereJoinOperatorAnd,lStrClauseCustomText,lMapClauseEqualAnd,lMapClauseEqualOr,lMapClauseInAnd,lMapClauseInOr,lMapClauseLikeAnd,lMapClauseLikeOr,lMapClauseNotEqualAnd,lMapClauseNotEqualOr,lMapClauseNotInAnd,lMapClauseNotInOr,lMapClauseNotLikeAnd,lMapClauseNotLikeOr)
+			Map<String,String> lMapGetSalesforceObjectByQueryParamList=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			if(!lMapGetSalesforceObjectByQueryParamList.Result){
+				lMapGetSalesforceObjectByQueryParamList=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+			}
+			if(lMapGetSalesforceObjectByQueryParamList.Result){
+				List<Map> lListMapJsonSalesforceObjectResponseObject=lMapGetSalesforceObjectByQueryParamList.ListMapJsonResponseObject
+				List<Map> lListMapSalesforceObjectRecordByQueryParamList=lMapGetSalesforceObjectByQueryParamList.ListMapSalesforceObjectRecord
+				if(lListMapSalesforceObjectRecordByQueryParamList.size()>0){
+					lListSalesforceRecordID=this.getListSalesforceRestAPIResponseRecordID(lListMapSalesforceObjectRecordByQueryParamList,"Id")
+				}else{
+					lListSalesforceRecordID=[]
+				}
+			}
+			lMapClauseEqualAnd.clear()
+			lMapClauseEqualOr.clear()
+			lMapClauseInAnd.clear()
+			lMapClauseInOr.clear()
+			lMapClauseLikeAnd.clear()
+			lMapClauseLikeOr.clear()
+			lMapClauseNotEqualAnd.clear()
+			lMapClauseNotEqualOr.clear()
+			lMapClauseNotInAnd.clear()
+			lMapClauseNotInOr.clear()
+			lMapClauseNotLikeAnd.clear()
+			lMapClauseNotLikeOr.clear()
+			if(lListSalesforceRecordID.size()==0){
+				for(Map.Entry lEntry in lMapOpportunityDetailFieldList){
+					String lStrMapKey=lEntry.getKey()
+					String lStrMapValue=lEntry.getValue()
+					lStrMapValue=IGNUemaHelper.getAddedStringBeginEnd(lStrMapValue,'%')
+					lStrMapValue=IGNUemaHelper.getAddedSingleQuoteBeginEnd(lStrMapValue)
+					lMapClauseLikeOr.put(lStrMapKey,lStrMapValue)
+				}
+				lStrTrueValue=IGNUemaHelper.convertBooleanToString(true)
+				lMapClauseEqualAnd.put('IsWon',lStrTrueValue)
+				lStrWhereClause=IGNUemaHelper.getStringQueryForWhereClauseBuilder(lIsWhereJoinOperatorAnd,lStrClauseCustomText,lMapClauseEqualAnd,lMapClauseEqualOr,lMapClauseInAnd,lMapClauseInOr,lMapClauseLikeAnd,lMapClauseLikeOr,lMapClauseNotEqualAnd,lMapClauseNotEqualOr,lMapClauseNotInAnd,lMapClauseNotInOr,lMapClauseNotLikeAnd,lMapClauseNotLikeOr)
+				lMapGetSalesforceObjectByQueryParamList=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+				if(!lMapGetSalesforceObjectByQueryParamList.Result){
+					lMapGetSalesforceObjectByQueryParamList=IGNSalesforceRestAPIHelper.mapGetSalesforceObjectByQueryParamList(lStrTargetSalesforceObjectName,lIsToPreferSelectedFieldName,lListFieldNameSelected,lStrWhereClause,lStrSuffixQuery)
+				}
+				if(lMapGetSalesforceObjectByQueryParamList.Result){
+					List<Map> lListMapJsonSalesforceObjectResponseObject=lMapGetSalesforceObjectByQueryParamList.ListMapJsonResponseObject
+					List<Map> lListMapSalesforceObjectRecordByQueryParamList=lMapGetSalesforceObjectByQueryParamList.ListMapSalesforceObjectRecord
+					if(lListMapSalesforceObjectRecordByQueryParamList.size()>0){
+						lListSalesforceRecordID=this.getListSalesforceRestAPIResponseRecordID(lListMapSalesforceObjectRecordByQueryParamList,"Id")
+					}else{
+						lListSalesforceRecordID=[]
+					}
+				}
+			}
+			lResult=lListSalesforceRecordID.size()>0
+			if(lResult){
+				lreturn.put('ListSalesforceRecordId',lListSalesforceRecordID)
+				lreturn.put('Result',lResult)
 			}
 		}catch(Exception e){
 		}
