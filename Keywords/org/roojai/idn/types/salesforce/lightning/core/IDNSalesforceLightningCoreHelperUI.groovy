@@ -2372,7 +2372,7 @@ public class IDNSalesforceLightningCoreHelperUI{
 			String lLocatorSearch01InputLevel01LightningInputChild01='lightning-combobox'
 			String lLocatorSearch01InputLevel01LightningInputChild02='lightning-base-combobox'
 			String lLocatorSearch01InputLevel01LightningInputChild03='lightning-base-combobox-item'
-			String lLocatorSearch01InputLevel01LightningInputChild04='span.slds-truncate'
+			String lLocatorSearch01InputLevel01LightningInputChild04='span.slds-media__body'
 			WebElement lElementSearch01InputLevel01LightningInputChild01=null
 			WebElement lElementSearch01InputLevel01LightningInputChild02=null
 			WebElement lElementSearch01InputLevel01LightningInputChild03=null
@@ -2404,7 +2404,7 @@ public class IDNSalesforceLightningCoreHelperUI{
 						return lreturn
 					}
 					if(lElementSearch01InputLevel01LightningInputChild04){
-						String lStrValue=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01LightningInputChild04,'title')
+						String lStrValue=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementSearch01InputLevel01LightningInputChild04,'textContent')
 						lStrValue=lStrValue.toLowerCase()
 						lStrTargetBaseComboBoxItemName=lStrTargetBaseComboBoxItemName.toLowerCase()
 						if(lIsContainString){
@@ -2819,7 +2819,7 @@ public class IDNSalesforceLightningCoreHelperUI{
 		}
 		return lreturn
 	}
-	public static Map inputSfLightningPicklist(WebDriver webDriver,WebElement elementIgniteFormRoot,String strTargetFieldName,String strTargetValueName){
+	public static Map inputSfLightningPicklist(WebDriver webDriver,WebElement elementIgniteFormRoot,String strTargetFieldName,String strTargetValueName,Boolean isContainString){
 		Map lreturn=[:]
 		if(IGNUemaHelper.checkObjectNullOfObject(elementIgniteFormRoot)){
 			return lreturn
@@ -2833,6 +2833,7 @@ public class IDNSalesforceLightningCoreHelperUI{
 			return lreturn
 		}
 		String lStrTargetValueName=strTargetValueName.trim()
+		Boolean lIsContainString=isContainString
 		try{
 			Boolean lResult=false
 			lreturn.put('ErrorMessage','')
@@ -2865,7 +2866,7 @@ public class IDNSalesforceLightningCoreHelperUI{
 					}
 				}
 			}
-			lResult=this.selectedValueSfToTargetBaseComboBoxItem(webDriver,lElementSearch01InputLevel01IgniteMainFormChild02,lStrTargetValueName,true)
+			lResult=this.selectedValueSfToTargetBaseComboBoxItem(webDriver,lElementSearch01InputLevel01IgniteMainFormChild02,lStrTargetValueName,lIsContainString)
 			if(!lResult){
 				lStrErrorMessage='Cannot selected item in '+lStrTargetFieldName
 			}
@@ -3247,6 +3248,86 @@ public class IDNSalesforceLightningCoreHelperUI{
 					}
 				}
 			}
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+		}catch(Exception e){
+		}
+		return lreturn
+	}
+	public static Map getGenericObjectNameOnSfLightning(WebDriver webDriver){
+		Map lreturn=[:]
+		try{
+			/*
+			 * get url
+			 * document.querySelector('div.recordHomeFlexipage2').baseURI
+			 * 
+			 * get object name
+			 * document.querySelector('div.recordHomeFlexipage2').querySelector('div.slds-media__body').querySelector('div.entityNameTitle').querySelector('slot').outerText
+			 * 
+			 *get name 
+			 * document.querySelector('div.recordHomeFlexipage2').querySelector('div.slds-media__body').querySelector('slot.slds-page-header__title').outerText
+			 */
+			Boolean lResult=false
+			String lStrSalesforceBaseUrl=''
+			String lStrSalesforceObjectName=''
+			String lStrSalesforceValueName=''
+			String lStrErrorMessage=''
+			lreturn.put('SalesforceBaseUrl',lStrSalesforceBaseUrl)
+			lreturn.put('SalesforceObjectName',lStrSalesforceObjectName)
+			lreturn.put('SalesforceValueName',lStrSalesforceValueName)
+			lreturn.put('ErrorMessage',lStrErrorMessage)
+			lreturn.put('Result',lResult)
+			String lLocatorIgniteMainFormParent='div.recordHomeFlexipage2'
+			String lLocatorIgniteMainFormChild01='div.slds-media__body'
+			String lLocatorIgniteObjectNameFormChild01='div.entityNameTitle'
+			String lLocatorIgniteObjectNameFormChild02='slot'
+			String lLocatorIgniteValueNameFormChild01='slot.slds-page-header__title'
+			WebElement lElementIgniteMainFormChild01=null
+			WebElement lElementIgniteObjectNameFormChild01=null
+			WebElement lElementIgniteObjectNameFormChild02=null
+			WebElement lElementIgniteValueNameFormChild01=null
+			IGNUemaHelper.waitElementVisibleByLocator(webDriver,lLocatorIgniteMainFormParent)
+			WebElement lElementIgniteMainFormParent=IGNUemaHelper.getWebElementFromCssLocator(webDriver,lLocatorIgniteMainFormParent)
+			if(lElementIgniteMainFormParent){
+				lStrSalesforceBaseUrl=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementIgniteMainFormParent,'baseURI')
+			}
+			if(!lElementIgniteMainFormParent){
+				return lreturn
+			}
+			if(lElementIgniteMainFormParent){
+				lElementIgniteMainFormChild01=IGNUemaHelper.getChildWebElementOfWebElement(webDriver,lElementIgniteMainFormParent,lLocatorIgniteMainFormChild01,false)
+			}
+			if(!lElementIgniteMainFormChild01){
+				return lreturn
+			}
+			if(lElementIgniteMainFormChild01){
+				lElementIgniteValueNameFormChild01=IGNUemaHelper.getChildWebElementOfWebElement(webDriver,lElementIgniteMainFormChild01,lLocatorIgniteValueNameFormChild01,false)
+			}
+			if(lElementIgniteMainFormChild01){
+				lElementIgniteObjectNameFormChild01=IGNUemaHelper.getChildWebElementOfWebElement(webDriver,lElementIgniteMainFormChild01,lLocatorIgniteObjectNameFormChild01,false)
+			}
+			if(!lElementIgniteValueNameFormChild01){
+				return lreturn
+			}
+			if(lElementIgniteValueNameFormChild01){
+				lStrSalesforceValueName=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementIgniteValueNameFormChild01,'outerText')
+			}
+			if(!lElementIgniteObjectNameFormChild01){
+				return lreturn
+			}
+			if(lElementIgniteObjectNameFormChild01){
+				lElementIgniteObjectNameFormChild02=IGNUemaHelper.getChildWebElementOfWebElement(webDriver,lElementIgniteObjectNameFormChild01,lLocatorIgniteObjectNameFormChild02,false)
+			}
+			if(!lElementIgniteObjectNameFormChild02){
+				return lreturn
+			}
+			if(lElementIgniteObjectNameFormChild02){
+				lStrSalesforceObjectName=IGNUemaHelper.getElementAttributeByWebElement(webDriver,lElementIgniteObjectNameFormChild02,'outerText')
+			}
+			lResult=true
+			lreturn.put('SalesforceBaseUrl',lStrSalesforceBaseUrl)
+			lreturn.put('SalesforceObjectName',lStrSalesforceObjectName)
+			lreturn.put('SalesforceValueName',lStrSalesforceValueName)
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){

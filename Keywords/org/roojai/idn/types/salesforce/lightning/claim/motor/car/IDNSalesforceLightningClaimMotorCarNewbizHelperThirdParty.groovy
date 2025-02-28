@@ -411,7 +411,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='isTpVehicleDamage'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimIsTPVehicleDamageValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimIsTPVehicleDamageValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -507,7 +507,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='isTpInjured'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimIsTPDriverInjuredValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimIsTPDriverInjuredValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -763,7 +763,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='isTpInsured'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimIsTPInsuredValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimIsTPInsuredValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -795,7 +795,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='liability'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimTPLiabilityValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimTPLiabilityValue,true)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -923,7 +923,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='tpInsuranceCompany'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimTPInsuranceCompanyValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimTPInsuranceCompanyValue,true)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -987,7 +987,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperThirdParty{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='tpPolicyType'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimTPPolicyTypeValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimThirdPartyDetailFormRoot,lStrTargetFieldName,lStrSfClaimTPPolicyTypeValue,true)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{

@@ -590,7 +590,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='incidentReportingMotorData_liability'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimLiabilityValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimLiabilityValue,true)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -625,7 +625,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='flagUsageDriveToWork'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimWereYouTravellingOrWorkValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimWereYouTravellingOrWorkValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -695,7 +695,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='incidentReportingData_independentWitness'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimIndependentWitnessValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimIndependentWitnessValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -730,7 +730,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='surveyorData_vehicleIsDrivable'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimCarIsDrivableValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimCarIsDrivableValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -800,7 +800,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='anyInjury'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimAnyInjuryValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimAnyInjuryValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -870,7 +870,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='surveyorData_doYouRequireASurveyorAtTheScene'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimSurveyorRequiredValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimSurveyorRequiredValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -1010,7 +1010,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='surveyorData_surveyType'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimSurveyTypeValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimSurveyTypeValue,true)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -1045,7 +1045,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='surveyorData_reasonForSurveyType'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimReasonForSurveyTypeValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimReasonForSurveyTypeValue,true)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -1296,7 +1296,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='touchPointStage'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimTouchPointStageValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimTouchPointStageValue,true)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -1584,7 +1584,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='insurerApprovalStatus'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimInsurerApprovalStatusValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimInsurerApprovalStatusValue,true)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -1872,7 +1872,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='surveyorData_flagDriverAtScene'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimDriverOnSceneValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimDriverOnSceneValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -1904,7 +1904,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='surveyorData_vehicleIsAtWorkshop'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimCarIsAtWorkshopValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimCarIsAtWorkshopValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -2064,7 +2064,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='incidentReportingMotorData_isTheVehicleDamage'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimVehicleDamagedValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimVehicleDamagedValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -2096,7 +2096,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='incidentReportingMotorData_isKfk'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimKFKValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimKFKValue,true)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -2128,16 +2128,16 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='collisionCountByVehicle'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimCollisionCountByVehicle)
-			if(lMapInputSfLightningPicklist.Result){
+			Map lMapInputSfLightningPrimitiveInput=IDNSalesforceLightningCoreHelperUI.inputSfLightningPrimitiveInput(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimCollisionCountByVehicle)
+			if(lMapInputSfLightningPrimitiveInput.Result){
 				lStrErrorMessage=''
 			}else{
-				lStrErrorMessage=lMapInputSfLightningPicklist.ErrorMessage
+				lStrErrorMessage=lMapInputSfLightningPrimitiveInput.ErrorMessage
 			}
-			if(!lMapInputSfLightningPicklist.Result){
+			if(!lMapInputSfLightningPrimitiveInput.Result){
 				return lreturn
 			}
-			lResult=lMapInputSfLightningPicklist.Result
+			lResult=lMapInputSfLightningPrimitiveInput.Result
 			lreturn.put('ErrorMessage',lStrErrorMessage)
 			lreturn.put('Result',lResult)
 		}catch(Exception e){
@@ -2256,7 +2256,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='incidentLocationData_claimAccidentCountry'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimAccidentCountryValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimAccidentCountryValue,true)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -2352,7 +2352,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='incidentReportingMotorData_werePhotosTakenAtTheScene'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimPhotosTakenValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimPhotosTakenValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -2384,7 +2384,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='incidentReportingMotorData_doYouRequireTowing'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimTowingRequiredValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimTowingRequiredValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -2448,7 +2448,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='incidentReportingMotorData_didAnyoneCallAnAmbulance'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimDidAnyoneCallAnAmbulanceValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimDidAnyoneCallAnAmbulanceValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -2576,7 +2576,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='incidentReportingData_wasTheIncidentReportedToThePolice'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimWasTheIncidentReportedToThePoliceValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimWasTheIncidentReportedToThePoliceValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -2800,7 +2800,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='fraudCheckClaimData_confirmedFraud'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimConfirmedFraudValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimConfirmedFraudValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
@@ -2832,7 +2832,7 @@ public class IDNSalesforceLightningClaimMotorCarNewbizHelperClaim{
 			lreturn.put('Result',lResult)
 			String lStrErrorMessage=''
 			String lStrTargetFieldName='fraudCheckClaimData_provenFraud'
-			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimProvenFraudValue)
+			Map lMapInputSfLightningPicklist=IDNSalesforceLightningCoreHelperUI.inputSfLightningPicklist(webDriver,lElementIgniteClaimReportingFormRoot,lStrTargetFieldName,lStrSfClaimProvenFraudValue,false)
 			if(lMapInputSfLightningPicklist.Result){
 				lStrErrorMessage=''
 			}else{
